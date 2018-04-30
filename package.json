@@ -8,8 +8,7 @@
   "scripts": {
     "start": "node server/server.js",
     "test": "jest --runInBand --forceExit --coverage --verbose",
-    "heroku-postbuild":
-      "cd front-end && yarn --only=dev && yarn && yarn run build"
+    "heroku-postbuild": "cd front-end && yarn --only=dev && yarn && yarn run build"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
@@ -20,6 +19,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
@@ -28,6 +28,6 @@
     "supertest": "^3.0.0"
   },
   "engines": {
-    "node": "9.3.0"
+    "node": "9.8.0"
   }
 }
