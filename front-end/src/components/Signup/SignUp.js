@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'material-ui/Button';
 import './sign-up.css';
 
 class SignUp extends Component {
@@ -20,6 +21,7 @@ class SignUp extends Component {
 
 	onSubmit = event => {
 		event.preventDefault();
+		console.log(this.state);
 		this.setState({
 			email: '',
 			password: '',
@@ -59,7 +61,14 @@ class SignUp extends Component {
 						required
 					/>
 					<br />
-					<button onClick={this.onSubmit}>Sign Up</button>
+					<Button
+						className="btn--signup"
+						variant="raised"
+						color="primary"
+						onClick={this.onSubmit}
+					>
+						Sign Up
+					</Button>
 				</form>
 			</div>
 		);
