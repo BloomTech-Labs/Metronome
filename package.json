@@ -1,0 +1,22 @@
+{
+  "name": "Metronome",
+  "version": "0.1.0",
+  "description": "Lambda Labs Metronome Project",
+  "main": "app.js",
+  "repository": "https://github.com/Lambda-School-Labs/Metronome.git",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "jest --runInBand --forceExit --coverage --verbose"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "jest": "^22.4.3",
+    "supertest": "^3.0.0"
+  }
+}
