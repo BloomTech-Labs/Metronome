@@ -29,7 +29,7 @@ class SignUp extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="signup-form">
 				<form>
 					<h1>Sign Up</h1>
 					<input
