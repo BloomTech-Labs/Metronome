@@ -9,7 +9,7 @@
     "start": "node server/server.js",
     "test": "jest --runInBand --forceExit --coverage --verbose",
     "heroku-postbuild":
-      "cd front-end && npm install --only=dev && npm install && npm run build"
+      "cd front-end && yarn --only=dev && yarn && yarn run build"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
