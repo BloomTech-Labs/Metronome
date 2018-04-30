@@ -4,7 +4,9 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 const BuyNowButton = () => (
   <div>
     <ButtonToolbar>
-      <Buttonb bsStyle="info"bsSize="large">Buy Now</Button>
+      <Button bsStyle="info" bsSize="large" block>Buy Now</Button>
     </ButtonToolbar>
   </div>
-)
+);
+
+export default BuyNowButton;

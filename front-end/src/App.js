@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import BuyNowButton from './components/landingpage/.buyNowButtonjs';
+import React from 'react';
+import BuyNowButton from './components/landingpage/buyNowButton';
+import LoginButtons from './components/landingpage/signInSignOut';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <BuyNowButton />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <LoginButtons />
+    <BuyNowButton />
+  </div>
+);
 
 export default App;
