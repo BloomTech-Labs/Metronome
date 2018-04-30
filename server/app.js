@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 // Test route to make sure everything is working
 app.get('/', (req, res) => {
-  res.status(200).json({ response: 'Hello World!'});
+  res.status(200).json({ response: 'Hello World!' });
 });
 
 module.exports = app;
