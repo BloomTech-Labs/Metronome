@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node server/server.js",
-    "test": "jest --runInBand --forceExit --coverage --verbose"
+    "test": "jest --runInBand --forceExit --coverage --verbose",
+    "heroku-postbuild":
+      "cd front-end && yarn --only=dev && yarn && yarn run build"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
@@ -24,5 +26,8 @@
     "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.3",
     "supertest": "^3.0.0"
+  },
+  "engines": {
+    "node": "9.3.0"
   }
 }
