@@ -6,17 +6,27 @@ import equals from 'validator/lib/equals';
 
 import './sign-up.css';
 
+// Input Valiations match backend
+const PASSWORD_MIN = 8;
+const PASSWORD_MAX = 56;
+const EMAIL_MIN = 3;
+const EMAIL_MAX = 320;
+const FNAME_MIN = 1;
+const FNAME_MAX = 100;
+const LNAME_MIN = 1;
+const LNAME_MAX = 100;
+
 class SignUp extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			firstName: '',
+			lastName: '',
 			email: '',
 			password: '',
 			confirmPassword: '',
-			errors: {
-				email: false,
-			},
+			errors: {},
 		};
 	}
 
@@ -31,12 +41,12 @@ class SignUp extends Component {
 
 	onSubmit = event => {
 		event.preventDefault();
-		// TODO: Make the messages more specific under each input
-		if (!this.validForm()) {
-			alert('Form is invalid');
+
+		if (!this.handleValidation()) {
 			return;
 		}
-		console.log(this.state);
+		alert('submitted');
+		// TODO: Use Axios to send data
 		this.setState({
 			email: '',
 			password: '',
@@ -44,16 +54,18 @@ class SignUp extends Component {
 		});
 	};
 
-	validForm = () => {
-		// Check for valid email
-		const validEmail = isEmail(this.state.email);
-		return (
-			validEmail &&
-			// Check if password is required length
-			this.state.password.length >= 6 &&
-			// Check if passwords match
-			equals(this.state.password, this.state.confirmPassword)
-		);
+	handleValidation = () => {
+		// Check all requirements are met and return if form is valid
+		let errors = {};
+		let formIsValid = true;
+
+		// First Name
+		if (!this.state.firstName) {
+			formIsValid = false;
+			errors['firstName'] = 'Cannot be empty';
+		}
+		this.setState({ errors });
+		return formIsValid;
 	};
 
 	render() {
@@ -64,6 +76,27 @@ class SignUp extends Component {
 						<h1>Sign Up</h1>
 						<div className="pair">
 							<input
+								name="firstName"
+								placeholder="First Name"
+								value={this.state.firstName}
+								onChange={this.onChange}
+								required={true}
+							/>
+
+							<span style={{ color: 'red' }}>
+								{this.state.errors['firstName']}
+							</span>
+						</div>
+
+						<input
+							name="lastName"
+							placeholder="Last Name"
+							value={this.state.lastName}
+							onChange={this.onChange}
+							required
+						/>
+						<div className="pair">
+							<input
 								name="email"
 								placeholder="email"
 								value={this.state.email}
@@ -72,9 +105,6 @@ class SignUp extends Component {
 							/>
 
 							<br />
-							<label for="email">
-								{this.state.errors.email ? 'Email Invalid' : ''}
-							</label>
 						</div>
 						<input
 							name="password"
