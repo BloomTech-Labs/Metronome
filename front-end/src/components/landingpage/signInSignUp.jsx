@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap';
+import './landingpage.css';
 
 class LoginButtons extends Component {
   constructor() {
@@ -9,7 +10,7 @@ class LoginButtons extends Component {
   render() {
     return (
       <div>
-        <ButtonToolbar>
+        <ButtonToolbar className="loginbutton">
           <Button>Sign Up</Button>
           <Button>Sign In</Button>
         </ButtonToolbar>
