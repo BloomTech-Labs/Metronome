@@ -1,0 +1,19 @@
+.signup-form {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	margin-top: 18%;
+}
+
+input {
+	margin: 5px;
+	height: 30px;
+	width: 200px;
+}
+
+h1 {
+	font-family: 'Roboto', sans-serif;
+	font-size: 30px;
+	color: black;
+	text-decoration-line: underline;
+}
