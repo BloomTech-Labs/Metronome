@@ -71,7 +71,6 @@ describe('Student model', () => {
 
   it('Should have student role', async () => {
     const student = await Student.findOne({ email: validStudent.email });
-    console.log(student);
     expect(student.__t).toEqual('Student');
   });
   it('Should have students empty array in the teacher', async () => {
