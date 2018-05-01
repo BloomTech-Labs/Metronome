@@ -22,7 +22,6 @@ class SignUp extends Component {
 	onSubmit = event => {
 		event.preventDefault();
 		console.log(this.state);
-
 		this.setState({
 			email: '',
 			password: '',
@@ -33,15 +32,14 @@ class SignUp extends Component {
 	render() {
 		return (
 			<div className="signup-form">
-				<form onSubmit={this.onSubmit}>
+				<form>
 					<h1>Sign Up</h1>
 					<input
 						name="email"
 						placeholder="email"
-						type="email"
-						required={true}
 						value={this.state.email}
 						onChange={this.onChange}
+						required
 					/>
 					<br />
 
@@ -67,7 +65,7 @@ class SignUp extends Component {
 						className="btn--signup"
 						variant="raised"
 						color="primary"
-						type="submit"
+						onClick={this.onSubmit}
 					>
 						Sign Up
 					</Button>
