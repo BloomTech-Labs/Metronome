@@ -123,7 +123,7 @@ UserSchema.statics.validateUser = function ({ email = '', password = '', firstNa
  * @param {String} opts.password
  * @param {String} opts.firstName
  * @param {String} opts.lastName
- * @returns the new user instance
+ * @returns {Promise} the new user instance
  */
 UserSchema.statics.registerNewUser = function (opts) {
   return new Promise(async (resolve, reject) => {
