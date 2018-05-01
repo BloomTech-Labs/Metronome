@@ -17,7 +17,3 @@ h1 {
 	color: black;
 	text-decoration-line: underline;
 }
-
-.pair {
-	flex-direction: column;
-}

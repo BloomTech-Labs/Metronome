@@ -9,12 +9,9 @@ import './sign-up.css';
 // Input Valiations match backend
 const PASSWORD_MIN = 8;
 const PASSWORD_MAX = 56;
-const EMAIL_MIN = 3;
 const EMAIL_MAX = 320;
-const FNAME_MIN = 1;
 const FNAME_MAX = 320;
-const LNAME_MIN = 1;
-const LNAME_MAX = 5;
+const LNAME_MAX = 320;
 
 class SignUp extends Component {
 	constructor(props) {
@@ -45,7 +42,7 @@ class SignUp extends Component {
 		if (!this.handleValidation()) {
 			return;
 		}
-		alert('submitted');
+
 		// TODO: Use Axios to send data
 		this.setState({
 			email: '',
@@ -58,7 +55,6 @@ class SignUp extends Component {
 		// Check all requirements are met and return if form is valid
 		let errors = {};
 		let formIsValid = true;
-		console.log(`First name length: ${this.state.firstName.length}`);
 
 		// First Name
 		if (!this.state.firstName) {
@@ -82,6 +78,11 @@ class SignUp extends Component {
 		if (!isEmail(this.state.email)) {
 			formIsValid = false;
 			errors['email'] = 'Must be a valid email';
+		}
+
+		if (this.state.email.length > EMAIL_MAX) {
+			formIsValid = false;
+			errors['email'] = `Must be less than ${EMAIL_MAX} characters`;
 		}
 
 		// Password check if between values
@@ -116,7 +117,7 @@ class SignUp extends Component {
 								value={this.state.firstName}
 								onChange={this.onChange}
 							/>
-
+							<br />
 							<span style={{ color: 'red' }}>
 								{this.state.errors['firstName']}
 							</span>
@@ -128,6 +129,7 @@ class SignUp extends Component {
 								value={this.state.lastName}
 								onChange={this.onChange}
 							/>
+							<br />
 							<span style={{ color: 'red' }}>
 								{this.state.errors['lastName']}
 							</span>
@@ -139,6 +141,7 @@ class SignUp extends Component {
 								value={this.state.email}
 								onChange={this.onChange}
 							/>
+							<br />
 							<span style={{ color: 'red' }}>{this.state.errors['email']}</span>
 						</div>
 						<div className="pair">
@@ -149,6 +152,7 @@ class SignUp extends Component {
 								value={this.state.password}
 								onChange={this.onChange}
 							/>
+							<br />
 							<span style={{ color: 'red' }}>
 								{this.state.errors['password']}
 							</span>
@@ -160,8 +164,8 @@ class SignUp extends Component {
 								placeholder="confirm password"
 								value={this.state.confirmPassword}
 								onChange={this.onChange}
-								required
 							/>
+							<br />
 							<span style={{ color: 'red' }}>
 								{this.state.errors['passwordConfirm']}
 							</span>
@@ -170,7 +174,7 @@ class SignUp extends Component {
 							className="btn--signup"
 							variant="raised"
 							color="primary"
-							onClick={this.onSubmit}
+							type="submit"
 						>
 							Sign Up
 						</Button>
