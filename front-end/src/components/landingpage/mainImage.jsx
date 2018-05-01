@@ -1,23 +1,22 @@
-import React from 'react';
-import { Carousel } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Carousel } from 'react-responsive-carousel';
 
-const MainImage = () => (
-  <div>
-    <Carousel>
-      <Carousel.Item>
-        <img width={900} height={500} alt="900x500" src="/carousel.png" />
-        <Carousel.Caption>
-          <p>Come One</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img width={900} height={500} alt="900x500" src="/carousel.png" />
-        <Carousel.Caption>
-          <p>Come All</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-  </div>
-);
+class MainImage extends Component {
+  render() {
+    return (
+      <Carousel>
+        <div>
+          <img src="http://lorempixel.com/output/cats-q-c-640-480-1.jpg" />
+        </div>
+        <div>
+          <img src="http://lorempixel.com/output/cats-q-c-640-480-2.jpg" />
+        </div>
+        <div>
+            <img src="http://lorempixel.com/output/cats-q-c-640-480-3.jpg" />
+        </div>
+      </Carousel>
+    );
+  }
+};
 
 export default MainImage;
