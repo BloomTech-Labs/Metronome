@@ -14,6 +14,9 @@ class SignUp extends Component {
 			email: '',
 			password: '',
 			confirmPassword: '',
+			errors: {
+				email: false,
+			},
 		};
 	}
 
@@ -40,10 +43,13 @@ class SignUp extends Component {
 		});
 	};
 
+
+
 	validForm = () => {
 		// Check for valid email
+		const validEmail = isEmail(this.state.email);
 		return (
-			isEmail(this.state.email) &&
+			validEmail &&
 			// Check if password is required length
 			this.state.password.length >= 6 &&
 			// Check if passwords match
@@ -57,16 +63,20 @@ class SignUp extends Component {
 				<div className="signup-form">
 					<form onSubmit={this.onSubmit}>
 						<h1>Sign Up</h1>
+						<div className="pair">
+							<input
+								name="email"
+								placeholder="email"
+								value={this.state.email}
+								onChange={this.onChange}
+								required
+							/>
 
-						<input
-							name="email"
-							placeholder="email"
-							value={this.state.email}
-							onChange={this.onChange}
-							required
-						/>
-
-						<br />
+							<br />
+							<label for="email">
+								{this.state.errors.email ? 'Email Invalid' : ''}
+							</label>
+						</div>
 						<input
 							name="password"
 							type="password"
@@ -94,7 +104,9 @@ class SignUp extends Component {
 							Sign Up
 						</Button>
 						<br />
-						<Link to="/login">Already have an account?</Link>
+						<Link className="link" to="/login">
+							Already have an account?
+						</Link>
 					</form>
 				</div>
 			</div>

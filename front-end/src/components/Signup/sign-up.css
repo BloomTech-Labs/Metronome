@@ -13,5 +13,11 @@ input {
 
 h1 {
 	font-family: 'Roboto', sans-serif;
-	color: #3d5d68;
+	font-size: 30px;
+	color: white;
+	text-decoration-line: underline;
+}
+
+.pair {
+	flex-direction: column;
 }
