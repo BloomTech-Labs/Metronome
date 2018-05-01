@@ -12,9 +12,9 @@ const PASSWORD_MAX = 56;
 const EMAIL_MIN = 3;
 const EMAIL_MAX = 320;
 const FNAME_MIN = 1;
-const FNAME_MAX = 100;
+const FNAME_MAX = 320;
 const LNAME_MIN = 1;
-const LNAME_MAX = 100;
+const LNAME_MAX = 5;
 
 class SignUp extends Component {
 	constructor(props) {
@@ -58,12 +58,47 @@ class SignUp extends Component {
 		// Check all requirements are met and return if form is valid
 		let errors = {};
 		let formIsValid = true;
+		console.log(`First name length: ${this.state.firstName.length}`);
 
 		// First Name
 		if (!this.state.firstName) {
 			formIsValid = false;
 			errors['firstName'] = 'Cannot be empty';
 		}
+		if (this.state.firstName.length > FNAME_MAX) {
+			formIsValid = false;
+			errors['firstName'] = `Must be less than ${FNAME_MAX}`;
+		}
+		// Last Name
+		if (!this.state.lastName) {
+			formIsValid = false;
+			errors['lastName'] = 'Cannot be empty';
+		}
+		if (this.state.lastName.length > LNAME_MAX) {
+			formIsValid = false;
+			errors['lastName'] = `Must be less than ${LNAME_MAX}`;
+		}
+		// Email check
+		if (!isEmail(this.state.email)) {
+			formIsValid = false;
+			errors['email'] = 'Must be a valid email';
+		}
+
+		// Password check if between values
+		if (
+			this.state.password.length < PASSWORD_MIN ||
+			this.state.password.length > PASSWORD_MAX
+		) {
+			formIsValid = false;
+			errors['password'] = 'Must be between 8 and 56 characters';
+		}
+
+		// Password confirmation check
+		if (!equals(this.state.password, this.state.confirmPassword)) {
+			formIsValid = false;
+			errors['passwordConfirm'] = 'Must match entered password';
+		}
+
 		this.setState({ errors });
 		return formIsValid;
 	};
@@ -80,50 +115,57 @@ class SignUp extends Component {
 								placeholder="First Name"
 								value={this.state.firstName}
 								onChange={this.onChange}
-								required={true}
 							/>
 
 							<span style={{ color: 'red' }}>
 								{this.state.errors['firstName']}
 							</span>
 						</div>
-
-						<input
-							name="lastName"
-							placeholder="Last Name"
-							value={this.state.lastName}
-							onChange={this.onChange}
-							required
-						/>
+						<div className="pair">
+							<input
+								name="lastName"
+								placeholder="Last Name"
+								value={this.state.lastName}
+								onChange={this.onChange}
+							/>
+							<span style={{ color: 'red' }}>
+								{this.state.errors['lastName']}
+							</span>
+						</div>
 						<div className="pair">
 							<input
 								name="email"
 								placeholder="email"
 								value={this.state.email}
 								onChange={this.onChange}
+							/>
+							<span style={{ color: 'red' }}>{this.state.errors['email']}</span>
+						</div>
+						<div className="pair">
+							<input
+								name="password"
+								type="password"
+								placeholder="password"
+								value={this.state.password}
+								onChange={this.onChange}
+							/>
+							<span style={{ color: 'red' }}>
+								{this.state.errors['password']}
+							</span>
+						</div>
+						<div className="pair">
+							<input
+								name="confirmPassword"
+								type="password"
+								placeholder="confirm password"
+								value={this.state.confirmPassword}
+								onChange={this.onChange}
 								required
 							/>
-
-							<br />
+							<span style={{ color: 'red' }}>
+								{this.state.errors['passwordConfirm']}
+							</span>
 						</div>
-						<input
-							name="password"
-							type="password"
-							placeholder="password"
-							value={this.state.password}
-							onChange={this.onChange}
-							required
-						/>
-						<br />
-						<input
-							name="confirmPassword"
-							type="password"
-							placeholder="confirm password"
-							value={this.state.confirmPassword}
-							onChange={this.onChange}
-							required
-						/>
-						<br />
 						<Button
 							className="btn--signup"
 							variant="raised"
