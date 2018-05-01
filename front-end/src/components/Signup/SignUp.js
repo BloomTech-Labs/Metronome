@@ -31,8 +31,9 @@ class SignUp extends Component {
 
 	onSubmit = event => {
 		event.preventDefault();
+		// TODO: Make the messages more specific under each input
 		if (!this.validForm()) {
-			alert('nope');
+			alert('Form is invalid');
 			return;
 		}
 		console.log(this.state);
@@ -42,8 +43,6 @@ class SignUp extends Component {
 			confirmPassword: '',
 		});
 	};
-
-
 
 	validForm = () => {
 		// Check for valid email
