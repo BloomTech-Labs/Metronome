@@ -4,7 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 class MainImage extends Component {
   render() {
     return (
-      <Carousel showThumbs={false}>
+      <Carousel showThumbs={false} showStatus={false} infiniteLoop={true}>
         <div>
           <img src="http://lorempixel.com/output/cats-q-c-640-480-1.jpg" />
         </div>
