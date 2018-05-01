@@ -53,48 +53,50 @@ class SignUp extends Component {
 
 	render() {
 		return (
-			<div className="signup-form">
-				<form onSubmit={this.onSubmit}>
-					<h1>Sign Up</h1>
+			<div className="form-container">
+				<div className="signup-form">
+					<form onSubmit={this.onSubmit}>
+						<h1>Sign Up</h1>
 
-					<input
-						name="email"
-						placeholder="email"
-						value={this.state.email}
-						onChange={this.onChange}
-						required
-					/>
+						<input
+							name="email"
+							placeholder="email"
+							value={this.state.email}
+							onChange={this.onChange}
+							required
+						/>
 
-					<br />
-					<input
-						name="password"
-						type="password"
-						placeholder="password"
-						value={this.state.password}
-						onChange={this.onChange}
-						required
-					/>
-					<br />
-					<input
-						name="confirmPassword"
-						type="password"
-						placeholder="confirm password"
-						value={this.state.confirmPassword}
-						onChange={this.onChange}
-						required
-					/>
-					<br />
-					<Button
-						className="btn--signup"
-						variant="raised"
-						color="primary"
-						onClick={this.onSubmit}
-					>
-						Sign Up
-					</Button>
-					<br />
-					<Link to="/login">Already have an account?</Link>
-				</form>
+						<br />
+						<input
+							name="password"
+							type="password"
+							placeholder="password"
+							value={this.state.password}
+							onChange={this.onChange}
+							required
+						/>
+						<br />
+						<input
+							name="confirmPassword"
+							type="password"
+							placeholder="confirm password"
+							value={this.state.confirmPassword}
+							onChange={this.onChange}
+							required
+						/>
+						<br />
+						<Button
+							className="btn--signup"
+							variant="raised"
+							color="primary"
+							onClick={this.onSubmit}
+						>
+							Sign Up
+						</Button>
+						<br />
+						<Link to="/login">Already have an account?</Link>
+					</form>
+				</div>
 			</div>
 		);
 	}
