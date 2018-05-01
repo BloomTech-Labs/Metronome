@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
+import isEmail from 'validator/lib/isEmail';
+import equals from 'validator/lib/equals';
+
 import './sign-up.css';
 
 class SignUp extends Component {
@@ -14,13 +17,20 @@ class SignUp extends Component {
 	}
 
 	onChange = event => {
+		const name = event.target.name;
+		const value = event.target.value;
+
 		this.setState({
-			[event.target.name]: event.target.value,
+			[name]: value,
 		});
 	};
 
 	onSubmit = event => {
 		event.preventDefault();
+		if (!this.validForm()) {
+			alert('nope');
+			return;
+		}
 		console.log(this.state);
 		this.setState({
 			email: '',
@@ -29,18 +39,31 @@ class SignUp extends Component {
 		});
 	};
 
+	validForm = () => {
+		// Check for valid email
+		return (
+			isEmail(this.state.email) &&
+			// Check if password is required length
+			this.state.password.length >= 6 &&
+			// Check if passwords match
+			equals(this.state.password, this.state.confirmPassword)
+		);
+	};
+
 	render() {
 		return (
 			<div className="signup-form">
-				<form>
+				<form onSubmit={this.onSubmit}>
 					<h1>Sign Up</h1>
-					<input
-						name="email"
-						placeholder="email"
-						value={this.state.email}
-						onChange={this.onChange}
-						required
-					/>
+					<div className="pair">
+						<input
+							name="email"
+							placeholder="email"
+							value={this.state.email}
+							onChange={this.onChange}
+							required
+						/>
+					</div>
 					<br />
 
 					<input
