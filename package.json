@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node server/server.js",
     "test": "jest --runInBand --forceExit --coverage --verbose",
+    "build-docs": "apidoc -i server/ -o apidoc/",
     "heroku-postbuild": "cd front-end && yarn --only=dev && yarn && yarn run build"
   },
   "dependencies": {

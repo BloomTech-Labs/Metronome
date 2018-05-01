@@ -72,6 +72,7 @@ UserSchema.methods.generateJWT = function () {
   return jwt.sign({
     id: this._id,
     email: this.email,
+    name: `${this.firstName} ${this.lastName}`,
     exp: Math.round(exp.getTime() / 1000),
   }, secret);
 };
@@ -86,7 +87,7 @@ UserSchema.methods.generateJWT = function () {
  * @param {String} opts.lastName
  * @returns {Promise}
  */
-UserSchema.statics.validateUser = function ({ email = '', password = '', firstName = '', lastName = '' }) {
+UserSchema.statics.validateRegistration = function ({ email = '', password = '', firstName = '', lastName = '' }) {
   return new Promise(async (resolve, reject) => {
     if (email.length < MIN_EMAIL_LENGTH || email.length > MAX_EMAIL_LENGTH) {
       return reject(new Error(`Email must be between ${MIN_EMAIL_LENGTH} and ${MAX_EMAIL_LENGTH} characters.`));
@@ -117,18 +118,18 @@ UserSchema.statics.validateUser = function ({ email = '', password = '', firstNa
 };
 
 /**
- * Register a new user if the inputs are valid.
+ * Register a new user if the input is valid.
  * @param {Object} opts
  * @param {String} opts.email
  * @param {String} opts.password
  * @param {String} opts.firstName
  * @param {String} opts.lastName
- * @returns {Promise} the new user instance
+ * @returns {Promise<any>} the new user instance
  */
 UserSchema.statics.registerNewUser = function (opts) {
   return new Promise(async (resolve, reject) => {
     try {
-      await this.validateUser(opts);
+      await this.validateRegistration(opts);
 
       const user = new this({
         email: opts.email,
@@ -144,6 +145,48 @@ UserSchema.statics.registerNewUser = function (opts) {
   });
 };
 
+/**
+ * Returns a promise that resolves to the user's JWT if the email and password is correct.
+ * Rejects the promise with a corresponding error if the email or password is invalid.
+ * @param {Object} opts
+ * @param {String} opts.email
+ * @param {String} opts.password
+ * @returns {Promise<String>}
+ */
+UserSchema.statics.validateLogin = function ({ email = '', password = '' }) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await this.findOne({ email });
+      if (!user) return reject(new Error('User does not exist with that email.'));
+
+      if (!user.isValidPassword(password)) {
+        return reject(new Error('Password is not correct.'));
+      }
+
+      return resolve(user.generateJWT());
+    } catch (err) {
+      return reject(err);
+    }
+  });
+};
+
+/**
+ * Returns a JWT if the input is valid.
+ * @param {Object} opts
+ * @param {String} opts.email
+ * @param {String} opts.password
+ * @returns {Promise<String>}
+ */
+UserSchema.statics.loginUser = function ({ email = '', password = '' }) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const token = await this.validateLogin({ email, password });
+      return resolve(token);
+    } catch (err) {
+      return reject(err);
+    }
+  });
+};
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

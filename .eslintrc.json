@@ -8,7 +8,8 @@
         "func-names": "off",
         "consistent-return": "off",
         "object-curly-newline": "off",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "max-len": "off"
     },
     "env": {
         "jest": true
