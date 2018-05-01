@@ -19,14 +19,14 @@ class Login extends Component {
 					<form>
 						<input
 							className="form-item"
-							placeholder="Username goes here..."
+							placeholder="Email"
 							name="username"
 							type="text"
 							onChange={this.handleChange}
 						/>
 						<input
 							className="form-item"
-							placeholder="Password goes here..."
+							placeholder="Password "
 							name="password"
 							type="password"
 							onChange={this.handleChange}
