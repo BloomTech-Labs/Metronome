@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const uniqueValidator = require('mongoose-unique-validator');
 
-const { secret } = require('../config');
+const { secret } = require('../config'); // secret for JWT
 
 const saltRounds = 11;
 const expDay = 30; // expiration time of JWT
@@ -21,6 +22,11 @@ const UserSchema = new Schema({
   },
   passwordHash: String,
 }, { timestamps: true });
+
+/**
+ * check the uniqueness of fields
+ */
+UserSchema.plugin(uniqueValidator, { message: 'is already taken' });
 
 /**
  * set plain password to password hash
