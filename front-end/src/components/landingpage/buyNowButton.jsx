@@ -5,7 +5,7 @@ import './landingpage.css';
 const BuyNowButton = () => (
   <div>
     <ButtonToolbar className="buynow">
-      <Button bsStyle="info" bsSize="large" block>Buy Now</Button>
+      <Button active bsStyle="info" bsSize="large" block>Buy Now</Button>
     </ButtonToolbar>
   </div>
 );
