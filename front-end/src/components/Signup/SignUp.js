@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
@@ -55,17 +56,16 @@ class SignUp extends Component {
 			<div className="signup-form">
 				<form onSubmit={this.onSubmit}>
 					<h1>Sign Up</h1>
-					<div className="pair">
-						<input
-							name="email"
-							placeholder="email"
-							value={this.state.email}
-							onChange={this.onChange}
-							required
-						/>
-					</div>
-					<br />
 
+					<input
+						name="email"
+						placeholder="email"
+						value={this.state.email}
+						onChange={this.onChange}
+						required
+					/>
+
+					<br />
 					<input
 						name="password"
 						type="password"
@@ -92,6 +92,8 @@ class SignUp extends Component {
 					>
 						Sign Up
 					</Button>
+					<br />
+					<Link to="/login">Already have an account?</Link>
 				</form>
 			</div>
 		);
