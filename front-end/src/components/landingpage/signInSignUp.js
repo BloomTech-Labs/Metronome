@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import './landingpage.css';
 
 const LoginNavBar = () => (
@@ -10,8 +11,11 @@ const LoginNavBar = () => (
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
+      <LinkContainer to="/signup">
       <NavItem eventKey={1} href="#">Sign Up</NavItem>
-      <NavItem eventKey={2} href="#">Sign In</NavItem>
+      </LinkContainer>
+      <LinkContainer to="login"
+      <NavItem eventKey={2} href="#">Log In</NavItem>
     </Nav>
   </Navbar>
 );
