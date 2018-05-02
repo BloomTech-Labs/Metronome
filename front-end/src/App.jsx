@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import './App.css';
-import LandingPage from './components/landingpage/landingpage';
 
-const App = () => (
-  <div className="App">
-    <LandingPage />
-  </div>
-);
+import SignUp from './components/Signup/SignUp';
+import LogIn from './components/LogIn/LogIn.js';
+import Assignments from './components/Assignments/Assignments';
+import EnsureLoggedInContainer from './components/EnsureLoggedIn/EnsureLoggedInContainer';
+
+class App extends Component {
+	render() {
+		return (
+			<div>
+			
+	     <Route path="/signup" component={SignUp} />
+       <Route path="/login" component={LogIn} />
+					
+			 
+			</div>
+		);
+	}
+ }
 
 export default App;
