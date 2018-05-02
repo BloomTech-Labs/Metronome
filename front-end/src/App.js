@@ -6,7 +6,7 @@ import SignUp from './components/Signup/SignUp';
 import LogIn from './components/LogIn/LogIn.js';
 import Assignments from './components/Assignments/Assignments';
 import EnsureLoggedInContainer from './components/EnsureLoggedIn/EnsureLoggedInContainer';
-
+import LandingPage from './components/landingpage/landingpage';
 class App extends Component {
 	render() {
 		return (
@@ -14,6 +14,7 @@ class App extends Component {
 			
 	     <Route path="/signup" component={SignUp} />
        <Route path="/login" component={LogIn} />
+			 <LandingPage />
 					
 			 
 			</div>
