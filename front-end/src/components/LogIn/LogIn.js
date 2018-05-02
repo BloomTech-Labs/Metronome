@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import './login.css';
 
 class Login extends Component {
-	constructor() {
-    super();
-    
-  	}
-
 	handleChange = event => {
 		this.setState({
 			[event.target.name]: event.target.value,

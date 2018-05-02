@@ -4,7 +4,12 @@ import './App.css';
 
 import SignUp from './components/Signup/SignUp';
 import LogIn from './components/LogIn/LogIn.js';
+
 import Assignments from './components/Assignments/Assignments';
+
+
+import TeacherDashboard from './Containers/TeacherDashboard';
+
 
 class App extends Component {
   render() {
@@ -12,6 +17,10 @@ class App extends Component {
       <div>
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={LogIn} />
+
+
+        <Route path="/teacher" component={TeacherDashboard} />
+
       </div>
     );
   }
