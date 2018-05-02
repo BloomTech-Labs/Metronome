@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Element } from 'react-stripe-elements';
+import { Elements } from 'react-stripe-elements';
 import InjectedCheckoutForm from './CheckoutForm';
 
 class BillingCheckout extends Component {
   render() {
     return (
       <div>
-        <Element>
+        <Elements>
           <InjectedCheckoutForm />
-        </Element>
+        </Elements>
       </div>
     );
   }
