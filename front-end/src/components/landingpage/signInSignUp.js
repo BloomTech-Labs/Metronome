@@ -11,10 +11,10 @@ const LoginNavBar = () => (
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <LinkContainer to="/signup">
+      <LinkContainer to="/signup" exact>
         <NavItem eventKey={1} href="#">Sign Up</NavItem>
       </LinkContainer>
-      <LinkContainer to="/login">
+      <LinkContainer to="/login" exact>
         <NavItem eventKey={2} href="#">Log In</NavItem>
       </LinkContainer>
     </Nav>
