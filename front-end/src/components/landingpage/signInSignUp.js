@@ -14,7 +14,7 @@ const LoginNavBar = () => (
       <LinkContainer to="/signup">
         <NavItem eventKey={1} href="#">Sign Up</NavItem>
       </LinkContainer>
-      <LinkContainer to="login">
+      <LinkContainer to="/login">
         <NavItem eventKey={2} href="#">Log In</NavItem>
       </LinkContainer>
     </Nav>
