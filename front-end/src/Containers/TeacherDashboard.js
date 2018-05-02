@@ -10,7 +10,13 @@ class TeacherDashboard extends Component {
     super(props);
 
     this.state = {
-      assignments: ['test'],
+      assignments: [
+        {
+          music: 'music details',
+          dueDate: '05/05/18',
+          client: 'John Doe',
+        },
+      ],
     };
   }
   render() {
@@ -27,8 +33,9 @@ class TeacherDashboard extends Component {
           <Grid item sm={3}>
             <SideMenu />
           </Grid>
-          <Grid item >
-            <AssignmentList />
+
+          <Grid item>
+            <AssignmentList assignments={this.state.assignments} />
           </Grid>
         </Grid>
       </div>
