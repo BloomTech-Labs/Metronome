@@ -1,0 +1,17 @@
+.loginbutton {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+}
+
+.buynow {
+  display: flex;
+  justify-content: center;
+  padding: 2em;
+  margin-bottom: 2em;
+}
+
+.mainimage {
+  display: flex;
+  padding: 3em;
+}
