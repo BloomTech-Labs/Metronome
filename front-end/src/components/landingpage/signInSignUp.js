@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './landingpage.css';
 
-const LoginButtons = () => (
+const LoginNavBar = () => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -17,4 +17,4 @@ const LoginButtons = () => (
 );
 
 
-export default LoginButtons;
+export default LoginNavBar;
