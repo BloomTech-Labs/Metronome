@@ -3,9 +3,13 @@ import React from 'react';
 const AssignmentDetails = props => (
   <div>
     <ul>
-      <li>{props.client}</li>
+      <li>Title: {props.name}</li>
+      <li>{props.days}</li>
+      <li>{props.hours}</li>
       <li>{props.dueDate}</li>
-      <li>{props.music}</li>
+      <li>{props.file}</li>
+      <li>{props.email}</li>
+      <li>{props.client}</li>
     </ul>
   </div>
 );

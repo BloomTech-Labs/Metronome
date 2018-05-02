@@ -18,9 +18,14 @@ const AssignmentList = (props) => {
       {assignments.map((assignment, key) => (
         <div key={key}>
           <AssignmentDetails
-            music={assignment.music}
+            name={assignment.assignmentName}
             dueDate={assignment.dueDate}
-            client={assignment.client}
+            client={assignment.clientName}
+            email={assignment.email}
+            days={assignment.daysToPractice}
+            hours={assignment.hoursToPractice}
+            file={assignment.musicFile}
+
           />
         </div>
 			))}

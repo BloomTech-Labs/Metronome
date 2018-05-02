@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
-import { Grid, Checkbox } from 'material-ui';
+import { Grid, Checkbox, Button } from 'material-ui';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import './add-assignment.css';
+
+// TODO: Grab client name off page teacher is on for assignments
+// TODO: Look at file upload to see how to send with data
 
 class AddAssignmentForm extends Component {
 	constructor(props) {
@@ -14,55 +17,97 @@ class AddAssignmentForm extends Component {
 		this.state = {
 			assignmentName: '',
 			daysToPractice: [],
-			hoursToPractice: 0,
-			checkedMonday: false,
-			checkedSunday: false,
-			checkedTuesday: false,
-			checkedWednesday: false,
-			checkedThursday: false,
-			checkedFriday: false,
-			checkedSaturday: false,
+			hoursToPractice: '',
+			Monday: false,
+			Sunday: false,
+			Tuesday: false,
+			Wednesday: false,
+			Thursday: false,
+			Friday: false,
+			Saturday: false,
 			dueDate: '',
+			date: moment(),
 			musicFile: '',
 			email: '',
-			startDate: moment(),
 			file: null,
+			clientName: 'Joe Schmoe - Will get this from the page the teacher is on',
 		};
 	}
 
+	// Changes state of items that are handled
 	handleStateDataChange = event => {
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
 	};
 
+	// Handles the unchecking and checking of days to practice
+	// adds or takes away from array based on state of checked
+	// this is what gets passed up to assignments
 	handleChange = name => event => {
-		// TODO: change hour box to display state data of hours
-		this.setState({ [name]: event.target.checked });
+		this.setState({
+			[name]: event.target.checked,
+		});
+		if (event.target.checked) {
+			this.setState({
+				daysToPractice: [...this.state.daysToPractice, name],
+			});
+		} else {
+			const filteredArray = this.state.daysToPractice.filter(
+				day => day !== name,
+			);
+
+			this.setState({
+				daysToPractice: filteredArray,
+			});
+		}
 	};
+
+	//	handles date of the date picker
 
 	handledDateChange = date => {
+		const dueDate = date.format();
+
 		this.setState({
-			startDate: date,
+			dueDate,
 		});
 	};
 
+	// This is for handling filed upload
+	// TODO: Need to make sure this works with server figure out how to send data
 	handleFileUpload = event => {
+		alert('uploading file');
 		this.setState({
-			file: event.target.files[0],
+			musicFile: event.target.files[0].name,
 		});
+		console.log(event.target.files[0]);
 	};
 
-	fileUpload = file => {
-		// TODO: add url
-		// const url = 'our api here'
-		const formData = new FormData();
-		formData.append('file', file);
-		const config = {
-			headers: {
-				'content-type': 'mutlipart/form-data',
-			},
-		};
+	// This sends date up to the parent
+
+	addAssignment = () => {
+		const {
+			assignmentName,
+			hoursToPractice,
+			dueDate,
+			email,
+			daysToPractice,
+			musicFile,
+			clientName,
+		} = this.state;
+
+		this.props.addAssignment({
+			assignmentName,
+			hoursToPractice,
+			dueDate,
+			email,
+			daysToPractice,
+			musicFile,
+			clientName,
+		});
+
+		// Closes assignment form when done
+		this.props.doneAssignment();
 	};
 
 	render() {
@@ -71,87 +116,103 @@ class AddAssignmentForm extends Component {
 				<div style={{ margin: 40 }}>
 					<Grid container spacing={0} align="center">
 						<Grid item xs={12}>
-							<h1 className="title">Assignment Name</h1>
+							<input
+								className="title"
+								placeholder="Assignment Name"
+								name="assignmentName"
+								value={this.state.assignmentName}
+								onChange={this.handleStateDataChange}
+							/>
 						</Grid>
 						<Grid container spacing={0} justify="center">
 							<Grid item xs={16}>
 								<Checkbox
 									className="daysToPractice"
 									checked={this.state.checkedSunday}
-									onChange={this.handleChange('checkedSunday')}
+									onChange={this.handleChange('Sunday')}
 									value="checkedSunday"
 								/>
-								<label for="checkedSunday">Sunday</label>
+								<label htmlFor="checkedSunday">Sunday</label>
 								<Checkbox
 									className="daysToPractice"
 									checked={this.state.checkedMonday}
-									onChange={this.handleChange('checkedMonday')}
+									onChange={this.handleChange('Monday')}
 									value="checkedMonday"
 								/>
-								<label for="checkedMonday">Monday</label>
+								<label htmlFor="checkedMonday">Monday</label>
 								<Checkbox
 									className="daysToPractice"
 									checked={this.state.checkedTuesday}
-									onChange={this.handleChange('checkedTuesday')}
+									onChange={this.handleChange('Tuesday')}
 									value="checkedTuesday"
 								/>
-								<label for="checkedTuesday">Tuesday</label>
+								<label htmlFor="checkedTuesday">Tuesday</label>
 								<Checkbox
 									className="daysToPractice"
 									checked={this.state.checkedWednesday}
-									onChange={this.handleChange('checkedWednesday')}
+									onChange={this.handleChange('Wednesday')}
 									value="checkedWednesday"
 								/>
-								<label for="checkedWednesday">Wednesday</label>
+								<label htmlFor="checkedWednesday">Wednesday</label>
 								<Checkbox
 									className="daysToPractice"
 									checked={this.state.checkedThursday}
-									onChange={this.handleChange('checkedThursday')}
+									onChange={this.handleChange('Thursday')}
 									value="checkedThursday"
 								/>
-								<label for="checkedThursday">Thursday</label>
+								<label htmlFor="checkedThursday">Thursday</label>
 								<Checkbox
 									className="daysToPractice"
 									checked={this.state.checkedFriday}
-									onChange={this.handleChange('checkedFriday')}
+									onChange={this.handleChange('Friday')}
 									value="checkedFriday"
 								/>
-								<label for="checkedFriday">Friday</label>
+								<label htmlFor="checkedFriday">Friday</label>
 								<Checkbox
 									className="daysToPractice"
 									checked={this.state.checkedSaturday}
-									onChange={this.handleChange('checkedSaturday')}
+									onChange={this.handleChange('Saturday')}
 									value="checkedSaturday"
 								/>
-								<label for="checkedSaturday">Saturday</label>
+								<label htmlFor="checkedSaturday">Saturday</label>
 							</Grid>
 						</Grid>
 						<Grid container justify="center">
 							<Grid item />
 							<input
 								className="hours"
-								name="hours"
+								name="hoursToPractice"
 								type="text"
 								placeholder="0"
 								value={this.state.hoursToPractice}
+								onChange={this.handleStateDataChange}
 							/>
-							<label for="hours">hrs</label>
+							<label htmlFor="hoursToPractice">hrs</label>
+							<label htmlFor="due date">Due Date:</label>
 							<DatePicker
 								className="date-picker"
-								selected={this.state.startDate}
+								name="due date"
+								selected={this.state.date}
 								onChange={this.handledDateChange}
 							/>
+
 							<Grid item>
 								<input type="file" onChange={this.handleFileUpload} />
 							</Grid>
 						</Grid>
 						<Grid container justify="center">
+							<label htmlFor="email">Email:</label>
 							<input
 								type="email"
 								name="email"
 								value={this.state.email}
 								onChange={this.handleStateDataChange}
 							/>
+						</Grid>
+						<Grid item>
+							<Button variant="raised" onClick={this.addAssignment}>
+								Submit
+							</Button>
 						</Grid>
 					</Grid>
 				</div>

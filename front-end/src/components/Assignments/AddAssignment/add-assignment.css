@@ -1,5 +1,8 @@
 .title {
 	border: 1px solid black;
+	width: 800px;
+	text-align: center;
+	font-size: 14px;
 }
 
 .hours {

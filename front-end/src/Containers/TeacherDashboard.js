@@ -12,18 +12,17 @@ class TeacherDashboard extends Component {
 		super(props);
 
 		this.state = {
-			showAddAssignment: true,
+			showAddAssignment: false,
 
 			assignments: [
 				{
-					music: 'music details',
+					assignmentName: 'Mary Had A Little Lamb',
+					daysToPractice: ['Monday', 'Tuesday', 'Friday'],
+					hoursToPractice: 2,
 					dueDate: '05/05/18',
-					client: 'John Doe',
-				},
-				{
-					music: 'music details2',
-					dueDate: '05/07/18',
-					client: 'Alyson Cramer',
+					musicFile: 'MusicSheet.pdf',
+					email: 'playingpiano@gmail.com',
+					clientName: 'Ralph Waldo Emerson',
 				},
 			],
 		};
@@ -32,11 +31,19 @@ class TeacherDashboard extends Component {
 	//TODO: On componentDidMount fetch assignments
 	//TODO: add assignments post to database
 
-	addAssignment = () => {
-		alert('add assignment');
-		console.log(this.state.addAssignment);
+	//
+	addAssignment = assignment => {
+		// This takes info form the form and adds it to the state
+		// That is then passed down to AssignmentList
 		this.setState({
-			showAddAssignment: true,
+			assignments: [...this.state.assignments, assignment],
+		});
+	};
+
+	// Toggles whether to show the assignment form or not
+	toggleAddAssignment = () => {
+		this.setState({
+			showAddAssignment: !this.state.showAddAssignment,
 		});
 	};
 
@@ -45,7 +52,7 @@ class TeacherDashboard extends Component {
 		return (
 			<div>
 				<Dashboard title="Teacher" />
-				<Grid container xs={12}>
+				<Grid container xs={12} space={0}>
 					<Grid item sm={3}>
 						<SideMenu />
 					</Grid>
@@ -54,10 +61,22 @@ class TeacherDashboard extends Component {
 						<AssignmentList assignments={this.state.assignments} />
 					</Grid>
 				</Grid>
-				<Button variant="raised" onClick={this.addAssignment}>
-					+ Add Assignment
-				</Button>
-				{this.state.showAddAssignment && <AddAssignmentForm />}
+
+				{/* This shows wheter to add assignment or cancel based on state of showAddAssignment */}
+				<Grid item justify="center">
+					<Button variant="raised" onClick={this.toggleAddAssignment}>
+						{this.state.showAddAssignment === false
+							? '+ Add Assignment'
+							: '- Cancel Assignment'}
+					</Button>
+				</Grid>
+				{/* This toggles showing hte assignment form and passes props to change state and upload assignments here*/}
+				{this.state.showAddAssignment && (
+					<AddAssignmentForm
+						addAssignment={this.addAssignment}
+						doneAssignment={this.toggleAddAssignment}
+					/>
+				)}
 			</div>
 		);
 	}
