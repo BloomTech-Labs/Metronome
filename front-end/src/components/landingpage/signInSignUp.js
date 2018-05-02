@@ -1,23 +1,20 @@
-import React, { Component } from 'react';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import React from 'react';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './landingpage.css';
 
-class LoginButtons extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <div>
-        <ButtonToolbar className="loginbutton">
-          <Button>Sign Up</Button>
-          <Button>Sign In</Button>
-        </ButtonToolbar>
-    </div>
-    );
-  }
-}
+const LoginButtons = () => (
+  <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <p>Metronome</p>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavItem eventKey={1} href="#">Sign Up</NavItem>
+      <NavItem eventKey={2} href="#">Sign In</NavItem>
+    </Nav>
+  </Navbar>
+);
 
 
 export default LoginButtons;
