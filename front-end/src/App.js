@@ -4,7 +4,7 @@ import './App.css';
 
 import SignUp from './components/Signup/SignUp';
 import LogIn from './components/LogIn/LogIn.js';
-import EnsureLoggedInContainer from './components/EnsureLoggedIn/EnsureLoggedInContainer';
+
 import TeacherDashboard from './Containers/TeacherDashboard';
 
 class App extends Component {
