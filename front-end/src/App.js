@@ -8,17 +8,17 @@ import Assignments from './components/Assignments/Assignments';
 import EnsureLoggedInContainer from './components/EnsureLoggedIn/EnsureLoggedInContainer';
 
 class App extends Component {
-    render() {
-        return (
-            <div>
-        
-                <Route path="/signup" component={SignUp} />
-                <Route path="/login" component={LogIn} />
-            
-        
-            </div>
-        );
-    }
-}
+	render() {
+		return (
+			<div>
+			
+	     <Route path="/signup" component={SignUp} />
+       <Route path="/login" component={LogIn} />
+					
+			 
+			</div>
+		);
+	}
+ }
 
 export default App;
