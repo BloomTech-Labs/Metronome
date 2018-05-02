@@ -12,10 +12,11 @@ const LoginNavBar = () => (
     </Navbar.Header>
     <Nav>
       <LinkContainer to="/signup">
-      <NavItem eventKey={1} href="#">Sign Up</NavItem>
+        <NavItem eventKey={1} href="#">Sign Up</NavItem>
       </LinkContainer>
-      <LinkContainer to="login"
-      <NavItem eventKey={2} href="#">Log In</NavItem>
+      <LinkContainer to="login">
+        <NavItem eventKey={2} href="#">Log In</NavItem>
+      </LinkContainer>
     </Nav>
   </Navbar>
 );
