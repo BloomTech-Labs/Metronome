@@ -3,8 +3,9 @@ import './login.css';
 
 class Login extends Component {
 	constructor() {
-		super();
-	}
+    super();
+    
+  	}
 
 	handleChange = event => {
 		this.setState({
