@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Route } from 'react-router-dom';
 import SideMenu from '../components/SideMenu/SideMenu';
 import AssignmentList from '../components/Assignments/AssignmentList';
 
