@@ -6,24 +6,19 @@ import SignUp from './components/Signup/SignUp';
 import LogIn from './components/LogIn/LogIn.js';
 
 import Assignments from './components/Assignments/Assignments';
-
-
-import TeacherDashboard from './Containers/TeacherDashboard';
-
-
+import EnsureLoggedInContainer from './components/EnsureLoggedIn/EnsureLoggedInContainer';
+import LandingPage from './components/landingpage/landingpage';
 class App extends Component {
-  render() {
-    return (
-      <div>
-        <Route path="/signup" component={SignUp} />
+	render() {
+		return (
+			<div>
+				<Route exact path="/" component={LandingPage} />
+	      <Route path="/signup" component={SignUp} />
         <Route path="/login" component={LogIn} />
-
-
         <Route path="/teacher" component={TeacherDashboard} />
-
-      </div>
-    );
-  }
-}
+			</div>
+		);
+	}
+ }
 
 export default App;
