@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import SideMenu from '../components/SideMenu/SideMenu';
-import AssignmentList from '../components/Assignments/AssignmentList';
+import React from 'react';
 
-import { AppBar, Toolbar, Typography, Grid } from 'material-ui';
+import { AppBar, Toolbar, Typography } from 'material-ui';
 
 const TeacherDashboard = ({ title }) => (
   <div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import AssignmentDetails from './AssignmentDetails';
 
-import { Button } from 'material-ui';
+
 
 const AssignmentList = (props) => {
-  const { assignments, addAssignment } = props;
+  const { assignments,  } = props;
   if (!assignments.length) {
     return (
       <div>

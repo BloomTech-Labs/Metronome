@@ -5,7 +5,7 @@ import AssignmentList from '../components/Assignments/AssignmentList';
 import Dashboard from './Dashboard';
 import AddAssignmentForm from '../components/Assignments/AddAssignment/AddAssignmentForm';
 
-import { AppBar, Toolbar, Typography, Grid, Button } from 'material-ui';
+import { Grid, Button } from 'material-ui';
 
 class TeacherDashboard extends Component {
 	constructor(props) {
@@ -48,7 +48,6 @@ class TeacherDashboard extends Component {
 	};
 
 	render() {
-		const addAssignment = this.state.addAssignment;
 		return (
 			<div>
 				<Dashboard title="Teacher" />
