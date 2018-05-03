@@ -43,6 +43,11 @@ const UserSchema = new Schema({
   passwordHash: {
     type: String,
   },
+  subscribe: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 }, { timestamps: true });
 
 /**
