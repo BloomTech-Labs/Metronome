@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 /**
  * @api {post} /api/user/register Register a new user
@@ -131,6 +132,49 @@ exports.editProfile = async (req, res) => {
     const currentUser = await User.findById(req.user._id);
     const token = await currentUser.editProfile({ email, password, firstName, lastName });
     res.status(200).json({ token });
+  } catch (err) {
+    res.status(400).json({
+      error: err.message,
+    });
+  }
+};
+
+exports.transaction = async (req, res) => {
+  try {
+    const { userId, tokenId, subscribeType, price } = req.body;
+    const user = await User.findById(userId);
+    if (subscribeType) {
+      user.subscribeType = subscribeType;
+      user.isSubscribe = true;
+    }
+    user.price = price;
+
+    if (!user) return res.status(422).json({ error: 'User not exist' });
+    if (subscribeType === '1 Month') {
+      const charge = await stripe.plans.create({
+        amount: Number(price) * 100,
+        currency: 'usd',
+        interval: 'month',
+        product: 'prod_CnOW1SzS52XC5X',
+      });
+
+      if (!charge) return res.status(500).json({ error: 'Transaction Error' });
+      user.orderId = charge.id;
+      res.status(200).json(charge);
+    } else if (subscribeType === '1 Client') {
+      const charge = await stripe.charges.create({
+        amount: Number(price) * 100,
+        currency: 'usd',
+        source: tokenId,
+      });
+
+      if (!charge) return res.status(500).json({ error: 'Transaction Error' });
+      user.orderId = charge.id;
+      res.status(200).json(charge);
+    } else {
+      res.status(500).json({ error: 'No Transaction' });
+    }
+    user.save();
   } catch (err) {
     res.status(400).json({
       error: err.message,
