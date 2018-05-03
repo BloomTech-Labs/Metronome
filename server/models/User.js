@@ -43,10 +43,19 @@ const UserSchema = new Schema({
   passwordHash: {
     type: String,
   },
-  subscribe: {
+  isSubscribe: {
     type: Boolean,
     required: true,
     default: false,
+  },
+  subscribeType: {
+    type: String,
+  },
+  price: {
+    type: String,
+  },
+  orderId: {
+    type: String,
   },
 }, { timestamps: true });
 
