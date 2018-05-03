@@ -59,12 +59,12 @@ describe('Teacher model', () => {
     const teacher = await Teacher.registerNewUser(validNewUser);
     const teacherInDb = await Teacher.findOne({ email: teacher.email });
     expect(teacher.email).toEqual(teacherInDb.email);
-    expect(teacherInDb.isValidPassword(validNewUser.password)).toBeTruthy();
+    expect(teacherInDb.comparePassword(validNewUser.password)).toBeTruthy();
   });
 
   it('Should validate incorrect passwords properly', async () => {
     const teacher = await Teacher.findOne({ email: validNewUser.email });
-    expect(teacher.isValidPassword('wrongpassword')).toBeFalsy();
+    expect(teacher.comparePassword('wrongpassword')).toBeFalsy();
   });
 
   it('Should have teacher role', async () => {

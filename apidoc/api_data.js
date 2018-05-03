@@ -76,7 +76,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "server/controllers/authController.js",
+    "filename": "server/controllers/userController.js",
     "groupTitle": "User"
   },
   {
@@ -170,7 +170,101 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "server/controllers/authController.js",
+    "filename": "server/controllers/userController.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "put",
+    "url": "/api/user/",
+    "title": "Edit the user's profile",
+    "name": "UpdateUser",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The user's new email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>The user's new password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "firstName",
+            "description": "<p>The user's new first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lastName",
+            "description": "<p>The user's new last name.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>The user's new JWT.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"token\": \"abcdef.ghijklmnop.qrstuvwxyz\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserAlreadyExists",
+            "description": "<p>&quot;User already exists with that email.&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidInput",
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.)</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "UserAlreadyExists-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"User already exists with that email.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "InvalidInput-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"Password must be between 8 and 56 characters.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/userController.js",
     "groupTitle": "User"
   }
 ] });

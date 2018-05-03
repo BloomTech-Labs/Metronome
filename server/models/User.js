@@ -54,10 +54,11 @@ UserSchema.methods.setPassword = function (password) {
 };
 
 /**
- * validate the password
+ * compare plaintext password to hashed password
  * @param {String} password
+ * @returns {Boolean}
  */
-UserSchema.methods.isValidPassword = function (password) {
+UserSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.passwordHash);
 };
 
@@ -78,46 +79,6 @@ UserSchema.methods.generateJWT = function () {
 };
 
 /**
- * Returns a resolved promise if the new user's information is valid.
- * Rejects the promise with a corresponding error if any input is invalid.
- * @param {Object} opts
- * @param {String} opts.email
- * @param {String} opts.password
- * @param {String} opts.firstName
- * @param {String} opts.lastName
- * @returns {Promise}
- */
-UserSchema.statics.validateRegistration = function ({ email = '', password = '', firstName = '', lastName = '' }) {
-  return new Promise(async (resolve, reject) => {
-    if (email.length < MIN_EMAIL_LENGTH || email.length > MAX_EMAIL_LENGTH) {
-      return reject(new Error(`Email must be between ${MIN_EMAIL_LENGTH} and ${MAX_EMAIL_LENGTH} characters.`));
-    }
-    if (!email.match(EMAIL_REGEX)) {
-      return reject(new Error('Email must be a valid email.'));
-    }
-    if (password.length < MIN_PASSWORD_LENGTH || password.length > MAX_PASSWORD_LENGTH) {
-      return reject(new Error(`Password must be between ${MIN_PASSWORD_LENGTH} and ${MAX_PASSWORD_LENGTH} characters.`));
-    }
-    if (firstName.length < MIN_NAME_LENGTH || firstName.length > MAX_NAME_LENGTH) {
-      return reject(new Error(`First name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`));
-    }
-    if (lastName.length < MIN_NAME_LENGTH || lastName.length > MAX_NAME_LENGTH) {
-      return reject(new Error(`Last name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`));
-    }
-
-    // Check if the user exists before registering them
-    try {
-      const count = await this.findOne({ email }).count();
-      if (count) return reject(new Error('User already exists with that email.'));
-
-      return resolve('User is valid');
-    } catch (err) {
-      return reject(err);
-    }
-  });
-};
-
-/**
  * Register a new user if the input is valid.
  * @param {Object} opts
  * @param {String} opts.email
@@ -126,48 +87,55 @@ UserSchema.statics.validateRegistration = function ({ email = '', password = '',
  * @param {String} opts.lastName
  * @returns {Promise<any>} the new user instance
  */
-UserSchema.statics.registerNewUser = function (opts) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await this.validateRegistration(opts);
+UserSchema.statics.registerNewUser = async function ({ email = '', password = '', firstName = '', lastName = '' }) {
+  this.validateEmail(email);
+  this.validatePassword(password);
+  this.validateFirstName(firstName);
+  this.validateLastName(lastName);
+  await this.validateUniqueEmail(email);
 
-      const user = new this({
-        email: opts.email,
-        firstName: opts.firstName,
-        lastName: opts.lastName,
-      });
-      user.setPassword(opts.password);
-      await user.save();
-      return resolve(user);
-    } catch (err) {
-      return reject(err);
-    }
+  const user = new this({
+    email,
+    firstName,
+    lastName,
   });
+  user.setPassword(password);
+  await user.save();
+  return user;
 };
 
 /**
- * Returns a promise that resolves to the user's JWT if the email and password is correct.
- * Rejects the promise with a corresponding error if the email or password is invalid.
+ * Updates the existing user's profile if the input is valid and returns a new JWT.
  * @param {Object} opts
  * @param {String} opts.email
  * @param {String} opts.password
- * @returns {Promise<String>}
+ * @param {String} opts.firstName
+ * @param {String} opts.lastName
  */
-UserSchema.statics.validateLogin = function ({ email = '', password = '' }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const user = await this.findOne({ email });
-      if (!user) return reject(new Error('User does not exist with that email.'));
+UserSchema.methods.editProfile = async function ({ email, password, firstName, lastName }) {
+  if (firstName) {
+    this.model('User').validateFirstName(firstName);
+    this.firstName = firstName;
+  }
 
-      if (!user.isValidPassword(password)) {
-        return reject(new Error('Password is not correct.'));
-      }
+  if (lastName) {
+    this.model('User').validateLastName(lastName);
+    this.lastName = lastName;
+  }
 
-      return resolve(user.generateJWT());
-    } catch (err) {
-      return reject(err);
-    }
-  });
+  if (password) {
+    this.model('User').validatePassword(password);
+    this.setPassword(password);
+  }
+
+  if (email) {
+    this.model('User').validateEmail(email);
+    await this.model('User').validateUniqueEmail(email);
+    this.email = email;
+  }
+
+  await this.save();
+  return this.generateJWT();
 };
 
 /**
@@ -186,6 +154,74 @@ UserSchema.statics.loginUser = function ({ email = '', password = '' }) {
       return reject(err);
     }
   });
+};
+
+
+/**
+ * Returns a promise that resolves to the user's JWT if the email and password is correct.
+ * Rejects the promise with a corresponding error if the email or password is invalid.
+ * @param {Object} opts
+ * @param {String} opts.email
+ * @param {String} opts.password
+ * @returns {Promise<String>}
+ */
+UserSchema.statics.validateLogin = async function ({ email = '', password = '' }) {
+  const user = await this.findOne({ email });
+  if (!user) throw new Error('User does not exist with that email.');
+
+  if (!user.comparePassword(password)) {
+    throw new Error('Password is not correct.');
+  }
+
+  return user.generateJWT();
+};
+
+/**
+ * @param {String} email
+ */
+UserSchema.statics.validateEmail = function (email = '') {
+  if (email.length < MIN_EMAIL_LENGTH || email.length > MAX_EMAIL_LENGTH) {
+    throw new Error(`Email must be between ${MIN_EMAIL_LENGTH} and ${MAX_EMAIL_LENGTH} characters.`);
+  }
+  if (!email.match(EMAIL_REGEX)) {
+    throw new Error('Email must be a valid email.');
+  }
+};
+
+/**
+ * @param {String} email
+ */
+UserSchema.statics.validateUniqueEmail = async function (email = '') {
+  const count = await this.findOne({ email }).count();
+  if (count) throw new Error('User already exists with that email.');
+};
+
+/**
+ * @param {String} password
+ */
+UserSchema.statics.validatePassword = function (password = '') {
+  if (password.length < MIN_PASSWORD_LENGTH || password.length > MAX_PASSWORD_LENGTH) {
+    throw new Error(`Password must be between ${MIN_PASSWORD_LENGTH} and ${MAX_PASSWORD_LENGTH} characters.`);
+  }
+};
+
+/**
+ * @param {String} firstName
+ */
+UserSchema.statics.validateFirstName = function (firstName = '') {
+  if (firstName.length < MIN_NAME_LENGTH || firstName.length > MAX_NAME_LENGTH) {
+    throw new Error(`First name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`);
+  }
+};
+
+/**
+ *
+ * @param {String} lastName
+ */
+UserSchema.statics.validateLastName = function (lastName = '') {
+  if (lastName.length < MIN_NAME_LENGTH || lastName.length > MAX_NAME_LENGTH) {
+    throw new Error(`Last name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`);
+  }
 };
 
 const User = mongoose.model('User', UserSchema);

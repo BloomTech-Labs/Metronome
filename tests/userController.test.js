@@ -82,3 +82,42 @@ describe('[POST] /api/user/login', () => {
   });
 });
 
+describe('[PUT] /api/user', () => {
+  beforeAll((done) => {
+    mongoose.connect('mongodb://localhost/Metronome_local_test');
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error'));
+    db.once('open', async () => {
+      await User.registerNewUser(validNewUser);
+      done();
+    });
+  });
+
+  afterAll((done) => {
+    mongoose.connection.db.dropCollection('users', done);
+  });
+
+  it('Should not edit the user\'s profile if new information is invalid', async () => {
+    try {
+      const user = await User.findOne({ email: validNewUser.email });
+      await user.editProfile(newUserWithBadEmail);
+    } catch (err) {
+      expect(err.message).toBe('Email must be a valid email.');
+    }
+  });
+
+  it('Should edit the user\'s profile if new information is valid', async () => {
+    const newData = {
+      email: 'mynewemail@example.com',
+      password: 'mynewpassword',
+      firstName: 'NewFirstName',
+      lastName: 'NewLastName',
+    };
+    const user = await User.findOne({ email: validNewUser.email });
+    await user.editProfile(newData);
+    expect(user.email).toBe(newData.email);
+    expect(user.comparePassword(newData.password)).toBeTruthy();
+    expect(user.firstName).toBe(newData.firstName);
+    expect(user.lastName).toBe(newData.lastName);
+  });
+});
