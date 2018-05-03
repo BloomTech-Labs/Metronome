@@ -7,11 +7,11 @@ const { isAuthenticated } = require('./services/auth');
 const app = express();
 
 // ... other app.use middleware setups
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, '../front-end', 'build')));
 app.use(bodyParser.json());
 
 // Test route to make sure everything is working
-app.get('/', (req, res) => {
+app.get('/hello-world', (req, res) => {
   res.status(200).json({ response: 'Hello World!' });
 });
 
