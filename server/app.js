@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
+const { isAuthenticated } = require('./services/auth');
 
 const app = express();
 
@@ -12,6 +13,10 @@ app.use(bodyParser.json());
 // Test route to make sure everything is working
 app.get('/', (req, res) => {
   res.status(200).json({ response: 'Hello World!' });
+});
+
+app.get('/auth-route', isAuthenticated, (req, res) => {
+  res.status(200).json({ response: 'Successfully authenticated!' });
 });
 
 // Route connections

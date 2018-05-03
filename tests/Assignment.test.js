@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
 const Assignment = require('../server/models/Assignment');
+const { AssignmentDataFactory } = require('./testDataFactories');
+
+const {
+  validNewAssignment,
+  newAssignmentWithBadAddress,
+  newAssignmentWithBadDays,
+  newAssignmentWithBadHours,
+  newAssignmentWithBadName,
+} = AssignmentDataFactory;
 
 describe('Assignment model', () => {
-  // Test data
-  const validAssignment = {
-    name: 'everyday practice',
-    days: ['monday', 'wednesday', 'friday'],
-    hours: 1,
-    musicSheetAddr: 'localhost:8000',
-  };
-  const badName = { ...validAssignment, name: null };
-  const badDays = { ...validAssignment, days: null };
-  const badHours = { ...validAssignment, hours: null };
-  const badAddr = { ...validAssignment, musicSheetAddr: null };
-
   beforeAll((done) => {
     mongoose.connect('mongodb://localhost/Metronome_local_test');
     const db = mongoose.connection;
@@ -27,7 +24,7 @@ describe('Assignment model', () => {
 
   it('Should not register a assignment with an invalid name', async () => {
     try {
-      await Assignment.create(badName);
+      await Assignment.create(newAssignmentWithBadName);
     } catch (err) {
       expect(err.message).toBe('Assignment validation failed: name: can\'t be blank');
     }
@@ -35,7 +32,7 @@ describe('Assignment model', () => {
 
   it('Should not register a assignment with an invalid days', async () => {
     try {
-      await Assignment.create(badDays);
+      await Assignment.create(newAssignmentWithBadDays);
     } catch (err) {
       expect(err.message).toBe('Assignment validation failed: days: can\'t be blank');
     }
@@ -43,7 +40,7 @@ describe('Assignment model', () => {
 
   it('Should not register a assignment with an invalid hours', async () => {
     try {
-      await Assignment.create(badHours);
+      await Assignment.create(newAssignmentWithBadHours);
     } catch (err) {
       expect(err.message).toBe('Assignment validation failed: hours: can\'t be blank');
     }
@@ -51,25 +48,26 @@ describe('Assignment model', () => {
 
   it('Should not register a assignment with an invalid music sheet address', async () => {
     try {
-      await Assignment.create(badAddr);
+      await Assignment.create(newAssignmentWithBadAddress);
     } catch (err) {
       expect(err.message).toBe('Assignment validation failed: musicSheetAddr: can\'t be blank');
     }
   });
 
+  // New assignment is in the test database after this test
   it('Should register a valid assignment', async () => {
-    const assignment = await Assignment.create(validAssignment);
+    const assignment = await Assignment.create(validNewAssignment);
     const assignmentInDb = await Assignment.findOne({ name: assignment.name });
     expect(assignment.hours).toEqual(assignmentInDb.hours);
   });
 
   it('Should have students empty array in the assignment', async () => {
-    const assignment = await Assignment.findOne({ name: validAssignment.name });
+    const assignment = await Assignment.findOne({ name: validNewAssignment.name });
     expect(assignment.students.length).toEqual(0);
   });
 
   it('Should have a teacher field in the assignment', async () => {
-    const assignment = await Assignment.findOne({ name: validAssignment.name });
+    const assignment = await Assignment.findOne({ name: validNewAssignment.name });
     expect(assignment.teacher).toEqual(undefined);
   });
 });

@@ -1,13 +1,16 @@
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 import React from 'react';
 import BuyNowButton from './buyNowButton';
-import LoginButtons from './signInSignUp';
+import LoginNavBar from './signInSignUp';
 import MainImage from './mainImage';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Description from './description';
 
 const LandingPage = () => (
   <div>
-    <LoginButtons />
+    <LoginNavBar />
     <MainImage />
+    <Description />
     <BuyNowButton />
   </div>
 );
