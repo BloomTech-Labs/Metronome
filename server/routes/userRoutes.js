@@ -5,4 +5,5 @@ const { isAuthenticated } = require('../services/auth');
 routes.post('/register', userController.register);
 routes.post('/login', userController.login);
 routes.post('/edit', isAuthenticated, userController.editProfile);
+routes.post('/transaction', isAuthenticated, userController.transaction);
 module.exports = routes;
