@@ -176,8 +176,7 @@ exports.editProfile = async (req, res) => {
  *      "balance_transaction": "txn_1CNoOCBAjX4w9BqHZaGDqBbr",
  *      "captured": true,
  *      "created": 1525380656,
- *      "currency": "usd",
- *      ... 
+ *      "currency": "usd"
  *    }
  *
  * @apiError UserDoesNotExist "User not exist."
