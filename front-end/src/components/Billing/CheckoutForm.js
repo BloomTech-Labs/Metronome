@@ -28,6 +28,11 @@ class CheckoutForm extends Component {
       this.setState({ error: null });
     }
 
+    const subscribeType = this.state.subscribe ? "1 Month" :
+                          this.state.client ? "1 Client" : false;
+    const price = subscribeType === '1 Month' ? '20' :
+                  subscribeType === '1 Client' ? '1.99' : undefined;
+
     this.props.stripe.createToken({})
       .then(({ token }) => {
         console.log('Received Stripe token:', token);
