@@ -1,6 +1,4 @@
 {
-
-
     "extends": "airbnb",
     "rules": {
         "linebreak-style": 0,
@@ -10,10 +8,12 @@
         "consistent-return": "off",
         "object-curly-newline": "off",
         "no-underscore-dangle": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     },
     "env": {
-        "jest": true
-    }
-
+        "jest": true,
+        "browser": true
+    },
+    "parser": "babel-eslint"
 }
