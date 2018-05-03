@@ -12,17 +12,9 @@ app.use(bodyParser.json());
 
 app.use('/api/user', authRoutes);
 
-// Test route to make sure everything is working
-app.get('/hello-world', (req, res) => {
-  res.status(200).json({ response: 'Hello World!' });
-});
-
+// Test auth route
 app.get('/auth-route', isAuthenticated, (req, res) => {
   res.status(200).json({ response: 'Successfully authenticated!' });
-});
-
-app.get('/api/test', (req, res) => {
-  res.status(200).json({ response: 'testing ' });
 });
 
 module.exports = app;
