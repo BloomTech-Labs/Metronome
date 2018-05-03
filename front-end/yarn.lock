@@ -5995,6 +5995,12 @@ react-scrollbar-size@^2.0.2:
     react-event-listener "^0.5.1"
     stifle "^1.0.2"
 
+react-stripe-elements@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-1.6.0.tgz#1433bf6b7a83479f2cdb9ba459bf36fb201b97be"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-tap-event-plugin@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-3.0.2.tgz#280371677b881c31376e0027a0b86d2c6de039ee"
