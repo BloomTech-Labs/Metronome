@@ -13,15 +13,35 @@ class UserSettings extends Component {
     };
   }
 
+  onChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  onSubmit = event => {
+    event.preventDefault();
+
+    this.setState({
+      newEmail: '',
+      newPassword: '',
+    })
+  }
+
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <h1>Update Email</h1>
           <div>
             <input
-              updateEmail=""
+              name="newEmail"
               placeholder="New Email"
+              value={this.state.newEmail}
+              onChange={this.onChange}
             />
             <br />
             <Button
@@ -31,19 +51,23 @@ class UserSettings extends Component {
             >
               Submit New Email
             </Button>
-            </div>
+          </div>
           <div>
             <h1>Change Password</h1>
             <input
-              oldPass=""
+              name="oldPassword"
               placeholder="Old Password"
+              value={this.state.oldPassword}
+              onChange={this.onChange}
             />
             <br />
           </div>
           <div>
             <input
-              newPass=""
+              name="newPassword"
               placeholder="NewPassword"
+              value={this.state.newPassword}
+              onChange={this.onChange}
             />
             <br />
           </div>
