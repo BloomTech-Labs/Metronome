@@ -1,4 +1,7 @@
 const User = require('../models/User');
+const sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 /**
  * @api {post} /api/user/register Register a new user
@@ -37,7 +40,12 @@ exports.register = async (req, res) => {
   try {
     const { email, password, firstName, lastName } = req.body;
 
-    const user = await User.registerNewUser({ email, password, firstName, lastName });
+    const user = await User.registerNewUser({
+      email,
+      password,
+      firstName,
+      lastName,
+    });
     const token = user.generateJWT();
     res.status(200).json({
       token,
@@ -129,8 +137,35 @@ exports.editProfile = async (req, res) => {
   try {
     const { email, password, firstName, lastName } = req.body;
     const currentUser = await User.findById(req.user._id);
-    const token = await currentUser.editProfile({ email, password, firstName, lastName });
+    const token = await currentUser.editProfile({
+      email,
+      password,
+      firstName,
+      lastName,
+    });
     res.status(200).json({ token });
+  } catch (err) {
+    res.status(400).json({
+      error: err.message,
+    });
+  }
+};
+
+exports.sendMail = (req, res) => {
+  // using SendGrid's v3 Node.js Library
+  // https://github.com/sendgrid/sendgrid-nodejs
+  
+  try {
+    const { to, from, subject, text, html } = req.body;
+    const msg = {
+      to,
+      from,
+      subject,
+      text,
+      html,
+    };
+    sgMail.send(msg);
+    res.status(200).json({ message: 'success' });
   } catch (err) {
     res.status(400).json({
       error: err.message,
