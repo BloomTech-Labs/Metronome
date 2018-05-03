@@ -52,7 +52,7 @@ const UserSchema = new Schema({
     type: String,
   },
   price: {
-    type: Number,
+    type: String,
   },
   orderId: {
     type: String,
