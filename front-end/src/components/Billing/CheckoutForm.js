@@ -21,10 +21,38 @@ class CheckoutForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <CardSection />
-        <button>Buy now</button>
-      </form>
+      <div className="billing">
+        <form onSubmit={this.handleSubmit}>
+          <h1>Billing</h1>
+          <div>
+            <div>
+              <h4>Payment Info</h4>
+              <CardSection fontSize='16px'/>
+            </div>
+            <div className="checkbox">
+              <div className="checkbox__option">
+                <input
+                  type="checkbox"
+                  value={this.state.subscribe}
+                  onChange={() => {}}
+                />
+                <span>{this.state.subErr}</span>
+                1 Month Subscription - $20
+              </div>
+              <div className="checkbox__option">
+                <input
+                  type="checkbox"
+                  value={this.state.client}
+                  onChange={() => {}}
+                />
+                <span>{this.state.clientErr}</span>
+                1 Client - $1.99
+              </div>
+            </div>
+          </div>
+          <button>Buy Now</button>
+        </form>
+      </div>
     );
   }
 }
