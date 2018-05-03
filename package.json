@@ -1,5 +1,5 @@
 {
-	"name": "Metronome",
+  "name": "Metronome",
 	"version": "1.0.0",
 	"main": "index.js",
 	"repository": "https://github.com/Lambda-School-Labs/Metronome.git",
@@ -19,7 +19,8 @@
 		"dotenv": "^5.0.1",
 		"express": "^4.16.3",
 		"jsonwebtoken": "^8.2.1",
-		"mongoose": "^5.0.16"
+		"mongoose": "^5.0.16",
+    "stripe": "^5.8.0"
 	},
 	"devDependencies": {
 		"babel-eslint": "^8.2.3",

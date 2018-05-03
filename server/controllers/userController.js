@@ -1,7 +1,8 @@
 const User = require('../models/User');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const sgMail = require('@sendgrid/mail');
-
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 
 /**
  * @api {post} /api/user/register Register a new user
@@ -144,6 +145,91 @@ exports.editProfile = async (req, res) => {
       lastName,
     });
     res.status(200).json({ token });
+  } catch (err) {
+    res.status(400).json({
+      error: err.message,
+    });
+  }
+};
+
+/**
+ * @api {post} /api/user/transaction make a stripe transaction
+ * @apiName StripeTransaction
+ * @apiGroup User
+ *
+ * @apiParam {String} userId The user's id.
+ * @apiParam {String} tokenId The stripe front-end transaction token id.
+ * @apiParam {String} subscribeType The user subscription type.
+ * @apiParam {String} price The user transaction price.
+ *
+ * @apiSuccess {JSON} transaction The user's transaction JSON information.
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "id": "ch_1CNoOCBAjX4w9BqH3Ck3KBAL",
+ *      "object": "charge",
+ *      "amount": 299,
+ *      "amount_refunded": 0,
+ *      "application": null,
+ *      "application_fee": null,
+ *      "balance_transaction": "txn_1CNoOCBAjX4w9BqHZaGDqBbr",
+ *      "captured": true,
+ *      "created": 1525380656,
+ *      "currency": "usd",
+ *      ... 
+ *    }
+ *
+ * @apiError UserDoesNotExist "User not exist."
+ *
+ * @apiErrorExample Transaction Error:
+ *    HTTP/1.1 500 Bad Request
+ *    {
+ *      "error": "Transaction Error"
+ *    }
+ *
+ * @apiErrorExample "No Transaction"
+ *    HTTP/1.1 500 Bad Request
+ *    {
+ *      "error": "No Transaction"
+ *    }
+ */
+exports.transaction = async (req, res) => {
+  try {
+    const { userId, tokenId, subscribeType, price } = req.body;
+    const user = await User.findById(userId);
+    if (subscribeType) {
+      user.subscribeType = subscribeType;
+      user.isSubscribe = true;
+    }
+    user.price = price;
+
+    if (!user) return res.status(422).json({ error: 'User not exist' });
+    if (subscribeType === '1 Month') {
+      const charge = await stripe.plans.create({
+        amount: Number(price) * 100,
+        currency: 'usd',
+        interval: 'month',
+        product: 'prod_CnOW1SzS52XC5X',
+      });
+
+      if (!charge) return res.status(500).json({ error: 'Transaction Error' });
+      user.orderId = charge.id;
+      res.status(200).json(charge);
+    } else if (subscribeType === '1 Client') {
+      const charge = await stripe.charges.create({
+        amount: Number(price) * 100,
+        currency: 'usd',
+        source: tokenId,
+      });
+
+      if (!charge) return res.status(500).json({ error: 'Transaction Error' });
+      user.orderId = charge.id;
+      res.status(200).json(charge);
+    } else {
+      res.status(500).json({ error: 'No Transaction' });
+    }
+    user.save();
   } catch (err) {
     res.status(400).json({
       error: err.message,
