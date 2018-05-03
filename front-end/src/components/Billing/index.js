@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StripeProvider } from 'react-stripe-elements';
 import BillingCheckOut from './BillingCheckout';
+import './billing.css';
 
 class Billing extends Component {
   render() {
