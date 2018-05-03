@@ -4,11 +4,10 @@ import './App.css';
 
 import SignUp from './components/Signup/SignUp';
 import LogIn from './components/LogIn/LogIn.js';
-import LandingPage from './components/landingpage/landingpage';
-
+import LandingPage from './components/LandingPage/landingpage';
 import TeacherDashboard from './Containers/TeacherDashboard';
-
 import Billing from './components/Billing';
+import UserSettings from './components/UserSettings/UserSettings';
 
 
 class App extends Component {
@@ -20,6 +19,7 @@ class App extends Component {
         <Route path="/login" component={LogIn} />
         <Route path="/teacher" component={TeacherDashboard} />
         <Route path="/billing" component={Billing} />
+        <Route path="/settings" component={UserSettings} />
       </div>
     );
   }
