@@ -71,14 +71,14 @@ Please read []() for details on our code of conduct, and the process for submitt
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
-## Authors
-
-* **Adam Fetters** - ** - []()
-* **Emma Drueke** - ** - []()
-* **Jesse Hood** - ** - []()
-* **Ting Wang** - ** - []()
-
-See also the list of [contributors]() who participated in this project.
+<!-- ## Authors -->
+<!--  -->
+<!-- * **Adam Fetters** - ** - []() -->
+<!-- * **Emma Drueke** - ** - []() -->
+<!-- * **Jesse Hood** - ** - []() -->
+<!-- * **Ting Wang** - ** - []() -->
+<!--  -->
+<!-- See also the list of [contributors]() who participated in this project. -->
 
 ## License
 
