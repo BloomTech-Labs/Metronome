@@ -24,7 +24,8 @@ class UserSettings extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-
+//TODO: set up Axios to send data
+//TODO: How to check old password to varify
     this.setState({
       newEmail: '',
       newPassword: '',
