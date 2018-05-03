@@ -1,13 +1,29 @@
 import React from 'react';
-import { CardElement } from 'react-stripe-elements';
+import { CardNumberElement, CardExpiryElement, CardCVCElement } from 'react-stripe-elements';
 
+const createOptions = fontSize => ({
+  style: {
+    base: {
+      fontSize,
+      letterSpacing: '0.025em',
+      fontFamily: 'Source Code Pro, monospace',
+      '::placeholder': {
+        color: '#aab7c4',
+      },
+    },
+    invalid: {
+      color: '#9e2146',
+    },
+  },
+});
 class CardSection extends React.Component {
   render() {
     return (
-      <label>
-        Card details
-        <CardElement style={{ base: { fontSize: '18px' } }} />
-      </label>
+      <div className="payment">
+        <CardNumberElement {...createOptions(this.props.fontSize)} />
+        <CardExpiryElement {...createOptions(this.props.fontSize)} />
+        <CardCVCElement {...createOptions(this.props.fontSize)} />
+      </div>
     );
   }
 }
