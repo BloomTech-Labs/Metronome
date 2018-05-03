@@ -1,7 +1,8 @@
 import React from 'react';
+import "./landingpage.css";
 
 const Description = () => (
-  <div>
+  <div className="description">
     <p>
       Lets learn music
     </p>
