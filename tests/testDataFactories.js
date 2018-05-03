@@ -9,7 +9,7 @@ exports.UserDataFactory = class UserDataFactory {
   }
 
   static get newUserWithBadEmail() {
-    return { ...this.validUser, email: 'bademail' };
+    return { ...this.validNewUser, email: 'bademail' };
   }
 
   static get newUserWithBadPassword() {

@@ -91,3 +91,49 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+/**
+ * @api {put} /api/user/ Edit the user's profile
+ * @apiName UpdateUser
+ * @apiGroup User
+ *
+ * @apiParam {String} email The user's new email.
+ * @apiParam {String} password The user's new password.
+ * @apiParam {String} firstName The user's new first name.
+ * @apiParam {String} lastName The user's new last name.
+ *
+ * @apiSuccess {String} token The user's new JWT.
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "token": "abcdef.ghijklmnop.qrstuvwxyz"
+ *    }
+ *
+ * @apiError UserAlreadyExists "User already exists with that email."
+ * @apiError InvalidInput Describes the input error (invalid email format, invalid password length, etc.)
+ *
+ * @apiErrorExample UserAlreadyExists-Response:
+ *    HTTP/1.1 400 Bad Request
+ *    {
+ *      "error": "User already exists with that email."
+ *    }
+ *
+ * @apiErrorExample InvalidInput-Response:
+ *    HTTP/1.1 400 Bad Request
+ *    {
+ *      "error": "Password must be between 8 and 56 characters."
+ *    }
+ */
+exports.editProfile = async (req, res) => {
+  try {
+    const { email, password, firstName, lastName } = req.body;
+    const currentUser = await User.findById(req.user._id);
+    const token = await currentUser.editProfile({ email, password, firstName, lastName });
+    res.status(200).json({ token });
+  } catch (err) {
+    res.status(400).json({
+      error: err.message,
+    });
+  }
+};

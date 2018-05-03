@@ -59,11 +59,11 @@ describe('User model', () => {
     const user = await User.registerNewUser(validNewUser);
     const userInDb = await User.findOne({ email: user.email });
     expect(user.email).toEqual(userInDb.email);
-    expect(userInDb.isValidPassword(validNewUser.password)).toBeTruthy();
+    expect(userInDb.comparePassword(validNewUser.password)).toBeTruthy();
   });
 
   it('Should validate incorrect passwords properly', async () => {
     const user = await User.findOne({ email: validNewUser.email });
-    expect(user.isValidPassword('wrongpassword')).toBeFalsy();
+    expect(user.comparePassword('wrongpassword')).toBeFalsy();
   });
 });
