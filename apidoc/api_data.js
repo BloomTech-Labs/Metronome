@@ -174,6 +174,94 @@ define({ "api": [
     "groupTitle": "User"
   },
   {
+    "type": "post",
+    "url": "/api/user/transaction",
+    "title": "make a stripe transaction",
+    "name": "StripeTransaction",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>The user's id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tokenId",
+            "description": "<p>The stripe front-end transaction token id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "subscribeType",
+            "description": "<p>The user subscription type.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "price",
+            "description": "<p>The user transaction price.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "JSON",
+            "optional": false,
+            "field": "transaction",
+            "description": "<p>The user's transaction JSON information.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": \"ch_1CNoOCBAjX4w9BqH3Ck3KBAL\",\n  \"object\": \"charge\",\n  \"amount\": 299,\n  \"amount_refunded\": 0,\n  \"application\": null,\n  \"application_fee\": null,\n  \"balance_transaction\": \"txn_1CNoOCBAjX4w9BqHZaGDqBbr\",\n  \"captured\": true,\n  \"created\": 1525380656,\n  \"currency\": \"usd\",\n  ... \n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserDoesNotExist",
+            "description": "<p>&quot;User not exist.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Transaction Error:",
+          "content": "HTTP/1.1 500 Bad Request\n{\n  \"error\": \"Transaction Error\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "\"No Transaction\"",
+          "content": "HTTP/1.1 500 Bad Request\n{\n  \"error\": \"No Transaction\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/userController.js",
+    "groupTitle": "User"
+  },
+  {
     "type": "put",
     "url": "/api/user/",
     "title": "Edit the user's profile",
