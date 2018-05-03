@@ -4,11 +4,12 @@ import './App.css';
 
 import SignUp from './components/Signup/SignUp';
 import LogIn from './components/LogIn/LogIn.js';
-
-import Assignments from './components/Assignments/Assignments';
-import EnsureLoggedInContainer from './components/EnsureLoggedIn/EnsureLoggedInContainer';
 import LandingPage from './components/landingpage/landingpage';
+
+import TeacherDashboard from './Containers/TeacherDashboard';
+
 import Billing from './components/Billing';
+
 
 class App extends Component {
   render() {
