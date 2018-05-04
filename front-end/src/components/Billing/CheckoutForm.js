@@ -10,8 +10,8 @@ class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subscribe: false,
-      client: false,
+      subscribe: false, // 1 month subscription: $20
+      client: false, // 1 client purchase: $1.99
       error: null,
     };
   }
@@ -22,26 +22,43 @@ class CheckoutForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const url = 'http://localhost:3000/api/user/transaction';
+
+    // relative url for axios request
+    const url = '/api/user/transaction';
+
+    // JWT token pulled from local storage
     const jwt = window.localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZWI3Mjk4NTU0NmIwOGJkNDYzYjY0YyIsImVtYWlsIjoiMTIzQDEyMy5jb20iLCJuYW1lIjoidGluZyB3YW5nIiwiZXhwIjoxNTI3OTcxNzM3LCJpYXQiOjE1MjUzNzk3Mzd9.pc5jdU6FYaxiNMnfkW85H2ppAeoo1lcdAt9gcOuOMAQ';
+
+    // decode from jwt-decode with the encoded information
     const decode = jwtDecode(jwt);
+
+    // user id that is encoded into the jwt token
     const { id } = decode;
     const { subscribe, client } = this.state;
+
+    // need to choose the purchase plan
     if (!subscribe && !client) {
       return this.setState({ error: 'Please select a plan' });
     }
     this.setState({ error: null });
 
+    // subscribe type that will send to the backend
     const subscribeType = this.state.subscribe ? '1 Month' :
       this.state.client ? '1 Client' : false;
+
+    // purchase price that will send to backend
     const price = subscribeType === '1 Month' ? '20' :
       subscribeType === '1 Client' ? '1.99' : undefined;
 
+    // create stripe transaction token
     this.props.stripe.createToken()
       .then(({ token }) => {
-        // if (!stripeToken) return this.setState({ error: 'Card information incorrect' });
+        if (!token) return this.setState({ error: 'Card information incorrect' });
         this.setState({ error: null });
         console.log('Received Stripe token:', token);
+
+        // once token is created, send request to backend
+        // with user id, token id, subscribe type, and price
         axios.post(url, {
           userId: id,
           tokenId: token.id,
@@ -52,14 +69,14 @@ class CheckoutForm extends Component {
             Authorization: jwt,
           },
         }).then((res) => {
-          // redirect to user page
+          // TODO: redirect to user page
           console.log('Transaction successful', res.data);
         }).catch((error) => {
           console.log('Transaction Error', error);
         });
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log('Transaction Error:', error);
       });
   };
 
