@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import FaTrash from 'react-icons/lib/fa/trash';
 
@@ -7,7 +8,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 const AssignmentDetails = props => (
 	<div>
 		<Card>
-			<Link to={`/${props.id}`}>
+			<Link to={`${props.match.url}/assignment-details/${props.id}`}>
 				<CardTitle>{props.name}</CardTitle>
 				<CardImg
 					top

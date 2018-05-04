@@ -44,7 +44,6 @@ class AssignmentList extends Component {
 	};
 
 	deleteAssignment = id => {
-		alert(`Clicked ${id}`);
 		const filteredArray = this.state.assignments.filter(x => x.id !== id);
 		this.setState({
 			assignments: filteredArray,
