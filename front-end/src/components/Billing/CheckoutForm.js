@@ -22,7 +22,7 @@ class CheckoutForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const url = 'localhost:3000/api/user/transaction';
+    const url = 'http://localhost:3000/api/user/transaction';
     const jwt = window.localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZWI3Mjk4NTU0NmIwOGJkNDYzYjY0YyIsImVtYWlsIjoiMTIzQDEyMy5jb20iLCJuYW1lIjoidGluZyB3YW5nIiwiZXhwIjoxNTI3OTcxNzM3LCJpYXQiOjE1MjUzNzk3Mzd9.pc5jdU6FYaxiNMnfkW85H2ppAeoo1lcdAt9gcOuOMAQ';
     const decode = jwtDecode(jwt);
     const { id } = decode;
