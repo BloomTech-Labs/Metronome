@@ -11,8 +11,9 @@ export default () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={LandingPage} />
+      <Route path="/loign" component={LogIn} />
       <Route path="/signup" component={SignUp} />
-
+      <Route path="/teacher/add-assignment" component={AddAssignmentForm} />
       <Route path="/teacher" component={TeacherDashboard} />
     </Switch>
   </BrowserRouter>

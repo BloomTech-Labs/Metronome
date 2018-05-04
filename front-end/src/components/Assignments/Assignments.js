@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import AssignmentDetails from './AssignmentDetails';
-import AddAssignmentForm from '../Assignments/AddAssignment/AddAssignmentForm';
 
-import { Container, Row, Col, Card, CardTitle, CardImg } from 'reactstrap';
-import { Link, Route } from 'react-router-dom';
+import { Container, Row, Card, CardTitle, CardImg } from 'reactstrap';
+import { Link, } from 'react-router-dom';
 
 
 class AssignmentList extends Component {
@@ -11,28 +10,28 @@ class AssignmentList extends Component {
     super(props);
       this.state = {
       assignments: [
-        // {
-        //   id: 1,
-        //   assignmentName: 'Mary Had A Little Lamb',
-        //   daysToPractice: ['Monday', 'Tuesday', 'Friday'],
-        //   hoursToPractice: 2,
-        //   dueDate: '05/05/18',
-        //   musicFile: 'MusicSheet Goes Here',
-        //   email: 'playingpiano@gmail.com',
-        //   clientName: 'Ralph Waldo Emerson',
-        //   teacherName: 'Sally Fields',
-        // },
-        // {
-        //   id: 2,
-        //   assignmentName: 'Boom Donkey',
-        //   daysToPractice: ['Monday', 'Tuesday', 'Friday'],
-        //   hoursToPractice: 2,
-        //   dueDate: '05/05/18',
-        //   musicFile: 'MusicSheet Goes Here',
-        //   email: 'playingpiano@gmail.com',
-        //   clientName: 'Ralph Waldo Emerson',
-        //   teacherName: 'Sally Fields',
-        // }
+        {
+          id: 1,
+          assignmentName: 'Mary Had A Little Lamb',
+          daysToPractice: ['Monday', 'Tuesday', 'Friday'],
+          hoursToPractice: 2,
+          dueDate: '05/05/18',
+          musicFile: 'MusicSheet Goes Here',
+          email: 'playingpiano@gmail.com',
+          clientName: 'Ralph Waldo Emerson',
+          teacherName: 'Sally Fields',
+        },
+        {
+          id: 2,
+          assignmentName: 'Boom Donkey',
+          daysToPractice: ['Monday', 'Tuesday', 'Friday'],
+          hoursToPractice: 2,
+          dueDate: '05/05/18',
+          musicFile: 'MusicSheet Goes Here',
+          email: 'playingpiano@gmail.com',
+          clientName: 'Ralph Waldo Emerson',
+          teacherName: 'Sally Fields',
+        }
       ],
     };
   }

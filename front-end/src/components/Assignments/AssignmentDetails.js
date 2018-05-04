@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   Card,
@@ -7,7 +7,7 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  Button,
+  
 } from 'reactstrap';
 
 const AssignmentDetails = props => (

@@ -6,10 +6,10 @@ import Assignments from '../Assignments/Assignments';
 import Billing from '../Billing';
 import UserSettings from '../UserSettings/UserSettings';
 
-import AddAssignmentForm from '../Assignments/AddAssignment/AddAssignmentForm';
+
 const Menu = ({ match }) => (
   <div>
-  <Container>
+    <Container>
       <Row>
         <Col md={3}>
     <ul>
@@ -31,10 +31,7 @@ const Menu = ({ match }) => (
     )}/>
     <Route path={`${match.path}/billing`} component={Billing} />
     <Route path={`${match.path}/setings`} component={UserSettings} />
-    <Route path={`${match.urls}/add-assignment`} 
-        render={(props) => (
-    <AddAssignmentForm {...props} addAssignment={this.addAssignment} />
-    )}/>
+         
       
       </Col>
       </Row>
