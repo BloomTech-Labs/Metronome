@@ -66,4 +66,42 @@ describe('User model', () => {
     const user = await User.findOne({ email: validNewUser.email });
     expect(user.comparePassword('wrongpassword')).toBeFalsy();
   });
+
+  it('Should not edit the user\'s profile if new information is invalid', async () => {
+    const newData = { ...newUserWithBadEmail };
+    delete newData.password;
+    try {
+      const user = await User.findOne({ email: validNewUser.email });
+      await user.editProfile(newData);
+    } catch (err) {
+      expect(err.message).toBe('Email must be a valid email.');
+    }
+  });
+
+  it('Should not edit the user\'s password if the old password is incorrect', async () => {
+    const newData = { ...validNewUser, oldPassword: 'abcdefghijklmnop', newPassword: 'qrstuvwxyz' };
+    delete newData.password;
+    try {
+      const user = await User.findOne({ email: validNewUser.email });
+      await user.editProfile(newData);
+    } catch (err) {
+      expect(err.message).toBe('Password is not correct.');
+    }
+  });
+
+  it('Should edit the user\'s profile if new information is valid', async () => {
+    const newData = {
+      email: 'mynewemail@example.com',
+      oldPassword: validNewUser.password,
+      newPassword: 'mynewpassword',
+      firstName: 'NewFirstName',
+      lastName: 'NewLastName',
+    };
+    const user = await User.findOne({ email: validNewUser.email });
+    await user.editProfile(newData);
+    expect(user.email).toBe(newData.email);
+    expect(user.comparePassword(newData.newPassword)).toBeTruthy();
+    expect(user.firstName).toBe(newData.firstName);
+    expect(user.lastName).toBe(newData.lastName);
+  });
 });

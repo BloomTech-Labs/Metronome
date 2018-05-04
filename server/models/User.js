@@ -85,7 +85,7 @@ UserSchema.methods.generateJWT = function () {
   exp.setDate(today.getDate() + expDay);
 
   return jwt.sign({
-    id: this._id,
+    _id: this._id,
     email: this.email,
     name: `${this.firstName} ${this.lastName}`,
     exp: Math.round(exp.getTime() / 1000),
@@ -122,11 +122,21 @@ UserSchema.statics.registerNewUser = async function ({ email = '', password = ''
  * Updates the existing user's profile if the input is valid and returns a new JWT.
  * @param {Object} opts
  * @param {String} opts.email
- * @param {String} opts.password
+ * @param {String} opts.oldPassword
+ * @param {String} opts.newPassword
  * @param {String} opts.firstName
  * @param {String} opts.lastName
  */
-UserSchema.methods.editProfile = async function ({ email, password, firstName, lastName }) {
+UserSchema.methods.editProfile = async function ({ email, oldPassword, newPassword, firstName, lastName }) {
+  if (newPassword) {
+    this.model('User').validatePassword(oldPassword);
+    this.model('User').validatePassword(newPassword);
+    if (!this.comparePassword(oldPassword)) {
+      throw new Error('Password is not correct.');
+    }
+    this.setPassword(newPassword);
+  }
+
   if (firstName) {
     this.model('User').validateFirstName(firstName);
     this.firstName = firstName;
@@ -135,11 +145,6 @@ UserSchema.methods.editProfile = async function ({ email, password, firstName, l
   if (lastName) {
     this.model('User').validateLastName(lastName);
     this.lastName = lastName;
-  }
-
-  if (password) {
-    this.model('User').validatePassword(password);
-    this.setPassword(password);
   }
 
   if (email) {
