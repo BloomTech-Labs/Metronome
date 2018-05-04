@@ -14,19 +14,19 @@ class CheckoutForm extends Component {
     };
   }
 
-  handleChange = name => event => {
+  handleChange = name => (event) => {
     this.setState({ [name]: event.target.checked });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const { subscribe, client } = this.state;
     if (!subscribe && !client) {
       return this.setState({ error: 'Please select a plan' });
-    } else {
-      this.setState({ error: null });
     }
+    this.setState({ error: null });
+
 
     // const subscribeType = this.state.subscribe ? "1 Month" :
     //                       this.state.client ? "1 Client" : false;
@@ -37,7 +37,7 @@ class CheckoutForm extends Component {
       .then(({ token }) => {
         console.log('Received Stripe token:', token);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('Error:', error);
       });
   };
@@ -45,7 +45,7 @@ class CheckoutForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} style={{ margin: '5rem' }}>
           <h1>Billing</h1>
           <CardSection />
           <FormGroup row>
@@ -70,7 +70,7 @@ class CheckoutForm extends Component {
               label="1 Client - $1.99"
             />
           </FormGroup>
-          <div style={{color: 'red'}}>{this.state.error}</div>
+          <div style={{ color: 'red' }}>{this.state.error}</div>
           <button>Buy Now</button>
         </form>
       </div>
