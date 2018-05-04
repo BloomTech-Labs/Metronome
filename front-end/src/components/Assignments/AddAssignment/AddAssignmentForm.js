@@ -13,7 +13,7 @@ import './add-assignment.css';
 class AddAssignmentForm extends Component {
 	constructor(props) {
 		super(props);
-	
+		console.log(this.props);
 
 		this.state = {
 			assignmentName: '',
@@ -97,17 +97,17 @@ class AddAssignmentForm extends Component {
 			clientName,
 		} = this.state;
 
-		this.props.addAssignment({
-			assignmentName,
-			hoursToPractice,
-			dueDate,
-			email,
-			daysToPractice,
-			musicFile,
-			clientName,
-		});
-
-	}
+		// this.props.addAssignment({
+		// 	assignmentName,
+		// 	hoursToPractice,
+		// 	dueDate,
+		// 	email,
+		// 	daysToPractice,
+		// 	musicFile,
+		// 	clientName,
+		// });
+		this.props.history.goBack();
+	};
 
 	render() {
 		return (
