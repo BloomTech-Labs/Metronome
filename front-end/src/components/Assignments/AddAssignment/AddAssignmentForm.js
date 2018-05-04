@@ -97,15 +97,15 @@ class AddAssignmentForm extends Component {
 			clientName,
 		} = this.state;
 
-		// this.props.addAssignment({
-		// 	assignmentName,
-		// 	hoursToPractice,
-		// 	dueDate,
-		// 	email,
-		// 	daysToPractice,
-		// 	musicFile,
-		// 	clientName,
-		// });
+		this.props.addAssignment({
+			assignmentName,
+			hoursToPractice,
+			dueDate,
+			email,
+			daysToPractice,
+			musicFile,
+			clientName,
+		});
 		this.props.history.goBack();
 	};
 
