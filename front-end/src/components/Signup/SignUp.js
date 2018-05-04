@@ -110,6 +110,12 @@ class SignUp extends Component {
 				<div className="signup-form">
 					<form onSubmit={this.onSubmit}>
 						<h1>Sign Up</h1>
+						<div>
+							<select>
+								<option value="teacher">Teacher</option>
+								<option value="student">Student</option>
+							</select>
+						</div>
 						<div className="pair">
 							<input
 								name="firstName"
@@ -171,6 +177,7 @@ class SignUp extends Component {
 							</span>
 						</div>
 						<Button
+							style={{ fontSize: '14px' }}
 							className="btn--signup"
 							variant="raised"
 							color="primary"
