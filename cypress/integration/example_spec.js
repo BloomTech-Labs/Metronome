@@ -1,5 +1,6 @@
 /*eslint-disable */
 // NOTE: Don't disable eslint in other cypress files
+// NOTE: cy.exec() examples are commented out because CodeShip free does not support it
 
 // copy the following comments in your cypress test files to get intellisense:
 /// <reference types="Cypress" />
@@ -746,31 +747,31 @@ describe('Kitchen Sink', function () {
       });
     });
 
-    it('cy.exec() - execute a system command', function () {
-      // cy.exec allows you to execute a system command.
-      // so you can take actions necessary for your test,
-      // but outside the scope of Cypress.
+    // it('cy.exec() - execute a system command', function () {
+    //   // cy.exec allows you to execute a system command.
+    //   // so you can take actions necessary for your test,
+    //   // but outside the scope of Cypress.
 
-      // https://on.cypress.io/exec
-      cy.exec('echo Jane Lane')
-        .its('stdout').should('contain', 'Jane Lane');
+    //   // https://on.cypress.io/exec
+    //   cy.exec('echo Jane Lane')
+    //     .its('stdout').should('contain', 'Jane Lane');
 
-      // we can use Cypress.platform string to
-      // select appropriate command
-      // https://on.cypress/io/platform
-      cy.log(`Platform ${Cypress.platform} architecture ${Cypress.arch}`);
+    //   // we can use Cypress.platform string to
+    //   // select appropriate command
+    //   // https://on.cypress/io/platform
+    //   cy.log(`Platform ${Cypress.platform} architecture ${Cypress.arch}`);
 
-      if (Cypress.platform === 'win32') {
-        cy.exec('print cypress.json')
-          .its('stderr').should('be.empty');
-      } else {
-        cy.exec('cat cypress.json')
-          .its('stderr').should('be.empty');
+    //   if (Cypress.platform === 'win32') {
+    //     cy.exec('print cypress.json')
+    //       .its('stderr').should('be.empty');
+    //   } else {
+    //     cy.exec('cat cypress.json')
+    //       .its('stderr').should('be.empty');
 
-        cy.exec('pwd')
-          .its('code').should('eq', 0);
-      }
-    });
+    //     cy.exec('pwd')
+    //       .its('code').should('eq', 0);
+    //   }
+    // });
 
     it('cy.focused() - get the DOM element that has focus', function () {
       // https://on.cypress.io/focused

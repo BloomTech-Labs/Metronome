@@ -9,6 +9,7 @@
 		"start": "nodemon server/server.js",
 		"test": "jest --runInBand --forceExit --coverage --verbose",
 		"cypress:open": "npx cypress open",
+		"cypress:e2e": "npx cypress run",
 		"build-docs": "apidoc -i server/ -o apidoc/",
 		"heroku-postbuild": "cd front-end && yarn --only=dev && yarn && yarn run build"
 	},
