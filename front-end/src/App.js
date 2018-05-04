@@ -4,7 +4,7 @@ import './App.css';
 
 import SignUp from './components/Signup/SignUp';
 import LogIn from './components/LogIn/LogIn.js';
-import LandingPage from './components/LandingPage/landingpage';
+import LandingPage from './components/landingpage/landingpage';
 import TeacherDashboard from './Containers/TeacherDashboard';
 import Billing from './components/Billing';
 import UserSettings from './components/UserSettings/UserSettings';

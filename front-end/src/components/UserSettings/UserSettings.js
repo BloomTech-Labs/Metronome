@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SideMenu from '../SideMenu/SideMenu';
+// import SideMenu from '../SideMenu/SideMenu';
 import { Button } from 'material-ui';
 
 class UserSettings extends Component {
