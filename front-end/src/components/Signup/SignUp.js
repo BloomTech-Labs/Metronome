@@ -104,7 +104,7 @@ class SignUp extends Component {
 		return formIsValid;
 	};
 
-	render() {
+  render() {
 		return (
 			<div className="form-container">
 				<div className="signup-form">

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FaTrash from 'react-icons/lib/fa/trash';
 
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 const AssignmentDetails = props => (
 	<div>
-		<Link to={`/${props.id}`}>
-			<Card>
+		<Card>
+			<Link to={`/${props.id}`}>
 				<CardTitle>{props.name}</CardTitle>
 				<CardImg
 					top
@@ -17,8 +18,10 @@ const AssignmentDetails = props => (
 				<CardBody>
 					<CardText>{props.dueDate}</CardText>
 				</CardBody>
-			</Card>
-		</Link>
+			</Link>
+
+			<FaTrash onClick={() => props.deleteAssignment(props.id)} />
+		</Card>
 	</div>
 );
 
