@@ -1,5 +1,5 @@
 {
-  "name": "Metronome",
+	"name": "Metronome",
 	"version": "1.0.0",
 	"main": "index.js",
 	"repository": "https://github.com/Lambda-School-Labs/Metronome.git",
@@ -9,18 +9,18 @@
 		"start": "nodemon server/server.js",
 		"test": "jest --runInBand --forceExit --coverage --verbose",
 		"build-docs": "apidoc -i server/ -o apidoc/",
-		"heroku-postbuild":
-			"cd front-end && yarn --only=dev && yarn && yarn run build"
+		"heroku-postbuild": "cd front-end && yarn --only=dev && yarn && yarn run build"
 	},
 	"dependencies": {
 		"@sendgrid/mail": "^6.2.1",
 		"bcrypt": "^2.0.1",
 		"body-parser": "^1.18.2",
+		"cors": "^2.8.4",
 		"dotenv": "^5.0.1",
 		"express": "^4.16.3",
 		"jsonwebtoken": "^8.2.1",
 		"mongoose": "^5.0.16",
-    "stripe": "^5.8.0"
+		"stripe": "^5.8.0"
 	},
 	"devDependencies": {
 		"babel-eslint": "^8.2.3",
