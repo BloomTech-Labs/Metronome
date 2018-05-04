@@ -1,5 +1,9 @@
 {
     "extends": "airbnb",
+    "plugins": [
+        "cypress",
+        "chai-friendly"
+    ],
     "rules": {
         "linebreak-style": 0,
         "global-require": 0,
@@ -9,11 +13,15 @@
         "object-curly-newline": "off",
         "no-underscore-dangle": "off",
         "max-len": "off",
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "prefer-arrow-callback": "off",
+        "no-unused-expressions":0,
+        "chai-friendly/no-unused-expressions": 2
     },
     "env": {
         "jest": true,
-        "browser": true
+        "browser": true,
+        "cypress/globals": true
     },
     "parser": "babel-eslint"
 }
