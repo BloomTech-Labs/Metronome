@@ -37,7 +37,7 @@ describe('Metronome front-end', () => {
       cy.url().should('include', '/signup');
       cy.get('input[name="firstName"]').type('John');
       cy.get('input[name="lastName"]').type('Smith');
-      cy.get('input[name="username"]').type('123@123.com');
+      cy.get('input[name="email"]').type('123@123.com');
       cy.get('input[name="password"]').type('12345678');
       cy.get('input[name="confirmPassword"]').type('12345678');
     });
@@ -50,7 +50,7 @@ describe('Metronome front-end', () => {
     it('Should redirect to login page when clicking login', () => {
       cy.contains('Log In').click();
       cy.url().should('include', '/login');
-      cy.get('input[name="email"]').type('123@123.com');
+      cy.get('input[name="username"]').type('123@123.com');
       cy.get('input[name="password"]').type('12345678');
     });
   });
