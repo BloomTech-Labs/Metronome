@@ -17,6 +17,7 @@
     "react-scripts": "1.1.4",
     "react-stripe-elements": "^1.6.0",
     "react-tap-event-plugin": "^3.0.2",
+    "reactstrap": "^6.0.1",
     "validator": "^9.4.1"
   },
   "scripts": {

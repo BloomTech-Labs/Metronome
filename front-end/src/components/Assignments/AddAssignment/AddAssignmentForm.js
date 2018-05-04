@@ -13,6 +13,7 @@ import './add-assignment.css';
 class AddAssignmentForm extends Component {
 	constructor(props) {
 		super(props);
+	
 
 		this.state = {
 			assignmentName: '',
@@ -106,9 +107,7 @@ class AddAssignmentForm extends Component {
 			clientName,
 		});
 
-		// Closes assignment form when done
-		this.props.doneAssignment();
-	};
+	}
 
 	render() {
 		return (
