@@ -13,7 +13,7 @@ import './add-assignment.css';
 class AddAssignmentForm extends Component {
 	constructor(props) {
 		super(props);
-	
+		console.log(this.props);
 
 		this.state = {
 			assignmentName: '',
@@ -106,8 +106,8 @@ class AddAssignmentForm extends Component {
 			musicFile,
 			clientName,
 		});
-
-	}
+		this.props.history.goBack();
+	};
 
 	render() {
 		return (
