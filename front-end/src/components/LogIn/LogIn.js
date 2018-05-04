@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
 import './login.css';
-
-import { Link } from 'react-router-dom';
 
 class Login extends Component {
 	handleChange = event => {
@@ -13,38 +10,24 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="center">
-				<div className="signup-form">
-					<br />
+				<div className="card">
+					<h1>Login</h1>
 					<form>
-						<div>
-							<h1>Login</h1>
-							<input
-								placeholder="Email"
-								name="username"
-								type="text"
-								onChange={this.handleChange}
-							/>
-							<br />
-							<input
-								placeholder="Password "
-								name="password"
-								type="password"
-								onChange={this.handleChange}
-							/>
-						</div>
-						<Button
-							style={{ fontSize: '14px' }}
-							className="btn--signup"
-							variant="raised"
-							color="primary"
-							type="submit"
-						>
-							Log In
-						</Button>
-						<br />
-						<Link className="link" to="/signup">
-							Need an Account?
-						</Link>
+						<input
+							className="form-item"
+							placeholder="Email"
+							name="username"
+							type="text"
+							onChange={this.handleChange}
+						/>
+						<input
+							className="form-item"
+							placeholder="Password "
+							name="password"
+							type="password"
+							onChange={this.handleChange}
+						/>
+						<input className="form-submit" value="SUBMIT" type="submit" />
 					</form>
 				</div>
 			</div>
