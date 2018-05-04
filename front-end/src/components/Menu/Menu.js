@@ -12,31 +12,31 @@ const Menu = ({ match }) => (
     <Container>
       <Row>
         <Col md={3}>
-    <ul>
-      <li>
-        <Link to={`${match.url}/assignments`}>assignments</Link>{' '}
-      </li>
-      <li>
-        <Link to={`${match.url}/billing`}>billing</Link>{' '}
-      </li>
-      <li>
-        <Link to={`${match.url}/settings`}>settings</Link>{' '}
-      </li>
-    </ul>
-    </Col>
-    <Col md={9}>
-      <Route path={`${match.path}/assignments`}  
-      render={(props) => (
-    <Assignments {...props} match={match} />
-    )}/>
-    <Route path={`${match.path}/billing`} component={Billing} />
-    <Route path={`${match.path}/setings`} component={UserSettings} />
-         
-      
-      </Col>
+          <ul>
+            <li>
+              <Link to={`${match.url}/assignments`}>assignments</Link>{' '}
+            </li>
+            <li>
+              <Link to={`${match.url}/billing`}>billing</Link>{' '}
+            </li>
+            <li>
+              <Link to={`${match.url}/settings`}>settings</Link>{' '}
+            </li>
+          </ul>
+        </Col>
+        <Col md={9}>
+          <Route
+            path={`${match.path}/assignments`}
+            render={props => (
+              <Assignments {...props} match={match} />
+            )}
+          />
+          <Route path={`${match.path}/billing`} component={Billing} />
+          <Route path={`${match.path}/settings`} component={UserSettings} />
+        </Col>
       </Row>
     </Container>
-    </div>
-)
+  </div>
+);
 
 export default Menu;
