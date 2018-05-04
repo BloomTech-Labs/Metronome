@@ -16,7 +16,8 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "prefer-arrow-callback": "off",
         "no-unused-expressions":0,
-        "chai-friendly/no-unused-expressions": 2
+        "chai-friendly/no-unused-expressions": 2,
+        "spaced-comment": "off"
     },
     "env": {
         "jest": true,

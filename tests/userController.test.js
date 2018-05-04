@@ -97,27 +97,51 @@ describe('[PUT] /api/user', () => {
     mongoose.connection.db.dropCollection('users', done);
   });
 
-  it('Should not edit the user\'s profile if new information is invalid', async () => {
-    try {
-      const user = await User.findOne({ email: validNewUser.email });
-      await user.editProfile(newUserWithBadEmail);
-    } catch (err) {
-      expect(err.message).toBe('Email must be a valid email.');
-    }
+  it('Should return an error if the old password is incorrect', async () => {
+    const user = await User.findOne({ email: validNewUser.email });
+    const newData = {
+      oldPassword: 'wrongoldpassword',
+      newPassword: 'mynewpassword',
+      firstName: 'NewFirstName',
+    };
+    const response = await request
+      .put('/api/user')
+      .set('authorization', user.generateJWT())
+      .send(newData);
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBe('Password is not correct.');
   });
 
-  it('Should edit the user\'s profile if new information is valid', async () => {
+  it('Should return an error if a field has invalid data', async () => {
+    const user = await User.findOne({ email: validNewUser.email });
+    const newData = {
+      email: 'bademail',
+    };
+    const response = await request
+      .put('/api/user')
+      .set('authorization', user.generateJWT())
+      .send(newData);
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBe('Email must be a valid email.');
+  });
+
+  it('Should return a new JSON Web Token if all the input was valid', async () => {
+    const user = await User.findOne({ email: validNewUser.email });
     const newData = {
       email: 'mynewemail@example.com',
-      password: 'mynewpassword',
+      oldPassword: validNewUser.password,
+      newPassword: 'mynewpassword',
       firstName: 'NewFirstName',
       lastName: 'NewLastName',
     };
-    const user = await User.findOne({ email: validNewUser.email });
-    await user.editProfile(newData);
-    expect(user.email).toBe(newData.email);
-    expect(user.comparePassword(newData.password)).toBeTruthy();
-    expect(user.firstName).toBe(newData.firstName);
-    expect(user.lastName).toBe(newData.lastName);
+    const response = await request
+      .put('/api/user')
+      .set('authorization', user.generateJWT())
+      .send(newData);
+    expect(response.status).toBe(200);
+    expect(response.body.token.length).toBeGreaterThan(0);
+    expect(response.body.error).toBeUndefined();
   });
 });

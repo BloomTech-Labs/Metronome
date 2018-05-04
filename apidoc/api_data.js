@@ -45,6 +45,9 @@ define({ "api": [
         }
       ]
     },
+    "version": "0.0.0",
+    "filename": "server/controllers/userController.js",
+    "groupTitle": "User",
     "error": {
       "fields": {
         "Error 4xx": [
@@ -74,10 +77,7 @@ define({ "api": [
           "type": "json"
         }
       ]
-    },
-    "version": "0.0.0",
-    "filename": "server/controllers/userController.js",
-    "groupTitle": "User"
+    }
   },
   {
     "type": "post",
@@ -139,6 +139,9 @@ define({ "api": [
         }
       ]
     },
+    "version": "0.0.0",
+    "filename": "server/controllers/userController.js",
+    "groupTitle": "User",
     "error": {
       "fields": {
         "Error 4xx": [
@@ -168,10 +171,7 @@ define({ "api": [
           "type": "json"
         }
       ]
-    },
-    "version": "0.0.0",
-    "filename": "server/controllers/userController.js",
-    "groupTitle": "User"
+    }
   },
   {
     "type": "post",
@@ -228,7 +228,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"id\": \"ch_1CNoOCBAjX4w9BqH3Ck3KBAL\",\n  \"object\": \"charge\",\n  \"amount\": 299,\n  \"amount_refunded\": 0,\n  \"application\": null,\n  \"application_fee\": null,\n  \"balance_transaction\": \"txn_1CNoOCBAjX4w9BqHZaGDqBbr\",\n  \"captured\": true,\n  \"created\": 1525380656,\n  \"currency\": \"usd\",\n  ... \n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": \"ch_1CNoOCBAjX4w9BqH3Ck3KBAL\",\n  \"object\": \"charge\",\n  \"amount\": 299,\n  \"amount_refunded\": 0,\n  \"application\": null,\n  \"application_fee\": null,\n  \"balance_transaction\": \"txn_1CNoOCBAjX4w9BqHZaGDqBbr\",\n  \"captured\": true,\n  \"created\": 1525380656,\n  \"currency\": \"usd\"\n}",
           "type": "json"
         }
       ]
@@ -321,6 +321,9 @@ define({ "api": [
         }
       ]
     },
+    "version": "0.0.0",
+    "filename": "server/controllers/userController.js",
+    "groupTitle": "User",
     "error": {
       "fields": {
         "Error 4xx": [
@@ -350,9 +353,6 @@ define({ "api": [
           "type": "json"
         }
       ]
-    },
-    "version": "0.0.0",
-    "filename": "server/controllers/userController.js",
-    "groupTitle": "User"
+    }
   }
 ] });

@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const sgMail = require('@sendgrid/mail');
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
@@ -22,20 +23,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
  *      "token": "abcdef.ghijklmnop.qrstuvwxyz"
  *    }
  *
- * @apiError UserAlreadyExists "User already exists with that email."
- * @apiError InvalidInput Describes the input error (invalid email format, invalid password length, etc.)
- *
- * @apiErrorExample UserAlreadyExists-Response:
- *    HTTP/1.1 400 Bad Request
- *    {
- *      "error": "User already exists with that email."
- *    }
- *
- * @apiErrorExample InvalidInput-Response:
- *    HTTP/1.1 400 Bad Request
- *    {
- *      "error": "Password must be between 8 and 56 characters."
- *    }
+ * @apiUse UserAlreadyExistsError
+ * @apiUse InvalidInputError
  */
 exports.register = async (req, res) => {
   try {
@@ -74,20 +63,8 @@ exports.register = async (req, res) => {
  *      "token": "abcdef.ghijklmnop.qrstuvwxyz"
  *    }
  *
- * @apiError UserDoesNotExist "User does not exist with that email."
- * @apiError IncorrectPassword "Password is not correct."
- *
- * @apiErrorExample UserDoesNotExist-Response:
- *    HTTP/1.1 400 Bad Request
- *    {
- *      "error": "User does not exist with that email."
- *    }
- *
- * @apiErrorExample IncorrectPassword-Response:
- *    HTTP/1.1 400 Bad Request
- *    {
- *      "error": "Password is not correct."
- *    }
+ * @apiUse UserDoesNotExistError
+ * @apiUse IncorrectPasswordError
  */
 exports.login = async (req, res) => {
   try {
@@ -119,28 +96,17 @@ exports.login = async (req, res) => {
  *      "token": "abcdef.ghijklmnop.qrstuvwxyz"
  *    }
  *
- * @apiError UserAlreadyExists "User already exists with that email."
- * @apiError InvalidInput Describes the input error (invalid email format, invalid password length, etc.)
- *
- * @apiErrorExample UserAlreadyExists-Response:
- *    HTTP/1.1 400 Bad Request
- *    {
- *      "error": "User already exists with that email."
- *    }
- *
- * @apiErrorExample InvalidInput-Response:
- *    HTTP/1.1 400 Bad Request
- *    {
- *      "error": "Password must be between 8 and 56 characters."
- *    }
+ * @apiUse UserAlreadyExistsError
+ * @apiUse InvalidInputError
  */
 exports.editProfile = async (req, res) => {
   try {
-    const { email, password, firstName, lastName } = req.body;
+    const { email, oldPassword, newPassword, firstName, lastName } = req.body;
     const currentUser = await User.findById(req.user._id);
     const token = await currentUser.editProfile({
       email,
-      password,
+      oldPassword,
+      newPassword,
       firstName,
       lastName,
     });
@@ -239,7 +205,6 @@ exports.transaction = async (req, res) => {
 exports.sendMail = (req, res) => {
   // using SendGrid's v3 Node.js Library
   // https://github.com/sendgrid/sendgrid-nodejs
-  
   try {
     const { to, from, subject, text, html } = req.body;
     const msg = {
