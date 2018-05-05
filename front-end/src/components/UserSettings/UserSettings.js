@@ -23,17 +23,18 @@ class UserSettings extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const url = '/api/user/edit';
-    const jwt = window.localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZWI3Mjk4NTU0NmIwOGJkNDYzYjY0YyIsImVtYWlsIjoiMTIzQDEyMy5jb20iLCJuYW1lIjoidGluZyB3YW5nIiwiZXhwIjoxNTI3OTcxNzM3LCJpYXQiOjE1MjUzNzk3Mzd9.pc5jdU6FYaxiNMnfkW85H2ppAeoo1lcdAt9gcOuOMAQ';
+    const url = '/api/user/settings';
+    const jwt = window.localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YWViNzI5ODU1NDZiMDhiZDQ2M2I2NGMiLCJlbWFpbCI6IjEyM0AxMjMuY29tIiwibmFtZSI6InRpbmcgd2FuZyIsImV4cCI6MTUyODA4NDM5NywiaWF0IjoxNTI1NDkyMzk2fQ.XGShPbeR4f4XFV7gWp91byRNXhyte3bvo6NrieTX24Y';
 
     // send updated information to backend
     const userInfo = this.state;
-    axios.post(url, { userInfo }, {
+    axios.post(url, userInfo, {
       headers: {
         Authorization: jwt,
       },
     }).then((res) => {
       console.log('Update successful', res.data);
+      window.localStorage.setItem('token', res.data.token);
     }).catch((error) => {
       console.log('Update Error', error.message);
     });
@@ -99,7 +100,7 @@ class UserSettings extends Component {
             </div>
             <div className="col-75">
               <input
-                type="text"
+                type="password"
                 name="oldPassword"
                 placeholder="Old Password"
                 value={this.state.oldPassword}
@@ -113,7 +114,7 @@ class UserSettings extends Component {
             </div>
             <div className="col-75">
               <input
-                type="text"
+                type="password"
                 name="newPassword"
                 placeholder="New Password"
                 value={this.state.newPassword}
