@@ -161,8 +161,8 @@ exports.editProfile = async (req, res) => {
  */
 exports.transaction = async (req, res) => {
   try {
-    const { userId, tokenId, subscribeType, price } = req.body;
-    const user = await User.findById(userId);
+    const { tokenId, subscribeType, price } = req.body;
+    const user = await User.findById(req.user._id);
     if (subscribeType) {
       user.subscribeType = subscribeType;
       user.isSubscribe = true;
