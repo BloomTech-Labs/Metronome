@@ -23,12 +23,12 @@ class UserSettings extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const url = '/api/user/settings';
+    const url = '/api/user';
     const jwt = window.localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YWViNzI5ODU1NDZiMDhiZDQ2M2I2NGMiLCJlbWFpbCI6IjEyM0AxMjMuY29tIiwibmFtZSI6InRpbmcgd2FuZyIsImV4cCI6MTUyODA4NDM5NywiaWF0IjoxNTI1NDkyMzk2fQ.XGShPbeR4f4XFV7gWp91byRNXhyte3bvo6NrieTX24Y';
 
     // send updated information to backend
     const userInfo = this.state;
-    axios.post(url, userInfo, {
+    axios.put(url, userInfo, {
       headers: {
         Authorization: jwt,
       },
