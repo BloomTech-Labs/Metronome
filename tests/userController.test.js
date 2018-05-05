@@ -116,10 +116,10 @@ describe('[PUT] /api/user', () => {
   it('Should return an error if a field has invalid data', async () => {
     const user = await User.findOne({ email: validNewUser.email });
     const newData = {
-      email: 'bademail',
+      newEmail: 'bademail',
     };
     const response = await request
-      .put('/api/user/')
+      .put('/api/user')
       .set('authorization', user.generateJWT())
       .send(newData);
 
@@ -130,14 +130,14 @@ describe('[PUT] /api/user', () => {
   it('Should return a new JSON Web Token if all the input was valid', async () => {
     const user = await User.findOne({ email: validNewUser.email });
     const newData = {
-      email: 'mynewemail@example.com',
+      newEmail: 'mynewemail@example.com',
       oldPassword: validNewUser.password,
       newPassword: 'mynewpassword',
       firstName: 'NewFirstName',
       lastName: 'NewLastName',
     };
     const response = await request
-      .put('/api/user/')
+      .put('/api/user')
       .set('authorization', user.generateJWT())
       .send(newData);
     expect(response.status).toBe(200);
