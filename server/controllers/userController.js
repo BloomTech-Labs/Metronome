@@ -101,10 +101,10 @@ exports.login = async (req, res) => {
  */
 exports.editProfile = async (req, res) => {
   try {
-    const { email, oldPassword, newPassword, firstName, lastName } = req.body;
+    const { firstName, lastName, newEmail, oldPassword, newPassword } = req.body;
     const currentUser = await User.findById(req.user._id);
     const token = await currentUser.editProfile({
-      email,
+      newEmail,
       oldPassword,
       newPassword,
       firstName,
