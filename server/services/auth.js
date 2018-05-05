@@ -21,3 +21,12 @@ exports.isAuthenticated = function (req, res, next) {
     next();
   });
 };
+
+exports.isTeacher = function (req, res, next) {
+  if (req.user.role !== 'Teacher') {
+    res.status(403).json({
+      error: 'Not authorized',
+    });
+  }
+  next();
+};

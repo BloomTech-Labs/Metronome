@@ -88,6 +88,7 @@ UserSchema.methods.generateJWT = function () {
     _id: this._id,
     email: this.email,
     name: `${this.firstName} ${this.lastName}`,
+    role: this.__t,
     exp: Math.round(exp.getTime() / 1000),
   }, secret);
 };
