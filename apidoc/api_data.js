@@ -274,7 +274,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "email",
+            "field": "newEmail",
             "description": "<p>The user's new email.</p>"
           },
           {
