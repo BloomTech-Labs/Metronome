@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
 import CardSection from './CardSection';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
@@ -29,11 +28,6 @@ class CheckoutForm extends Component {
     // JWT token pulled from local storage
     const jwt = window.localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZWI3Mjk4NTU0NmIwOGJkNDYzYjY0YyIsImVtYWlsIjoiMTIzQDEyMy5jb20iLCJuYW1lIjoidGluZyB3YW5nIiwiZXhwIjoxNTI3OTcxNzM3LCJpYXQiOjE1MjUzNzk3Mzd9.pc5jdU6FYaxiNMnfkW85H2ppAeoo1lcdAt9gcOuOMAQ';
 
-    // decode from jwt-decode with the encoded information
-    const decode = jwtDecode(jwt);
-
-    // user id that is encoded into the jwt token
-    const { id } = decode;
     const { subscribe, client } = this.state;
 
     // need to choose the purchase plan
@@ -60,7 +54,6 @@ class CheckoutForm extends Component {
         // once token is created, send request to backend
         // with user id, token id, subscribe type, and price
         axios.post(url, {
-          userId: id,
           tokenId: token.id,
           subscribeType,
           price,
