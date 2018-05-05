@@ -119,7 +119,7 @@ describe('[PUT] /api/user', () => {
       email: 'bademail',
     };
     const response = await request
-      .put('/api/user/settings')
+      .put('/api/user/')
       .set('authorization', user.generateJWT())
       .send(newData);
 
@@ -137,7 +137,7 @@ describe('[PUT] /api/user', () => {
       lastName: 'NewLastName',
     };
     const response = await request
-      .put('/api/user/settings')
+      .put('/api/user/')
       .set('authorization', user.generateJWT())
       .send(newData);
     expect(response.status).toBe(200);
