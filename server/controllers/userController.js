@@ -84,7 +84,8 @@ exports.login = async (req, res) => {
  * @apiGroup User
  *
  * @apiParam {String} email The user's new email.
- * @apiParam {String} password The user's new password.
+ * @apiParam {String} oldPassword The user's old (current) password.
+ * @apiParam {String} newPassword The user's new password.
  * @apiParam {String} firstName The user's new first name.
  * @apiParam {String} lastName The user's new last name.
  *
