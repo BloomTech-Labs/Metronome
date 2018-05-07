@@ -274,14 +274,21 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "email",
+            "field": "newEmail",
             "description": "<p>The user's new email.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "password",
+            "field": "oldPassword",
+            "description": "<p>The user's old (current) password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "newPassword",
             "description": "<p>The user's new password.</p>"
           },
           {
