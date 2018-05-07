@@ -10,6 +10,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
  * @apiParam {String} password The user's password.
  * @apiParam {String} firstName The user's first name.
  * @apiParam {String} lastName The user's last name.
+ * @apiParam {String} role The user's role (Teacher or Student) (defaults to Student if not specified).
  *
  * @apiSuccess {String} token The new user's JWT.
  *
@@ -24,9 +25,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
  */
 exports.register = async (req, res) => {
   try {
-    const { email, password, firstName, lastName } = req.body;
-
-    const user = await User.registerNewUser({
+    const { email, password, firstName, lastName, role = 'Student' } = req.body;
+    const user = await User.getModelForRole(role).registerNewUser({
       email,
       password,
       firstName,

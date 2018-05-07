@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
+const jwt = require('jsonwebtoken');
 const app = require('../server/app');
 const User = require('../server/models/User');
 const { UserDataFactory } = require('./testDataFactories');
@@ -20,6 +21,10 @@ describe('[POST] /api/user/register ', () => {
     db.once('open', done);
   });
 
+  afterEach((done) => {
+    User.remove({}, done);
+  });
+
   afterAll((done) => {
     mongoose.connection.db.dropCollection('users', done);
   });
@@ -36,6 +41,20 @@ describe('[POST] /api/user/register ', () => {
     expect(response.status).toBe(200);
     expect(response.body.token.length).toBeGreaterThan(0);
     expect(response.body.error).toBeUndefined();
+  });
+
+  it('Should not register a user with an invalid role', async () => {
+    const response = await request.post('/api/user/register').send({ ...validNewUser, role: 'Wizard' });
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeDefined();
+  });
+
+  it('Should default the user to a Student role if the role is not specified', async () => {
+    const response = await request.post('/api/user/register').send(validNewUser);
+    expect(response.status).toBe(200);
+    expect(response.body.token.length).toBeGreaterThan(0);
+    expect(response.body.error).toBeUndefined();
+    expect(jwt.decode(response.body.token).role).toBe('Student');
   });
 });
 
