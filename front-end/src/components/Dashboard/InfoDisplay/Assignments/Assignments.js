@@ -13,16 +13,6 @@ class Assignments extends Component {
     };
   }
 
-  componentDidMount() {
-    const assignments = this.props.getAssignments();
-    this.setState({
-      assignments,
-    })
-  }
-  
-  
- 
-
   render() {
     return (
       <div className="assignments">
