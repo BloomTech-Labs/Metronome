@@ -167,6 +167,13 @@ define({ "api": [
             "optional": false,
             "field": "lastName",
             "description": "<p>The user's last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "role",
+            "description": "<p>The user's role (Teacher or Student) (defaults to Student if not specified).</p>"
           }
         ]
       }
