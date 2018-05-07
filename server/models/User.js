@@ -16,6 +16,7 @@ const MAX_NAME_LENGTH = 100;
 const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 56;
 
+const ROLES = ['Teacher', 'Student'];
 
 const { Schema } = mongoose;
 const UserSchema = new Schema({
@@ -100,13 +101,15 @@ UserSchema.methods.generateJWT = function () {
  * @param {String} opts.password
  * @param {String} opts.firstName
  * @param {String} opts.lastName
+ * @param {String} opts.role (defaults to "Student" if not specified)
  * @returns {Promise<any>} the new user instance
  */
-UserSchema.statics.registerNewUser = async function ({ email = '', password = '', firstName = '', lastName = '' }) {
+UserSchema.statics.registerNewUser = async function ({ email = '', password = '', firstName = '', lastName = '', role = 'Student' }) {
   this.validateEmail(email);
   this.validatePassword(password);
   this.validateFirstName(firstName);
   this.validateLastName(lastName);
+  this.validateRole(role);
   await this.validateUniqueEmail(email);
 
   const user = new this({
@@ -175,7 +178,6 @@ UserSchema.statics.loginUser = function ({ email = '', password = '' }) {
   });
 };
 
-
 /**
  * Returns a promise that resolves to the user's JWT if the email and password is correct.
  * Rejects the promise with a corresponding error if the email or password is invalid.
@@ -234,13 +236,33 @@ UserSchema.statics.validateFirstName = function (firstName = '') {
 };
 
 /**
- *
  * @param {String} lastName
  */
 UserSchema.statics.validateLastName = function (lastName = '') {
   if (lastName.length < MIN_NAME_LENGTH || lastName.length > MAX_NAME_LENGTH) {
     throw new Error(`Last name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`);
   }
+};
+
+/**
+ * @param {String} role
+ */
+UserSchema.statics.validateRole = function (role = '') {
+  if (!ROLES.includes(role)) {
+    throw new Error(`Role must be one of the following: ${ROLES.join(', ')}`);
+  }
+};
+
+/**
+ * @param {String} role (Teacher or Student)
+ * @returns {any}
+ */
+UserSchema.statics.getModelForRole = function (role = '') {
+  this.validateRole(role);
+  // Dynamically import models (this model has not been exported yet so the discriminators are not actually defined yet)
+  if (role === 'Student') return require('./Student');
+  else if (role === 'Teacher') return require('./Teacher');
+  return this;
 };
 
 const User = mongoose.model('User', UserSchema);
