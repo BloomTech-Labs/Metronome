@@ -1,9 +1,5 @@
 const User = require('../models/User');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const sgMail = require('@sendgrid/mail');
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 
 /**
  * @api {post} /api/user/register Register a new user
@@ -83,8 +79,9 @@ exports.login = async (req, res) => {
  * @apiName UpdateUser
  * @apiGroup User
  *
- * @apiParam {String} email The user's new email.
- * @apiParam {String} password The user's new password.
+ * @apiParam {String} newEmail The user's new email.
+ * @apiParam {String} oldPassword The user's old (current) password.
+ * @apiParam {String} newPassword The user's new password.
  * @apiParam {String} firstName The user's new first name.
  * @apiParam {String} lastName The user's new last name.
  *
@@ -101,10 +98,10 @@ exports.login = async (req, res) => {
  */
 exports.editProfile = async (req, res) => {
   try {
-    const { email, oldPassword, newPassword, firstName, lastName } = req.body;
+    const { firstName, lastName, newEmail, oldPassword, newPassword } = req.body;
     const currentUser = await User.findById(req.user._id);
     const token = await currentUser.editProfile({
-      email,
+      newEmail,
       oldPassword,
       newPassword,
       firstName,
@@ -161,8 +158,8 @@ exports.editProfile = async (req, res) => {
  */
 exports.transaction = async (req, res) => {
   try {
-    const { userId, tokenId, subscribeType, price } = req.body;
-    const user = await User.findById(userId);
+    const { tokenId, subscribeType, price } = req.body;
+    const user = await User.findById(req.user._id);
     if (subscribeType) {
       user.subscribeType = subscribeType;
       user.isSubscribe = true;
@@ -195,27 +192,6 @@ exports.transaction = async (req, res) => {
       res.status(500).json({ error: 'No Transaction' });
     }
     user.save();
-  } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
-  }
-};
-
-exports.sendMail = (req, res) => {
-  // using SendGrid's v3 Node.js Library
-  // https://github.com/sendgrid/sendgrid-nodejs
-  try {
-    const { to, from, subject, text, html } = req.body;
-    const msg = {
-      to,
-      from,
-      subject,
-      text,
-      html,
-    };
-    sgMail.send(msg);
-    res.status(200).json({ message: 'success' });
   } catch (err) {
     res.status(400).json({
       error: err.message,

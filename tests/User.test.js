@@ -68,7 +68,8 @@ describe('User model', () => {
   });
 
   it('Should not edit the user\'s profile if new information is invalid', async () => {
-    const newData = { ...newUserWithBadEmail };
+    const newData = { ...newUserWithBadEmail, newEmail: newUserWithBadEmail.email };
+    delete newData.email;
     delete newData.password;
     try {
       const user = await User.findOne({ email: validNewUser.email });
@@ -91,7 +92,7 @@ describe('User model', () => {
 
   it('Should edit the user\'s profile if new information is valid', async () => {
     const newData = {
-      email: 'mynewemail@example.com',
+      newEmail: 'mynewemail@example.com',
       oldPassword: validNewUser.password,
       newPassword: 'mynewpassword',
       firstName: 'NewFirstName',
@@ -99,7 +100,7 @@ describe('User model', () => {
     };
     const user = await User.findOne({ email: validNewUser.email });
     await user.editProfile(newData);
-    expect(user.email).toBe(newData.email);
+    expect(user.email).toBe(newData.newEmail);
     expect(user.comparePassword(newData.newPassword)).toBeTruthy();
     expect(user.firstName).toBe(newData.firstName);
     expect(user.lastName).toBe(newData.lastName);

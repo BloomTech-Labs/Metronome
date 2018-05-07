@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const authRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
+const teacherRoutes = require('./routes/teacherRoutes');
 const { isAuthenticated } = require('./services/auth');
 
 const app = express();
@@ -16,7 +17,8 @@ app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, '../front-end/build')));
 app.use(bodyParser.json());
 
-app.use('/api/user', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/teacher', teacherRoutes);
 
 // Test auth route
 app.get('/auth-route', isAuthenticated, (req, res) => {

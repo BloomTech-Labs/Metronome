@@ -14,10 +14,19 @@ exports.isAuthenticated = function (req, res, next) {
 
   jwt.verify(token, secret, (err, decodedToken) => {
     if (err) {
-      res.status(403).json({ error: 'Login token has expired. Please log in again.' });
+      return res.status(403).json({ error: 'Login token has expired. Please log in again.' });
     }
 
     req.user = decodedToken;
     next();
   });
+};
+
+exports.isTeacher = function (req, res, next) {
+  if (req.user.role !== 'Teacher') {
+    return res.status(403).json({
+      error: 'Not authorized',
+    });
+  }
+  next();
 };
