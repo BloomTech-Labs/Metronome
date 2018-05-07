@@ -8,6 +8,15 @@ exports.UserDataFactory = class UserDataFactory {
     };
   }
 
+  static get validNewUser2() {
+    return {
+      email: 'me@example.com',
+      password: 'differentpassword',
+      firstName: 'Adam',
+      lastName: 'Jensen',
+    };
+  }
+
   static get newUserWithBadEmail() {
     return { ...this.validNewUser, email: 'bademail' };
   }

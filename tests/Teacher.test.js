@@ -71,10 +71,12 @@ describe('Teacher model', () => {
     const teacher = await Teacher.findOne({ email: validNewUser.email });
     expect(teacher.__t).toEqual('Teacher');
   });
+
   it('Should have students empty array in the teacher', async () => {
     const teacher = await Teacher.findOne({ email: validNewUser.email });
     expect(teacher.students.length).toEqual(0);
   });
+
   it('Should have assignments empty array in the teacher', async () => {
     const teacher = await Teacher.findOne({ email: validNewUser.email });
     expect(teacher.assignments.length).toEqual(0);
