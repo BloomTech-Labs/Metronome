@@ -1,38 +1,33 @@
-// / <reference types="Cypress" />
-// / <reference types="Mocha" />
+/// <reference types="Cypress" />
+/// <reference types="Mocha" />
 
 describe('Metronome front-end', () => {
-  context('Visit the Metronome website', () => {
-    beforeEach(() => {
-      cy.visit('http://localhost:3000');
-    });
+  before(() => {
+    cy.visit('http://localhost:3000');
+  });
 
-    it('Should contain the brand title Metronome', () => {
-      // http://localhost:3000/
-      cy.visit('http://localhost:3000');
-      cy.title().should('include', 'Metronome');
-    });
+  it('Should contain the brand title Metronome', () => {
+    cy.title().should('include', 'Metronome');
+  });
 
-    it('Should have signup and login links', () => {
-      // Get DOM elements by class
-      cy.get('.nav').should('contain', 'Sign Up');
-      cy.get('.nav').should('contain', 'Log In');
-    });
+  it('Should have signup and login links', () => {
+    // Get DOM elements by class
+    cy.get('.nav').should('contain', 'Sign Up');
+    cy.get('.nav').should('contain', 'Log In');
+  });
 
-    it('Should have Buy Now button', () => {
-      cy.get('.btn').should('contain', 'Buy Now');
-    });
+  it('Should have Buy Now button', () => {
+    cy.get('.btn').should('contain', 'Buy Now');
+  });
 
-    it('Should have carousel', () => {
-      cy.get('.carousel .slider').children().should('have.class', 'slide');
-    });
+  it('Should have carousel', () => {
+    cy.get('.carousel .slider').children().should('have.class', 'slide');
   });
 
   context('Go to Signup page', () => {
-    beforeEach(() => {
-      cy.visit('http://localhost:3000');
-    });
     it('Should redirect to signup page when clicking signup', () => {
+      cy.visit('http://localhost:3000');
+
       cy.contains('Sign Up').click();
       cy.url().should('include', '/signup');
       cy.get('select').select('teacher');
@@ -48,10 +43,9 @@ describe('Metronome front-end', () => {
   });
 
   context('Go to Login page', () => {
-    beforeEach(() => {
-      cy.visit('http://localhost:3000');
-    });
     it('Should redirect to login page when clicking login', () => {
+      cy.visit('http://localhost:3000');
+
       cy.contains('Log In').click();
       cy.url().should('include', '/login');
       cy.get('input[name="username"]').type('123@123.com');
@@ -62,11 +56,9 @@ describe('Metronome front-end', () => {
   });
 
   context('Go to teacher dashboard', () => {
-    beforeEach(() => {
-      cy.visit('http://localhost:3000/teacher');
-    });
-
     it('Should redirect to teacher assignments page', () => {
+      cy.visit('http://localhost:3000/teacher');
+
       cy.contains('assignments').click();
       cy.url().should('include', '/assignments');
     });
