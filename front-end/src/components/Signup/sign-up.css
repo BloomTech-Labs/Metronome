@@ -10,6 +10,11 @@ input {
 	height: 30px;
 	width: 200px;
 }
+select {
+	margin: 5px;
+	height: 30px;
+	width: 200px;
+}
 
 h1 {
 	font-family: 'Roboto', sans-serif;
