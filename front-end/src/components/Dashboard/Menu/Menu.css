@@ -1,0 +1,8 @@
+li {
+	list-style-type: none;
+}
+
+.menu {
+	border: solid 1px black;
+	font-size: 30px;
+}

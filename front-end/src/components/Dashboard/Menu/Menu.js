@@ -1,25 +1,29 @@
 import React from 'react';
 import { Container, Col, Row } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-// import Assignments from '../Assignments/Assignments';
-// import Billing from '../Billing';
-// import UserSettings from '../UserSettings/UserSettings';
+import './Menu.css';
 
 const Menu = ({ match }) => (
 	<div>
 		<Container>
 			<Row>
 				<Col md={3}>
-					<ul>
+					<ul className="menu">
 						<li>
-							<Link to={`${match.url}/assignments`}>assignments</Link>{' '}
+							<NavLink activeClassName="active" to={`${match.url}/assignments`}>
+								assignments
+							</NavLink>{' '}
 						</li>
 						<li>
-							<Link to={`${match.url}/billing`}>billing</Link>{' '}
+							<NavLink activeClassName="active" to={`${match.url}/billing`}>
+								billing
+							</NavLink>{' '}
 						</li>
 						<li>
-							<Link to={`${match.url}/settings`}>settings</Link>{' '}
+							<NavLink activeClassName="active" to={`${match.url}/settings`}>
+								settings
+							</NavLink>{' '}
 						</li>
 					</ul>
 				</Col>

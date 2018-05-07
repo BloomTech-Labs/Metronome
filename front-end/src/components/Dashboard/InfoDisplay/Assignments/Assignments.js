@@ -2,25 +2,13 @@ import React, { Component } from 'react';
 import AssignmentCard from './AssignmentCard';
 import AssignmentDetails from './AssignmentDetails';
 
-import {
-	Container,
-	Col,
-	Row,
-	Card,
-	CardTitle,
-	CardImg,
-	Modal,
-	ModalHeader,
-	ModalBody,
-	ModalFooter,
-} from 'reactstrap';
+import { Container, Col, Row, Card, CardTitle, CardImg } from 'reactstrap';
 import { Link, Route } from 'react-router-dom';
 
 class AssignmentList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			modal: false,
 			assignments: [
 				{
 					id: 1,
@@ -63,13 +51,6 @@ class AssignmentList extends Component {
 		});
 	};
 
-	toggleModal = id => {
-		alert(`toggle modal ${id}`);
-		this.setState({
-			modal: !this.state.modal,
-		});
-	};
-
 	render() {
 		return (
 			<div>
@@ -79,8 +60,6 @@ class AssignmentList extends Component {
 							return (
 								<div key={key}>
 									<AssignmentCard
-										modalOpen={this.state.modal}
-										toggleModal={this.toggleModal}
 										deleteAssignment={this.deleteAssignment}
 										id={assignment.id}
 										match={this.props.match}
