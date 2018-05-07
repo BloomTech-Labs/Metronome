@@ -35,11 +35,15 @@ describe('Metronome front-end', () => {
     it('Should redirect to signup page when clicking signup', () => {
       cy.contains('Sign Up').click();
       cy.url().should('include', '/signup');
+      cy.get('select').select('teacher');
+      cy.get('select').select('student');
       cy.get('input[name="firstName"]').type('John');
       cy.get('input[name="lastName"]').type('Smith');
       cy.get('input[name="email"]').type('123@123.com');
       cy.get('input[name="password"]').type('12345678');
       cy.get('input[name="confirmPassword"]').type('12345678');
+      cy.get('.link').click();
+      cy.url().should('include', '/login');
     });
   });
 
@@ -52,6 +56,19 @@ describe('Metronome front-end', () => {
       cy.url().should('include', '/login');
       cy.get('input[name="username"]').type('123@123.com');
       cy.get('input[name="password"]').type('12345678');
+      cy.get('.link').click();
+      cy.url().should('include', '/signup');
+    });
+  });
+
+  context('Go to teacher dashboard', () => {
+    beforeEach(() => {
+      cy.visit('http://localhost:3000/teacher');
+    });
+
+    it('Should redirect to teacher assignments page', () => {
+      cy.contains('assignments').click();
+      cy.url().should('include', '/assignments');
     });
   });
 });
