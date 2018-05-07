@@ -7,6 +7,7 @@
     "jwt-decode": "^2.2.0",
     "material-ui": "^1.0.0-beta.44",
     "moment": "^2.22.1",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
     "react-datepicker": "^1.4.1",
@@ -21,7 +22,7 @@
     "react-tap-event-plugin": "^3.0.2",
     "reactstrap": "^6.0.1",
     "redux": "^4.0.0",
-    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
     "validator": "^9.4.1"
   },
   "scripts": {
