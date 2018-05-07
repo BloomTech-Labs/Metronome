@@ -7,15 +7,27 @@
     "rules": {
         "linebreak-style": 0,
         "global-require": 0,
-        "eslint linebreak-style": [0, "error", "windows"],
+        "eslint linebreak-style": [
+            0,
+            "error",
+            "windows"
+        ],
         "func-names": "off",
         "consistent-return": "off",
         "object-curly-newline": "off",
         "no-underscore-dangle": "off",
         "max-len": "off",
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
         "prefer-arrow-callback": "off",
-        "no-unused-expressions":0,
+        "no-unused-expressions": 0,
         "chai-friendly/no-unused-expressions": 2,
         "spaced-comment": "off"
     },

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { register } from '../../actions';
 import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
+import Error from './Error';
 
 import './sign-up.css';
 
@@ -14,186 +18,143 @@ const FNAME_MAX = 320;
 const LNAME_MAX = 320;
 
 class SignUp extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			firstName: '',
-			lastName: '',
-			email: '',
-			password: '',
-			confirmPassword: '',
-			errors: {},
-		};
-	}
-
-	onChange = event => {
-		const name = event.target.name;
-		const value = event.target.value;
-
-		this.setState({
-			[name]: value,
-		});
-	};
-
-	onSubmit = event => {
-		event.preventDefault();
-
-		if (!this.handleValidation()) {
-			return;
-		}
-
-		// TODO: Use Axios to send data
-		this.setState({
-			email: '',
-			password: '',
-			confirmPassword: '',
-		});
+	handleFormSubmit = ({ email, password, firstName, lastName }) => {
+	  this.props.register(email, password, firstName, lastName, this.props.history);
 	};
 
 	handleValidation = () => {
-		// Check all requirements are met and return if form is valid
-		let errors = {};
-		let formIsValid = true;
+	  // Check all requirements are met and return if form is valid
+	  const errors = {};
+	  let formIsValid = true;
 
-		// First Name
-		if (!this.state.firstName) {
-			formIsValid = false;
-			errors['firstName'] = 'Cannot be empty';
-		}
-		if (this.state.firstName.length > FNAME_MAX) {
-			formIsValid = false;
-			errors['firstName'] = `Must be less than ${FNAME_MAX}`;
-		}
-		// Last Name
-		if (!this.state.lastName) {
-			formIsValid = false;
-			errors['lastName'] = 'Cannot be empty';
-		}
-		if (this.state.lastName.length > LNAME_MAX) {
-			formIsValid = false;
-			errors['lastName'] = `Must be less than ${LNAME_MAX}`;
-		}
-		// Email check
-		if (!isEmail(this.state.email)) {
-			formIsValid = false;
-			errors['email'] = 'Must be a valid email';
-		}
+	  // First Name
+	  if (!this.state.firstName) {
+	    formIsValid = false;
+	    errors.firstName = 'Cannot be empty';
+	  }
+	  if (this.state.firstName.length > FNAME_MAX) {
+	    formIsValid = false;
+	    errors.firstName = `Must be less than ${FNAME_MAX}`;
+	  }
+	  // Last Name
+	  if (!this.state.lastName) {
+	    formIsValid = false;
+	    errors.lastName = 'Cannot be empty';
+	  }
+	  if (this.state.lastName.length > LNAME_MAX) {
+	    formIsValid = false;
+	    errors.lastName = `Must be less than ${LNAME_MAX}`;
+	  }
+	  // Email check
+	  if (!isEmail(this.state.email)) {
+	    formIsValid = false;
+	    errors.email = 'Must be a valid email';
+	  }
 
-		if (this.state.email.length > EMAIL_MAX) {
-			formIsValid = false;
-			errors['email'] = `Must be less than ${EMAIL_MAX} characters`;
-		}
+	  if (this.state.email.length > EMAIL_MAX) {
+	    formIsValid = false;
+	    errors.email = `Must be less than ${EMAIL_MAX} characters`;
+	  }
 
-		// Password check if between values
-		if (
-			this.state.password.length < PASSWORD_MIN ||
+	  // Password check if between values
+	  if (
+	    this.state.password.length < PASSWORD_MIN ||
 			this.state.password.length > PASSWORD_MAX
-		) {
-			formIsValid = false;
-			errors['password'] = 'Must be between 8 and 56 characters';
-		}
+	  ) {
+	    formIsValid = false;
+	    errors.password = 'Must be between 8 and 56 characters';
+	  }
 
-		// Password confirmation check
-		if (!equals(this.state.password, this.state.confirmPassword)) {
-			formIsValid = false;
-			errors['passwordConfirm'] = 'Must match entered password';
-		}
+	  // Password confirmation check
+	  if (!equals(this.state.password, this.state.confirmPassword)) {
+	    formIsValid = false;
+	    errors.passwordConfirm = 'Must match entered password';
+	  }
 
-		this.setState({ errors });
-		return formIsValid;
+	  this.setState({ errors });
+	  return formIsValid;
 	};
 
 	render() {
-		return (
-			<div className="form-container">
-				<div className="signup-form">
-					<form onSubmit={this.onSubmit}>
-						<h1>Sign Up</h1>
-						<div>
-							<select>
-								<option value="teacher">Teacher</option>
-								<option value="student">Student</option>
-							</select>
-						</div>
-						<div className="pair">
-							<input
-								name="firstName"
-								placeholder="First Name"
-								value={this.state.firstName}
-								onChange={this.onChange}
-							/>
-							<br />
-							<span style={{ color: 'red' }}>
-								{this.state.errors['firstName']}
-							</span>
-						</div>
-						<div className="pair">
-							<input
-								name="lastName"
-								placeholder="Last Name"
-								value={this.state.lastName}
-								onChange={this.onChange}
-							/>
-							<br />
-							<span style={{ color: 'red' }}>
-								{this.state.errors['lastName']}
-							</span>
-						</div>
-						<div className="pair">
-							<input
-								name="email"
-								placeholder="email"
-								value={this.state.email}
-								onChange={this.onChange}
-							/>
-							<br />
-							<span style={{ color: 'red' }}>{this.state.errors['email']}</span>
-						</div>
-						<div className="pair">
-							<input
-								name="password"
-								type="password"
-								placeholder="password"
-								value={this.state.password}
-								onChange={this.onChange}
-							/>
-							<br />
-							<span style={{ color: 'red' }}>
-								{this.state.errors['password']}
-							</span>
-						</div>
-						<div className="pair">
-							<input
-								name="confirmPassword"
-								type="password"
-								placeholder="confirm password"
-								value={this.state.confirmPassword}
-								onChange={this.onChange}
-							/>
-							<br />
-							<span style={{ color: 'red' }}>
-								{this.state.errors['passwordConfirm']}
-							</span>
-						</div>
-						<Button
-							style={{ fontSize: '14px' }}
-							className="btn--signup"
-							variant="raised"
-							color="primary"
-							type="submit"
-						>
-							Sign Up
-						</Button>
-						<br />
-						<Link className="link" to="/login">
-							Already have an account?
-						</Link>
-					</form>
-				</div>
-			</div>
-		);
+	  return (
+  <div className="form-container">
+    <div className="signup-form">
+      <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+        <h1>Sign Up</h1>
+        <Error error={this.props.auth.error} />
+        {/* <div>
+          <Field name="role" component="select">
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
+          </Field>
+        </div> */}
+        <div className="pair">
+          <Field
+            name="firstName"
+            component="input"
+            placeholder="First Name"
+          />
+          <br />
+        </div>
+        <div className="pair">
+          <Field
+            name="lastName"
+            placeholder="Last Name"
+            component="input"
+          />
+          <br />
+        </div>
+        <div className="pair">
+          <Field
+            name="email"
+            placeholder="email"
+            type="email"
+            component="input"
+          />
+          <br />
+        </div>
+        <div className="pair">
+          <Field
+            name="password"
+            type="password"
+            placeholder="password"
+            component="input"
+          />
+          <br />
+        </div>
+        <div className="pair">
+          <Field
+            name="confirmPassword"
+            type="password"
+            placeholder="confirm password"
+            component="input"
+          />
+          <br />
+        </div>
+        <Button
+          style={{ fontSize: '14px' }}
+          className="btn--signup"
+          variant="raised"
+          color="primary"
+          type="submit"
+        >Sign Up
+        </Button>
+        <br />
+        <Link className="link" to="/login">Already have an account?</Link>
+      </form>
+    </div>
+  </div>
+	  );
 	}
 }
 
-export default SignUp;
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+SignUp = connect(mapStateToProps, { register })(SignUp);
+
+export default reduxForm({
+  form: 'signup',
+  fields: ['email', 'password', 'firstName', 'lastName'],
+})(SignUp);
