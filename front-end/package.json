@@ -23,9 +23,16 @@
     "reactstrap": "^6.0.1",
     "redux": "^4.0.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "redux-form": "^7.3.0",
 >>>>>>> master
+=======
+
+
+    "redux-form": "^7.3.0",
+
+>>>>>>> 0290c34f7d13e0dd41522ac246caa4574841c3f2
     "redux-thunk": "^2.2.0",
     "validator": "^9.4.1"
   },

@@ -1,31 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // import axios from 'axios';
 
-export const GET_ASSIGNMENTS = 'GET_ASSIGNMENTS';
-export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
-export const ADD_ASSIGNMENT = 'ADD_ASSIGNMENT';
-export const VIEW_ASSIGNMENT_DETAILS = 'VIEW_ASSIGNMENT_DETAILS';
 
-export const getAssignments = () => ({
-  type: 'GET_ASSIGNMENTS',
-  payload: getAssignments,
-});
 
-export const addAssignment = assignment => ({
-  type: 'ADD_ASSIGNMENT',
-  payload: assignment,
-});
-
-export const deleteAssignment = id => ({
-  type: 'DELETE_ASSIGNMENT',
-  payload: id,
-});
-
-export const viewAssignmentDetails = id => ({
-  type: 'VIEW_ASSIGNMENT_DETAILS',
-  payload: id,
-});
-=======
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -46,6 +24,11 @@ export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+
+export const GET_ASSIGNMENTS = 'GET_ASSIGNMENTS';
+export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
+export const ADD_ASSIGNMENT = 'ADD_ASSIGNMENT';
+export const VIEW_ASSIGNMENT_DETAILS = 'VIEW_ASSIGNMENT_DETAILS';
 
 export const login = (email, password, history) => (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
@@ -75,6 +58,27 @@ export const register = (email, password, firstName, lastName, role, history) =>
     });
 };
 
+
+export const getAssignments = () => ({
+  type: 'GET_ASSIGNMENTS',
+  payload: getAssignments,
+});
+
+export const addAssignment = assignment => ({
+  type: 'ADD_ASSIGNMENT',
+  payload: assignment,
+});
+
+export const deleteAssignment = id => ({
+  type: 'DELETE_ASSIGNMENT',
+  payload: id,
+});
+
+export const viewAssignmentDetails = id => ({
+  type: 'VIEW_ASSIGNMENT_DETAILS',
+  payload: id,
+})
+
 export const logout = history => (dispatch) => {
   try {
     dispatch({ type: LOGOUT_REQUEST });
@@ -85,4 +89,4 @@ export const logout = history => (dispatch) => {
     dispatch({ type: LOGOUT_FAILURE, error: error.response.data });
   }
 };
->>>>>>> master
+

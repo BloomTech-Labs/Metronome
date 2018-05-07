@@ -1,17 +1,14 @@
 import { combineReducers } from 'redux';
-<<<<<<< HEAD
 import assignments from './assignmentsReducer';
-
-const rootReducer = combineReducers({
-  assignments,
-=======
 import { reducer as FormReducer } from 'redux-form';
 import AuthReducer from './auth';
+import assignmentsReducer from './assignmentsReducer';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
   form: FormReducer,
->>>>>>> master
+  assignments,
+
 });
 
 export default rootReducer;
