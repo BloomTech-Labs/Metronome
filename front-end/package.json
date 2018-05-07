@@ -22,6 +22,10 @@
     "react-tap-event-plugin": "^3.0.2",
     "reactstrap": "^6.0.1",
     "redux": "^4.0.0",
+<<<<<<< HEAD
+=======
+    "redux-form": "^7.3.0",
+>>>>>>> master
     "redux-thunk": "^2.2.0",
     "validator": "^9.4.1"
   },

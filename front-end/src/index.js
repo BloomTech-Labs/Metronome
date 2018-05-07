@@ -15,8 +15,15 @@ const store = createStoreWithMiddleware(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const store = createStoreWithMiddleware(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 ReactDOM.render(
+<<<<<<< HEAD
   <Provider store={store}>
+=======
+  <Provider store={store} >
+>>>>>>> master
     <BrowserRouter>
       <App />
     </BrowserRouter>
