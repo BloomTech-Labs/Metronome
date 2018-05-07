@@ -34,10 +34,10 @@ export const login = (email, password, history) => (dispatch) => {
     });
 };
 
-export const register = (email, password, firstName, lastName, history) => (dispatch) => {
+export const register = (email, password, firstName, lastName, role, history) => (dispatch) => {
   dispatch({ type: REGISTER_REQUEST });
   axios
-    .post(`${ROOT_URL}/register`, { email, password, firstName, lastName })
+    .post(`${ROOT_URL}/register`, { email, password, firstName, lastName, role })
     .then((response) => {
       dispatch({ type: REGISTER_SUCCESS, payload: response.data });
       history.push('/login');

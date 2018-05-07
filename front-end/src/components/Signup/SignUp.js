@@ -18,8 +18,8 @@ const FNAME_MAX = 320;
 const LNAME_MAX = 320;
 
 class SignUp extends Component {
-	handleFormSubmit = ({ email, password, firstName, lastName }) => {
-	  this.props.register(email, password, firstName, lastName, this.props.history);
+	handleFormSubmit = ({ email, password, firstName, lastName, role }) => {
+	  this.props.register(email, password, firstName, lastName, role, this.props.history);
 	};
 
 	handleValidation = () => {
@@ -82,12 +82,13 @@ class SignUp extends Component {
       <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
         <h1>Sign Up</h1>
         <Error error={this.props.auth.error} />
-        {/* <div>
+        <div>
           <Field name="role" component="select">
-            <option value="teacher">Teacher</option>
-            <option value="student">Student</option>
+            <option />
+            <option value="Teacher">Teacher</option>
+            <option value="Student">Student</option>
           </Field>
-        </div> */}
+        </div>
         <div className="pair">
           <Field
             name="firstName"
