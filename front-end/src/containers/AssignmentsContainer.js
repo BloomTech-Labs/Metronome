@@ -5,8 +5,6 @@ import { getAssignments } from '../actions';
 
 import Assignments from '../components/Dashboard/InfoDisplay/Assignments/Assignments';
 
-const AssignmentContainer = () => <Assignments />;
-
 const mapStateToProps = state => ({
   assignments: state.assignments,
 });
