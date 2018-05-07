@@ -1,6 +1,58 @@
 [
   {
     "type": "post",
+    "url": "/api/teacher/emailAssignments",
+    "title": "Email assignments",
+    "name": "EmailAssignments",
+    "group": "Teacher",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "emails",
+            "description": "<p>A comma separated list of student emails (or just one email) to send the assignment to.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>A simple success message.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"token\": \"Emails sent successfully!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "InvalidEmails-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"Could not send emails. Please verify that all email addresses are valid.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/teacherController.js",
+    "groupTitle": "Teacher"
+  },
+  {
+    "type": "post",
     "url": "/api/user/login",
     "title": "Log a user in",
     "name": "LoginUser",

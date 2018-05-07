@@ -1,9 +1,5 @@
 const User = require('../models/User');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const sgMail = require('@sendgrid/mail');
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 
 /**
  * @api {post} /api/user/register Register a new user
@@ -196,27 +192,6 @@ exports.transaction = async (req, res) => {
       res.status(500).json({ error: 'No Transaction' });
     }
     user.save();
-  } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
-  }
-};
-
-exports.sendMail = (req, res) => {
-  // using SendGrid's v3 Node.js Library
-  // https://github.com/sendgrid/sendgrid-nodejs
-  try {
-    const { to, from, subject, text, html } = req.body;
-    const msg = {
-      to,
-      from,
-      subject,
-      text,
-      html,
-    };
-    sgMail.send(msg);
-    res.status(200).json({ message: 'success' });
   } catch (err) {
     res.status(400).json({
       error: err.message,

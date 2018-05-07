@@ -125,3 +125,6 @@ typings/
 # cypress output
 cypress/screenshots/
 cypress/videos/
+
+# cypress example spec file
+cypress/integration/example_spec.js
