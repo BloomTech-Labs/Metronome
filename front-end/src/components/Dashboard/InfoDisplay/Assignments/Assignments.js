@@ -15,7 +15,7 @@ class Assignments extends Component {
 	  this.props.deleteAssignment(id);
 	};
 
-	render() {
+  render() {
 	  return (
   <div>
     <h1>Assignments</h1>

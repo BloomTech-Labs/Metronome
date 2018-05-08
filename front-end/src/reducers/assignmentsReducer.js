@@ -16,8 +16,8 @@ export default (assignments = [], action) => {
       return [...assignments.slice(0, id), ...assignments.slice(id + 1)];
     }
     case VIEW_ASSIGNMENT_DETAILS: {
-      const { assignmentID } = action.payload;
-      return assignments.filter(assignment => assignment.id === assignmentID);
+      const id = action.payload;
+      return assignments[id];
     }
     default:
       return assignments;
