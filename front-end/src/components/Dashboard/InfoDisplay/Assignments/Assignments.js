@@ -3,27 +3,34 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAssignments } from '../../../../actions';
 
-import AssignmentForm from '../Assignments/AddAssignments/AssignmentForm';
+import AssignmentCard from './AssignmentCard/AssignmentCard';
+import AddAssignmentCard from '../Assignments/AddAssignments/AddAssignmentCard';
 
 class Assignments extends Component {
   componentWillMount() {
     this.props.getAssignments();
   }
 
-  render() {
-    const assignmentItems = this.props.assignments.map(assignment => (
-      <div key={assignment.id}>
-        <h3>{assignment.assignmentName}</h3>
-        <p>{assignment.dueDate}</p>
-      </div>
-    ));
+  deleteAssignment = (id) => {
+    alert(id);
+  }
 
+  render() {
     return (
       <div>
-        <AssignmentForm />
-        <hr />
         <h1>Assignments</h1>
-        {assignmentItems}
+        {this.props.assignments.map((assignment,index) => (
+          <div key={index}>
+            <AssignmentCard
+              id={assignment.id}
+              deleteAssignment={this.deleteAssignment}
+              name={assignment.assignmentName}
+              file={assignment.musicFile}
+            />
+          </div>
+				))}
+        <AssignmentCard />
+        <AddAssignmentCard />
       </div>
     );
   }

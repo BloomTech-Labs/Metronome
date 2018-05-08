@@ -13,6 +13,7 @@ class AssignmentForm extends Component {
     super(props);
 
     this.state = {
+      assignmentId: 1,
       assignmentName: '',
       daysToPractice: [],
       hoursToPractice: '',
@@ -84,6 +85,7 @@ class AssignmentForm extends Component {
 	addAssignment = () => {
     console.log(`added: ${this.state.assignmentName}`)
 	  this.props.addAssignment(this.state);
+    this.props.history.goBack();
 	};
 
 	render() {
