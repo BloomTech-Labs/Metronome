@@ -24,8 +24,7 @@ const InfoDisplay = props => (
         component={AssignmentForm}
       />
       <Route
-        path={`${props.match.path}/assignment-details/
-      :userId`}
+        path={`${props.match.path}/assignment-details/:userId`}
         component={AssignmentDetails}
       />
     </Switch>
@@ -33,7 +32,9 @@ const InfoDisplay = props => (
 );
 
 InfoDisplay.propTypes = {
-  match: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default InfoDisplay;

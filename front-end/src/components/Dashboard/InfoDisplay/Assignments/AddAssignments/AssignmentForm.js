@@ -63,10 +63,11 @@ class AssignmentForm extends Component {
 	//	handles date of the date picker
 
 	handledDateChange = (date) => {
-	  const dueDate = date.format();
-
+    const dueDate = date.format('l');
+	  
 	  this.setState({
 	    dueDate,
+      date
 	  });
 	};
 
@@ -84,7 +85,18 @@ class AssignmentForm extends Component {
 
 	addAssignment = () => {
 	  this.props.addAssignment(this.state);
-    this.props.history.goBack();
+    this.setState({
+      assignmentName: '',
+      daysToPractice: [],
+      hoursToPractice: '',
+      musicFile: '',
+      file: '',
+      email: '',
+      Wednesday: false,
+
+      
+    })
+    
 	};
 
 	render() {
@@ -167,8 +179,6 @@ class AssignmentForm extends Component {
           <label htmlFor="hoursToPractice">hrs</label>
           <label htmlFor="due date">Due Date:</label>
           <DatePicker
-            className="date-picker"
-            name="due date"
             selected={this.state.date}
             onChange={this.handledDateChange}
           />
@@ -189,6 +199,9 @@ class AssignmentForm extends Component {
         <Grid item>
           <Button variant="raised" onClick={this.addAssignment}>
 								Submit
+          </Button>
+          <Button variant="raised" onClick={this.props.history.goBack}>
+								Assignments
           </Button>
         </Grid>
       </Grid>

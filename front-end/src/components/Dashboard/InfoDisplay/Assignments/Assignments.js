@@ -15,10 +15,11 @@ class Assignments extends Component {
 	  this.props.deleteAssignment(id);
 	};
 
-  render() {
+	render() {
 	  return (
   <div>
     <h1>Assignments</h1>
+  
     {this.props.assignments.map((assignment, index) => (
       <div key={index}>
         <AssignmentCard
@@ -28,7 +29,7 @@ class Assignments extends Component {
           dueDate={assignment.dueDate}
         />
       </div>
-				))}
+		))}
     <AddAssignmentCard />
   </div>
 	  );

@@ -28,7 +28,11 @@ class AssignmentDetails extends Component {
 AssignmentDetails.propTypes = {
   viewAssignmentDetails: PropTypes.func.isRequired,
   assignments: PropTypes.string.isRequired,
-  match: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      userId: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({ assignments: state.assignments });
