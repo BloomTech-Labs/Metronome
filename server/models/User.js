@@ -139,8 +139,6 @@ UserSchema.methods.editProfile = async function ({ newEmail, oldPassword, newPas
       throw new Error('Password is not correct.');
     }
     this.setPassword(newPassword);
-  } else {
-    throw new Error('Please insert old password and new password.');
   }
 
   if (firstName) {
