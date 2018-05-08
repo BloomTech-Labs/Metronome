@@ -39,10 +39,23 @@ export const login = (email, password, history) => (dispatch) => {
     });
 };
 
-export const register = (email, password, firstName, lastName, role, history) => (dispatch) => {
+export const register = (
+  email,
+  password,
+  firstName,
+  lastName,
+  role,
+  history,
+) => (dispatch) => {
   dispatch({ type: REGISTER_REQUEST });
   axios
-    .post(`${ROOT_URL}/register`, { email, password, firstName, lastName, role })
+    .post(`${ROOT_URL}/register`, {
+      email,
+      password,
+      firstName,
+      lastName,
+      role,
+    })
     .then((response) => {
       dispatch({ type: REGISTER_SUCCESS, payload: response.data });
       history.push('/login');
@@ -51,7 +64,6 @@ export const register = (email, password, firstName, lastName, role, history) =>
       dispatch({ type: REGISTER_FAILURE, error: error.response.data });
     });
 };
-
 
 export const getAssignments = () => ({
   type: 'GET_ASSIGNMENTS',
@@ -71,7 +83,7 @@ export const deleteAssignment = id => ({
 export const viewAssignmentDetails = id => ({
   type: 'VIEW_ASSIGNMENT_DETAILS',
   payload: id,
-})
+});
 
 export const logout = history => (dispatch) => {
   try {
@@ -83,4 +95,3 @@ export const logout = history => (dispatch) => {
     dispatch({ type: LOGOUT_FAILURE, error: error.response.data });
   }
 };
-

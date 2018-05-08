@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import assignments from './assignmentsReducer';
 import { reducer as FormReducer } from 'redux-form';
 import AuthReducer from './auth';
 import assignmentsReducer from './assignmentsReducer';
