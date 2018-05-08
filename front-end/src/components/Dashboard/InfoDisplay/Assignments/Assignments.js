@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAssignments } from '../../../../actions';
 
@@ -12,8 +13,8 @@ class Assignments extends Component {
   render() {
     const assignmentItems = this.props.assignments.map(assignment => (
       <div key={assignment.id}>
-        <h3>{assignment.title}</h3>
-        <p>{assignment.body}</p>
+        <h3>{assignment.assignmentName}</h3>
+        <p>{assignment.dueDate}</p>
       </div>
     ));
 
@@ -27,6 +28,11 @@ class Assignments extends Component {
     );
   }
 }
+
+Assignments.propTypes = {
+  getAssignments: PropTypes.func.isRequired,
+  assignments: PropTypes.arrayOf.isRequired,
+};
 
 const mapStateToProps = state => ({ assignments: state.assignments });
 

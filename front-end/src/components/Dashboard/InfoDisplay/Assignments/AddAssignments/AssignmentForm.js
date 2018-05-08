@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { addAssignment } from '../../../../../actions';
 
 import { Grid, Checkbox, Button } from 'material-ui';
 import 'react-datepicker/dist/react-datepicker.css';
 
-
 class AssignmentForm extends Component {
   constructor(props) {
     super(props);
-  
+
     this.state = {
       assignmentName: '',
       daysToPractice: [],
@@ -80,32 +82,13 @@ class AssignmentForm extends Component {
 	// This sends date up to the parent
 
 	addAssignment = () => {
-	  const {
-	    assignmentName,
-	    hoursToPractice,
-	    dueDate,
-	    email,
-	    daysToPractice,
-	    musicFile,
-	    clientName,
-	  } = this.state;
-
-	  this.props.addAssignment({
-	    assignmentName,
-	    hoursToPractice,
-	    dueDate,
-	    email,
-	    daysToPractice,
-	    musicFile,
-	    clientName,
-	  });
-	  this.props.history.goBack();
+    console.log(`added: ${this.state.assignmentName}`)
+	  this.props.addAssignment(this.state);
 	};
 
 	render() {
 	  return (
   <div>
-    
     <div style={{ margin: 40 }}>
       <Grid container spacing={0} align="center">
         <Grid item xs={12}>
@@ -209,10 +192,13 @@ class AssignmentForm extends Component {
         </Grid>
       </Grid>
     </div>
-   
   </div>
 	  );
 	}
 }
 
-export default AssignmentForm;
+AssignmentForm.propTypes = {
+  addAssignment: PropTypes.func.isRequired,
+};
+
+export default connect(null, { addAssignment })(AssignmentForm);
