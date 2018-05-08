@@ -84,7 +84,7 @@ class SignUp extends Component {
         <Error error={this.props.auth.error} />
         <div>
           <Field name="role" component="select">
-            <option />
+            <option>Please select role</option>
             <option value="Teacher">Teacher</option>
             <option value="Student">Student</option>
           </Field>
