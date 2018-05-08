@@ -29,7 +29,8 @@ export const login = (email, password, history) => (dispatch) => {
   axios
     .post(`${ROOT_URL}/login`, { email, password })
     .then((response) => {
-      window.localStorage.setItem('token', JSON.stringify(response.data.token));
+      window.localStorage.setItem('token', response.data.token);
+      console.log(response.data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: response.data });
       history.push('/');
     })
@@ -102,7 +103,7 @@ export const updateUser = (
       { headers: { Authorization: token } },
     )
     .then((response) => {
-      window.localStorage.setItem('token', JSON.stringify(response.data.token));
+      window.localStorage.setItem('token', response.data.token);
       dispatch({ type: UPDATE_USER_SUCCESS, payload: response.data });
       history.push('/dashboard');
     })

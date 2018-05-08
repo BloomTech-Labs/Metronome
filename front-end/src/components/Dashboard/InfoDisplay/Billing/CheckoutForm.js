@@ -27,6 +27,7 @@ class CheckoutForm extends Component {
 
     // JWT token pulled from local storage
     const jwt = window.localStorage.getItem('token');
+    console.log(jwt);
 
     const { subscribe, client } = this.state;
 
@@ -62,8 +63,9 @@ class CheckoutForm extends Component {
             Authorization: jwt,
           },
         }).then((res) => {
-          // TODO: redirect to user page
+          // transaction succeed and redirect to dashboard page
           console.log('Transaction successful', res.data);
+          window.location.href = '/dashboard';
         }).catch((error) => {
           console.log('Transaction Error', error);
         });
