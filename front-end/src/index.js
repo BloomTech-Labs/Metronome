@@ -9,13 +9,14 @@ import reducer from './reducers';
 import './index.css';
 import App from './App';
 
-import registerServiceWorker from './registerServiceWorker';
-
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStoreWithMiddleware(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 ReactDOM.render(
-  <Provider store={store} >
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
@@ -23,4 +24,3 @@ ReactDOM.render(
 
   document.getElementById('root'),
 );
-registerServiceWorker();

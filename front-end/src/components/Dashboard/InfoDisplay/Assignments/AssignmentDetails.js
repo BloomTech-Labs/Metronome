@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const AssignmentDetails = props => {
+const AssignmentDetails = {} => {
 	return (
 		<div>
 			<h1>Details</h1>
