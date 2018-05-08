@@ -67,7 +67,6 @@ export const register = (
 
 export const getAssignments = () => ({
   type: 'GET_ASSIGNMENTS',
-  payload: getAssignments,
 });
 
 export const addAssignment = assignment => ({

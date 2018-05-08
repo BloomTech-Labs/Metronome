@@ -2,9 +2,9 @@ import React from 'react';
 import { Container, Col, Row } from 'reactstrap';
 import { Link, Route } from 'react-router-dom';
 
-import Assignments from '../Assignments/Assignments';
-import Billing from '../Billing';
-import UserSettings from '../UserSettings/UserSettings';
+import Assignments from '../Dashboard/InfoDisplay/Assignments/Assignments';
+import Billing from '../Dashboard/InfoDisplay/Billing/';
+import UserSettings from '../Dashboard/InfoDisplay/UserSettings/UserSettings';
 
 
 const Menu = ({ match }) => (

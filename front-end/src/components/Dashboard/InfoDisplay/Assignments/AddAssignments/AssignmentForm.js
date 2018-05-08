@@ -5,16 +5,11 @@ import moment from 'moment';
 import { Grid, Checkbox, Button } from 'material-ui';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import './add-assignment.css';
 
-// TODO: Grab client name off page teacher is on for assignments
-// TODO: Look at file upload to see how to send with data
-
-class AddAssignmentForm extends Component {
+class AssignmentForm extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
-
+  
     this.state = {
       assignmentName: '',
       daysToPractice: [],
@@ -110,6 +105,7 @@ class AddAssignmentForm extends Component {
 	render() {
 	  return (
   <div>
+    
     <div style={{ margin: 40 }}>
       <Grid container spacing={0} align="center">
         <Grid item xs={12}>
@@ -213,9 +209,10 @@ class AddAssignmentForm extends Component {
         </Grid>
       </Grid>
     </div>
+   
   </div>
 	  );
 	}
 }
 
-export default AddAssignmentForm;
+export default AssignmentForm;
