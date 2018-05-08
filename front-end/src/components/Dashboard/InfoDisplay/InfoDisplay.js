@@ -14,6 +14,7 @@ const InfoDisplay = props => (
     <Switch>
       <Route
         path={`${props.match.path}/assignments`}
+
         component={Assignments}
         match={props.match}
       />
