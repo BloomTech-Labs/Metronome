@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
-import Error from './Error';
+import Error from '../Error/Error';
 
 import './sign-up.css';
 
@@ -162,5 +162,5 @@ SignUp = connect(mapStateToProps, { register })(SignUp);
 
 export default reduxForm({
   form: 'signup',
-  fields: ['email', 'password', 'firstName', 'lastName'],
+  fields: ['email', 'password', 'firstName', 'lastName', 'role'],
 })(SignUp);

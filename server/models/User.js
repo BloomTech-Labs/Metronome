@@ -132,13 +132,15 @@ UserSchema.statics.registerNewUser = async function ({ email = '', password = ''
  * @param {String} opts.lastName
  */
 UserSchema.methods.editProfile = async function ({ newEmail, oldPassword, newPassword, firstName, lastName }) {
-  if (newPassword) {
+  if (newPassword && oldPassword) {
     this.model('User').validatePassword(oldPassword);
     this.model('User').validatePassword(newPassword);
     if (!this.comparePassword(oldPassword)) {
       throw new Error('Password is not correct.');
     }
     this.setPassword(newPassword);
+  } else {
+    throw new Error('Please insert old password and new password.');
   }
 
   if (firstName) {
