@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Route, Switch } from 'react-router-dom';
-
 import AssignmentsContainer from '../../../containers/AssignmentsContainer';
 import Billing from '../InfoDisplay/Billing/index';
 import UserSettings from '../InfoDisplay/UserSettings/UserSettings';
@@ -13,6 +11,7 @@ const InfoDisplay = props => (
     <Switch>
       <Route
         path={`${props.match.path}/assignments`}
+        student-assignment-page
         component={AssignmentsContainer} />
 			<Route
         path={`${props.match.path}/billing`}  
