@@ -20,13 +20,17 @@ const AssignmentCard = props => (
         </CardBody>
       </Card>
 
-      <FATrash onClick={() => props.deleteAssignment()} />
+      <FATrash onClick={() => props.deleteAssignment(props.id)} />
     </Col>
   </div>
 );
 
 AssignmentCard.propTypes = {
-  deletedAssignment: PropTypes.func.isRequired,
+  deleteAssignment: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  dueDate: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  
 }
 
 export default AssignmentCard;

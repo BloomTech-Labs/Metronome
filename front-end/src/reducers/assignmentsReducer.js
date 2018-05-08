@@ -12,8 +12,8 @@ export default (assignments = [], action) => {
     case ADD_ASSIGNMENT:
       return [...assignments, action.payload];
     case DELETE_ASSIGNMENT: {
-      const { assignmentID } = action.payload;
-      return assignments.filter(assignment => assignment.id !== assignmentID);
+      const id = action.payload;
+      return [...assignments.slice(0, id), ...assignments.slice(id + 1)];
     }
     case VIEW_ASSIGNMENT_DETAILS: {
       const { assignmentID } = action.payload;

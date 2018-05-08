@@ -9,11 +9,11 @@ import { Grid, Checkbox, Button } from 'material-ui';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class AssignmentForm extends Component {
+  
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      assignmentId: 1,
       assignmentName: '',
       daysToPractice: [],
       hoursToPractice: '',
@@ -83,7 +83,6 @@ class AssignmentForm extends Component {
 	// This sends date up to the parent
 
 	addAssignment = () => {
-    console.log(`added: ${this.state.assignmentName}`)
 	  this.props.addAssignment(this.state);
     this.props.history.goBack();
 	};

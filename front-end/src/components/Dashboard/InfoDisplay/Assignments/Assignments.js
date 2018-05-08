@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getAssignments } from '../../../../actions';
+import { getAssignments, deleteAssignment } from '../../../../actions';
 
 import AssignmentCard from './AssignmentCard/AssignmentCard';
 import AddAssignmentCard from '../Assignments/AddAssignments/AddAssignmentCard';
@@ -11,36 +11,36 @@ class Assignments extends Component {
     this.props.getAssignments();
   }
 
-  deleteAssignment = (id) => {
-    alert(id);
-  }
+	deleteAssignment = (id) => {
+	  this.props.deleteAssignment(id);
+	};
 
-  render() {
-    return (
-      <div>
-        <h1>Assignments</h1>
-        {this.props.assignments.map((assignment,index) => (
-          <div key={index}>
-            <AssignmentCard
-              id={assignment.id}
-              deleteAssignment={this.deleteAssignment}
-              name={assignment.assignmentName}
-              file={assignment.musicFile}
-            />
-          </div>
-				))}
-        <AssignmentCard />
-        <AddAssignmentCard />
+	render() {
+	  return (
+  <div>
+    <h1>Assignments</h1>
+    {this.props.assignments.map((assignment, index) => (
+      <div key={index}>
+        <AssignmentCard
+          id={index}
+          deleteAssignment={this.deleteAssignment}
+          name={assignment.assignmentName}
+          dueDate={assignment.dueDate}
+        />
       </div>
-    );
-  }
+				))}
+    <AddAssignmentCard />
+  </div>
+	  );
+	}
 }
 
 Assignments.propTypes = {
   getAssignments: PropTypes.func.isRequired,
   assignments: PropTypes.arrayOf.isRequired,
+  deleteAssignment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ assignments: state.assignments });
 
-export default connect(mapStateToProps, { getAssignments })(Assignments);
+export default connect(mapStateToProps, { getAssignments, deleteAssignment })(Assignments);
