@@ -94,6 +94,7 @@ class SignUp extends Component {
             name="firstName"
             component="input"
             placeholder="First Name"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -102,6 +103,7 @@ class SignUp extends Component {
             name="lastName"
             placeholder="Last Name"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -111,6 +113,7 @@ class SignUp extends Component {
             placeholder="email"
             type="email"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -120,6 +123,7 @@ class SignUp extends Component {
             type="password"
             placeholder="password"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -129,6 +133,7 @@ class SignUp extends Component {
             type="password"
             placeholder="confirm password"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
