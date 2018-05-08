@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-// import axios from 'axios';
-
-
-
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
