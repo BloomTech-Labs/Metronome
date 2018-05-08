@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { Row, Col, Container, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
+  CardTitle, CardSubtitle, Button, Form, Label, Input } from 'reactstrap';
 
 class StudentAssignments extends Component {
   constructor() {
     super();
     this.state = {
-      assignments: [],
+      assignmentName: '',
+      dueDate: '',
+      image: '',
+      description: '',
+      timeStudying: '',
     };
+
+    
   }
 
   render() {
@@ -15,7 +21,7 @@ class StudentAssignments extends Component {
       <div>
         <Row>
           <Col sm="6">
-            <Card>
+            <Card body>
               <CardBody>
                 <CardTitle>Assignment Name</CardTitle>
                 <CardSubtitle>Due Date</CardSubtitle>
@@ -24,10 +30,14 @@ class StudentAssignments extends Component {
               <CardBody>
                 <CardText>Description of Assignment</CardText>
               </CardBody>
+              <Form>
+                <Label for="number">Input Hours</Label>
+                <Input type="number" name="hours" id="hours" placeholder="hours" />
+              </Form>
             </Card>
           </Col>
           <Col sm="6">
-            <Card>
+            <Card body>
               <CardBody>
                 <CardTitle>Assignment Name</CardTitle>
                 <CardSubtitle>Due Date</CardSubtitle>
