@@ -13,9 +13,7 @@ const InfoDisplay = props => (
     <Switch>
       <Route
         path={`${props.match.path}/assignments`}
-        component={AssignmentsContainer}
-      />
-			/>
+        component={AssignmentsContainer} />
 			<Route
         path={`${props.match.path}/billing`}  
         component={Billing} />
@@ -24,8 +22,7 @@ const InfoDisplay = props => (
         component={UserSettings} />
       <Route
         path={`${props.match.path}/add-assignment`}
-        component={AddAssignmentForm}
-      />
+        component={AddAssignmentForm} />
       <Route
         path={`${props.match.path}/student-assignments`}
         component={StudentAssignments} />

@@ -3,32 +3,26 @@ import { Row, Container, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 class StudentAssignments extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       assignments: [],
     };
   }
 
-  redner() {
+  render() {
     return (
       <div>
-        <Container>
-          <Row>
-            <div className="assignemtName">
-              <Card>
-                <CardBody>
-                  <CardTitle>Assignment Name</CardTitle>
-                  <CardSubtitle>Due Date</CardSubtitle>
-                </CardBody>
-                <img top width="100%" src="http://www.musicnotes.com/sheetmusic/mtdVPE.asp?ppn=MN0096911&" />
-                <CardBody>
-                  <CardText>Description of Assignment</CardText>
-                </CardBody>
-              </Card>
-            </div>
-          </Row>
-        </Container>
+        <Card>
+          <CardBody>
+            <CardTitle>Assignment Name</CardTitle>
+            <CardSubtitle>Due Date</CardSubtitle>
+          </CardBody>
+          <img top width="100%" src="http://michaelmarc.com/content/images/thumbs/000/0000410_hallelujah-sheet-music-tabs_400.png" />
+          <CardBody>
+            <CardText>Description of Assignment</CardText>
+          </CardBody>
+        </Card>
       </div>
     )
   }
