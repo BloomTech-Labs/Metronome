@@ -1,134 +1,120 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { updateUser } from '../../../../actions';
 import './userSettings.css';
+import Error from '../../../Error/Error';
 
 class UserSettings extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      firstName: '',
-      lastName: '',
-      newEmail: '',
-      oldPassword: '',
-      newPassword: '',
-    };
+  componentWillMount() {
+    const token = window.localStorage.getItem('token');
+    if (!token) this.props.history.push('/');
   }
 
-  onChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  componentWillUnmount() {
+
+  }
+
+  handleFormSubmit = ({ firstName, lastName, newEmail, oldPassword, newPassword }) => {
+    this.props.updateUser(
+      firstName,
+      lastName,
+      newEmail,
+      oldPassword,
+      newPassword,
+      this.props.history,
+    );
   };
-
-  onSubmit = (event) => {
-    event.preventDefault();
-    const url = '/api/user';
-    const jwt = window.localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YWViNzI5ODU1NDZiMDhiZDQ2M2I2NGMiLCJlbWFpbCI6IjEyM0AxMjMuY29tIiwibmFtZSI6InRpbmcgd2FuZyIsImV4cCI6MTUyODA4NDM5NywiaWF0IjoxNTI1NDkyMzk2fQ.XGShPbeR4f4XFV7gWp91byRNXhyte3bvo6NrieTX24Y';
-
-    // send updated information to backend
-    const userInfo = this.state;
-    axios.put(url, userInfo, {
-      headers: {
-        Authorization: jwt,
-      },
-    }).then((res) => {
-      console.log('Update successful', res.data);
-      window.localStorage.setItem('token', res.data.token);
-    }).catch((error) => {
-      console.log('Update Error', error.message);
-    });
-
-    this.setState({
-      firstName: '',
-      lastName: '',
-      newEmail: '',
-      oldPassword: '',
-      newPassword: '',
-    });
-  }
 
   render() {
     return (
-      <div className="container">
-        <form onSubmit={this.onSubmit} style={{ maxWidth: '50%' }}>
-          <div className="row">
-            <div className="col-25">
-              <label htmlFor="firstName">First Name:</label>
-            </div>
-            <div className="col-75">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={this.state.firstName}
-                onChange={this.onChange}
-              />
-            </div>
+      <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '5rem' }}>
+        <Error error={this.props.auth.error} />
+        <div className="row">
+          <div className="col-25">
+            <label htmlFor="firstName">First Name:</label>
           </div>
-          <div className="row">
-            <div className="col-25">
-              <label htmlFor="lastName">Last Name:</label>
-            </div>
-            <div className="col-75">
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={this.state.lastName}
-                onChange={this.onChange}
-              />
-            </div>
+          <div className="col-75">
+            <Field
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              autoComplete="off"
+              component="input"
+            />
           </div>
-          <div className="row">
-            <div className="col-25">
-              <label htmlFor="newEmail">Email:</label>
-            </div>
-            <div className="col-75">
-              <input
-                type="text"
-                name="newEmail"
-                placeholder="New email"
-                value={this.state.newEmail}
-                onChange={this.onChange}
-              />
-            </div>
+        </div>
+        <div className="row">
+          <div className="col-25">
+            <label htmlFor="lastName">Last Name:</label>
           </div>
-          <div className="row">
-            <div className="col-25">
-              <label htmlFor="oldPassword">Old Password:</label>
-            </div>
-            <div className="col-75">
-              <input
-                type="password"
-                name="oldPassword"
-                placeholder="Old Password"
-                value={this.state.oldPassword}
-                onChange={this.onChange}
-              />
-            </div>
+          <div className="col-75">
+            <Field
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              autoComplete="off"
+              component="input"
+            />
           </div>
-          <div className="row">
-            <div className="col-25">
-              <label htmlFor="newPassword">New Password:</label>
-            </div>
-            <div className="col-75">
-              <input
-                type="password"
-                name="newPassword"
-                placeholder="New Password"
-                value={this.state.newPassword}
-                onChange={this.onChange}
-              />
-            </div>
+        </div>
+        <div className="row">
+          <div className="col-25">
+            <label htmlFor="newEmail">Email:</label>
           </div>
-          <div className="row">
-            <button>Submit</button>
+          <div className="col-75">
+            <Field
+              type="email"
+              name="newEmail"
+              placeholder="New email"
+              autoComplete="off"
+              component="input"
+            />
           </div>
-        </form>
-      </div>
+        </div>
+        <div className="row">
+          <div className="col-25">
+            <label htmlFor="oldPassword">Old Password:</label>
+          </div>
+          <div className="col-75">
+            <Field
+              type="password"
+              name="oldPassword"
+              placeholder="Old Password"
+              autoComplete="off"
+              component="input"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-25">
+            <label htmlFor="newPassword">New Password:</label>
+          </div>
+          <div className="col-75">
+            <Field
+              type="password"
+              name="newPassword"
+              placeholder="New Password"
+              autoComplete="off"
+              component="input"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <input type="submit" value="Update" />
+        </div>
+      </form>
     );
   }
 }
 
-export default UserSettings;
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+UserSettings = connect(mapStateToProps, { updateUser })(UserSettings);
+
+export default reduxForm({
+  form: 'settings',
+  fields: ['firstName', 'lastName', 'newEmail', 'oldPassword', 'newPassword'],
+})(UserSettings);
