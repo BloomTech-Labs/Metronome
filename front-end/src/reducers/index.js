@@ -7,8 +7,7 @@ import assignmentsReducer from './assignmentsReducer';
 const rootReducer = combineReducers({
   auth: AuthReducer,
   form: FormReducer,
-  assignments,
-
+  assignments: assignmentsReducer,
 });
 
 export default rootReducer;
