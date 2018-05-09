@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardBody,
-  CardTitle, CardSubtitle, Form, Label, Input } from 'reactstrap';
+  CardTitle, CardSubtitle } from 'reactstrap';
 import './studentassignment.css';
 
 class StudentAssignments extends Component {
