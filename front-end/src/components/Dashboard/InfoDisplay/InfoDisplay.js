@@ -1,32 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Route, Switch } from 'react-router-dom';
-import AssignmentsContainer from '../../../containers/AssignmentsContainer';
+
+import Assignments from '../InfoDisplay/Assignments/Assignments';
+import AssignmentDetails from '../InfoDisplay/Assignments/AssignmentDetails/AssignmentDetails';
 import Billing from '../InfoDisplay/Billing/index';
 import UserSettings from '../InfoDisplay/UserSettings/UserSettings';
-import AddAssignmentForm from '../InfoDisplay/Assignments/AddAssignment/AddAssignmentForm';
-import StudentAssignments from '../InfoDisplay/StudentAssignments/StudentAssignments';
+import AssignmentForm from '../InfoDisplay/Assignments/AddAssignments/AssignmentForm';
 
 const InfoDisplay = props => (
   <div>
     <Switch>
       <Route
         path={`${props.match.path}/assignments`}
-        student-assignment-page
-        component={AssignmentsContainer} />
-			<Route
-        path={`${props.match.path}/billing`}  
-        component={Billing} />
-      <Route
-        path={`${props.match.path}/settings`}
-        component={UserSettings} />
+
+        component={Assignments}
+        match={props.match}
+      />
+      <Route path={`${props.match.path}/billing`} component={Billing} />
+      <Route path={`${props.match.path}/settings`} component={UserSettings} />
       <Route
         path={`${props.match.path}/add-assignment`}
-        component={AddAssignmentForm} />
+        component={AssignmentForm}
+      />
       <Route
-        path={`${props.match.path}/student-assignments`}
-        component={StudentAssignments} />
+        path={`${props.match.path}/assignment-details/:userId`}
+        component={AssignmentDetails}
+      />
     </Switch>
   </div>
 );
+
+InfoDisplay.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default InfoDisplay;

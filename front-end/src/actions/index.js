@@ -68,7 +68,6 @@ export const register = (
 
 export const getAssignments = () => ({
   type: 'GET_ASSIGNMENTS',
-  payload: getAssignments,
 });
 
 export const addAssignment = assignment => ({
@@ -76,9 +75,9 @@ export const addAssignment = assignment => ({
   payload: assignment,
 });
 
-export const deleteAssignment = id => ({
+export const deleteAssignment = index => ({
   type: 'DELETE_ASSIGNMENT',
-  payload: id,
+  payload: index,
 });
 
 export const viewAssignmentDetails = id => ({

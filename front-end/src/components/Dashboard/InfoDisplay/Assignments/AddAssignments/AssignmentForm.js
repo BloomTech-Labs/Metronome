@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-
 import { Grid, Checkbox, Button } from 'material-ui';
 import 'react-datepicker/dist/react-datepicker.css';
+import { addAssignment } from '../../../../../actions';
 
-import './add-assignment.css';
-
-// TODO: Grab client name off page teacher is on for assignments
-// TODO: Look at file upload to see how to send with data
-
-class AddAssignmentForm extends Component {
+class AssignmentForm extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
 
     this.state = {
       assignmentName: '',
@@ -65,10 +61,11 @@ class AddAssignmentForm extends Component {
 	//	handles date of the date picker
 
 	handledDateChange = (date) => {
-	  const dueDate = date.format();
+	  const dueDate = date.format('l');
 
 	  this.setState({
 	    dueDate,
+	    date,
 	  });
 	};
 
@@ -79,32 +76,21 @@ class AddAssignmentForm extends Component {
 	  this.setState({
 	    musicFile: event.target.files[0].name,
 	  });
-	  console.log(event.target.files[0]);
 	};
 
-	// This sends date up to the parent
+	// Adds excitment via props/redux
 
 	addAssignment = () => {
-	  const {
-	    assignmentName,
-	    hoursToPractice,
-	    dueDate,
-	    email,
-	    daysToPractice,
-	    musicFile,
-	    clientName,
-	  } = this.state;
-
-	  this.props.addAssignment({
-	    assignmentName,
-	    hoursToPractice,
-	    dueDate,
-	    email,
-	    daysToPractice,
-	    musicFile,
-	    clientName,
+	  this.props.addAssignment(this.state);
+	  this.setState({
+	    assignmentName: '',
+	    daysToPractice: [],
+	    hoursToPractice: '',
+	    musicFile: '',
+	    file: '',
+	    email: '',
+	    Wednesday: false,
 	  });
-	  this.props.history.goBack();
 	};
 
 	render() {
@@ -187,8 +173,6 @@ class AddAssignmentForm extends Component {
           <label htmlFor="hoursToPractice">hrs</label>
           <label htmlFor="due date">Due Date:</label>
           <DatePicker
-            className="date-picker"
-            name="due date"
             selected={this.state.date}
             onChange={this.handledDateChange}
           />
@@ -210,6 +194,9 @@ class AddAssignmentForm extends Component {
           <Button variant="raised" onClick={this.addAssignment}>
 								Submit
           </Button>
+          <Button variant="raised" onClick={this.props.history.goBack}>
+								Assignments
+          </Button>
         </Grid>
       </Grid>
     </div>
@@ -218,4 +205,8 @@ class AddAssignmentForm extends Component {
 	}
 }
 
-export default AddAssignmentForm;
+AssignmentForm.propTypes = {
+  addAssignment: PropTypes.func.isRequired,
+};
+
+export default connect(null, { addAssignment })(AssignmentForm);
