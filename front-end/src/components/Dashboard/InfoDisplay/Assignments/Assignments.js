@@ -23,7 +23,7 @@ class Assignments extends Component {
 
       <div>
         <h1>Assignments</h1>
-
+        
         {this.props.assignments.map((assignment, index) => (
           <div key={index}>
             <AssignmentCard

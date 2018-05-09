@@ -8,6 +8,7 @@ import { Button } from 'material-ui';
 const AssignmentDetails = (props) => {
   const id = props.match.params.userId;
   const assignDetails = props.assignments[id];
+  
   return (
     <div>
       <h1>Assignment Details</h1>
