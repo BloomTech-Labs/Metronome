@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { addAssignment } from '../../../../../actions';
-
 import { Grid, Checkbox, Button } from 'material-ui';
 import 'react-datepicker/dist/react-datepicker.css';
+import { addAssignment } from '../../../../../actions';
 
 class AssignmentForm extends Component {
-  
   constructor(props) {
     super(props);
-    
+
     this.state = {
       assignmentName: '',
       daysToPractice: [],
@@ -63,11 +61,11 @@ class AssignmentForm extends Component {
 	//	handles date of the date picker
 
 	handledDateChange = (date) => {
-    const dueDate = date.format('l');
-	  
+	  const dueDate = date.format('l');
+
 	  this.setState({
 	    dueDate,
-      date
+	    date,
 	  });
 	};
 
@@ -78,25 +76,21 @@ class AssignmentForm extends Component {
 	  this.setState({
 	    musicFile: event.target.files[0].name,
 	  });
-	  console.log(event.target.files[0]);
 	};
 
-	// This sends date up to the parent
+	// Adds excitment via props/redux
 
 	addAssignment = () => {
 	  this.props.addAssignment(this.state);
-    this.setState({
-      assignmentName: '',
-      daysToPractice: [],
-      hoursToPractice: '',
-      musicFile: '',
-      file: '',
-      email: '',
-      Wednesday: false,
-
-      
-    })
-    
+	  this.setState({
+	    assignmentName: '',
+	    daysToPractice: [],
+	    hoursToPractice: '',
+	    musicFile: '',
+	    file: '',
+	    email: '',
+	    Wednesday: false,
+	  });
 	};
 
 	render() {
