@@ -93,7 +93,7 @@ export const updateUser = (
   newPassword,
   history,
 ) => (dispatch) => {
-  const token = JSON.parse(window.localStorage.getItem('token'));
+  const token = window.localStorage.getItem('token');
   dispatch({ type: UPDATE_USER_REQUEST });
   axios
     .put(
