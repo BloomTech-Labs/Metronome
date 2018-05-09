@@ -10,3 +10,13 @@
 .input {
   width: 20%;
 }
+
+.dateContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+.checkbox {
+  width: 15px;
+  height: 15px;
+}
+label { padding: 0 10px; }
