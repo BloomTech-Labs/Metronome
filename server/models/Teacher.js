@@ -16,7 +16,7 @@ TeacherSchema.methods.emailAssignment = async function (studentEmails = [], assi
       assignmentId,
     }, secret, { expiresIn: '7 days' });
 
-    const url = `http://localhost:8000/api/student/getAssignment/${token}`;
+    const url = `http://localhost:8000/claim-token?token=${token}`;
     const emailTemplate = {
       to: email,
       from: 'lambda.metronome@gmail.com',

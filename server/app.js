@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const userRoutes = require('./routes/userRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
+const studentRoutes = require('./routes/studentRoutes');
 const { isAuthenticated } = require('./services/auth');
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 
 app.use('/api/user', userRoutes);
 app.use('/api/teacher', teacherRoutes);
+app.use('/api/student', studentRoutes);
 
 // Test auth route
 app.get('/auth-route', isAuthenticated, (req, res) => {
