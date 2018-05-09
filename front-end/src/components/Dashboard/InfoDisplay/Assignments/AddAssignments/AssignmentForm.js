@@ -194,11 +194,15 @@ class AssignmentForm extends Component {
           <Button variant="raised" onClick={this.addAssignment}>
 								Submit
           </Button>
+
+        </Grid>
+        <Grid item>
           <Button variant="raised" onClick={this.props.history.goBack}>
 								Assignments
           </Button>
         </Grid>
       </Grid>
+
     </div>
   </div>
 	  );
