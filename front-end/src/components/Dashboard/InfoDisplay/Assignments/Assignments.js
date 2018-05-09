@@ -11,29 +11,33 @@ class Assignments extends Component {
     this.props.getAssignments();
   }
 
-	deleteAssignment = (id) => {
-	  this.props.deleteAssignment(id);
-	};
+  deleteAssignment = (id) => {
+    this.props.deleteAssignment(id);
+  };
 
-	render() {
-	  return (
-  <div>
-    <h1>Assignments</h1>
-  
-    {this.props.assignments.map((assignment, index) => (
-      <div key={index}>
-        <AssignmentCard
-          id={index}
-          deleteAssignment={this.deleteAssignment}
-          name={assignment.assignmentName}
-          dueDate={assignment.dueDate}
-        />
+  render() {
+    if (!this.props.assignments) return (<div>Loading...</div>);
+
+
+    return (
+
+      <div>
+        <h1>Assignments</h1>
+        {console.log(this.props.assignments)}
+        {this.props.assignments.map((assignment, index) => (
+          <div key={index}>
+            <AssignmentCard
+              id={index}
+              deleteAssignment={this.deleteAssignment}
+              name={assignment.assignmentName}
+              dueDate={assignment.dueDate}
+            />
+          </div>
+        ))}
+        <AddAssignmentCard />
       </div>
-		))}
-    <AddAssignmentCard />
-  </div>
-	  );
-	}
+    );
+  }
 }
 
 Assignments.propTypes = {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { viewAssignmentDetails } from '../../../../../actions';
+import { Button } from 'material-ui';
 
 class AssignmentDetails extends Component {
   componentWillMount() {
@@ -20,6 +21,9 @@ class AssignmentDetails extends Component {
         <h3>{this.props.assignments.file}</h3>
         <h3>{this.props.assignments.hoursToPractice}</h3>
         <h3>{this.props.assignments.musicFile}</h3>
+        <Button variant="raised" onClick={this.props.history.goBack}>
+								Assignments
+        </Button>
       </div>
     );
   }

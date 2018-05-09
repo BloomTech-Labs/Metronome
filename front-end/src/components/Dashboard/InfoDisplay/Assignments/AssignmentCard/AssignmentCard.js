@@ -8,9 +8,10 @@ import FATrash from 'react-icons/lib/fa/trash';
 
 const AssignmentCard = props => (
   <div>
-    
+
     <Col>
-      <Link to={`/dashboard/assignment-details/${props.id}`}>
+      // TODO: Add condiational statement to show details based on student or teacher
+      <Link to={`/dashboard/teacher-assignment-details/${props.id}`}>
         <Card>
           <CardTitle>{props.name}</CardTitle>
           <CardImg
