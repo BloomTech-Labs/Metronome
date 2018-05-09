@@ -15,6 +15,10 @@ const AssignmentSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'can\'t be blank'],
   },
+  dueDate: {
+    type: Date,
+    required: [true, 'can\'t be blank'],
+  },
   musicSheetAddr: {
     type: String,
     required: [true, 'can\'t be blank'],
