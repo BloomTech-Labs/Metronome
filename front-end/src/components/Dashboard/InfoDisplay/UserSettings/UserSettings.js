@@ -6,19 +6,13 @@ import './userSettings.css';
 import Error from '../../../Error/Error';
 
 class UserSettings extends Component {
-  componentWillMount() {
-    const token = window.localStorage.getItem('token');
-    if (!token) this.props.history.push('/');
-  }
+  // componentWillMount() {
+  //   const token = window.localStorage.getItem('token');
+  //   if (!token) this.props.history.push('/');
+  // }
 
-  componentWillUnmount() {
-
-  }
-
-  handleFormSubmit = ({ firstName, lastName, newEmail, oldPassword, newPassword }) => {
+  handleFormSubmit = ({ newEmail, oldPassword, newPassword }) => {
     this.props.updateUser(
-      firstName,
-      lastName,
       newEmail,
       oldPassword,
       newPassword,
@@ -30,7 +24,7 @@ class UserSettings extends Component {
     return (
       <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '5rem' }}>
         <Error error={this.props.auth.error} />
-        <div className="row">
+        {/* <div className="row">
           <div className="col-25">
             <label htmlFor="firstName">First Name:</label>
           </div>
@@ -57,7 +51,7 @@ class UserSettings extends Component {
               component="input"
             />
           </div>
-        </div>
+        </div> */}
         <div className="row">
           <div className="col-25">
             <label htmlFor="newEmail">Email:</label>
@@ -116,5 +110,5 @@ UserSettings = connect(mapStateToProps, { updateUser })(UserSettings);
 
 export default reduxForm({
   form: 'settings',
-  fields: ['firstName', 'lastName', 'newEmail', 'oldPassword', 'newPassword'],
+  fields: ['newEmail', 'oldPassword', 'newPassword'],
 })(UserSettings);
