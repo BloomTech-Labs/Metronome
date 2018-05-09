@@ -40,6 +40,7 @@ exports.AssignmentDataFactory = class AssignmentDataFactory {
       name: 'everyday practice',
       days: ['monday', 'wednesday', 'friday'],
       hours: 1,
+      dueDate: Date.now(),
       musicSheetAddr: 'localhost:8000',
     };
   }
@@ -54,6 +55,10 @@ exports.AssignmentDataFactory = class AssignmentDataFactory {
 
   static get newAssignmentWithBadHours() {
     return { ...this.validNewAssignment, hours: null };
+  }
+
+  static get newAssignmentWithBadDueDate() {
+    return { ...this.validNewAssignment, dueDate: null };
   }
 
   static get newAssignmentWithBadAddress() {
