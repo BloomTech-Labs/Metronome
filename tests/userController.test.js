@@ -121,7 +121,7 @@ describe('[PUT] /api/user', () => {
     const newData = {
       oldPassword: 'wrongoldpassword',
       newPassword: 'mynewpassword',
-      firstName: 'NewFirstName',
+      // firstName: 'NewFirstName',
     };
     const response = await request
       .put('/api/user')
@@ -152,8 +152,8 @@ describe('[PUT] /api/user', () => {
       newEmail: 'mynewemail@example.com',
       oldPassword: validNewUser.password,
       newPassword: 'mynewpassword',
-      firstName: 'NewFirstName',
-      lastName: 'NewLastName',
+      // firstName: 'NewFirstName',
+      // lastName: 'NewLastName',
     };
     const response = await request
       .put('/api/user')
