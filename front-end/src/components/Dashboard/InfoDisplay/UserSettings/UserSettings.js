@@ -6,14 +6,10 @@ import './userSettings.css';
 import Error from '../../../Error/Error';
 
 class UserSettings extends Component {
-  componentWillMount() {
-    const token = window.localStorage.getItem('token');
-    if (!token) this.props.history.push('/');
-  }
-
-  componentWillUnmount() {
-
-  }
+  // componentWillMount() {
+  //   const token = window.localStorage.getItem('token');
+  //   if (!token) this.props.history.push('/');
+  // }
 
   handleFormSubmit = ({ firstName, lastName, newEmail, oldPassword, newPassword }) => {
     this.props.updateUser(
