@@ -7,6 +7,7 @@ const {
   newAssignmentWithBadAddress,
   newAssignmentWithBadDays,
   newAssignmentWithBadHours,
+  newAssignmentWithBadDueDate,
   newAssignmentWithBadName,
 } = AssignmentDataFactory;
 
@@ -43,6 +44,14 @@ describe('Assignment model', () => {
       await Assignment.create(newAssignmentWithBadHours);
     } catch (err) {
       expect(err.message).toBe('Assignment validation failed: hours: can\'t be blank');
+    }
+  });
+
+  it('Should not register a assignment with an invalid due date', async () => {
+    try {
+      await Assignment.create(newAssignmentWithBadDueDate);
+    } catch (err) {
+      expect(err.message).toBe('Assignment validation failed: dueDate: can\'t be blank');
     }
   });
 

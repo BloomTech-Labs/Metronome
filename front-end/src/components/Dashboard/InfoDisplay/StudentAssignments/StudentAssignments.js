@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, CardBody, CardText,
+import { Row, Col, Card, CardText, CardBody,
   CardTitle, CardSubtitle, Form, Label, Input } from 'reactstrap';
 import './studentassignment.css';
 
@@ -26,12 +26,16 @@ class StudentAssignments extends Component {
                   <CardTitle>Assignment Name</CardTitle>
                   <CardSubtitle>Due Date</CardSubtitle>
                 </CardBody>
+
                 <img
                   top
                   width="100%"
                   alt="assignment-sheet-music"
                   src="http://michaelmarc.com/content/images/thumbs/000/0000410_hallelujah-sheet-music-tabs_400.png"
                 />
+
+                <img top width="100%" src="http://michaelmarc.com/content/images/thumbs/000/0000410_hallelujah-sheet-music-tabs_400.png" alt="img" />
+
                 <CardBody>
                   <CardText>Description of Assignment</CardText>
                 </CardBody>
@@ -48,12 +52,16 @@ class StudentAssignments extends Component {
                 <CardTitle>Assignment Name</CardTitle>
                 <CardSubtitle>Due Date</CardSubtitle>
               </CardBody>
+
               <img
                 top
                 width="100%"
                 alt="hallelujah"
                 src="http://michaelmarc.com/content/images/thumbs/000/0000410_hallelujah-sheet-music-tabs_400.png"
               />
+
+              <img top width="100%" src="http://michaelmarc.com/content/images/thumbs/000/0000410_hallelujah-sheet-music-tabs_400.png" alt="img" />
+
               <CardBody>
                 <CardText>Description of Assignment</CardText>
               </CardBody>
