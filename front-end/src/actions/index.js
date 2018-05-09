@@ -86,19 +86,17 @@ export const viewAssignmentDetails = id => ({
 });
 
 export const updateUser = (
-  firstName,
-  lastName,
   newEmail,
   oldPassword,
   newPassword,
   history,
 ) => (dispatch) => {
-  const token = JSON.parse(window.localStorage.getItem('token'));
+  const token = window.localStorage.getItem('token');
   dispatch({ type: UPDATE_USER_REQUEST });
   axios
     .put(
       ROOT_URL,
-      { firstName, lastName, newEmail, oldPassword, newPassword },
+      { newEmail, oldPassword, newPassword },
       { headers: { Authorization: token } },
     )
     .then((response) => {

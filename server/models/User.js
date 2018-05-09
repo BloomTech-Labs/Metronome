@@ -131,7 +131,7 @@ UserSchema.statics.registerNewUser = async function ({ email = '', password = ''
  * @param {String} opts.firstName
  * @param {String} opts.lastName
  */
-UserSchema.methods.editProfile = async function ({ newEmail, oldPassword, newPassword, firstName, lastName }) {
+UserSchema.methods.editProfile = async function ({ newEmail, oldPassword, newPassword }) {
   if (newPassword && oldPassword) {
     this.model('User').validatePassword(oldPassword);
     this.model('User').validatePassword(newPassword);
@@ -141,15 +141,15 @@ UserSchema.methods.editProfile = async function ({ newEmail, oldPassword, newPas
     this.setPassword(newPassword);
   }
 
-  if (firstName) {
-    this.model('User').validateFirstName(firstName);
-    this.firstName = firstName;
-  }
+  // if (firstName) {
+  //   this.model('User').validateFirstName(firstName);
+  //   this.firstName = firstName;
+  // }
 
-  if (lastName) {
-    this.model('User').validateLastName(lastName);
-    this.lastName = lastName;
-  }
+  // if (lastName) {
+  //   this.model('User').validateLastName(lastName);
+  //   this.lastName = lastName;
+  // }
 
   if (newEmail && newEmail !== this.email) {
     this.model('User').validateEmail(newEmail);
