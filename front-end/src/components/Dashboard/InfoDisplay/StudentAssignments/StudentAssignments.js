@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, CardText, CardBody,
+import { Card, CardText, CardBody,
   CardTitle, CardSubtitle, Form, Label, Input } from 'reactstrap';
 import './studentassignment.css';
 
