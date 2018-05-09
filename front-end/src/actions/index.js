@@ -30,7 +30,6 @@ export const login = (email, password, history) => (dispatch) => {
     .post(`${ROOT_URL}/login`, { email, password })
     .then((response) => {
       window.localStorage.setItem('token', response.data.token);
-      console.log(response.data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: response.data });
       history.push('/');
     })
