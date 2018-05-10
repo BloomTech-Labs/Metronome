@@ -49,10 +49,10 @@ const AssignmentSchema = new mongoose.Schema({
     ref: 'Teacher',
   },
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
-  emails: {
+  emails: [{
     type: String,
     required: [true, 'Assignment emails is a required field.'],
-  },
+  }],
 }, { timestamps: true });
 
 
