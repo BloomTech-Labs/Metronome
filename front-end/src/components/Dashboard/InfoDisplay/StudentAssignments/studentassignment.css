@@ -1,0 +1,22 @@
+.body {
+  margin-bottom: 3em;
+  padding: 1em;
+  border: solid 1px gray;
+}
+.form {
+  display: grid;
+  justify-items: end;
+}
+.input {
+  width: 20%;
+}
+
+.dateContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+.checkbox {
+  width: 15px;
+  height: 15px;
+}
+label { padding: 0 10px; }

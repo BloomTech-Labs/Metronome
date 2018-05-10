@@ -23,7 +23,7 @@ class Login extends Component {
             placeholder="Email"
             name="email"
             type="email"
-            autoComplete="email"
+            autoComplete="off"
             component="input"
           />
           <br />
@@ -32,7 +32,7 @@ class Login extends Component {
             name="password"
             type="password"
             component="input"
-            autoComplete="current-password"
+            autoComplete="off"
           />
         </div>
         <Button
@@ -45,7 +45,7 @@ class Login extends Component {
         </Button>
         <br />
         <Link className="link" to="/signup">
-															Need an Account?
+                                      Need an Account?
         </Link>
       </form>
     </div>

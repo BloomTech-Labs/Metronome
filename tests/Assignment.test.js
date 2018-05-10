@@ -7,6 +7,7 @@ const {
   newAssignmentWithBadAddress,
   newAssignmentWithBadDays,
   newAssignmentWithBadHours,
+  newAssignmentWithBadDueDate,
   newAssignmentWithBadName,
   newAssignmentWithBadEmails,
 } = AssignmentDataFactory;
@@ -47,6 +48,14 @@ describe('Assignment model', () => {
     }
   });
 
+  it('Should not register a assignment with an invalid due date', async () => {
+    try {
+      await Assignment.create(newAssignmentWithBadDueDate);
+    } catch (err) {
+      expect(err.message).toBe('Assignment due date is a required field.');
+    }
+  });
+  
   it('Should not register a assignment with a missing music sheet address', async () => {
     try {
       await Assignment.create(newAssignmentWithBadAddress);

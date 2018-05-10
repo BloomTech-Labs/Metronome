@@ -58,6 +58,10 @@ exports.AssignmentDataFactory = class AssignmentDataFactory {
     return { ...this.validNewAssignment, hours: null };
   }
 
+  static get newAssignmentWithBadDueDate() {
+    return { ...this.validNewAssignment, dueDate: null };
+  }
+
   static get newAssignmentWithBadAddress() {
     return { ...this.validNewAssignment, musicSheetAddr: null };
   }

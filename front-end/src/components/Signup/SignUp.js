@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
-import Error from './Error';
+import Error from '../Error/Error';
 
 import './sign-up.css';
 
@@ -84,7 +84,7 @@ class SignUp extends Component {
         <Error error={this.props.auth.error} />
         <div>
           <Field name="role" component="select">
-            <option />
+            <option>Please select role</option>
             <option value="Teacher">Teacher</option>
             <option value="Student">Student</option>
           </Field>
@@ -94,6 +94,7 @@ class SignUp extends Component {
             name="firstName"
             component="input"
             placeholder="First Name"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -102,6 +103,7 @@ class SignUp extends Component {
             name="lastName"
             placeholder="Last Name"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -111,6 +113,7 @@ class SignUp extends Component {
             placeholder="email"
             type="email"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -120,6 +123,7 @@ class SignUp extends Component {
             type="password"
             placeholder="password"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -129,6 +133,7 @@ class SignUp extends Component {
             type="password"
             placeholder="confirm password"
             component="input"
+            autoComplete="off"
           />
           <br />
         </div>
@@ -157,5 +162,5 @@ SignUp = connect(mapStateToProps, { register })(SignUp);
 
 export default reduxForm({
   form: 'signup',
-  fields: ['email', 'password', 'firstName', 'lastName'],
+  fields: ['email', 'password', 'firstName', 'lastName', 'role'],
 })(SignUp);

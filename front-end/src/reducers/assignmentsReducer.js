@@ -2,7 +2,6 @@ import {
   GET_ASSIGNMENTS,
   ADD_ASSIGNMENT,
   DELETE_ASSIGNMENT,
-  VIEW_ASSIGNMENT_DETAILS,
 } from '../actions';
 
 export default (assignments = [], action) => {
@@ -10,14 +9,10 @@ export default (assignments = [], action) => {
     case GET_ASSIGNMENTS:
       return assignments;
     case ADD_ASSIGNMENT:
-      return assignments.concat(action.payload.data);
+      return [...assignments, action.payload];
     case DELETE_ASSIGNMENT: {
-      const { assignmentID } = action.data;
-      return assignments.filter(assignment => assignment.id !== assignmentID);
-    }
-    case VIEW_ASSIGNMENT_DETAILS: {
-      const { assignmentID } = action.data;
-      return assignments.filter(assignment => assignment.id === assignmentID);
+      const id = action.payload;
+      return [...assignments.slice(0, id), ...assignments.slice(id + 1)];
     }
     default:
       return assignments;
