@@ -23,6 +23,7 @@ export const GET_ASSIGNMENTS = 'GET_ASSIGNMENTS';
 export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
 export const ADD_ASSIGNMENT = 'ADD_ASSIGNMENT';
 export const GET_STUDENT_LIST = 'GET_STUDENT_LIST';
+export const GET_STUDENT_ASSIGNMENT = 'GET_STUDENT_ASSIGNMENT';
 
 export const login = (email, password, history) => (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
@@ -79,10 +80,10 @@ export const deleteAssignment = index => ({
   payload: index,
 });
 
-export const getStudentList = song => ({
-  type: 'GET_STUDENT_LIST',
-  payload: song,
-})
+export const getStudentAssignment = studentName => ({
+  type: 'GET_STUDENT_ASSIGNMENT',
+  payload: studentName,
+});
 
 export const updateUser = (
   firstName,
