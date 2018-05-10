@@ -18,7 +18,6 @@ export default (assignments = initialState, action) => {
       return [...assignments.slice(0, id), ...assignments.slice(id + 1)];
     }
     case GET_STUDENT_ASSIGNMENT: {
-      console.log(`Get student assignment ${action.payload}`);
       const id = action.payload;
       return assignments.slice(id, id + 1);
     }

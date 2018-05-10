@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import { getStudentAssignment } from '../../../../actions';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-import { checkbox } from 'material-ui';
+
+
 import './studentassignment.css';
 
 class StudentAssignments extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false,
+    };
+  }
   componentWillMount() {
     const { assignmentId } = this.props.match.params;
     this.props.getStudentAssignment(assignmentId);
+  }
+
+  // TODO: Need to setup to change checkbox to completed for that day
+  // Send data to action and get data back
+  toggleCheck = () => {
+    this.setState({
+      checked: !this.state.checked,
+    });
   }
 
   render() {
@@ -39,9 +55,7 @@ class StudentAssignments extends Component {
                       type="checkbox"
                       id={day}
                       value={day}
-                      onClick={() => {
-                      console.log('checked');
-                    }}
+                      onClick={this.toggleCheck}
                     />
                   </div>
 
@@ -58,6 +72,14 @@ class StudentAssignments extends Component {
     );
   }
 }
+
+StudentAssignments.propTypes = {
+  getStudentAssignment: PropTypes.func.isRequired,
+  assignments: PropTypes.arrayOf.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({ assignments: state.assignments });
 
