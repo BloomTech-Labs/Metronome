@@ -40,7 +40,9 @@ exports.AssignmentDataFactory = class AssignmentDataFactory {
       name: 'everyday practice',
       days: ['monday', 'wednesday', 'friday'],
       hours: 1,
+      dueDate: new Date(),
       musicSheetAddr: 'localhost:8000',
+      emails: ['test@example.com'],
     };
   }
 
@@ -58,5 +60,9 @@ exports.AssignmentDataFactory = class AssignmentDataFactory {
 
   static get newAssignmentWithBadAddress() {
     return { ...this.validNewAssignment, musicSheetAddr: null };
+  }
+
+  static get newAssignmentWithBadEmails() {
+    return { ...this.validNewAssignment, emails: null };
   }
 };

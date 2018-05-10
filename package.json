@@ -23,6 +23,7 @@
 		"jsonwebtoken": "^8.2.1",
 		"moment": "^2.22.1",
 		"mongoose": "^5.0.16",
+		"mongoose-validator": "^2.0.2",
 		"stripe": "^5.8.0"
 	},
 	"devDependencies": {

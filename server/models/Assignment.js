@@ -1,53 +1,60 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
+const validate = require('mongoose-validator');
 
-const VALID_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// const VALID_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const AssignmentSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'can\'t be blank'],
-    unique: true,
-    index: true,
+    required: [true, 'Assignment name is a required field.'],
+    validate: [
+      validate({
+        validator: 'isLength',
+        arguments: [1, 100],
+        message: 'Assignment name must be between {ARGS[0]} and {ARGS[1]} characters.',
+      }),
+    ],
   },
   days: {
     type: [String],
-    required: [true, 'can\'t be blank'],
+    required: [true, 'Assignment days is a required field.'],
   },
   dueDate: {
     type: Date,
-    required: [true, 'can\'t be blank'],
+    required: [true, 'Assignment due date is a required field.'],
+    validate: [
+      validate({
+        validator: dueDate => !moment(dueDate).isBefore(moment(), 'day'),
+        message: 'An assignment due date cannot be before today.',
+      }),
+    ],
   },
   hours: {
     type: Number,
-    required: [true, 'can\'t be blank'],
+    required: [true, 'Assignment hours is a required field.'],
+    validate: [
+      validate({
+        validator: hours => hours > 0,
+        message: 'Assignment hours must be above 0 hours.',
+      }),
+    ],
   },
   musicSheetAddr: {
     type: String,
-    required: [true, 'can\'t be blank'],
+    required: [true, 'Assignment music sheet address is a required field.'],
   },
   teacher: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Teacher',
   },
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
-  emails: [String],
+  emails: {
+    type: String,
+    required: [true, 'Assignment emails is a required field.'],
+  },
 }, { timestamps: true });
 
-AssignmentSchema.statics.validateDays = function (days = ['']) {
-  const isYYYYMMDD = date => moment(date, 'YYYY-MM-DD', true).isValid();
-  const isBeforeToday = date => moment(date).isBefore(moment(), 'day');
-
-  days.forEach((day) => {
-    if (!isYYYYMMDD(day)) throw new Error(`Invalid date: ${day}. (Must be YYYY-MM-DD format)`);
-    if (isBeforeToday(day)) throw new Error('An assignment date cannot be before today.');
-  });
-};
-
-AssignmentSchema.statics.validateHours = function (hours = 0) {
-  if (Number.isNaN(hours)) throw new Error('Assignment hours must be a number.');
-  if (hours <= 0) throw new Error('Assignment hours must be above 0 hours.');
-};
 
 module.exports = mongoose.model('Assignment', AssignmentSchema);
 

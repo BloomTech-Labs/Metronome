@@ -5,7 +5,7 @@ const Assignment = require('../models/Assignment');
  * @apiName EmailAssignments
  * @apiGroup Teacher
  *
- * @apiParam {String} emails A comma separated list of student emails (or just one email) to send the assignment to.
+ * @apiParam {[String]} emails An array of emails to send the assignment to.
  * @apiParam {String} name The name of the assignment.
  * @apiParam {[String]} days The assigned days.
  * @apiParam {Number} hours The number of hours to work on the assignment.
@@ -25,22 +25,16 @@ const Assignment = require('../models/Assignment');
  *      "error": "Could not send emails. Please verify that all email addresses are valid."
  *    }
  */
-exports.emailAssignments = async function (req, res) {
-  // using SendGrid's v3 Node.js Library
-  // https://github.com/sendgrid/sendgrid-nodejs
-  // TODO: Add in actual assignments field
+exports.emailAssignments = async function (req, res, next) {
   try {
     const { emails, name, days, dueDate, hours, musicSheetAddr } = req.body;
-    const emailsArray = req.body.emails.split(',').map(email => email.trim());
     const teacher = await Teacher.findById(req.user._id);
 
     const assignment = new Assignment({ emails, name, days, dueDate, hours, musicSheetAddr, teacher: teacher._id });
     await assignment.save();
-    await teacher.emailAssignment(emailsArray, assignment._id);
+    await teacher.emailAssignment(emails, assignment._id);
     res.status(200).json({ message: 'Emails sent successfully!' });
   } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
+    next(err);
   }
 };
