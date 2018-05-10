@@ -11,12 +11,12 @@
   width: 20%;
 }
 
-.dateContainer {
-  display: flex;
-  justify-content: flex-start;
+.days-container {
+  display: inline;
+  background-color: red;
 }
+
 .checkbox {
-  width: 15px;
-  height: 15px;
+ float: left;
+
 }
-label { padding: 0 10px; }
