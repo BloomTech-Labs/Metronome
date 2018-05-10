@@ -34,7 +34,7 @@ exports.claimAssignmentToken = async function (req, res, next) {
 };
 
 /**
- * @api {get} /api/student/assignment Get logged in student's assignments
+ * @api {get} /api/student/assignments Get logged in student's assignments
  * @apiName GetAssignments
  * @apiGroup Student
  *
