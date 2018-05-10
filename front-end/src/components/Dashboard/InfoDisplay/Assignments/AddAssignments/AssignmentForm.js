@@ -91,7 +91,7 @@ class AssignmentForm extends Component {
       musicFile: '',
       file: '',
       email: '',
-      Wednesday: false,
+      clientName: '',
     });
   };
 

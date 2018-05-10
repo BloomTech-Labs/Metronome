@@ -16,9 +16,9 @@ export default (assignments = [], action) => {
       return [...assignments.slice (0, id), ...assignments.slice (id + 1)];
     }
     case GET_STUDENT_LIST: {
-      console.log('fired from TA');
-      const assignmentName = action.payload;
-      return assignments;
+      const song = action.payload;
+      console.log(`fired from TA: ${song}`);
+      return assignments.filter(assignment => assignment.id === 0);
     }
 
     default:
