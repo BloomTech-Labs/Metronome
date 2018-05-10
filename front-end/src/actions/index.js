@@ -35,6 +35,7 @@ export const DELETE_ASSIGNMENT_SUCCESS = 'DELETE_ASSIGNMENT_SUCCESS';
 export const DELETE_ASSIGNMENT_FAILURE = 'DELETE_ASSIGNMENT_FAILURE';
 
 export const GET_STUDENT_LIST = 'GET_STUDENT_LIST';
+export const GET_STUDENT_ASSIGNMENT = 'GET_STUDENT_ASSIGNMENT';
 
 export const login = (email, password, history) => (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });

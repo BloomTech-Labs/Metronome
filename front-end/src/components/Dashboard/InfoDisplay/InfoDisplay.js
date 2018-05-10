@@ -8,7 +8,7 @@ import AssignmentDetails from '../InfoDisplay/Assignments/AssignmentDetails/Assi
 import Billing from '../InfoDisplay/Billing/index';
 import UserSettings from '../InfoDisplay/UserSettings/UserSettings';
 import AssignmentForm from '../InfoDisplay/Assignments/AddAssignments/AssignmentForm';
-import StudentAssignment from '../InfoDisplay/StudentAssignments/StudentAssignments';
+import StudentAssignment from '../InfoDisplay/StudentAssignments/StudentAssignment';
 import TeacherAssignments from './Assignments/TeacherAssignments/TeacherAssignments';
 
 const InfoDisplay = props => (

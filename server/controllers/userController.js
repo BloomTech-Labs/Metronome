@@ -23,7 +23,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
  * @apiUse UserAlreadyExistsError
  * @apiUse InvalidInputError
  */
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   try {
     const { email, password, firstName, lastName, role = 'Student' } = req.body;
     const user = await User.getModelForRole(role).registerNewUser({
@@ -37,9 +37,7 @@ exports.register = async (req, res) => {
       token,
     });
   } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
+    next(err);
   }
 };
 
@@ -62,15 +60,13 @@ exports.register = async (req, res) => {
  * @apiUse UserDoesNotExistError
  * @apiUse IncorrectPasswordError
  */
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const token = await User.loginUser({ email, password });
     res.status(200).json({ token });
   } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
+    next(err);
   }
 };
 
@@ -96,7 +92,7 @@ exports.login = async (req, res) => {
  * @apiUse UserAlreadyExistsError
  * @apiUse InvalidInputError
  */
-exports.editProfile = async (req, res) => {
+exports.editProfile = async (req, res, next) => {
   try {
     const { firstName, lastName, newEmail, oldPassword, newPassword } = req.body;
     const currentUser = await User.findById(req.user._id);
@@ -109,9 +105,7 @@ exports.editProfile = async (req, res) => {
     });
     res.status(200).json({ token });
   } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
+    next(err);
   }
 };
 
@@ -156,7 +150,7 @@ exports.editProfile = async (req, res) => {
  *      "error": "No Transaction"
  *    }
  */
-exports.transaction = async (req, res) => {
+exports.transaction = async (req, res, next) => {
   try {
     const { tokenId, subscribeType, price } = req.body;
     const user = await User.findById(req.user._id);
@@ -193,8 +187,6 @@ exports.transaction = async (req, res) => {
     }
     user.save();
   } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
+    next(err);
   }
 };
