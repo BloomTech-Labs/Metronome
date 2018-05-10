@@ -150,3 +150,8 @@ export const getStudentList = song => ({
   type: 'GET_STUDENT_LIST',
   payload: song,
 });
+
+export const getStudentAssignment = studentName => ({
+  type: 'GET_STUDENT_ASSIGNMENT',
+  payload: studentName,
+});

@@ -37,7 +37,7 @@ class StudentAssignments extends Component {
             <CardText>Description of Assignment</CardText>
           </CardBody>
           <div className="dateContainer">
-            <input type="checkbox" className="checkbox"/>
+            <input type="checkbox" className="checkbox" />
             <label>Day of the Week</label>
           </div>
           <div className="form">
