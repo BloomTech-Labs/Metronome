@@ -35,7 +35,7 @@
  */
 
 /**
- * @apiDefine InvalidInputErrors
+ * @apiDefine InvalidInputsError
  *
  * @apiError InvalidInput Describes the input error (invalid email format, invalid password length, etc.). "errors" will always be an array, even if there is only one error.
  *

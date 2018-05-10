@@ -1,6 +1,117 @@
 [
   {
     "type": "post",
+    "url": "/api/student/claimAssignmentToken",
+    "title": "Claim assignment token",
+    "name": "ClaimAssignmentToken",
+    "group": "Student",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "assignmentToken",
+            "description": "<p>a token containing the user's email and the assignment ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>A simple success message.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": \"Assignment claimed successfully!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/studentController.js",
+    "groupTitle": "Student",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidInput",
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "InvalidInput-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/student/assignment",
+    "title": "Get logged in student's assignments",
+    "name": "GetAssignments",
+    "group": "Student",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "assignments",
+            "description": "<p>An array of the assignments linked to the student.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"assignments\": [{\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": [\"Monday\", \"Wednesday\", \"Friday\"],\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n  }, {\n    \"_id\": \"5af30e2aff9e28011850d7c4\",\n    \"days\": [\"Monday\"],\n    \"name\": \"My Other Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 1,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.png\"\n  }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/studentController.js",
+    "groupTitle": "Student",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidInput",
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "InvalidInput-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
     "url": "/api/teacher/emailAssignments",
     "title": "Email assignments",
     "name": "EmailAssignments",
@@ -10,10 +121,45 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "[String]",
             "optional": false,
             "field": "emails",
-            "description": "<p>A comma separated list of student emails (or just one email) to send the assignment to.</p>"
+            "description": "<p>An array of emails to send the assignment to.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The name of the assignment.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "[String]",
+            "optional": false,
+            "field": "days",
+            "description": "<p>The assigned days.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "hours",
+            "description": "<p>The number of hours to work on the assignment.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": false,
+            "field": "dueDate",
+            "description": "<p>The date that the assignment is due.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "musicSheetAddr",
+            "description": "<p>The URL to the uploaded music sheet file.</p>"
           }
         ]
       }
@@ -214,7 +360,7 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.)</p>"
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.).</p>"
           }
         ]
       },
@@ -226,7 +372,7 @@
         },
         {
           "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"Password must be between 8 and 56 characters.\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"\n}",
           "type": "json"
         }
       ]
@@ -403,7 +549,7 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.)</p>"
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.).</p>"
           }
         ]
       },
@@ -415,7 +561,7 @@
         },
         {
           "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"Password must be between 8 and 56 characters.\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"\n}",
           "type": "json"
         }
       ]
