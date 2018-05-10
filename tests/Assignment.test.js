@@ -52,7 +52,7 @@ describe('Assignment model', () => {
     try {
       await Assignment.create(newAssignmentWithBadDueDate);
     } catch (err) {
-      expect(err.message).toBe('Assignment due date is a required field.');
+      expect(err.errors.dueDate.message).toBe('Assignment due date is a required field.');
     }
   });
   
