@@ -22,7 +22,7 @@ export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 export const GET_ASSIGNMENTS = 'GET_ASSIGNMENTS';
 export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
 export const ADD_ASSIGNMENT = 'ADD_ASSIGNMENT';
-export const VIEW_ASSIGNMENT_DETAILS = 'VIEW_ASSIGNMENT_DETAILS';
+export const GET_STUDENT_LIST = 'GET_STUDENT_LIST';
 
 export const login = (email, password, history) => (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
@@ -79,10 +79,10 @@ export const deleteAssignment = index => ({
   payload: index,
 });
 
-export const viewAssignmentDetails = id => ({
-  type: 'VIEW_ASSIGNMENT_DETAILS',
-  payload: id,
-});
+export const getStudentList = song => ({
+  type: 'GET_STUDENT_LIST',
+  payload: song,
+})
 
 export const updateUser = (
   firstName,

@@ -9,6 +9,7 @@ import Billing from '../InfoDisplay/Billing/index';
 import UserSettings from '../InfoDisplay/UserSettings/UserSettings';
 import AssignmentForm from '../InfoDisplay/Assignments/AddAssignments/AssignmentForm';
 import StudentAssignment from '../InfoDisplay/StudentAssignments/StudentAssignments';
+import TeacherAssignments from './Assignments/TeacherAssignments/TeacherAssignments';
 
 const InfoDisplay = props => (
   <div>
@@ -32,6 +33,10 @@ const InfoDisplay = props => (
       <Route
         path={`${props.match.path}/student-assignment-details/:assignmentId`}
         component={StudentAssignment}
+      />
+      <Route
+        path={`${props.match.path}/teacher-assignments/:assignmentName`}
+        component={TeacherAssignments}
       />
     </Switch>
   </div>

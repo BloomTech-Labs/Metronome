@@ -2,6 +2,7 @@ import {
   GET_ASSIGNMENTS,
   ADD_ASSIGNMENT,
   DELETE_ASSIGNMENT,
+  GET_STUDENT_LIST,
 } from '../actions';
 
 export default (assignments = [], action) => {
@@ -12,8 +13,14 @@ export default (assignments = [], action) => {
       return [...assignments, action.payload];
     case DELETE_ASSIGNMENT: {
       const id = action.payload;
-      return [...assignments.slice(0, id), ...assignments.slice(id + 1)];
+      return [...assignments.slice (0, id), ...assignments.slice (id + 1)];
     }
+    case GET_STUDENT_LIST: {
+      const song = action.payload;
+      console.log(`fired from TA: ${song}`);
+      return assignments.filter(assignment => assignment.id === 0);
+    }
+
     default:
       return assignments;
   }
