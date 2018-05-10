@@ -12,7 +12,8 @@ const TeacherAssignments = props => {
   return (
   sortedList.map ((assign) => (
     <div>
-    <li>{assign.clientName}</li>
+      <h1>{assignmentName}</h1>
+    <li>{assign.clientName}</li>  
       <ul>{assign.daysToPractice.map((day) => (
         <li className='day'>{day}</li>
       )
