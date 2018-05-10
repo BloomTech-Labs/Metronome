@@ -34,7 +34,7 @@ exports.claimAssignmentToken = async function (req, res, next) {
 };
 
 /**
- * @api {get} /api/student/assignment Get logged in student's assignments
+ * @api {get} /api/student/assignments Get logged in student's assignments
  * @apiName GetAssignments
  * @apiGroup Student
  *
@@ -66,7 +66,7 @@ exports.getAssignments = async function (req, res, next) {
     const student = await Student.findById(req.user._id);
     const assignments = await Assignment
       .find({ students: student._id })
-      .select('-students -emails');
+      .select('-students -emails').populate('teacher', 'email firstName lastName');
     res.status(200).json(assignments);
   } catch (err) {
     next(err);
