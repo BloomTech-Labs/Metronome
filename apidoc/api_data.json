@@ -63,7 +63,7 @@
   },
   {
     "type": "get",
-    "url": "/api/student/assignment",
+    "url": "/api/student/assignments",
     "title": "Get logged in student's assignments",
     "name": "GetAssignments",
     "group": "Student",
