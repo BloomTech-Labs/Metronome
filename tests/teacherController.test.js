@@ -4,7 +4,7 @@ const app = require('../server/app');
 const User = require('../server/models/User');
 const Teacher = require('../server/models/Teacher');
 
-const { UserDataFactory } = require('./testDataFactories');
+const { UserDataFactory, AssignmentDataFactory } = require('./testDataFactories');
 
 const request = supertest(app);
 
@@ -12,6 +12,8 @@ const {
   validNewUser,
   validNewUser2,
 } = UserDataFactory;
+
+const { validNewAssignment } = AssignmentDataFactory;
 
 describe('[POST] /api/teacher/emailAssignments', () => {
   beforeAll((done) => {
@@ -27,8 +29,9 @@ describe('[POST] /api/teacher/emailAssignments', () => {
     });
   });
 
-  afterAll((done) => {
-    mongoose.connection.db.dropCollection('users', done);
+  afterAll(async () => {
+    await mongoose.connection.db.dropCollection('users');
+    await mongoose.connection.db.dropCollection('assignments');
   });
 
   it('Should return an error if the request is not from a teacher', async () => {
@@ -41,14 +44,13 @@ describe('[POST] /api/teacher/emailAssignments', () => {
     expect(response.body.error).toBe('Not authorized');
   });
 
-  it('Should return an error if an email is valid', async () => {
+  it('Should return a 400 error from sendgrid if an email is invalid', async () => {
     const user = await Teacher.findOne({ email: validNewUser.email });
     const response = await request
       .post('/api/teacher/emailAssignments')
       .set('Authorization', user.generateJWT())
       .send({ emails: 'test@example.com,asdfg' });
     expect(response.status).toBe(400);
-    expect(response.body.error).toBe('Could not send emails. Please verify that all email addresses are valid.');
   });
 
   it('Should successfully send out emails if the emails are valid', async () => {
@@ -56,9 +58,8 @@ describe('[POST] /api/teacher/emailAssignments', () => {
     const response = await request
       .post('/api/teacher/emailAssignments')
       .set('Authorization', user.generateJWT())
-      .send({ emails: 'test@example.com, hey@example.com' });
+      .send(validNewAssignment);
     expect(response.status).toBe(200);
     expect(response.body.error).toBeUndefined();
-
   });
 });

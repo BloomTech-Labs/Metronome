@@ -1,20 +1,16 @@
-const { sendEmail } = require('../services/email');
-
-// Sample email template - change this when we decide on what exactly to send
-const emailTemplate = {
-  from: 'lambda.metronome@gmail.com',
-  subject: 'Metronome assignment',
-  text: 'You have a new Metronome assignment',
-  html: '<h1>Here\'s your assignment</h1>',
-};
-
+const Teacher = require('../models/Teacher');
+const Assignment = require('../models/Assignment');
 /**
  * @api {post} /api/teacher/emailAssignments Email assignments
  * @apiName EmailAssignments
  * @apiGroup Teacher
  *
- * @apiParam {String} emails A comma separated list of student emails (or just one email) to send the assignment to.
- *
+ * @apiParam {[String]} emails An array of emails to send the assignment to.
+ * @apiParam {String} name The name of the assignment.
+ * @apiParam {[String]} days The assigned days.
+ * @apiParam {Number} hours The number of hours to work on the assignment.
+ * @apiParam {Date} dueDate The date that the assignment is due.
+ * @apiParam {String} musicSheetAddr The URL to the uploaded music sheet file.
  * @apiSuccess {String} message A simple success message.
  *
  * @apiSuccessExample Success-Response:
@@ -29,24 +25,16 @@ const emailTemplate = {
  *      "error": "Could not send emails. Please verify that all email addresses are valid."
  *    }
  */
-exports.emailAssignments = async function (req, res) {
-  // using SendGrid's v3 Node.js Library
-  // https://github.com/sendgrid/sendgrid-nodejs
-  // TODO: Add in actual assignments field
+exports.emailAssignments = async function (req, res, next) {
   try {
-    if (!req.body.emails || typeof req.body.emails !== 'string') throw new Error();
-    const emails = req.body.emails.split(',').map(email => email.trim());
+    const { emails, name, days, dueDate, hours, musicSheetAddr } = req.body;
+    const teacher = await Teacher.findById(req.user._id);
 
-    const emailsToSend = emails.map((email) => {
-      const template = { to: email, ...emailTemplate };
-      return sendEmail(template);
-    });
-
-    await Promise.all(emailsToSend);
+    const assignment = new Assignment({ emails, name, days, dueDate, hours, musicSheetAddr, teacher: teacher._id });
+    await assignment.save();
+    await teacher.emailAssignment(emails, assignment._id);
     res.status(200).json({ message: 'Emails sent successfully!' });
   } catch (err) {
-    res.status(400).json({
-      error: 'Could not send emails. Please verify that all email addresses are valid.',
-    });
+    next(err);
   }
 };

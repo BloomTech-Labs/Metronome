@@ -15,7 +15,6 @@ if (isProduction) {
 const PORT = process.env.PORT || 8000;
 const path = require('path');
 
-// Right before your app.listen(), add this:
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../front-end/build/index.html'));
 });

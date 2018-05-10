@@ -197,9 +197,6 @@ UserSchema.statics.validateLogin = async function ({ email = '', password = '' }
   return user.generateJWT();
 };
 
-/**
- * @param {String} email
- */
 UserSchema.statics.validateEmail = function (email = '') {
   if (email.length < MIN_EMAIL_LENGTH || email.length > MAX_EMAIL_LENGTH) {
     throw new Error(`Email must be between ${MIN_EMAIL_LENGTH} and ${MAX_EMAIL_LENGTH} characters.`);
@@ -209,54 +206,35 @@ UserSchema.statics.validateEmail = function (email = '') {
   }
 };
 
-/**
- * @param {String} email
- */
 UserSchema.statics.validateUniqueEmail = async function (email = '') {
   const count = await this.findOne({ email }).count();
   if (count) throw new Error('User already exists with that email.');
 };
 
-/**
- * @param {String} password
- */
 UserSchema.statics.validatePassword = function (password = '') {
   if (password.length < MIN_PASSWORD_LENGTH || password.length > MAX_PASSWORD_LENGTH) {
     throw new Error(`Password must be between ${MIN_PASSWORD_LENGTH} and ${MAX_PASSWORD_LENGTH} characters.`);
   }
 };
 
-/**
- * @param {String} firstName
- */
 UserSchema.statics.validateFirstName = function (firstName = '') {
   if (firstName.length < MIN_NAME_LENGTH || firstName.length > MAX_NAME_LENGTH) {
     throw new Error(`First name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`);
   }
 };
 
-/**
- * @param {String} lastName
- */
 UserSchema.statics.validateLastName = function (lastName = '') {
   if (lastName.length < MIN_NAME_LENGTH || lastName.length > MAX_NAME_LENGTH) {
     throw new Error(`Last name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`);
   }
 };
 
-/**
- * @param {String} role
- */
 UserSchema.statics.validateRole = function (role = '') {
   if (!ROLES.includes(role)) {
     throw new Error(`Role must be one of the following: ${ROLES.join(', ')}`);
   }
 };
 
-/**
- * @param {String} role (Teacher or Student)
- * @returns {any}
- */
 UserSchema.statics.getModelForRole = function (role = '') {
   this.validateRole(role);
   // Dynamically import models (this model has not been exported yet so the discriminators are not actually defined yet)

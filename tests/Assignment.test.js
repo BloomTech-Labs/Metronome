@@ -9,6 +9,7 @@ const {
   newAssignmentWithBadHours,
   newAssignmentWithBadDueDate,
   newAssignmentWithBadName,
+  newAssignmentWithBadEmails,
 } = AssignmentDataFactory;
 
 describe('Assignment model', () => {
@@ -23,27 +24,27 @@ describe('Assignment model', () => {
     mongoose.connection.db.dropCollection('assignments', done);
   });
 
-  it('Should not register a assignment with an invalid name', async () => {
+  it('Should not register a assignment with a missing name', async () => {
     try {
       await Assignment.create(newAssignmentWithBadName);
     } catch (err) {
-      expect(err.message).toBe('Assignment validation failed: name: can\'t be blank');
+      expect(err.errors.name.message).toBe('Assignment name is a required field.');
     }
   });
 
-  it('Should not register a assignment with an invalid days', async () => {
+  it('Should not register a assignment with missing days', async () => {
     try {
       await Assignment.create(newAssignmentWithBadDays);
     } catch (err) {
-      expect(err.message).toBe('Assignment validation failed: days: can\'t be blank');
+      expect(err.errors.days.message).toBe('Assignment days is a required field.');
     }
   });
 
-  it('Should not register a assignment with an invalid hours', async () => {
+  it('Should not register a assignment with missing hours', async () => {
     try {
       await Assignment.create(newAssignmentWithBadHours);
     } catch (err) {
-      expect(err.message).toBe('Assignment validation failed: hours: can\'t be blank');
+      expect(err.errors.hours.message).toBe('Assignment hours is a required field.');
     }
   });
 
@@ -51,15 +52,23 @@ describe('Assignment model', () => {
     try {
       await Assignment.create(newAssignmentWithBadDueDate);
     } catch (err) {
-      expect(err.message).toBe('Assignment validation failed: dueDate: can\'t be blank');
+      expect(err.errors.dueDate.message).toBe('Assignment due date is a required field.');
     }
   });
-
-  it('Should not register a assignment with an invalid music sheet address', async () => {
+  
+  it('Should not register a assignment with a missing music sheet address', async () => {
     try {
       await Assignment.create(newAssignmentWithBadAddress);
     } catch (err) {
-      expect(err.message).toBe('Assignment validation failed: musicSheetAddr: can\'t be blank');
+      expect(err.errors.musicSheetAddr.message).toBe('Assignment music sheet address is a required field.');
+    }
+  });
+
+  it('Should not register a assignment with missing emails', async () => {
+    try {
+      await Assignment.create(newAssignmentWithBadEmails);
+    } catch (err) {
+      expect(err.errors.emails.message).toBe('Assignment emails is a required field.');
     }
   });
 
