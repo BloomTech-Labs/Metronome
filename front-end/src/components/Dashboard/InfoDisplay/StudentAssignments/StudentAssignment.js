@@ -28,15 +28,25 @@ class StudentAssignments extends Component {
           />
           <div className="days-container">
             <fieldset>
-              <legend>Check off when you pratice</legend>
+              <legend>Check off when you practice</legend>
               {this.props.assignments[0].daysToPractice.map(day => (
-                <div>
-                  <div className="checkbox">
-                  <input type="checkbox" id={day} value={day} />
+                <div className="day-check-container">
+
+                  <div className="box">
+                    <label htmlFor={day}>{day}</label>
+                    <input
+                      className="check-box"
+                      type="checkbox"
+                      id={day}
+                      value={day}
+                      onClick={() => {
+                      console.log('checked');
+                    }}
+                    />
+                  </div>
+
                 </div>
-                  <label htmlFor={day}>{day}</label>
-                </div>
-            ))}
+              ))}
             </fieldset>
           </div>
 
