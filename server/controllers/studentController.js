@@ -66,7 +66,7 @@ exports.getAssignments = async function (req, res, next) {
     const student = await Student.findById(req.user._id);
     const assignments = await Assignment
       .find({ students: student._id })
-      .select('-students -emails');
+      .select('-students -emails').populate('teacher', 'email firstName lastName');
     res.status(200).json(assignments);
   } catch (err) {
     next(err);

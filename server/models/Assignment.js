@@ -50,7 +50,7 @@ const AssignmentSchema = new mongoose.Schema({
   },
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
   emails: {
-    type: String,
+    type: [String],
     required: [true, 'Assignment emails is a required field.'],
   },
 }, { timestamps: true });

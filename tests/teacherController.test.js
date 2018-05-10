@@ -3,6 +3,8 @@ const supertest = require('supertest');
 const app = require('../server/app');
 const User = require('../server/models/User');
 const Teacher = require('../server/models/Teacher');
+const Student = require('../server/models/Student');
+const Assignment = require('../server/models/Assignment');
 
 const { UserDataFactory, AssignmentDataFactory } = require('./testDataFactories');
 
@@ -61,5 +63,43 @@ describe('[POST] /api/teacher/emailAssignments', () => {
       .send(validNewAssignment);
     expect(response.status).toBe(200);
     expect(response.body.error).toBeUndefined();
+  });
+});
+
+describe('[GET] /api/teacher/assignments', () => {
+  beforeAll((done) => {
+    mongoose.connect('mongodb://localhost/Metronome_local_test');
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error'));
+    db.once('open', async () => {
+      await Promise.all([
+        Teacher.registerNewUser(validNewUser),
+        Student.registerNewUser(validNewUser2),
+      ]);
+      done();
+    });
+  });
+
+  afterAll(async () => {
+    await mongoose.connection.db.dropCollection('users');
+    await mongoose.connection.db.dropCollection('assignments');
+  });
+
+  it('Should retrieve the assignments for the logged in teacher', async () => {
+    const teacher = await Teacher.findOne({ email: validNewUser.email });
+    const student = await Student.findOne({ email: validNewUser2.email });
+    const assignment = new Assignment({
+      ...validNewAssignment,
+      teacher: teacher._id,
+      students: [student._id],
+      emails: [student.email],
+    });
+    await assignment.save();
+
+    const response = await request
+      .get('/api/teacher/assignments')
+      .set('Authorization', teacher.generateJWT());
+    expect(response.status).toBe(200);
+    expect(response.body.assignments.length).toBeGreaterThan(0);
   });
 });
