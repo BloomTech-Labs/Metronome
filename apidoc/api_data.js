@@ -63,7 +63,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/student/assignment",
+    "url": "/api/student/assignments",
     "title": "Get logged in student's assignments",
     "name": "GetAssignments",
     "group": "Student",
@@ -196,6 +196,55 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "server/controllers/teacherController.js",
     "groupTitle": "Teacher"
+  },
+  {
+    "type": "get",
+    "url": "/api/teacher/assignment",
+    "title": "Get logged in teacher's assignments",
+    "name": "GetAssignments",
+    "group": "Teacher",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "assignments",
+            "description": "<p>An array of the assignments linked to the teacher.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"assignments\": [{\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": [\"Monday\", \"Wednesday\", \"Friday\"],\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n    \"students\": [{\n      \"email\": \"test@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\"\n     }]\n  }, {\n    \"_id\": \"5af30e2aff9e28011850d7c4\",\n    \"days\": [\"Monday\"],\n    \"name\": \"My Other Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 1,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.png\",\n    \"students\": [{\n      \"email\": \"test@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\"\n     }]\n  }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/teacherController.js",
+    "groupTitle": "Teacher",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidInput",
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "InvalidInput-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
+          "type": "json"
+        }
+      ]
+    }
   },
   {
     "type": "post",

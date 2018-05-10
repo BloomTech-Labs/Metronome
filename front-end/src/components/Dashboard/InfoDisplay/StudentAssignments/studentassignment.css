@@ -3,20 +3,27 @@
   padding: 1em;
   border: solid 1px gray;
 }
-.form {
-  display: grid;
-  justify-items: end;
-}
-.input {
-  width: 20%;
-}
 
-.dateContainer {
-  display: flex;
-  justify-content: flex-start;
-}
-.checkbox {
-  width: 15px;
-  height: 15px;
-}
-label { padding: 0 10px; }
+
+.day-check-container {
+  float:left;
+ }
+
+.day-check-container label {
+   display: block;
+   float: left;
+  padding-left: 20px;
+ }
+
+ .box {
+   margin: -20px;
+   
+ }
+
+ 
+
+
+
+
+
+

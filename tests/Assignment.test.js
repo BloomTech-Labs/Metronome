@@ -55,7 +55,7 @@ describe('Assignment model', () => {
       expect(err.errors.dueDate.message).toBe('Assignment due date is a required field.');
     }
   });
-  
+
   it('Should not register a assignment with a missing music sheet address', async () => {
     try {
       await Assignment.create(newAssignmentWithBadAddress);
