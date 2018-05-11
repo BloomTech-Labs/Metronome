@@ -16,9 +16,8 @@ const AssignmentDetails = (props) => {
       <h3>{assignDetails.clientName}</h3>
       <h3>{assignDetails.dueDate}</h3>
       <h3>{assignDetails.email}</h3>
-      <h3>{assignDetails.file}</h3>
       <h3>{assignDetails.hoursToPractice}</h3>
-      <h3>{assignDetails.musicFile}</h3>
+      <h3>Download: <a href={assignDetails.musicSheetAddr}>{assignDetails.fileName}</a> </h3>
       <Link to="/dashboard/assignments">
         <Button variant="raised">
         Assignments
