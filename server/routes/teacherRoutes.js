@@ -4,4 +4,5 @@ const { isAuthenticated, isTeacher } = require('../services/auth');
 
 routes.post('/emailAssignments', isAuthenticated, isTeacher, teacherController.emailAssignments);
 routes.get('/assignments', isAuthenticated, isTeacher, teacherController.getAssignments);
+routes.delete('/assignments/:id', isAuthenticated, isTeacher, teacherController.deleteAssignment);
 module.exports = routes;

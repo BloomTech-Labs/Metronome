@@ -23,7 +23,7 @@ TeacherSchema.methods.emailAssignment = async function (studentEmails = [], assi
       subject: `Metronome assignment from ${this.firstName} ${this.lastName}`,
       text: 'You have a new Metronome assignment',
       html: `<p>
-              ${this.firstName} ${this.lastName} has sent you an assignment. 
+              ${this.firstName} ${this.lastName} has sent you an assignment.
               To view this assignment, go to the following url: ${url}
             </p>`,
     };

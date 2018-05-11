@@ -95,3 +95,16 @@ exports.getAssignments = async function (req, res, next) {
     next(err);
   }
 };
+
+exports.deleteAssignment = async function (req, res, next) {
+  try {
+    const { id } = req.params;
+    const assignment = await Assignment.findByIdAndRemove(id);
+    const teacher = await Teacher.findById(assignment.teacher);
+    teacher.assignments.splice(teacher.assignments.indexOf(id), 1);
+    await teacher.save();
+    res.status(200).json(assignment);
+  } catch (err) {
+    next(err);
+  }
+};

@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import './teacher-assignments.css';
+import { getAssignments } from '../../../../../actions';
 
-const TeacherAssignments = (props) => {
-  const { assignmentName } = props.match.params;
-  const sortedList = props.assignments.filter(assignment => assignment.assignmentName === assignmentName);
-
-  return (
-    <div>
-      <h1>{assignmentName}</h1>
-      {sortedList.map(assign => (
-        <div>
-          <li>{assign.clientName}</li>
-          <ul>{assign.daysToPractice.map(day => (
-            <li className="day">{day}</li>
-      ))}
-          </ul>
-        </div>
-
-    ))
+class TeacherAssignments extends Component {
+  componentWillMount() {
+    this.props.getAssignments();
   }
-    </div>
-  );
-};
 
+  render() {
+    const { assignmentName } = this.props.match.params;
+    const sortedList = this.props.assignments.assignments.filter(assignment => assignment.name === assignmentName);
+    return (
+      <div>
+        <h1>{assignmentName}</h1>
+        {sortedList.map(assign => (
+          <div>
+            <li>{assign.clientName}</li>
+            <ul>{assign.days.map(day => (
+              <li className="day">{day}</li>
+        ))}
+            </ul>
+          </div>
+
+      ))
+    }
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({ assignments: state.assignments });
 
-export default connect(mapStateToProps, null)(TeacherAssignments);
+export default connect(mapStateToProps, { getAssignments })(TeacherAssignments);
