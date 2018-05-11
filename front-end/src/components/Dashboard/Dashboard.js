@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Col } from 'reactstrap';
 import InfoDisplay from '../Dashboard/InfoDisplay/InfoDisplay';
-import Menu from '../Dashboard/Menu/Menu';
+
 
 const Dashboard = props => (
   <div>

@@ -1,0 +1,34 @@
+.button-container {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+#assign-btn {
+  margin-top: -40px;
+}
+
+Button {
+  width: 50px;
+  
+}
+
+.title {
+  width: 85%;
+}
+
+.hours-container {
+  display: flex;
+  width: 50px;
+  margin-right: 5px;
+  margin-left: -50px;
+}
+
+.fileupload-container {
+ margin-left: 200px;
+}
+
+.date-container {
+  margin-left: -150px;
+  margin-top: 30px;
+}

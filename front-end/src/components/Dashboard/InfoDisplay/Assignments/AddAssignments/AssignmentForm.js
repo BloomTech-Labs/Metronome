@@ -8,8 +8,11 @@ import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addAssignment } from '../../../../../actions';
+import './assignment-form.css';
 
 axios.defaults.withCredentials = true;
+
+
 
 class AssignmentForm extends Component {
   constructor(props) {
@@ -183,6 +186,7 @@ class AssignmentForm extends Component {
               </Grid>
               <Grid container justify="center">
                 <Grid item />
+                <div className='hours-container'>
                 <input
                   className="hours"
                   name="hours"
@@ -191,17 +195,25 @@ class AssignmentForm extends Component {
                   value={this.state.hours}
                   onChange={this.handleStateDataChange}
                 />
+                
+                </div>
                 <label htmlFor="hours">hrs</label>
+                <div className='date-container'>
+                
+                
+               
                 <label htmlFor="due date">Due Date:</label>
                 <DatePicker
                   selected={this.state.date}
                   onChange={this.handledDateChange}
                 />
-
+                </div>
                 <Grid item>
+                <div className='fileupload-container'>
                   <Dropzone onDrop={this.onDrop} size={150}>
                     Drop some files here!
                   </Dropzone>
+                  </div>
                 </Grid>
               </Grid>
               <Grid container justify="center">
@@ -213,17 +225,20 @@ class AssignmentForm extends Component {
                   onChange={this.handleStateDataChange}
                 />
               </Grid>
+              
               <Grid item>
-                <Button variant="raised" onClick={this.addAssignment}>
+             
+                <Button  variant="raised" onClick={this.addAssignment}>
                   Submit
                 </Button>
-
+               
               </Grid>
-              <Grid item>
+            
+              
                 <Button variant="raised" onClick={this.props.history.goBack}>
                   Assignments
                 </Button>
-              </Grid>
+              
             </Grid>
           </Grid>
         </div>
