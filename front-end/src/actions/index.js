@@ -1,7 +1,10 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 axios.defaults.withCredentials = true;
-const ROOT_URL = '/api/user';
+const AUTH_URL = '/api/user';
+const TEACHER_URL = '/api/teacher';
+const STUDENT_URL = '/api/student';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -19,15 +22,25 @@ export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
-export const GET_ASSIGNMENTS = 'GET_ASSIGNMENTS';
-export const DELETE_ASSIGNMENT = 'DELETE_ASSIGNMENT';
-export const ADD_ASSIGNMENT = 'ADD_ASSIGNMENT';
+export const GET_ASSIGNMENTS_REQUEST = 'GET_ASSIGNMENTS_REQUEST';
+export const GET_ASSIGNMENTS_SUCCESS = 'GET_ASSIGNMENTS_SUCCESS';
+export const GET_ASSIGNMENTS_FAILURE = 'GET_ASSIGNMENTS_FAILURE';
+
+export const ADD_ASSIGNMENT_REQUEST = 'ADD_ASSIGNMENT_REQUEST';
+export const ADD_ASSIGNMENT_SUCCESS = 'ADD_ASSIGNMENT_SUCCESS';
+export const ADD_ASSIGNMENT_FAILURE = 'ADD_ASSIGNMENT_FAILURE';
+
+export const DELETE_ASSIGNMENT_REQUEST = 'DELETE_ASSIGNMENT_REQUEST';
+export const DELETE_ASSIGNMENT_SUCCESS = 'DELETE_ASSIGNMENT_SUCCESS';
+export const DELETE_ASSIGNMENT_FAILURE = 'DELETE_ASSIGNMENT_FAILURE';
+
 export const GET_STUDENT_LIST = 'GET_STUDENT_LIST';
+export const GET_STUDENT_ASSIGNMENT = 'GET_STUDENT_ASSIGNMENT';
 
 export const login = (email, password, history) => (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   axios
-    .post(`${ROOT_URL}/login`, { email, password })
+    .post(`${AUTH_URL}/login`, { email, password })
     .then((response) => {
       window.localStorage.setItem('token', response.data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: response.data });
@@ -49,7 +62,7 @@ export const register = (
 ) => (dispatch) => {
   dispatch({ type: REGISTER_REQUEST });
   axios
-    .post(`${ROOT_URL}/register`, {
+    .post(`${AUTH_URL}/register`, {
       email,
       password,
       firstName,
@@ -65,25 +78,6 @@ export const register = (
     });
 };
 
-export const getAssignments = () => ({
-  type: 'GET_ASSIGNMENTS',
-});
-
-export const addAssignment = assignment => ({
-  type: 'ADD_ASSIGNMENT',
-  payload: assignment,
-});
-
-export const deleteAssignment = index => ({
-  type: 'DELETE_ASSIGNMENT',
-  payload: index,
-});
-
-export const getStudentList = song => ({
-  type: 'GET_STUDENT_LIST',
-  payload: song,
-});
-
 export const updateUser = (
   firstName,
   lastName,
@@ -96,7 +90,7 @@ export const updateUser = (
   dispatch({ type: UPDATE_USER_REQUEST });
   axios
     .put(
-      ROOT_URL,
+      AUTH_URL,
       { firstName, lastName, newEmail, oldPassword, newPassword },
       { headers: { Authorization: token } },
     )
@@ -120,3 +114,45 @@ export const logout = history => (dispatch) => {
     dispatch({ type: LOGOUT_FAILURE, error: error.response.data });
   }
 };
+
+export const getAssignments = () => (dispatch) => {
+  const token = window.localStorage.getItem('token');
+  const user = jwtDecode(token);
+  const url = user.role === 'Teacher' ? TEACHER_URL : STUDENT_URL;
+  console.log(TEACHER_URL);
+  dispatch({ type: GET_ASSIGNMENTS_REQUEST });
+  axios.get(`${url}/assignments`, { headers: { Authorization: token } })
+    .then((response) => {
+      dispatch({ type: GET_ASSIGNMENTS_SUCCESS, payload: response.data });
+    })
+    .catch((error) => {
+      dispatch({ type: GET_ASSIGNMENTS_FAILURE, error: error.response.data });
+    });
+};
+
+export const addAssignment = assignment => (dispatch) => {
+  const token = window.localStorage.getItem('token');
+  dispatch({ type: ADD_ASSIGNMENT_REQUEST });
+  axios.post(`${TEACHER_URL}/emailAssignments`, assignment, { headers: { Authorization: token } })
+    .then((response) => {
+      dispatch({ type: ADD_ASSIGNMENT_SUCCESS, payload: response.data });
+    })
+    .catch((error) => {
+      dispatch({ type: ADD_ASSIGNMENT_FAILURE, error: error.response.data });
+    });
+};
+
+export const deleteAssignment = index => ({
+  type: 'DELETE_ASSIGNMENT',
+  payload: index,
+});
+
+export const getStudentList = song => ({
+  type: 'GET_STUDENT_LIST',
+  payload: song,
+});
+
+export const getStudentAssignment = studentName => ({
+  type: 'GET_STUDENT_ASSIGNMENT',
+  payload: studentName,
+});
