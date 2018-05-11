@@ -4,12 +4,18 @@ import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { Grid, Checkbox, Button } from 'material-ui';
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addAssignment } from '../../../../../actions';
 
 
+
 import './assignment-form.css';
 
+
+
+axios.defaults.withCredentials = true;
 
 
 class AssignmentForm extends Component {
@@ -29,7 +35,7 @@ class AssignmentForm extends Component {
       Saturday: false,
       dueDate: '',
       date: moment(),
-      musicFile: '',
+      musicSheetAddr: '',
       email: '',
       file: null,
       clientName: '',
@@ -78,34 +84,33 @@ class AssignmentForm extends Component {
 
   // This is for handling filed upload
   // TODO: Need to make sure this works with server figure out how to send data
-  handleFileUpload = (event) => {
-    alert('uploading file');
-    this.setState({
-      musicFile: event.target.files[0].name,
-    });
+  onDrop = (files) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+
+    axios.post('/api/teacher/getUploadUrl', formData, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+        'Content-Type': 'multipart/form-data',
+      },
+    }).then((response) => {
+      const { fileName, musicSheetAddr } = response.data;
+      this.setState({ fileName, musicSheetAddr });
+    }).catch(err => console.log(err));
   };
 
   // Adds excitment via props/redux
 
   addAssignment = () => {
-    // emails, name, days, dueDate, hours, musicSheetAddr;
-    const { email, assignmentName, daysToPractice, dueDate, hoursToPractice, musicFile } = this.state;
-    const emails = email.split(',');
-    const assignment = {
-      emails,
-      name: assignmentName,
-      days: daysToPractice,
-      dueDate,
-      hours: hoursToPractice,
-      musicSheetAddr: musicFile,
-    };
-    this.props.addAssignment(assignment);
+    if (!this.state.musicSheetAddr) return alert('No file uploaded!');
+
+    this.props.addAssignment(this.state);
     this.setState({
       assignmentName: '',
       daysToPractice: [],
       hoursToPractice: '',
-      musicFile: '',
-      file: '',
+      musicSheetAddr: '',
+      fileName: '',
       email: '',
       checkedSunday: false,
     });
@@ -282,7 +287,26 @@ class AssignmentForm extends Component {
                 </Grid>
                 <div className='button-container'>
                 <Grid item>
+
                   <Button variant="raised" onClick={this.addAssignment}>
+
+                  <Dropzone onDrop={this.onDrop} size={150}>
+                    Drop some files here!
+                  </Dropzone>
+                </Grid>
+              </Grid>
+              <Grid container justify="center">
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleStateDataChange}
+                />
+              </Grid>
+              <Grid item>
+                <Button variant="raised" onClick={this.addAssignment}>
+
                   Submit
                   </Button>
 

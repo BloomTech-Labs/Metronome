@@ -4,7 +4,7 @@ const { secret } = require('../config');
  * Middleware to verify that the request contains a valid JWT
  */
 exports.isAuthenticated = function (req, res, next) {
-  const token = req.headers.authorization;
+  const token = req.headers.authorization || req.headers.Authorization;
 
   if (!token) {
     return res.status(422).json({
