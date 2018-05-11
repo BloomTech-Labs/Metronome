@@ -7,13 +7,12 @@ import { Button } from 'material-ui';
 
 const AssignmentDetails = (props) => {
   const id = props.match.params.userId;
-  const assignDetails = props.assignments[id];
-  
+  const assignDetails = props.assignments.assignments.filter(assignment => assignment._id === id)[0];
   return (
     <div>
       <h1>Assignment Details</h1>
-      <h3>{assignDetails.assignmentName}</h3>
-      <h3>{assignDetails.daysToPractice}</h3>
+      <h3>{assignDetails.name}</h3>
+      <h3>{assignDetails.days}</h3>
       <h3>{assignDetails.clientName}</h3>
       <h3>{assignDetails.dueDate}</h3>
       <h3>{assignDetails.email}</h3>

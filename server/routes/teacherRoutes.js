@@ -10,5 +10,7 @@ const upload = multer({
 
 routes.post('/emailAssignments', isAuthenticated, isTeacher, teacherController.emailAssignments);
 routes.get('/assignments', isAuthenticated, isTeacher, teacherController.getAssignments);
+routes.delete('/assignments/:id', isAuthenticated, isTeacher, teacherController.deleteAssignment);
 routes.post('/getUploadUrl', isAuthenticated, isTeacher, upload.single('file'), teacherController.getUploadUrl);
+
 module.exports = routes;
