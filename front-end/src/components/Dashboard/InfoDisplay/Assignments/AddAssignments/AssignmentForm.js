@@ -7,7 +7,10 @@ import { Grid, Checkbox, Button } from 'material-ui';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addAssignment } from '../../../../../actions';
 
+
 import './assignment-form.css';
+
+
 
 class AssignmentForm extends Component {
   constructor(props) {
@@ -43,9 +46,9 @@ class AssignmentForm extends Component {
  
   // Handles the unchecking and checking of days to practice
   // adds or takes away from array based on state of checked
-  // this is what gets passed up to assignments
+
    handleChange = name => (event) => {
-    
+
     this.setState({
       [name]: event.target.checked,
     });
@@ -113,9 +116,22 @@ class AssignmentForm extends Component {
   render() {
     return (
       <div>
+
         <form onSubmit={this.addAssignment}>
           <div style={{ margin: 40 }}>
             <Grid container spacing={0} align="center">
+
+        <div style={{ margin: 40 }}>
+          <Grid container spacing={0} align="center">
+            <Grid item xs={12}>
+              <input
+                className="title"
+                placeholder="Assignment Name"
+                name="assignmentName"
+                value={this.state.assignmentName}
+                onChange={this.handleStateDataChange}
+              />
+
               <Grid item xs={12}>
                 <input
                   className="title"
@@ -124,6 +140,7 @@ class AssignmentForm extends Component {
                   value={this.state.assignmentName}
                   onChange={this.handleStateDataChange}
                 />
+
                <Grid container spacing={0} justify="center">
                   <Grid item xs={16}>
                     <Checkbox
@@ -209,6 +226,58 @@ class AssignmentForm extends Component {
                     placeholder="Enter 1 or more emails to assign student assignments"
                     value={this.state.email}
                     onChange={this.handleStateDataChange}
+
+              </Grid>
+              <Grid container spacing={0} justify="center">
+                <Grid item xs={16}>
+                  <Checkbox
+                    className="daysToPractice"
+                    checked={this.state.checkedSunday}
+                    onChange={this.handleChange('Sunday')}
+                    value="checkedSunday"
+                  />
+                  <label htmlFor="checkedSunday">Sunday</label>
+                  <Checkbox
+                    className="daysToPractice"
+                    checked={this.state.checkedMonday}
+                    onChange={this.handleChange('Monday')}
+                    value="checkedMonday"
+                  />
+                  <label htmlFor="checkedMonday">Monday</label>
+                  <Checkbox
+                    className="daysToPractice"
+                    checked={this.state.checkedTuesday}
+                    onChange={this.handleChange('Tuesday')}
+                    value="checkedTuesday"
+                  />
+                  <label htmlFor="checkedTuesday">Tuesday</label>
+                  <Checkbox
+                    className="daysToPractice"
+                    checked={this.state.checkedWednesday}
+                    onChange={this.handleChange('Wednesday')}
+                    value="checkedWednesday"
+                  />
+                  <label htmlFor="checkedWednesday">Wednesday</label>
+                  <Checkbox
+                    className="daysToPractice"
+                    checked={this.state.checkedThursday}
+                    onChange={this.handleChange('Thursday')}
+                    value="checkedThursday"
+                  />
+                  <label htmlFor="checkedThursday">Thursday</label>
+                  <Checkbox
+                    className="daysToPractice"
+                    checked={this.state.checkedFriday}
+                    onChange={this.handleChange('Friday')}
+                    value="checkedFriday"
+                  />
+                  <label htmlFor="checkedFriday">Friday</label>
+                  <Checkbox
+                    className="daysToPractice"
+                    checked={this.state.checkedSaturday}
+                    onChange={this.handleChange('Saturday')}
+                    value="checkedSaturday"
+
                   />
                 </Grid>
                 <div className='button-container'>

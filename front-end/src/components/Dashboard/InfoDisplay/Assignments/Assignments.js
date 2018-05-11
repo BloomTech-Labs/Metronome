@@ -18,13 +18,12 @@ class Assignments extends Component {
   };
 
   render() {
-    if (!this.props.assignments) return (<div>Loading...</div>);
-
+    if (this.props.assignments.isPending) return <div>Loading...</div>;
 
     return (
-
       <div>
         <h1>Assignments</h1>
+
         <div className="card-container">
           {this.props.assignments.map((assignment, index) => (
             <div key={index}>
@@ -35,6 +34,16 @@ class Assignments extends Component {
                 dueDate={assignment.dueDate}
               />
             </div>
+
+        {this.props.assignments.assignments.map((assignment, index) => (
+          <div key={index}>
+            <AssignmentCard
+              id={index}
+              deleteAssignment={this.deleteAssignment}
+              name={assignment.assignmentName}
+              dueDate={assignment.dueDate}
+            />
+          </div>
 
         ))}
           <AddAssignmentCard  />

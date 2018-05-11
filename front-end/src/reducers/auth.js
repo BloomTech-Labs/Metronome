@@ -13,9 +13,7 @@ import {
   UPDATE_USER_FAILURE,
 } from '../actions';
 
-const initialState = {
-  user: null,
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
