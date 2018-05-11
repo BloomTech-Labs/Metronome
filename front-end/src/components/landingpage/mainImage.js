@@ -1,18 +1,21 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import './landingpage.css';
+import mainimage from './assets/metronome.png';
+import slogan from './assets/brownose.png';
+import guitar from './assets/guitarPractice.png';
 
 const MainImage = () => (
   <div className="mainimage">
-    <Carousel showThumbs={false} showStatus={false} infiniteLoop>
+    <Carousel showThumbs={false} showArrows={false} showStatus={false} infiniteLoop>
       <div>
-        <img alt="cat1" src="https://i.imgur.com/PcYHdVB.jpg" />
+        <img alt="metronome" src={mainimage} />
       </div>
       <div>
-        <img alt="cat2" src="https://i.imgur.com/RI22Rj0.jpg" />
+        <img alt="slogan" src={slogan} />
       </div>
       <div>
-        <img alt="cat3" src="https://i.imgur.com/e51VBAC.png" />
+        <img alt="guitar" src={guitar} />
       </div>
     </Carousel>
   </div>

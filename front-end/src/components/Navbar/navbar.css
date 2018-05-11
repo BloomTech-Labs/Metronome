@@ -1,0 +1,15 @@
+.container {
+  flex: 1 100%;
+}
+
+@media all and (max-width:800px) {
+  .container {
+    justify-content: space-around;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .container {
+    flex-direction: column;
+  }
+}

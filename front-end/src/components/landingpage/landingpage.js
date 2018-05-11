@@ -4,12 +4,15 @@ import React from 'react';
 import BuyNowButton from './buyNowButton';
 import MainImage from './mainImage';
 import Description from './description';
+import './landingpage.css';
 
 const LandingPage = () => (
-  <div>
-    <MainImage />
-    <Description />
-    <BuyNowButton />
+  <div className="container">
+    <div className="description-container">
+      <MainImage />
+      <Description />
+      <BuyNowButton />
+    </div>
   </div>
 );
 

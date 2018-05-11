@@ -1,19 +1,29 @@
-.loginbutton {
+.container {
   display: flex;
+  flex: 1;
+  
+}
+.description-container {
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginbutton {
+
   justify-content: flex-end;
   padding: 1em;
 }
 
 .buynow {
-  display: flex;
-  justify-content: center;
-  padding: 2em;
   margin-bottom: 2em;
+  width: 20em;
 }
 
 .mainimage {
-  display: flex;
-  padding: 3em;
+  height: 30em;
+  width: 30em;
 }
 
 .description {

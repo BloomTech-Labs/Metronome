@@ -4,6 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logout } from '../../actions';
 
+import './navbar.css';
+
 class LoginNavBar extends Component {
   navbarLinks = () => {
     const token = window.localStorage.getItem('token');
@@ -28,6 +30,7 @@ class LoginNavBar extends Component {
   };
   render() {
     return (
+      <div className="container">
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
@@ -38,6 +41,7 @@ class LoginNavBar extends Component {
           {this.navbarLinks()}
         </Nav>
       </Navbar>
+      </div>
     );
   }
 }
