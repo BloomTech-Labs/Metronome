@@ -26,6 +26,7 @@
                 ]
             }
         ],
+        "react/no-unused-state": "off",
         "prefer-arrow-callback": "off",
         "no-unused-expressions": 0,
         "chai-friendly/no-unused-expressions": 2,

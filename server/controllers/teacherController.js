@@ -1,5 +1,8 @@
 const Teacher = require('../models/Teacher');
 const Assignment = require('../models/Assignment');
+const { s3 } = require('../services/s3');
+const uuid4 = require('uuid/v4');
+
 /**
  * @api {post} /api/teacher/emailAssignments Email assignments
  * @apiName EmailAssignments
@@ -84,6 +87,28 @@ exports.getAssignments = async function (req, res, next) {
       .find({ teacher: teacher._id })
       .populate('students', 'email firstName lastName');
     res.status(200).json({ assignments });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getUploadUrl = async function (req, res, next) {
+  try {
+    const key = uuid4();
+    s3.upload({
+      Bucket: 'labs-metronome',
+      ACL: 'public-read',
+      Body: req.file.buffer,
+      ContentType: 'application/octet-stream',
+      Key: key,
+      ContentDisposition: `attachment; filename="${req.file.originalname}"`,
+    }, (err, data) => {
+      if (err) throw err;
+      res.status(200).json({
+        musicSheetAddr: data.Location,
+        fileName: req.file.originalname,
+      });
+    });
   } catch (err) {
     next(err);
   }

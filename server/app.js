@@ -13,6 +13,7 @@ const corsOptions = {
   origin: process.env.NODE_ENV ? '' : 'http://localhost:3000',
   credentials: true,
 };
+
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, '../front-end/build')));
 app.use(bodyParser.json());

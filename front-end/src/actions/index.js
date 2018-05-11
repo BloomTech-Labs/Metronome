@@ -82,7 +82,7 @@ export const deleteAssignment = index => ({
 export const getStudentList = song => ({
   type: 'GET_STUDENT_LIST',
   payload: song,
-})
+});
 
 export const updateUser = (
   firstName,
