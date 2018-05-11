@@ -16,7 +16,7 @@ class Assignments extends Component {
   };
 
   render() {
-    if (this.props.assignments.isPending) return <div>Loading...</div>;
+    if (this.props.assignments.isPending || !this.props.assignments.assignments) return <div>Loading...</div>;
 
     return (
       <div>
