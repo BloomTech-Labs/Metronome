@@ -8,9 +8,11 @@ import './landingpage.css';
 
 const LandingPage = () => (
   <div className="container">
-    <MainImage />
-    <Description />
-    <BuyNowButton />
+    <div className="description-container">
+      <MainImage />
+      <Description />
+      <BuyNowButton />
+    </div>
   </div>
 );
 
