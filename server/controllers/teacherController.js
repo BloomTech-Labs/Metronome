@@ -52,7 +52,7 @@ exports.emailAssignments = async function (req, res, next) {
 };
 
 /**
- * @api {get} /api/teacher/assignment Get logged in teacher's assignments
+ * @api {get} /api/teacher/assignments Get logged in teacher's assignments
  * @apiName GetAssignments
  * @apiGroup Teacher
  *
@@ -109,7 +109,7 @@ exports.deleteAssignment = async function (req, res, next) {
     teacher.assignments.splice(teacher.assignments.indexOf(id), 1);
     await teacher.save();
     res.status(200).json(assignment);
-    } catch (err) {
+  } catch (err) {
     next(err);
   }
 };
