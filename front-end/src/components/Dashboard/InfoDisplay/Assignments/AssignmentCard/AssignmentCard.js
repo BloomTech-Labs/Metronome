@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import FATrash from 'react-icons/lib/fa/trash';
-import { Z_DEFAULT_STRATEGY } from 'zlib';
+// import { Z_DEFAULT_STRATEGY } from 'zlib';
 
 const AssignmentCard = (props) => {
   const date = new Date(props.dueDate);
