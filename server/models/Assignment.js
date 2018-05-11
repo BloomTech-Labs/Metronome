@@ -44,6 +44,9 @@ const AssignmentSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Assignment music sheet address is a required field.'],
   },
+  fileName: {
+    type: String,
+  },
   teacher: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Teacher',
