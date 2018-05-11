@@ -28,7 +28,7 @@ class LoginNavBar extends Component {
   };
   render() {
     return (
-      <div className="navbar-container">
+      <div>
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
