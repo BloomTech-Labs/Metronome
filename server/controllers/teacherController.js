@@ -14,6 +14,7 @@ const uuid4 = require('uuid/v4');
  * @apiParam {Number} hours The number of hours to work on the assignment.
  * @apiParam {Date} dueDate The date that the assignment is due.
  * @apiParam {String} musicSheetAddr The URL to the uploaded music sheet file.
+ * @apiParam {String} fileName the name of the file.
  * @apiSuccess {Object} assignment The assignment that was just created.
  *
  * @apiSuccessExample Success-Response:
@@ -26,6 +27,7 @@ const uuid4 = require('uuid/v4');
  *          "dueDate": "2018-05-16 10:59:36.808",
  *          "hours": 5,
  *          "musicSheetAddr": "http://example.com/my_sheet.pdf",
+ *          "fileName": "my_sheet.pdf",
  *          "students": [],
  *          "emails": ["test@example.com"],
  *          "createdAt": "2018-05-10T21:08:44.018Z",
@@ -37,10 +39,10 @@ const uuid4 = require('uuid/v4');
  */
 exports.emailAssignments = async function (req, res, next) {
   try {
-    const { emails, name, days, dueDate, hours, musicSheetAddr } = req.body;
+    const { emails, name, days, dueDate, hours, musicSheetAddr, fileName } = req.body;
     const teacher = await Teacher.findById(req.user._id);
 
-    const assignment = new Assignment({ emails, name, days, dueDate, hours, musicSheetAddr, teacher: teacher._id });
+    const assignment = new Assignment({ emails, name, days, dueDate, hours, musicSheetAddr, fileName, teacher: teacher._id });
     await assignment.save();
     await teacher.emailAssignment(emails, assignment._id);
     res.status(200).json({ assignment });
