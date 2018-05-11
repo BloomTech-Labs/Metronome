@@ -11,6 +11,15 @@ class LoginNavBar extends Component {
     const token = window.localStorage.getItem('token');
     if (token) {
       return [
+        <LinkContainer to="/dashboard/assignments">
+          <NavItem href="#">Assignment</NavItem>
+        </LinkContainer>,
+        <LinkContainer to="/dashboard/billing">
+          <NavItem href="#">Billing</NavItem>
+        </LinkContainer>,
+         <LinkContainer to="/dashboard/settings">
+          <NavItem href="#">Settings</NavItem>
+        </LinkContainer>,
         <LinkContainer to="/" onClick={() => this.props.logout(this.props.history)}>
           <NavItem href="#">Sign Out</NavItem>
         </LinkContainer>,

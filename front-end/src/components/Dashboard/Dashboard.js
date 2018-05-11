@@ -7,6 +7,9 @@ import InfoDisplay from '../Dashboard/InfoDisplay/InfoDisplay';
 const Dashboard = props => (
   <div>
     <Container>
+      {/* <Col md={3}>
+        <Menu match={props.match} />
+      </Col> */}
       <Col md={9}>
         <InfoDisplay match={props.match} />
       </Col>
