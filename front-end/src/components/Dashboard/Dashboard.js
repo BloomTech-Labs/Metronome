@@ -7,9 +7,9 @@ import Menu from '../Dashboard/Menu/Menu';
 const Dashboard = props => (
   <div>
     <Container>
-      <Col md={3}>
+      {/* <Col md={3}>
         <Menu match={props.match} />
-      </Col>
+      </Col> */}
       <Col md={9}>
         <InfoDisplay match={props.match} />
       </Col>

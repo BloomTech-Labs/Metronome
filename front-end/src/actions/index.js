@@ -44,7 +44,7 @@ export const login = (email, password, history) => (dispatch) => {
     .then((response) => {
       window.localStorage.setItem('token', response.data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: response.data });
-      history.push('/');
+      history.push('/dashboard');
     })
     .then()
     .catch((error) => {
