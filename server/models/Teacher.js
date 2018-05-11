@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./User');
 const jwt = require('jsonwebtoken');
-const { secret } = require('../config');
+const { secret, url } = require('../config');
 const { sendEmail } = require('../services/email');
 
 const TeacherSchema = new mongoose.Schema({
@@ -16,7 +16,7 @@ TeacherSchema.methods.emailAssignment = async function (studentEmails = [], assi
       assignmentId,
     }, secret, { expiresIn: '7 days' });
 
-    const url = `http://localhost:8000/claim-token?token=${token}`;
+    const tokenUrl = `${url}/claim-token?token=${token}`;
     const emailTemplate = {
       to: email,
       from: 'lambda.metronome@gmail.com',
@@ -24,7 +24,7 @@ TeacherSchema.methods.emailAssignment = async function (studentEmails = [], assi
       text: 'You have a new Metronome assignment',
       html: `<p>
               ${this.firstName} ${this.lastName} has sent you an assignment. 
-              To view this assignment, go to the following url: ${url}
+              To view this assignment, go to the following url: ${tokenUrl}
             </p>`,
     };
 
