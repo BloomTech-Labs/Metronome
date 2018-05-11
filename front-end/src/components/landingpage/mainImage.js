@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import './landingpage.css';
-import mainimage from './assets/MetronomeLogo.jpg';
+import mainimage from './assets/metronome.png';
 import slogan from './assets/brownose.png';
 import guitar from './assets/guitarPractice.png';
 
