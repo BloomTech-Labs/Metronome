@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './assignment-card.css';
 
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import FATrash from 'react-icons/lib/fa/trash';
 
 const AssignmentCard = (props) => {

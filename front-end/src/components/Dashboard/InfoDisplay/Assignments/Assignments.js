@@ -6,8 +6,6 @@ import { getAssignments, deleteAssignment } from '../../../../actions';
 import AssignmentCard from './AssignmentCard/AssignmentCard';
 import AddAssignmentCard from '../Assignments/AddAssignments/AddAssignmentCard';
 
-import './assignments.css';
-
 class Assignments extends Component {
   componentWillMount() {
     this.props.getAssignments();
@@ -23,25 +21,8 @@ class Assignments extends Component {
     return (
       <div>
         <h1>Assignments</h1>
-
-
-        <div className="card-container">
-          {this.props.assignments.map((assignment, index) => (
-            <div key={index}>
-              <AssignmentCard
-                id={index}
-                deleteAssignment={this.deleteAssignment}
-                name={assignment.assignmentName}
-                dueDate={assignment.dueDate}
-              />
-            </div>
-
-        {this.props.assignments.assignments.map((assignment, index) => (
-          <div key={index}>
-
         {this.props.assignments.assignments.map(assignment => (
           <div key={assignment._id}>
-
             <AssignmentCard
               id={assignment._id}
               deleteAssignment={this.deleteAssignment}
@@ -49,12 +30,9 @@ class Assignments extends Component {
               dueDate={assignment.dueDate}
             />
           </div>
-
         ))}
-          <AddAssignmentCard  />
-        </div>
+        <AddAssignmentCard />
       </div>
-
     );
   }
 }
