@@ -62,6 +62,7 @@ describe('[POST] /api/teacher/emailAssignments', () => {
       .set('Authorization', user.generateJWT())
       .send(validNewAssignment);
     expect(response.status).toBe(200);
+    expect(response.body.assignment).toBeDefined();
     expect(response.body.error).toBeUndefined();
   });
 });
