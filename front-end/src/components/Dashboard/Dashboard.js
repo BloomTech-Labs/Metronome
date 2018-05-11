@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Col } from 'reactstrap';
 import InfoDisplay from '../Dashboard/InfoDisplay/InfoDisplay';
 import Menu from '../Dashboard/Menu/Menu';
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userDetails: {},
-    };
-  }
-  render() {
-    return (
-      <div>
-        <Container>
-          <Col md={3}>
-            <Menu match={this.props.match} />
-          </Col>
-          <Col md={9}>
-            <InfoDisplay match={this.props.match} />
-          </Col>
-        </Container>
-      </div>
-    );
-  }
-}
+const Dashboard = props => (
+  <div>
+    <Container>
+      <Col md={3}>
+        <Menu match={props.match} />
+      </Col>
+      <Col md={9}>
+        <InfoDisplay match={props.match} />
+      </Col>
+    </Container>
+  </div>
+);
+
+Dashboard.propTypes = {
+  match: PropTypes.string.isRequired,
+};
 
 export default Dashboard;
