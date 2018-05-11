@@ -16,11 +16,11 @@ class AssignmentForm extends Component {
     super(props);
 
     this.state = {
-      assignmentName: '',
-      daysToPractice: [],
-      hoursToPractice: '',
-      Monday: false,
+      name: '',
+      days: [],
+      hours: '',
       Sunday: false,
+      Monday: false,
       Tuesday: false,
       Wednesday: false,
       Thursday: false,
@@ -30,8 +30,7 @@ class AssignmentForm extends Component {
       date: moment(),
       musicSheetAddr: '',
       email: '',
-      file: null,
-      clientName: '',
+      fileName: '',
     };
   }
 
@@ -51,13 +50,13 @@ class AssignmentForm extends Component {
     });
     if (event.target.checked) {
       this.setState({
-        daysToPractice: [...this.state.daysToPractice, name],
+        days: [...this.state.days, name],
       });
     } else {
-      const filteredArray = this.state.daysToPractice.filter(day => day !== name);
+      const filteredArray = this.state.day.filter(day => day !== name);
 
       this.setState({
-        daysToPractice: filteredArray,
+        days: filteredArray,
       });
     }
   };
@@ -93,17 +92,26 @@ class AssignmentForm extends Component {
   // Adds excitment via props/redux
 
   addAssignment = () => {
-    if (!this.state.musicSheetAddr) return alert('No file uploaded!');
-
-    this.props.addAssignment(this.state);
+    // emails, name, days, dueDate, hours, musicSheetAddr;
+    const { email, name, days, dueDate, hours, musicSheetAddr, fileName } = this.state;
+    const emails = email.split(',');
+    const assignment = {
+      emails,
+      name,
+      days,
+      dueDate,
+      hours,
+      musicSheetAddr,
+      fileName,
+    };
+    this.props.addAssignment(assignment);
     this.setState({
-      assignmentName: '',
-      daysToPractice: [],
-      hoursToPractice: '',
-      musicSheetAddr: '',
+      name: '',
+      days: [],
+      hours: '',
       fileName: '',
+      musicSheetAddr: '',
       email: '',
-      clientName: '',
     });
   };
 
@@ -116,19 +124,10 @@ class AssignmentForm extends Component {
               <input
                 className="title"
                 placeholder="Assignment Name"
-                name="assignmentName"
-                value={this.state.assignmentName}
+                name="name"
+                value={this.state.name}
                 onChange={this.handleStateDataChange}
               />
-              <Grid item xs={12}>
-                <input
-                  className="client"
-                  placeholder="Client Name"
-                  name="clientName"
-                  value={this.state.clientName}
-                  onChange={this.handleStateDataChange}
-                />
-              </Grid>
               <Grid container spacing={0} justify="center">
                 <Grid item xs={16}>
                   <Checkbox
@@ -186,13 +185,13 @@ class AssignmentForm extends Component {
                 <Grid item />
                 <input
                   className="hours"
-                  name="hoursToPractice"
+                  name="hours"
                   type="text"
                   placeholder="0"
-                  value={this.state.hoursToPractice}
+                  value={this.state.hours}
                   onChange={this.handleStateDataChange}
                 />
-                <label htmlFor="hoursToPractice">hrs</label>
+                <label htmlFor="hours">hrs</label>
                 <label htmlFor="due date">Due Date:</label>
                 <DatePicker
                   selected={this.state.date}

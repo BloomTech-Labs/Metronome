@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 
@@ -8,7 +9,7 @@ import FATrash from 'react-icons/lib/fa/trash';
 // import { Z_DEFAULT_STRATEGY } from 'zlib';
 
 const AssignmentCard = (props) => {
-  const date = new Date(props.dueDate);
+  const date = moment(props.dueDate).format('l');
   return (
     <div>
       <Col>
@@ -24,7 +25,7 @@ const AssignmentCard = (props) => {
               alt="Card image cap"
             />
             <CardBody>
-              <CardText>{`Date: ${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`}</CardText>
+              <CardText>{`Date: ${date}`}</CardText>
             </CardBody>
           </Link>
         </Card>
