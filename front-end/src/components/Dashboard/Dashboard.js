@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Container, Col } from 'reactstrap';
 import InfoDisplay from '../Dashboard/InfoDisplay/InfoDisplay';
-
-import './dashboard.css';
+import Menu from '../Dashboard/Menu/Menu';
 
 const Dashboard = props => (
-  <div className="dashboard-container">
-    <div>
-      <InfoDisplay match={props.match} />
-    </div>
-
+  <div>
+    <Container>
+      <Col md={3}>
+        <Menu match={props.match} />
+      </Col>
+      <Col md={9}>
+        <InfoDisplay match={props.match} />
+      </Col>
+    </Container>
   </div>
 );
 

@@ -119,10 +119,11 @@ export const getAssignments = () => (dispatch) => {
   const token = window.localStorage.getItem('token');
   const user = jwtDecode(token);
   const url = user.role === 'Teacher' ? TEACHER_URL : STUDENT_URL;
+  console.log(TEACHER_URL);
   dispatch({ type: GET_ASSIGNMENTS_REQUEST });
   axios.get(`${url}/assignments`, { headers: { Authorization: token } })
     .then((response) => {
-      dispatch({ type: GET_ASSIGNMENTS_SUCCESS, payload: response.data.assignments });
+      dispatch({ type: GET_ASSIGNMENTS_SUCCESS, payload: response.data });
     })
     .catch((error) => {
       dispatch({ type: GET_ASSIGNMENTS_FAILURE, error: error.response.data });
@@ -141,19 +142,10 @@ export const addAssignment = assignment => (dispatch) => {
     });
 };
 
-export const deleteAssignment = id => (dispatch) => {
-  const token = window.localStorage.getItem('token');
-  dispatch({ type: DELETE_ASSIGNMENT_REQUEST });
-  axios.delete(`${TEACHER_URL}/assignments/${id}`, {
-    headers: { Authorization: token },
-  })
-    .then((response) => {
-      dispatch({ type: DELETE_ASSIGNMENT_SUCCESS, id });
-    })
-    .catch((error) => {
-      dispatch({ type: DELETE_ASSIGNMENT_FAILURE, error: error.response.data });
-    });
-};
+export const deleteAssignment = index => ({
+  type: 'DELETE_ASSIGNMENT',
+  payload: index,
+});
 
 export const getStudentList = song => ({
   type: 'GET_STUDENT_LIST',

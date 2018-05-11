@@ -21,12 +21,12 @@ class Assignments extends Component {
     return (
       <div>
         <h1>Assignments</h1>
-        {this.props.assignments.assignments.map(assignment => (
-          <div key={assignment._id}>
+        {this.props.assignments.assignments.map((assignment, index) => (
+          <div key={index}>
             <AssignmentCard
-              id={assignment._id}
+              id={index}
               deleteAssignment={this.deleteAssignment}
-              name={assignment.name}
+              name={assignment.assignmentName}
               dueDate={assignment.dueDate}
             />
           </div>
