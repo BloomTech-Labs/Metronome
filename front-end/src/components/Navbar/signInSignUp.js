@@ -28,6 +28,7 @@ class LoginNavBar extends Component {
   };
   render() {
     return (
+      <div className="navbar-container">
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
@@ -38,6 +39,7 @@ class LoginNavBar extends Component {
           {this.navbarLinks()}
         </Nav>
       </Navbar>
+      </div>
     );
   }
 }

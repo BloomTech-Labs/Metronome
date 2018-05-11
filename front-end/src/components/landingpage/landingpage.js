@@ -4,9 +4,10 @@ import React from 'react';
 import BuyNowButton from './buyNowButton';
 import MainImage from './mainImage';
 import Description from './description';
+import './landingpage.css';
 
 const LandingPage = () => (
-  <div>
+  <div className="container">
     <MainImage />
     <Description />
     <BuyNowButton />
