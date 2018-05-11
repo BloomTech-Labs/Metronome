@@ -23,7 +23,7 @@ class Assignments extends Component {
 
     return (
 
-      <div >
+      <div>
         <h1>Assignments</h1>
         <div className="card-container">
           {this.props.assignments.map((assignment, index) => (
