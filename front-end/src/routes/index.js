@@ -5,7 +5,7 @@ import LogIn from '../components/LogIn/LogIn';
 import LandingPage from '../components/landingpage/landingpage';
 import Dashboard from '../components/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute';
-import Navbar from '../components/Navbar/signInSignUp';
+import Navbar from '../components/Navbar/NavBar';
 
 const LoginContainer = () => (
   <div>

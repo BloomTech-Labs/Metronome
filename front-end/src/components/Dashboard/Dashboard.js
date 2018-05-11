@@ -2,15 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import InfoDisplay from '../Dashboard/InfoDisplay/InfoDisplay';
-import Menu from '../Dashboard/Menu/Menu';
 
 import './dashboard.css';
 
 const Dashboard = props => (
-  <div className="menu-container">
-    <aside>
-      <Menu match={props.match} />
-    </aside>
+  <div className="dashboard-container">
     <div>
       <InfoDisplay match={props.match} />
     </div>

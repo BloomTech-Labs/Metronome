@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logout } from '../../actions';
 
-import './signin-signup.css';
+import './navbar.css';
 
 class LoginNavBar extends Component {
   navbarLinks = () => {
@@ -17,6 +17,15 @@ class LoginNavBar extends Component {
         <LinkContainer to="/" onClick={() => this.props.logout(this.props.history)}>
           <NavItem href="#">Sign Out</NavItem>
         </LinkContainer>,
+        <LinkContainer to="/dashboard/assignments" exact>
+          <NavItem eventKey={3} href="#">Assignments</NavItem>
+        </LinkContainer>,
+        <LinkContainer to="/dashboard/billing" exact>
+          <NavItem eventKey={4} href="#">Billing</NavItem>
+        </LinkContainer>,
+        <LinkContainer to="/dashboard/settings" exact>
+          <NavItem eventKey={5} href="#">Settings</NavItem>
+        </LinkContainer>,
       ];
     }
     return [
@@ -27,6 +36,7 @@ class LoginNavBar extends Component {
       <LinkContainer to="/login" exact>
         <NavItem eventKey={2} href="#">Log In</NavItem>
       </LinkContainer>,
+
 
     ];
   };

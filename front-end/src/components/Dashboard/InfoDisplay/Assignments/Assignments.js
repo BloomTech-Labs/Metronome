@@ -37,7 +37,7 @@ class Assignments extends Component {
             </div>
 
         ))}
-          <AddAssignmentCard />
+          <AddAssignmentCard  />
         </div>
       </div>
 

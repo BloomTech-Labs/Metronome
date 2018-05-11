@@ -1,3 +1,5 @@
-.menu-container {
+.dashboard-container {
   display: flex;
+  justify-content: center;
+ 
 }

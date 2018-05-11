@@ -11,6 +11,7 @@ import AssignmentForm from '../InfoDisplay/Assignments/AddAssignments/Assignment
 import StudentAssignment from '../InfoDisplay/StudentAssignments/StudentAssignment';
 import TeacherAssignments from './Assignments/TeacherAssignments/TeacherAssignments';
 
+
 const InfoDisplay = props => (
   <div>
     <Switch>
