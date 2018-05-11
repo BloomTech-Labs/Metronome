@@ -7,7 +7,7 @@ const BuyNowButton = () => (
   <div>
     <LinkContainer to="/dashboard/billing">
       <ButtonToolbar className="buynow">
-        <Button active bsStyle="info" bsSize="large" block>Buy Now</Button>
+        <Button active bsStyle="info" bsSize="small" block>Buy Now</Button>
       </ButtonToolbar>
     </LinkContainer>
   </div>

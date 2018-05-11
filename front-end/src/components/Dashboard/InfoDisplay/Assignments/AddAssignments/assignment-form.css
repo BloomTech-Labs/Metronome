@@ -1,0 +1,27 @@
+Button {
+  width: 300px;
+  display: inline;
+}
+
+.button-container {
+  display: flex;
+  margin: 20px;
+  justify-content: space-between;
+}
+
+.hours {
+  width: 30px;
+}
+
+.hours-container {
+  margin-right: 20px;
+  width: 50px;
+}
+
+.date-container {
+  margin-right: 30px;
+}
+
+.title {
+  width: 80%;
+}

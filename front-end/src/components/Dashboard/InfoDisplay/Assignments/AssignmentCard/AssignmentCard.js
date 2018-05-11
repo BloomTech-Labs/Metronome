@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
+import './assignment-card.css';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import FATrash from 'react-icons/lib/fa/trash';
-// import { Z_DEFAULT_STRATEGY } from 'zlib';
 
 const AssignmentCard = (props) => {
   const date = new Date(props.dueDate);
@@ -34,6 +33,7 @@ const AssignmentCard = (props) => {
     </div>
   );
 };
+
 
 AssignmentCard.propTypes = {
   deleteAssignment: PropTypes.func.isRequired,
