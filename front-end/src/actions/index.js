@@ -181,7 +181,7 @@ export const updateAssignment = (updates, assignmentId) => (dispatch) => {
   dispatch({ type: UPDATE_ASSIGNMENT_REQUEST });
   axios.put('/api/student/updateAssignment', { updates, assignmentId }, { headers: { Authorization: token } })
     .then((response) => {
-
+      dispatch({ type: UPDATE_ASSIGNMENT_SUCCESS });
     })
     .catch((error) => {
       dispatch({ type: UPDATE_ASSIGNMENT_FAILURE, error: error.response.data });
