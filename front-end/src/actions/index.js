@@ -38,6 +38,10 @@ export const CLAIM_ASSIGNMENT_REQUEST = 'CLAIM_ASSIGNMENT_REQUEST';
 export const CLAIM_ASSIGNMENT_SUCCESS = 'CLAIM_ASSIGNMENT_SUCCESS';
 export const CLAIM_ASSIGNMENT_FAILURE = 'CLAIM_ASSIGNMENT_FAILURE';
 
+export const UPDATE_ASSIGNMENT_REQUEST = 'UPDATE_ASSIGNMENT_REQUEST';
+export const UPDATE_ASSIGNMENT_SUCCESS = 'UPDATE_ASSIGNMENT_SUCCESS';
+export const UPDATE_ASSIGNMENT_FAILURE = 'UPDATE_ASSIGNMENT_FAILURE';
+
 export const GET_STUDENT_LIST = 'GET_STUDENT_LIST';
 export const GET_STUDENT_ASSIGNMENT = 'GET_STUDENT_ASSIGNMENT';
 
@@ -159,7 +163,7 @@ export const deleteAssignment = id => (dispatch) => {
     });
 };
 
-export const claimAssignment = assignmentToken => (dispatch) =>  {
+export const claimAssignment = assignmentToken => (dispatch) => {
   const token = window.localStorage.getItem('token');
   dispatch({ type: CLAIM_ASSIGNMENT_REQUEST });
   axios.post('/api/student/claimAssignmentToken', { assignmentToken }, { headers: { Authorization: token } })
@@ -169,6 +173,18 @@ export const claimAssignment = assignmentToken => (dispatch) =>  {
     })
     .catch((error) => {
       dispatch({ type: CLAIM_ASSIGNMENT_FAILURE, error: error.response.data });
+    });
+};
+
+export const updateAssignment = (updates, assignmentId) => (dispatch) => {
+  const token = window.localStorage.getItem('token');
+  dispatch({ type: UPDATE_ASSIGNMENT_REQUEST });
+  axios.put('/api/student/updateAssignment', { updates, assignmentId }, { headers: { Authorization: token } })
+    .then((response) => {
+
+    })
+    .catch((error) => {
+      dispatch({ type: UPDATE_ASSIGNMENT_FAILURE, error: error.response.data });
     });
 };
 
