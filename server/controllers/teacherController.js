@@ -44,7 +44,7 @@ exports.emailAssignments = async function (req, res, next) {
 
     const assignment = new Assignment({ emails, name, days, dueDate, hours, musicSheetAddr, fileName, teacher: teacher._id });
     await assignment.save();
-    await teacher.emailAssignment(emails, assignment._id);
+    await teacher.emailAssignment(emails, assignment);
     res.status(200).json({ assignment });
   } catch (err) {
     next(err);
