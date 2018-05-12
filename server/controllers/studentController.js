@@ -21,11 +21,17 @@ exports.claimAssignmentToken = async function (req, res, next) {
   try {
     const { assignmentToken } = req.body;
     const student = await Student.findById(req.user._id);
-    const { assignmentId } = jwt.decode(assignmentToken);
+    const { assignmentId, email: studentEmail } = jwt.decode(assignmentToken);
     const assignment = await Assignment.findById(assignmentId);
+
+    if (!assignment.emails.includes(studentEmail)) {
+      throw new Error('You have already claimed this assignment or you are not registered to the assignment.');
+    }
+
     if (!assignment.students.includes(student._id)) {
       assignment.students.push(student._id);
     }
+    assignment.emails = assignment.emails.filter(email => email !== student.email);
     await assignment.save();
     res.status(200).json({ message: 'Assignment claimed successfully!' });
   } catch (err) {
@@ -67,7 +73,7 @@ exports.getAssignments = async function (req, res, next) {
     const assignments = await Assignment
       .find({ students: student._id })
       .select('-students -emails').populate('teacher', 'email firstName lastName');
-    res.status(200).json(assignments);
+    res.status(200).json({ assignments });
   } catch (err) {
     next(err);
   }

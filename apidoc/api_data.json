@@ -216,7 +216,7 @@
   },
   {
     "type": "get",
-    "url": "/api/teacher/assignment",
+    "url": "/api/teacher/assignments",
     "title": "Get logged in teacher's assignments",
     "name": "GetAssignments",
     "group": "Teacher",
