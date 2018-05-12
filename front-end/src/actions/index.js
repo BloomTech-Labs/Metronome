@@ -34,6 +34,10 @@ export const DELETE_ASSIGNMENT_REQUEST = 'DELETE_ASSIGNMENT_REQUEST';
 export const DELETE_ASSIGNMENT_SUCCESS = 'DELETE_ASSIGNMENT_SUCCESS';
 export const DELETE_ASSIGNMENT_FAILURE = 'DELETE_ASSIGNMENT_FAILURE';
 
+export const CLAIM_ASSIGNMENT_REQUEST = 'CLAIM_ASSIGNMENT_REQUEST';
+export const CLAIM_ASSIGNMENT_SUCCESS = 'CLAIM_ASSIGNMENT_SUCCESS';
+export const CLAIM_ASSIGNMENT_FAILURE = 'CLAIM_ASSIGNMENT_FAILURE';
+
 export const GET_STUDENT_LIST = 'GET_STUDENT_LIST';
 export const GET_STUDENT_ASSIGNMENT = 'GET_STUDENT_ASSIGNMENT';
 
@@ -152,6 +156,19 @@ export const deleteAssignment = id => (dispatch) => {
     })
     .catch((error) => {
       dispatch({ type: DELETE_ASSIGNMENT_FAILURE, error: error.response.data });
+    });
+};
+
+export const claimAssignment = assignmentToken => (dispatch) =>  {
+  const token = window.localStorage.getItem('token');
+  dispatch({ type: CLAIM_ASSIGNMENT_REQUEST });
+  axios.post('/api/student/claimAssignmentToken', { assignmentToken }, { headers: { Authorization: token } })
+    .then((response) => {
+      dispatch({ type: CLAIM_ASSIGNMENT_SUCCESS });
+      window.localStorage.removeItem('assignmentToken');
+    })
+    .catch((error) => {
+      dispatch({ type: CLAIM_ASSIGNMENT_FAILURE, error: error.response.data });
     });
 };
 

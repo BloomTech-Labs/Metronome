@@ -29,11 +29,11 @@ export default (state = initialState, action) => {
     case ADD_ASSIGNMENT_SUCCESS:
       return { ...state, isPending: false, assignments: [action.payload].concat(state.assignments) };
     case DELETE_ASSIGNMENT_SUCCESS: {
-      const id = action.payload;
+      const { id } = action;
       return {
         ...state,
         isPending: false,
-        assignments: state.assignments.filter(assignment => assignment.id !== id),
+        assignments: state.assignments.filter(assignment => assignment._id !== id),
       };
     }
     default:

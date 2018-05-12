@@ -40,7 +40,9 @@ class LoginNavBar extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <p>Metronome</p>
+            <LinkContainer to="/">
+              <NavItem className="nav-brand" href="#">Metronome</NavItem>
+            </LinkContainer>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav>

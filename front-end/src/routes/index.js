@@ -6,6 +6,7 @@ import LandingPage from '../components/landingpage/landingpage';
 import Dashboard from '../components/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute';
 import Navbar from '../components/Navbar/signInSignUp';
+import ClaimToken from '../components/ClaimToken/ClaimToken';
 
 const LoginContainer = () => (
   <div>
@@ -34,6 +35,7 @@ export default () => (
     <Switch>
       <Route exact path="/(login)" component={LoginContainer} />
       <Route exact path="/(signup)" component={SignupContainer} />
+      <Route path="/claim-token" component={ClaimToken} />
       <Route component={DefaultContainer} />
     </Switch>
   </BrowserRouter>

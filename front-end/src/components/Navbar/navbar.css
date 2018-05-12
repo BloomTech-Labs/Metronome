@@ -1,3 +1,7 @@
+.nav-brand {
+  list-style-type: none;
+}
+
 .container {
   flex: 1 100%;
 }

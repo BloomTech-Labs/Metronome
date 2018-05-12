@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-import { getStudentAssignment } from '../../../../actions';
+import { getAssignments } from '../../../../actions';
 
 
 import './studentassignment.css';
 
-class StudentAssignments extends Component {
+class StudentAssignment extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,8 +16,7 @@ class StudentAssignments extends Component {
     };
   }
   componentWillMount() {
-    const { assignmentId } = this.props.match.params;
-    this.props.getStudentAssignment(assignmentId);
+    this.props.getAssignments();
   }
 
   // TODO: Need to setup to change checkbox to completed for that day
@@ -28,12 +28,16 @@ class StudentAssignments extends Component {
   }
 
   render() {
+    if (this.props.assignments.isPending || !this.props.assignments.assignments.length) { return <div>Loading...</div>; }
+    const { assignmentId } = this.props.match.params;
+    const filterAssignment = this.props.assignments.assignments.filter(assignment => assignment._id === assignmentId);
+    const date = moment(filterAssignment[0].dueDate).format('l');
     return (
       <div className="body">
         <Card>
           <CardBody>
-            <CardTitle>{this.props.assignments[0].assignmentName}</CardTitle>
-            <CardSubtitle>{this.props.assignments[0].dueDate}</CardSubtitle>
+            <CardTitle>{filterAssignment[0].name}</CardTitle>
+            <CardSubtitle>{date}</CardSubtitle>
           </CardBody>
 
           <img
@@ -45,7 +49,7 @@ class StudentAssignments extends Component {
           <div className="days-container">
             <fieldset>
               <legend>Check off when you practice</legend>
-              {this.props.assignments[0].daysToPractice.map(day => (
+              {filterAssignment[0].days.map(day => (
                 <div className="day-check-container">
 
                   <div className="box">
@@ -65,7 +69,7 @@ class StudentAssignments extends Component {
           </div>
 
           <div className="form">
-            <h3>Practice {this.props.assignments[0].hoursToPractice} Hours</h3>
+            <h3>Practice {filterAssignment[0].hours} Hours</h3>
           </div>
         </Card>
       </div>
@@ -73,7 +77,7 @@ class StudentAssignments extends Component {
   }
 }
 
-StudentAssignments.propTypes = {
+StudentAssignment.propTypes = {
   getStudentAssignment: PropTypes.func.isRequired,
   assignments: PropTypes.arrayOf.isRequired,
   match: PropTypes.shape({
@@ -83,4 +87,4 @@ StudentAssignments.propTypes = {
 
 const mapStateToProps = state => ({ assignments: state.assignments });
 
-export default connect(mapStateToProps, { getStudentAssignment })(StudentAssignments);
+export default connect(mapStateToProps, { getAssignments })(StudentAssignment);
