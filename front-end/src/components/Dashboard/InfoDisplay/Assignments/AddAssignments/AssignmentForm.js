@@ -115,6 +115,13 @@ class AssignmentForm extends Component {
       fileName: '',
       musicSheetAddr: '',
       email: '',
+      Sunday: false,
+      Monday: false,
+      Tuesday: false,
+      Wednesday: false,
+      Thursday: false,
+      Friday: false,
+      Saturday: false,
     });
   };
 
@@ -135,49 +142,49 @@ class AssignmentForm extends Component {
                 <Grid item xs={16}>
                   <Checkbox
                     className="daysToPractice"
-                    checked={this.state.checkedSunday}
+                    checked={this.state.Sunday}
                     onChange={this.handleChange('Sunday')}
                     value="checkedSunday"
                   />
                   <label htmlFor="checkedSunday">Sunday</label>
                   <Checkbox
                     className="daysToPractice"
-                    checked={this.state.checkedMonday}
+                    checked={this.state.Monday}
                     onChange={this.handleChange('Monday')}
                     value="checkedMonday"
                   />
                   <label htmlFor="checkedMonday">Monday</label>
                   <Checkbox
                     className="daysToPractice"
-                    checked={this.state.checkedTuesday}
+                    checked={this.state.Tuesday}
                     onChange={this.handleChange('Tuesday')}
                     value="checkedTuesday"
                   />
                   <label htmlFor="checkedTuesday">Tuesday</label>
                   <Checkbox
                     className="daysToPractice"
-                    checked={this.state.checkedWednesday}
+                    checked={this.state.Wednesday}
                     onChange={this.handleChange('Wednesday')}
                     value="checkedWednesday"
                   />
                   <label htmlFor="checkedWednesday">Wednesday</label>
                   <Checkbox
                     className="daysToPractice"
-                    checked={this.state.checkedThursday}
+                    checked={this.state.Thursday}
                     onChange={this.handleChange('Thursday')}
                     value="checkedThursday"
                   />
                   <label htmlFor="checkedThursday">Thursday</label>
                   <Checkbox
                     className="daysToPractice"
-                    checked={this.state.checkedFriday}
+                    checked={this.state.Friday}
                     onChange={this.handleChange('Friday')}
                     value="checkedFriday"
                   />
                   <label htmlFor="checkedFriday">Friday</label>
                   <Checkbox
                     className="daysToPractice"
-                    checked={this.state.checkedSaturday}
+                    checked={this.state.Saturday}
                     onChange={this.handleChange('Saturday')}
                     value="checkedSaturday"
                   />
