@@ -90,6 +90,7 @@ UserSchema.methods.generateJWT = function () {
     email: this.email,
     name: `${this.firstName} ${this.lastName}`,
     role: this.__t,
+    isSubscribe: this.isSubscribe,
     exp: Math.round(exp.getTime() / 1000),
   }, secret);
 };
