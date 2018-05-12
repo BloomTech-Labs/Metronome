@@ -56,7 +56,7 @@ class AssignmentForm extends Component {
         days: [...this.state.days, name],
       });
     } else {
-      const filteredArray = this.state.day.filter(day => day !== name);
+      const filteredArray = this.state.days.filter(day => day !== name);
 
       this.setState({
         days: filteredArray,
@@ -195,13 +195,13 @@ class AssignmentForm extends Component {
                   value={this.state.hours}
                   onChange={this.handleStateDataChange}
                 />
-                
+
                 </div>
                 <label htmlFor="hours">hrs</label>
                 <div className='date-container'>
-                
-                
-               
+
+
+
                 <label htmlFor="due date">Due Date:</label>
                 <DatePicker
                   selected={this.state.date}
@@ -225,20 +225,20 @@ class AssignmentForm extends Component {
                   onChange={this.handleStateDataChange}
                 />
               </Grid>
-              
+
               <Grid item>
-             
+
                 <Button  variant="raised" onClick={this.addAssignment}>
                   Submit
                 </Button>
-               
+
               </Grid>
-            
-              
+
+
                 <Button variant="raised" onClick={this.props.history.goBack}>
                   Assignments
                 </Button>
-              
+
             </Grid>
           </Grid>
         </div>

@@ -109,7 +109,7 @@ exports.deleteAssignment = async function (req, res, next) {
     teacher.assignments.splice(teacher.assignments.indexOf(id), 1);
     await teacher.save();
     res.status(200).json(assignment);
-    } catch (err) {
+  } catch (err) {
     next(err);
   }
 };
