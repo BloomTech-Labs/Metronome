@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Route, Switch } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import Assignments from '../InfoDisplay/Assignments/Assignments';
 import AssignmentDetails from '../InfoDisplay/Assignments/AssignmentDetails/AssignmentDetails';
 import Billing from '../InfoDisplay/Billing/index';
