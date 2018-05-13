@@ -13,14 +13,13 @@ import './assignment-form.css';
 axios.defaults.withCredentials = true;
 
 
-
 class AssignmentForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       name: '',
-      days: [],
+      days: {},
       hours: '',
       Sunday: false,
       Monday: false,
@@ -53,14 +52,14 @@ class AssignmentForm extends Component {
     });
     if (event.target.checked) {
       this.setState({
-        days: [...this.state.days, name],
+        days: { ...this.state.days, [name]: false },
       });
-    } else {
-      const filteredArray = this.state.days.filter(day => day !== name);
+    // } else {
+    //   const filteredArray = this.state.days.filter(day => day !== name);
 
-      this.setState({
-        days: filteredArray,
-      });
+    //   this.setState({
+    //     days: filteredArray,
+    //   });
     }
   };
 
@@ -110,7 +109,7 @@ class AssignmentForm extends Component {
     this.props.addAssignment(assignment);
     this.setState({
       name: '',
-      days: [],
+      days: {},
       hours: '',
       fileName: '',
       musicSheetAddr: '',
@@ -193,33 +192,32 @@ class AssignmentForm extends Component {
               </Grid>
               <Grid container justify="center">
                 <Grid item />
-                <div className='hours-container'>
-                <input
-                  className="hours"
-                  name="hours"
-                  type="text"
-                  placeholder="0"
-                  value={this.state.hours}
-                  onChange={this.handleStateDataChange}
-                />
+                <div className="hours-container">
+                  <input
+                    className="hours"
+                    name="hours"
+                    type="text"
+                    placeholder="0"
+                    value={this.state.hours}
+                    onChange={this.handleStateDataChange}
+                  />
 
                 </div>
                 <label htmlFor="hours">hrs</label>
-                <div className='date-container'>
+                <div className="date-container">
 
 
-
-                <label htmlFor="due date">Due Date:</label>
-                <DatePicker
-                  selected={this.state.date}
-                  onChange={this.handledDateChange}
-                />
+                  <label htmlFor="due date">Due Date:</label>
+                  <DatePicker
+                    selected={this.state.date}
+                    onChange={this.handledDateChange}
+                  />
                 </div>
                 <Grid item>
-                <div className='fileupload-container'>
-                  <Dropzone onDrop={this.onDrop} size={150}>
+                  <div className="fileupload-container">
+                    <Dropzone onDrop={this.onDrop} size={150}>
                     Drop some files here!
-                  </Dropzone>
+                    </Dropzone>
                   </div>
                 </Grid>
               </Grid>
@@ -235,16 +233,16 @@ class AssignmentForm extends Component {
 
               <Grid item>
 
-                <Button  variant="raised" onClick={this.addAssignment}>
+                <Button variant="raised" onClick={this.addAssignment}>
                   Submit
                 </Button>
 
               </Grid>
 
 
-                <Button variant="raised" onClick={this.props.history.goBack}>
+              <Button variant="raised" onClick={this.props.history.goBack}>
                   Assignments
-                </Button>
+              </Button>
 
             </Grid>
           </Grid>

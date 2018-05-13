@@ -4,6 +4,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import { getAssignments } from '../../../../actions';
+import CheckboxForm from './CheckboxForm';
 
 
 import './studentassignment.css';
@@ -32,6 +33,7 @@ class StudentAssignment extends Component {
     const { assignmentId } = this.props.match.params;
     const filterAssignment = this.props.assignments.assignments.filter(assignment => assignment._id === assignmentId);
     const date = moment(filterAssignment[0].dueDate).format('l');
+    const { days } = filterAssignment[0];
     return (
       <div className="body">
         <Card>
@@ -47,7 +49,7 @@ class StudentAssignment extends Component {
             alt="img"
           />
           <div className="days-container">
-            <fieldset>
+            {/* <fieldset>
               <legend>Check off when you practice</legend>
               {filterAssignment[0].days.map(day => (
                 <div className="day-check-container">
@@ -65,7 +67,8 @@ class StudentAssignment extends Component {
 
                 </div>
               ))}
-            </fieldset>
+            </fieldset> */}
+            <CheckboxForm days={days} assignmentId={assignmentId} />
           </div>
 
           <div className="form">

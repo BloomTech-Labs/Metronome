@@ -15,7 +15,7 @@ const AssignmentDetails = (props) => {
     <div>
       <h1>Assignment Details</h1>
       <h3>{assignDetails.name}</h3>
-      <h3>{assignDetails.days}</h3>
+      <h3>{Object.keys(assignDetails.days)}</h3>
       <h3>{date}</h3>
       <h3>{assignDetails.email}</h3>
       <h3>{assignDetails.hours}</h3>

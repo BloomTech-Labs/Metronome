@@ -16,11 +16,19 @@ class TeacherAssignments extends Component {
         <h1>{assignmentName}</h1>
         {sortedList.map(assign => (
           <div>
-            <li>{assign.clientName}</li>
-            <ul>{assign.days.map(day => (
-              <li className="day">{day}</li>
+            <div>{assign.students.map(student => (
+              <div>
+                <h3>{`${student.firstName} ${student.lastName}`}</h3>
+                <ul>{Object.keys(assign.days).map(day => (
+                  <div className="day" style={{ display: 'inline-block' }}>
+                    <input type="checkbox" name={day} value={assign.days[day]} checked={assign.days[day]} disabled="disabled" />
+                    <label htmlFor={day}>{day}</label>
+                  </div>
         ))}
-            </ul>
+                </ul>
+              </div>
+            ))}
+            </div>
           </div>
 
       ))
