@@ -86,8 +86,6 @@ exports.updateAssignment = async (req, res, next) => {
     Object.keys(assignment.days).forEach((day) => {
       if (updates[day]) {
         assignment.days[day] = true;
-      } else {
-        assignment.days[day] = false;
       }
     });
     assignment.markModified('days');
