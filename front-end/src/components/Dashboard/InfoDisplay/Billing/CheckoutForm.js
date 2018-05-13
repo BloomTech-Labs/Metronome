@@ -104,7 +104,7 @@ class CheckoutForm extends Component {
             />
           </FormGroup>
           <div style={{ color: 'red' }}>{this.state.error}</div>
-          <button>Buy Now</button>
+          <button style={{ width: 'calc(100% - 30px)' }}>Buy Now</button>
         </form>
       </div>
     );

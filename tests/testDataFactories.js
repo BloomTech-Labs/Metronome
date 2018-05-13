@@ -38,7 +38,7 @@ exports.AssignmentDataFactory = class AssignmentDataFactory {
   static get validNewAssignment() {
     return {
       name: 'everyday practice',
-      days: ['monday', 'wednesday', 'friday'],
+      days: { monday: false, wednesday: false, friday: false },
       hours: 1,
       dueDate: new Date(),
       musicSheetAddr: 'localhost:8000',
