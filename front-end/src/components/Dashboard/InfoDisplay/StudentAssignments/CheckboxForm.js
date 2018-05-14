@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { updateAssignment } from '../../../../actions';
 
 class CheckboxForm extends Component {
-  handleFormSubmit = (updates) => {
-    this.props.updateAssignment(updates, this.props.assignmentId);
+  handleFormSubmit = (days) => {
+    console.log(days);
+    this.props.updateAssignment(days, this.props.assignmentId);
   };
 
   render() {

@@ -73,6 +73,7 @@ class StudentAssignment extends Component {
 
           <div className="form">
             <h3>Practice {filterAssignment[0].hours} Hours</h3>
+            <h3>Download: </h3><a href={filterAssignment[0].musicSheetAddr}>{filterAssignment[0].fileName}</a>
           </div>
         </Card>
       </div>
