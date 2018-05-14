@@ -37,7 +37,7 @@ class LoginNavBar extends Component {
   render() {
     return (
       <div className="container">
-      <Navbar>
+      <Navbar fixedTop={true}>
         <Navbar.Header>
           <Navbar.Brand>
             <LinkContainer to="/">
