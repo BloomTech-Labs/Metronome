@@ -30,7 +30,7 @@
  * @apiErrorExample InvalidInput-Response:
  *    HTTP/1.1 400 Bad Request
  *    {
- *      "errors": "Password must be between 8 and 56 characters.", "First Name is a required field."
+ *      "errors": "Password must be between 8 and 56 characters."
  *    }
  */
 
