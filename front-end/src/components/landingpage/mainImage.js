@@ -8,6 +8,7 @@ import guitar from './assets/guitarPractice.png';
 
 const MainImage = () => (
   <div className="slider-cover">
+    
       <div id="slider">
         <div className="slider-content">
           <img src={mainimage} alt="" />

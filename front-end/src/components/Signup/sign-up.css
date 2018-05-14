@@ -2,7 +2,6 @@
 	display: flex;
 	justify-content: center;
 	text-align: center;
-	margin-top: 15%;
 }
 
 input {
@@ -16,9 +15,9 @@ select {
 	width: 200px;
 }
 
-h1 {
-	font-family: 'Roboto', sans-serif;
-	font-size: 30px;
-	color: black;
-	text-decoration-line: underline;
+
+.header-con .title{
+	font-size: 100px;
+	text-transform: uppercase;
+	/* margin-bottom: 5px; */
 }

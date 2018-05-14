@@ -77,10 +77,10 @@ class SignUp extends Component {
 
 	render() {
 	  return (
-  <div className="form-container">
+  <div className="form-container" style={{marginTop: "-10%"}}>
     <div className="signup-form">
       <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-        <h1>Sign Up</h1>
+        <h2 className="title header-con">Sign Up</h2>
         <Error error={this.props.auth.error} />
         <div>
           <Field name="role" component="select">
