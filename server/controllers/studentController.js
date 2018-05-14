@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Assignment = require('../models/Assignment');
 const Student = require('../models/Student');
+const AssignmentProgress = require('../models/AssignmentProgress');
 
 /**
  * @api {post} /api/student/claimAssignmentToken Claim assignment token
@@ -73,7 +74,44 @@ exports.getAssignments = async function (req, res, next) {
     const assignments = await Assignment
       .find({ students: student._id })
       .select('-students -emails').populate('teacher', 'email firstName lastName');
-    res.status(200).json({ assignments });
+
+    // Go through all assignments and add the progress to them
+    const progressQuery = assignments.map(async (assignment) => {
+      const progress = await assignment.getProgress({ studentId: req.user._id });
+      return { ...assignment.toObject(), progress };
+    });
+    const assignmentsWithProgress = await Promise.all(progressQuery);
+
+    res.status(200).json({ assignments: assignmentsWithProgress });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAssignmentById = async function (req, res, next) {
+  try {
+    const assignmentId = req.params.id;
+    const assignment = await Assignment
+      .findById(assignmentId)
+      .select('-students -emails').populate('teacher', 'email firstName lastName');
+    const progress = await assignment.getProgress({ studentId: req.user._id });
+    res.status(200).json({
+      assignment: { ...assignment.toObject(), progress },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.updateProgress = async function (req, res, next) {
+  try {
+    const { progress, assignmentId } = req.body;
+    const student = await Student.findById(req.user._id);
+    const assignmentProgress = await AssignmentProgress.findOne({ assignment: assignmentId, student: student._id });
+    assignmentProgress.progress = progress;
+    assignmentProgress.markModified('progress');
+    await assignmentProgress.save();
+    res.status(200).json({ ...assignmentProgress });
   } catch (err) {
     next(err);
   }
