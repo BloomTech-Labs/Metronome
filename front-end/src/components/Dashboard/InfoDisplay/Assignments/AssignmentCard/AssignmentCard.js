@@ -17,9 +17,9 @@ const AssignmentCard = (props) => {
       <Col>
         <Card>
           {role === 'Teacher' ?
-          <Link to={`/dashboard/teacher-assignments/${props.name}`}>
-            <CardTitle>{props.name}</CardTitle>
-          </Link> : <CardTitle>{props.name}</CardTitle>}
+            <Link to={`/dashboard/teacher-assignments/${props.id}`}>
+              <CardTitle>{props.name}</CardTitle>
+            </Link> : <CardTitle>{props.name}</CardTitle>}
           <Link to={`/dashboard/${role.toLowerCase()}-assignment-details/${props.id}`}>
             <CardImg
               top

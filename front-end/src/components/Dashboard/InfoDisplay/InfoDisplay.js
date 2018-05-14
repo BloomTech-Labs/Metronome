@@ -25,7 +25,7 @@ const InfoDisplay = props => (
       <Route path={`${props.match.path}/settings`} component={UserSettings} />
       <Route
         path={`${props.match.path}/add-assignment`}
-          component={AssignmentForm}
+        component={AssignmentForm}
       />
       <Route
         path={`${props.match.path}/teacher-assignment-details/:userId`}
@@ -36,7 +36,7 @@ const InfoDisplay = props => (
         component={StudentAssignment}
       />
       <Route
-        path={`${props.match.path}/teacher-assignments/:assignmentName`}
+        path={`${props.match.path}/teacher-assignments/:assignmentId`}
         component={TeacherAssignments}
       />
     </Switch>
