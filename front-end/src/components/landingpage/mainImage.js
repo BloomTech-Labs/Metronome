@@ -7,23 +7,10 @@ import guitar from './assets/guitarPractice.png';
 
 
 const MainImage = () => (
-  // <div className="mainimage">
-  //   <Carousel showThumbs={false} showArrows={false} showStatus={false} infiniteLoop>
-  //     <div>
-  //       <img alt="metronome" src={mainimage} />
-  //     </div>
-  //     <div>
-  //       <img alt="slogan" src={slogan} />
-  //     </div>
-  //     <div>
-  //       <img alt="guitar" src={guitar} />
-  //     </div>
-  //   </Carousel>
-  // </div>
   <div className="slider-cover">
       <div id="slider">
         <div className="slider-content">
-          <img src="img/placehold/banner.png" alt="" />
+          <img src={mainimage} alt="" />
 
           <div className="conent">
             <div className="cover">
@@ -40,8 +27,8 @@ const MainImage = () => (
         </div>
 
         <div className="slider-content">
-           <img src="img/placehold/banner.png" alt="" />
-           <div className="conent">
+            <img src={slogan} alt="" />
+            <div className="conent">
           <span className="bg-text">CONFERENCE</span>
 
           <h2 className="title">BUSINESS CONFERENCE INFO</h2>
