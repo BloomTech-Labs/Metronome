@@ -19,6 +19,7 @@ const AssignmentSchema = new mongoose.Schema({
   },
   days: {
     type: mongoose.Schema.Types.Mixed,
+    required: [true, 'Assignment days is a required field.'],
   },
   dueDate: {
     type: Date,
