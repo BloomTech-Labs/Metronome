@@ -14,7 +14,7 @@ class Login extends Component {
 
 	render() {
 	  return (
-      <section id="about" className="container" style={{marginTop: "3%"}}>
+      <section id="about" className="container" style={{marginTop: "3%", width: '60%'}}>
         <div className="row">
             <div className="">
                 <div className="icon-box">

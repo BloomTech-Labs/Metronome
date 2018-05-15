@@ -78,7 +78,7 @@ class SignUp extends Component {
 
 	render() {
 	  return (
-      <section id="about" class="container"  style={{marginTop: "-1%"}}>
+      <section id="about" class="container"  style={{marginTop: "-1%", width: '60%'}}>
       <div class="header-con text-center" >
         <div class="row">
             <div>
