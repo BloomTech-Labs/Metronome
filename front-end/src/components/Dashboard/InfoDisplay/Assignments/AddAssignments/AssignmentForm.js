@@ -33,6 +33,7 @@ class AssignmentForm extends Component {
       email: '',
       fileName: '',
       disabled: false,
+      preview: null,
     };
   }
 
@@ -88,9 +89,8 @@ class AssignmentForm extends Component {
         },
       })
       .then (response => {
-        console.log(response.data);
         const {fileName, musicSheetAddr} = response.data;
-        this.setState ({fileName, musicSheetAddr, disabled: true});
+        this.setState ({preview: files[0].preview,fileName, musicSheetAddr, disabled: true});
       })
       .catch (err => console.log (err));
   };
@@ -137,6 +137,7 @@ class AssignmentForm extends Component {
   };
 
   render () {
+    const {preview} = this.state;
     return (
       <div>
         <div style={{margin: 40}}>
@@ -234,8 +235,10 @@ class AssignmentForm extends Component {
                       onDrop={this.onDrop}
                       size={150}
                     >
-                      Drop some files here!
+                      Upload sheet music here!
+                      {preview && <img src={preview} alt="sheet music" />}
                     </Dropzone>
+                    
                   </div>
                 </Grid>
               </Grid>
