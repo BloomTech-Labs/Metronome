@@ -7,6 +7,7 @@ import Button from 'material-ui/Button';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
 import Error from '../Error/Error';
+import Background from '../landingpage/assets/background.jpg';
 
 
 import './sign-up.css';
