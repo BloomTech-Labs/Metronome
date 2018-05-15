@@ -21,7 +21,7 @@ const style = {
 class CardSection extends React.Component {
   render() {
     return (
-      <Card style={{ display: 'flex', flexDirection: 'column', padding: '0 2rem' }}>
+      <Card style={{ display: 'flex', flexDirection: 'column', padding: '0 1rem' }}>
         <h3>Payment Info</h3>
         <label>
           Card number
