@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { register } from '../../actions';
 import { Link } from 'react-router-dom';
-import Button from 'material-ui/Button';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
 import Error from '../Error/Error';
+
 
 import './sign-up.css';
 
@@ -77,79 +77,93 @@ class SignUp extends Component {
 
 	render() {
 	  return (
-  <div className="form-container">
-    <div className="signup-form">
-      <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-        <h1>Sign Up</h1>
-        <Error error={this.props.auth.error} />
-        <div>
-          <Field name="role" component="select">
-            <option>Please select role</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Student">Student</option>
-          </Field>
-        </div>
-        <div className="pair">
-          <Field
-            name="firstName"
-            component="input"
-            placeholder="First Name"
-            autoComplete="off"
-          />
-          <br />
-        </div>
-        <div className="pair">
-          <Field
-            name="lastName"
-            placeholder="Last Name"
-            component="input"
-            autoComplete="off"
-          />
-          <br />
-        </div>
-        <div className="pair">
-          <Field
-            name="email"
-            placeholder="email"
-            type="email"
-            component="input"
-            autoComplete="off"
-          />
-          <br />
-        </div>
-        <div className="pair">
-          <Field
-            name="password"
-            type="password"
-            placeholder="password"
-            component="input"
-            autoComplete="off"
-          />
-          <br />
-        </div>
-        <div className="pair">
-          <Field
-            name="confirmPassword"
-            type="password"
-            placeholder="confirm password"
-            component="input"
-            autoComplete="off"
-          />
-          <br />
-        </div>
-        <Button
-          style={{ fontSize: '14px' }}
-          className="btn--signup"
-          variant="raised"
-          color="primary"
-          type="submit"
-        >Sign Up
-        </Button>
-        <br />
-        <Link className="link" to="/login">Already have an account?</Link>
-      </form>
-    </div>
-  </div>
+      <section id="about" class="container"  style={{marginTop: "-1%", width: '60%'}}>
+      <div class="header-con text-center" >
+        <div class="row">
+            <div>
+                <div class="icon-box">
+                    <div class="icon-box-content">
+                        <div class="content">
+                          <h2 class="title" style={{marginLeft: '8%'}}>Welcome to Metronome</h2>
+                          <div className="form-container" style={{marginTop: "-10%"}}>
+                            <div className="signup-form">
+                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '40%'}}>
+                                <Error error={this.props.auth.error} />
+                                <div>
+                                  <Field name="role" component="select" style={{width: '100%'}}>
+                                    <option>Please select role</option>
+                                    <option value="Teacher">Teacher</option>
+                                    <option value="Student">Student</option>
+                                  </Field>
+                                </div>
+                                <div className="pair">
+                                  <Field
+                                    name="firstName"
+                                    type="email"
+                                    component="input"
+                                    placeholder="First Name"
+                                    autoComplete="off"
+                                  />
+                                  <br />
+                                </div>
+                                <div className="pair">
+                                  <Field
+                                    name="lastName"
+                                    placeholder="Last Name"
+                                    component="input"
+                                    type="email"
+                                    autoComplete="off"
+                                  />
+                                  <br />
+                                </div>
+                                <div className="pair">
+                                  <Field
+                                    name="email"
+                                    placeholder="email"
+                                    type="email"
+                                    component="input"
+                                    autoComplete="off"
+                                  />
+                                  <br />
+                                </div>
+                                <div className="pair">
+                                  <Field
+                                    name="password"
+                                    type="password"
+                                    placeholder="password"
+                                    component="input"
+                                    autoComplete="off"
+                                  />
+                                  <br />
+                                </div>
+                                <div className="pair">
+                                  <Field
+                                    name="confirmPassword"
+                                    type="password"
+                                    placeholder="confirm password"
+                                    component="input"
+                                    autoComplete="off"
+                                  />
+                                  <br />
+                                </div>
+                                <input
+                                  style={{ fontSize: '14px', width: '100%' }}
+                                  type="submit"
+                                  value="Sign Up"
+                                ></input>
+                                <br />
+                                <Link className="link" to="/login">Already have an account?</Link>
+                              </form>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
 	  );
 	}
 }

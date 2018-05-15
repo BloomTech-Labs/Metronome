@@ -2,13 +2,16 @@
 	display: flex;
 	justify-content: center;
 	text-align: center;
-	margin-top: 15%;
 }
 
 input {
-	margin: 5px;
-	height: 30px;
-	width: 200px;
+	margin: 2%;
+	height: 15%;
+	width: 40%;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
 }
 select {
 	margin: 5px;
@@ -16,9 +19,29 @@ select {
 	width: 200px;
 }
 
-h1 {
-	font-family: 'Roboto', sans-serif;
+
+.header-con .title{
 	font-size: 30px;
-	color: black;
-	text-decoration-line: underline;
+	text-transform: uppercase;
+	/* margin-bottom: 5px; */
 }
+
+@media screen and (max-width: 600px) {
+  .col-25, .col-75 {
+      width: 100%;
+      margin-top: 0;
+  }
+  input[type=submit] {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+/* 
+html {
+	background-image: url('../landingpage/assets/background.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+} */
