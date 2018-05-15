@@ -24,7 +24,7 @@ class Login extends Component {
                           <div className="center">
                             <div className="signup-form">
                               <br />
-                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '300px', marginTop: '-12%'} }>
+                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '40%', marginTop: '-12%'} }>
                                 <div>
                                 <h2 className="title center" style={{marginLeft: "6%"}}>Welcome Back to Metronome</h2>
                                   <Field
@@ -44,7 +44,7 @@ class Login extends Component {
                                   />
                                 </div>
                                 <input
-                                  style={{ fontSize: '14px', width: '300px' }}
+                                  style={{ fontSize: '14px', width: '100%' }}
                                   type="submit"
                                   value="Log In"
                                 ></input>

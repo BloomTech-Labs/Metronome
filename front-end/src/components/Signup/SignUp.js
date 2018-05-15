@@ -89,10 +89,10 @@ class SignUp extends Component {
                           <h2 class="title" style={{marginLeft: '8%'}}>Welcome to Metronome</h2>
                           <div className="form-container" style={{marginTop: "-10%"}}>
                             <div className="signup-form">
-                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '300px'}}>
+                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '40%'}}>
                                 <Error error={this.props.auth.error} />
                                 <div>
-                                  <Field name="role" component="select" style={{width: '300px'}}>
+                                  <Field name="role" component="select" style={{width: '100%'}}>
                                     <option>Please select role</option>
                                     <option value="Teacher">Teacher</option>
                                     <option value="Student">Student</option>
@@ -149,7 +149,7 @@ class SignUp extends Component {
                                   <br />
                                 </div>
                                 <input
-                                  style={{ fontSize: '14px', width: '300px' }}
+                                  style={{ fontSize: '14px', width: '100%' }}
                                   type="submit"
                                   value="Sign Up"
                                 ></input>
