@@ -116,20 +116,3 @@ exports.updateProgress = async function (req, res, next) {
     next(err);
   }
 };
-
-exports.updateAssignment = async (req, res, next) => {
-  try {
-    const { updates, assignmentId } = req.body;
-    const assignment = await Assignment.findById(assignmentId);
-    Object.keys(assignment.days).forEach((day) => {
-      if (updates[day]) {
-        assignment.days[day] = true;
-      }
-    });
-    assignment.markModified('days');
-    await assignment.save();
-    res.status(200).json({ assignment });
-  } catch (err) {
-    next(err);
-  }
-};
