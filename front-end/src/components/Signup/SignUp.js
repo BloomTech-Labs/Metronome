@@ -147,14 +147,11 @@ class SignUp extends Component {
                                   />
                                   <br />
                                 </div>
-                                <Button
+                                <input
                                   style={{ fontSize: '14px' }}
-                                  className="btn btn-pri"
-                                  variant="raised"
-                                  color="primary"
                                   type="submit"
-                                >Sign Up
-                                </Button>
+                                  value="Sign Up"
+                                ></input>
                                 <br />
                                 <Link className="link" to="/login">Already have an account?</Link>
                               </form>

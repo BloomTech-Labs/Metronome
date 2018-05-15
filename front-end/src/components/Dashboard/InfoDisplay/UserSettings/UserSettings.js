@@ -5,6 +5,7 @@ import { updateUser } from '../../../../actions';
 import './userSettings.css';
 import Error from '../../../Error/Error';
 
+
 class UserSettings extends Component {
   // componentWillMount() {
   //   const token = window.localStorage.getItem('token');
@@ -24,82 +25,72 @@ class UserSettings extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '5rem' }}>
-        <Error error={this.props.auth.error} />
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="firstName">First Name:</label>
-          </div>
-          <div className="col-75">
-            <Field
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              autoComplete="off"
-              component="input"
-            />
-          </div>
+      <div>
+        <div className="header-con">
+          <h2 className="title">USER SETTINGS</h2>
+          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '5rem' }}>
+            <Error error={this.props.auth.error} />
+            <div className="row">
+              <div className="col-75">
+                <Field
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  autoComplete="off"
+                  component="input"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-75">
+                <Field
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  autoComplete="off"
+                  component="input"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-75">
+                <Field
+                  type="email"
+                  name="newEmail"
+                  placeholder="New email"
+                  autoComplete="off"
+                  component="input"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-75">
+                <Field
+                  type="password"
+                  name="oldPassword"
+                  placeholder="Old Password"
+                  autoComplete="off"
+                  component="input"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-75">
+                <Field
+                  type="password"
+                  name="newPassword"
+                  placeholder="New Password"
+                  autoComplete="off"
+                  component="input"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <input type="submit" value="Update" />
+            </div>
+          </form>
         </div>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="lastName">Last Name:</label>
-          </div>
-          <div className="col-75">
-            <Field
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              autoComplete="off"
-              component="input"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="newEmail">Email:</label>
-          </div>
-          <div className="col-75">
-            <Field
-              type="email"
-              name="newEmail"
-              placeholder="New email"
-              autoComplete="off"
-              component="input"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="oldPassword">Old Password:</label>
-          </div>
-          <div className="col-75">
-            <Field
-              type="password"
-              name="oldPassword"
-              placeholder="Old Password"
-              autoComplete="off"
-              component="input"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="newPassword">New Password:</label>
-          </div>
-          <div className="col-75">
-            <Field
-              type="password"
-              name="newPassword"
-              placeholder="New Password"
-              autoComplete="off"
-              component="input"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <input type="submit" value="Update" />
-        </div>
-      </form>
+      </div>
     );
   }
 }

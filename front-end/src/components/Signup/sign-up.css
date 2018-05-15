@@ -9,6 +9,10 @@ input {
 	height: 30px;
 	width: 200px;
 }
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
 select {
 	margin: 5px;
 	height: 30px;

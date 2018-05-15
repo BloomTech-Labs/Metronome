@@ -43,14 +43,11 @@ class Login extends Component {
                                     autoComplete="off"
                                   />
                                 </div>
-                                <Button
+                                <input
                                   style={{ fontSize: '14px' }}
-                                  className="btn btn-pri"
-                                  variant="raised"
-                                  color="primary"
                                   type="submit"
-                                >Log In
-                                </Button>
+                                  value="Log In"
+                                ></input>
                                 <br />
                                 <Link className="link" to="/signup">
                                   Need an Account?
