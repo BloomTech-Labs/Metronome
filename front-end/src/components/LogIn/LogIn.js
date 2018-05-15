@@ -13,43 +13,56 @@ class Login extends Component {
 
 	render() {
 	  return (
-  <div className="center">
-    <div className="signup-form">
-      <br />
-      <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-        <div>
-          <h1>Login</h1>
-          <Field
-            placeholder="Email"
-            name="email"
-            type="email"
-            autoComplete="off"
-            component="input"
-          />
-          <br />
-          <Field
-            placeholder="Password "
-            name="password"
-            type="password"
-            component="input"
-            autoComplete="off"
-          />
-        </div>
-        <Button
-          style={{ fontSize: '14px' }}
-          className="btn--signup"
-          variant="raised"
-          color="primary"
-          type="submit"
-        >Log In
-        </Button>
-        <br />
-        <Link className="link" to="/signup">
-                                      Need an Account?
-        </Link>
-      </form>
-    </div>
-  </div>
+      <section id="about" class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="icon-box">
+                    <div class="icon-box-content">
+                        <div class="content">
+                          <h2 class="title">Login</h2>
+                          <div className="center">
+                            <div className="signup-form">
+                              <br />
+                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+                                <div>
+                                  <Field
+                                    placeholder="Email"
+                                    name="email"
+                                    type="email"
+                                    autoComplete="off"
+                                    component="input"
+                                  />
+                                  <br />
+                                  <Field
+                                    placeholder="Password "
+                                    name="password"
+                                    type="password"
+                                    component="input"
+                                    autoComplete="off"
+                                  />
+                                </div>
+                                <Button
+                                  style={{ fontSize: '14px' }}
+                                  className="btn--signup"
+                                  variant="raised"
+                                  color="primary"
+                                  type="submit"
+                                >Log In
+                                </Button>
+                                <br />
+                                <Link className="link" to="/signup">
+                                  Need an Account?
+                                </Link>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </section>
+  
 	  );
 	}
 }
