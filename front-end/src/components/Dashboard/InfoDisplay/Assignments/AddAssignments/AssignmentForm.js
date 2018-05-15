@@ -90,7 +90,12 @@ class AssignmentForm extends Component {
       })
       .then (response => {
         const {fileName, musicSheetAddr} = response.data;
-        this.setState ({preview: files[0].preview,fileName, musicSheetAddr, disabled: true});
+        this.setState ({
+          preview: files[0].preview,
+          fileName,
+          musicSheetAddr,
+          disabled: true,
+        });
       })
       .catch (err => console.log (err));
   };
@@ -133,6 +138,7 @@ class AssignmentForm extends Component {
       Thursday: false,
       Friday: false,
       Saturday: false,
+      preview: null,
     });
   };
 
@@ -236,9 +242,11 @@ class AssignmentForm extends Component {
                       size={150}
                     >
                       Upload sheet music here!
-                      {preview && <img src={preview} alt="sheet music" />}
+
                     </Dropzone>
-                    
+                    <div className="image-preview">
+                      {preview && <img src={preview} alt="sheet music" />}
+                    </div>
                   </div>
                 </Grid>
               </Grid>
