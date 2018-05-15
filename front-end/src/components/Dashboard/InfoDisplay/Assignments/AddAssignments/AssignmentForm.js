@@ -88,7 +88,6 @@ class AssignmentForm extends Component {
         },
       })
       .then (response => {
-        console.log(response.data);
         const {fileName, musicSheetAddr} = response.data;
         this.setState ({fileName, musicSheetAddr, disabled: true});
       })
