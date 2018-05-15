@@ -8,7 +8,7 @@ import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
 import Error from '../Error/Error';
 
-import '../landingpage/landingpage.css';
+
 import './sign-up.css';
 
 // Input Valiations match backend
@@ -84,15 +84,11 @@ class SignUp extends Component {
             <div class="col-md-4 col-sm-4">
                 <div class="icon-box">
                     <div class="icon-box-content">
-                        <div class="icons ">
-                            <i class="fa fa-calendar"></i>
-                        </div>
                         <div class="content">
                           <h2 class="title">Sign Up</h2>
                           <div className="form-container" style={{marginTop: "-10%"}}>
                             <div className="signup-form">
                               <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-                                <h2 className="title header-con">Sign Up</h2>
                                 <Error error={this.props.auth.error} />
                                 <div>
                                   <Field name="role" component="select">
@@ -104,6 +100,7 @@ class SignUp extends Component {
                                 <div className="pair">
                                   <Field
                                     name="firstName"
+                                    type="email"
                                     component="input"
                                     placeholder="First Name"
                                     autoComplete="off"
@@ -115,6 +112,7 @@ class SignUp extends Component {
                                     name="lastName"
                                     placeholder="Last Name"
                                     component="input"
+                                    type="email"
                                     autoComplete="off"
                                   />
                                   <br />
@@ -151,7 +149,7 @@ class SignUp extends Component {
                                 </div>
                                 <Button
                                   style={{ fontSize: '14px' }}
-                                  className="btn--signup"
+                                  className="btn btn-pri"
                                   variant="raised"
                                   color="primary"
                                   type="submit"
@@ -162,16 +160,13 @@ class SignUp extends Component {
                               </form>
                             </div>
                           </div>
-                          
-             <a href="#" class="btn btn-pri">Read More</a>
-                       </div>
-                      
-                   </div>
-               </div>
-           </div>
-           </div>
-           </div>
-           </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
 	  );
 	}
