@@ -4,6 +4,7 @@ import axios from 'axios';
 import CardSection from './CardSection';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
+import './billing.css';
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class CheckoutForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} style={{ margin: '5rem' }}>
-          <h1>Billing</h1>
+          <h2>Billing</h2>
           <CardSection />
           <FormGroup row>
             <FormControlLabel
