@@ -7,7 +7,7 @@ import guitar from './assets/guitarPractice.png';
 
 
 const MainImage = () => (
-  <div className="slider-cover">
+  <div className="slider-cover" style={{marginTop: "-6%"}}>
     
       <div id="slider">
         <div className="slider-content">
@@ -22,8 +22,6 @@ const MainImage = () => (
                 <p className="price">EVENTS Tricket - 100$</p>
                 <a href="#" className="btn btn-pri">BUY NOW</a>
             </div>
-          <div id="countdown" className="countdown "></div>
-
           </div>
         </div>
 
