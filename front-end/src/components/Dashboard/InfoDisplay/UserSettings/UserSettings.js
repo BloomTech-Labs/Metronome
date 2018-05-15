@@ -25,10 +25,10 @@ class UserSettings extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <div className="header-con">
           <h2 className="title">USER SETTINGS</h2>
-          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '5rem' }}>
+          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '.5em', width: '300px' }}>
             <Error error={this.props.auth.error} />
             <div className="row">
               <div className="col-75">
@@ -86,7 +86,7 @@ class UserSettings extends Component {
               </div>
             </div>
             <div className="row">
-              <input type="submit" value="Update" />
+              <input type="submit" value="Update" style={{width: '248px'}}/>
             </div>
           </form>
         </div>
