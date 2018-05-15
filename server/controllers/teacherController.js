@@ -22,7 +22,11 @@ const uuid4 = require('uuid/v4');
  *    {
  *        "assignment": {
  *          "_id": "5af352f0c9b6ae011ddbb065",
- *          "days": ["Monday", "Wednesday", "Friday"],
+ *          "days": {
+ *            "Monday": true,
+ *            "Wednesday": true,
+ *            "Friday": true,
+ *          },
  *          "name": "My Assignment",
  *          "dueDate": "2018-05-16 10:59:36.808",
  *          "hours": 5,
@@ -35,7 +39,7 @@ const uuid4 = require('uuid/v4');
  *        }
  *    }
  *
- * @apiUse InvalidInputsError
+ * @apiUse NotAuthorizedError
  */
 exports.emailAssignments = async function (req, res, next) {
   try {
@@ -55,14 +59,18 @@ exports.emailAssignments = async function (req, res, next) {
  * @apiName GetAssignments
  * @apiGroup Teacher
  *
- * @apiSuccess {Array} assignments An array of the assignments linked to the teacher.
+ * @apiSuccess {Array} assignments An array of the assignments linked to the teacher. (Does not include student progress)
  *
  * @apiSuccessExample Success-Response:
  *    HTTP/1.1 200 OK
  *    {
  *      "assignments": [{
  *        "_id": "5af352f0c9b6ae011ddbb065",
- *        "days": ["Monday", "Wednesday", "Friday"],
+ *        "days": {
+ *          "Monday": true,
+ *          "Wednesday": true,
+ *          "Friday": true,
+ *        },
  *        "name": "My Assignment",
  *        "dueDate": "2018-05-16 10:59:36.808",
  *        "hours": 5,
@@ -74,7 +82,10 @@ exports.emailAssignments = async function (req, res, next) {
  *         }]
  *      }, {
  *        "_id": "5af30e2aff9e28011850d7c4",
- *        "days": ["Monday"],
+ *        "days": {
+ *          "Tuesday": true,
+ *          "Thursday": true,
+ *        },
  *        "name": "My Other Assignment",
  *        "dueDate": "2018-05-16 10:59:36.808",
  *        "hours": 1,
@@ -86,7 +97,7 @@ exports.emailAssignments = async function (req, res, next) {
 *         }]
  *      }]
  *    }
- * @apiUse InvalidInputsError
+ * @apiUse NotAuthorizedError
  */
 exports.getAssignments = async function (req, res, next) {
   try {
@@ -99,6 +110,36 @@ exports.getAssignments = async function (req, res, next) {
   }
 };
 
+/**
+ * @api {get} /api/teacher/assignment/:id Get an assignment by its id with all students' progress.
+ * @apiName GetAssignmentById
+ * @apiGroup Teacher
+ *
+ * @apiSuccess {Object} assignment The assignment.
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "assignment": {
+ *        "_id": "5af352f0c9b6ae011ddbb065",
+ *        "days": {
+ *          "Monday": true,
+ *          "Wednesday": true,
+ *          "Friday": true,
+ *        },
+ *        "name": "My Assignment",
+ *        "dueDate": "2018-05-16 10:59:36.808",
+ *        "hours": 5,
+ *        "musicSheetAddr": "http://example.com/my_sheet.pdf",
+ *        "students": [{
+ *          "email": "test@example.com",
+ *          "firstName": "John",
+ *          "lastName": "Doe"
+ *         }]
+ *      }
+ *    }
+ * @apiUse NotAuthorizedError
+ */
 exports.getAssignmentById = async function (req, res, next) {
   try {
     const assignmentId = req.params.id;
@@ -122,6 +163,21 @@ exports.getAssignmentById = async function (req, res, next) {
   }
 };
 
+/**
+ * @api {delete} /api/teacher/assignments/:id Deletes an assignment.
+ * @apiName DeleteAssignment
+ * @apiGroup Teacher
+ *
+ * @apiSuccess {String} id The id of the deleted assignment.
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "id": "5af352f0c9b6ae011ddbb065"
+ *    }
+ *
+ * @apiUse NotAuthorizedError
+ */
 exports.deleteAssignment = async function (req, res, next) {
   try {
     const { id } = req.params;
@@ -129,12 +185,29 @@ exports.deleteAssignment = async function (req, res, next) {
     const teacher = await Teacher.findById(assignment.teacher);
     teacher.assignments.splice(teacher.assignments.indexOf(id), 1);
     await teacher.save();
-    res.status(200).json(assignment);
+    res.status(200).json({ id });
   } catch (err) {
     next(err);
   }
 };
 
+/**
+ * @api {post} /api/teacher/getUploadUrl Uploads a file to S3 and returns the URL.
+ * @apiName GetUploadUrl
+ * @apiGroup Teacher
+ *
+ * @apiSuccess {String} musicSheetAddr the URL to get the downloaded file at.
+ * @apiSuccess {String} fileName The original name of the file.
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "musicSheetAddr": "https://www.example.com/abc-def-ghijkl",
+ *      "fileName": "my_music_sheet.png"
+ *    }
+ *
+ * @apiUse NotAuthorizedError
+ */
 exports.getUploadUrl = async function (req, res, next) {
   try {
     const key = uuid4();
