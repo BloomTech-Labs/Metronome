@@ -14,19 +14,19 @@ class Login extends Component {
 
 	render() {
 	  return (
-      <section id="about" class="container">
-        <div class="row">
+      <section id="about" className="container" style={{marginTop: "3%"}}>
+        <div className="row">
             <div className="">
-                <div class="icon-box">
-                    <div class="icon-box-content">
-                        <div class="content">
+                <div className="icon-box">
+                    <div className="icon-box-content" >
+                        <div className="content" >
 
                           <div className="center">
                             <div className="signup-form">
                               <br />
-                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '300px'}}>
+                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '300px', marginTop: '-12%'} }>
                                 <div>
-                                <h2 class="title center">Welcome Back to Metronome</h2>
+                                <h2 className="title center" style={{marginLeft: "6%"}}>Welcome Back to Metronome</h2>
                                   <Field
                                     placeholder="Email"
                                     name="email"
