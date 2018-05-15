@@ -29,18 +29,21 @@ class Assignments extends Component {
     return (
       <div>
         <h1>Assignments</h1>
-        {this.props.assignments.assignments.length > 0 ? this.props.assignments.assignments.map(assignment => (
-          <div key={assignment._id}>
+        <div className="assignments-container">
+          {this.props.assignments.assignments.length > 0 ? this.props.assignments.assignments.map(assignment => (
+            <div key={assignment._id}>
             <AssignmentCard
               id={assignment._id}
+              musicSheetImage={assignment.musicSheetAddr}
               deleteAssignment={this.deleteAssignment}
               name={assignment.name}
               dueDate={assignment.dueDate}
             />
           </div>
         )) : role === 'Student' && <h3>There are no assignments</h3>}
-        { role === 'Teacher' && <AddAssignmentCard />}
-      </div>
+          { role === 'Teacher' && <AddAssignmentCard />}
+        </div>
+      </div>s
     );
   }
 }

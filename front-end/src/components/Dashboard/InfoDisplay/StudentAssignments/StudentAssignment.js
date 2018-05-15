@@ -83,7 +83,7 @@ class StudentAssignment extends Component {
 }
 
 StudentAssignment.propTypes = {
-  getStudentAssignment: PropTypes.func.isRequired,
+  getAssignments: PropTypes.func.isRequired,
   assignments: PropTypes.arrayOf.isRequired,
   match: PropTypes.shape({
     params: PropTypes.string.isRequired,
