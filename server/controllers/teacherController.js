@@ -90,11 +90,33 @@ exports.emailAssignments = async function (req, res, next) {
  */
 exports.getAssignments = async function (req, res, next) {
   try {
-    const teacher = await Teacher.findById(req.user._id);
     const assignments = await Assignment
-      .find({ teacher: teacher._id })
-      .populate('students', 'email firstName lastName');
+      .find({ teacher: req.user._id })
+      .populate('students', '_id email firstName lastName');
     res.status(200).json({ assignments });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAssignmentById = async function (req, res, next) {
+  try {
+    const assignmentId = req.params.id;
+    const assignment = await Assignment
+      .findOne({ _id: assignmentId, teacher: req.user._id })
+      .populate('students', '_id email firstName lastName');
+
+    // Get each student's progress
+    const studentsProgressQuery = assignment.students.map(async (student) => {
+      const progress = await assignment.getProgress({ studentId: student._id });
+      return { ...student.toObject(), progress };
+    });
+
+    const studentsWithProgress = await Promise.all(studentsProgressQuery);
+
+    res.status(200).json({
+      assignment: { ...assignment.toObject(), students: studentsWithProgress },
+    });
   } catch (err) {
     next(err);
   }
