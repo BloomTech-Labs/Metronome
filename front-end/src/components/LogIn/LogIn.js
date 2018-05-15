@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import Button from 'material-ui/Button';
 import { login } from '../../actions';
 import './login.css';
 

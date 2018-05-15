@@ -1,9 +1,9 @@
 import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
+
 import './landingpage.css';
 import mainimage from './assets/metronome.png';
 import slogan from './assets/brownose.png';
-import guitar from './assets/guitarPractice.png';
+
 
 
 const MainImage = () => (
@@ -20,7 +20,6 @@ const MainImage = () => (
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. </p>
                 <p className="price">EVENTS Tricket - 100$</p>
-                <a href="#" className="btn btn-pri">BUY NOW</a>
             </div>
           </div>
         </div>
@@ -34,7 +33,6 @@ const MainImage = () => (
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. </p>
           <p className="price">base price - 599$</p>
-          <a href="#" className="btn btn-pri">Read More</a>
           </div>
         </div>
       </div>

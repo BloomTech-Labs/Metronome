@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { register } from '../../actions';
 import { Link } from 'react-router-dom';
-import Button from 'material-ui/Button';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
 import Error from '../Error/Error';
-import Background from '../landingpage/assets/background.jpg';
 
 
 import './sign-up.css';
