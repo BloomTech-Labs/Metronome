@@ -25,7 +25,7 @@ class UserSettings extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container ">
         <div className="header-con">
           <h2 className="title">USER SETTINGS</h2>
           <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '.5em', width: '300px' }}>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import { login } from '../../actions';
 import './login.css';
-import '../landingpage/landingpage.css';
+
 
 class Login extends Component {
 	handleFormSubmit = ({ email, password }) => {
@@ -24,9 +24,9 @@ class Login extends Component {
                           <div className="center">
                             <div className="signup-form">
                               <br />
-                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '300px'}}>
                                 <div>
-                                <h2 class="title center">Login</h2>
+                                <h2 class="title center">Welcome Back to Metronome</h2>
                                   <Field
                                     placeholder="Email"
                                     name="email"
@@ -44,7 +44,7 @@ class Login extends Component {
                                   />
                                 </div>
                                 <input
-                                  style={{ fontSize: '14px' }}
+                                  style={{ fontSize: '14px', width: '300px' }}
                                   type="submit"
                                   value="Log In"
                                 ></input>
