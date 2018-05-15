@@ -20,8 +20,7 @@ class StudentAssignment extends Component {
     this.props.getAssignments();
   }
 
-  // TODO: Need to setup to change checkbox to completed for that day
-  // Send data to action and get data back
+
   toggleCheck = () => {
     this.setState({
       checked: !this.state.checked,
@@ -32,6 +31,7 @@ class StudentAssignment extends Component {
     if (this.props.assignments.isPending || !this.props.assignments.assignments.length) { return <div>Loading...</div>; }
     const { assignmentId } = this.props.match.params;
     const filterAssignment = this.props.assignments.assignments.filter(assignment => assignment._id === assignmentId);
+    const musicImage = filterAssignment[0].musicSheetAddr;
     const date = moment(filterAssignment[0].dueDate).format('l');
     const { days } = filterAssignment[0];
     return (
@@ -44,8 +44,8 @@ class StudentAssignment extends Component {
 
           <img
             top
-            width="100%"
-            src="http://michaelmarc.com/content/images/thumbs/000/0000410_hallelujah-sheet-music-tabs_400.png"
+            width="350px"
+            src={musicImage}
             alt="img"
           />
           <div className="days-container">
@@ -74,6 +74,7 @@ class StudentAssignment extends Component {
           <div className="form">
             <h3>Practice {filterAssignment[0].hours} Hours</h3>
             <h3>Download: </h3><a href={filterAssignment[0].musicSheetAddr}>{filterAssignment[0].fileName}</a>
+
           </div>
         </Card>
       </div>
