@@ -438,7 +438,7 @@
         },
         {
           "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\"\n}",
           "type": "json"
         }
       ]
@@ -627,7 +627,7 @@
         },
         {
           "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\"\n}",
           "type": "json"
         }
       ]
