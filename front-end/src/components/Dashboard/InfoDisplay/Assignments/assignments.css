@@ -1,7 +1,7 @@
 .assignments-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: stretch;
   margin: 10px;
 }
