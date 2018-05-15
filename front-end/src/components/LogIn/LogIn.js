@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import { login } from '../../actions';
 import './login.css';
+import '../landingpage/landingpage.css';
 
 class Login extends Component {
 	handleFormSubmit = ({ email, password }) => {
@@ -15,16 +16,17 @@ class Login extends Component {
 	  return (
       <section id="about" class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-4">
+            <div className="">
                 <div class="icon-box">
                     <div class="icon-box-content">
                         <div class="content">
-                          <h2 class="title">Login</h2>
+
                           <div className="center">
                             <div className="signup-form">
                               <br />
                               <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
                                 <div>
+                                <h2 class="title center">Login</h2>
                                   <Field
                                     placeholder="Email"
                                     name="email"
@@ -43,7 +45,7 @@ class Login extends Component {
                                 </div>
                                 <Button
                                   style={{ fontSize: '14px' }}
-                                  className="btn--signup"
+                                  className="btn btn-pri"
                                   variant="raised"
                                   color="primary"
                                   type="submit"
