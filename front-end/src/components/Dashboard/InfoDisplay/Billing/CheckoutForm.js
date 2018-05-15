@@ -79,8 +79,11 @@ class CheckoutForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} style={{ margin: '5rem', marginTop: '-2%' }}>
-          <h2 style={{marginBottom: '5%'}}>Billing</h2>
+        <form onSubmit={this.handleSubmit} >
+        <div className="header-con" style={{marginTop: '10%'}}>
+            <h2 className="title">BILLING INFORMATION</h2>
+            <span>CHOOSE YOUR PLAN</span>
+          </div>
           <CardSection />
           <FormGroup row>
             <FormControlLabel
