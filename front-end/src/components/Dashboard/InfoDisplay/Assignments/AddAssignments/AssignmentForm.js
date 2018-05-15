@@ -244,7 +244,7 @@ class AssignmentForm extends Component {
 
                     </Dropzone>
                     <div className="image-preview">
-                      {preview && <img src={preview} alt="sheet music" />}
+                      {preview && <img className="image-preview" src={preview}  alt="sheet music" />}
                     </div>
                   </div>
                 </Grid>

@@ -6,6 +6,7 @@ import { getAssignments, deleteAssignment, claimAssignment } from '../../../../a
 
 import AssignmentCard from './AssignmentCard/AssignmentCard';
 import AddAssignmentCard from '../Assignments/AddAssignments/AddAssignmentCard';
+import './assignments.css';
 
 class Assignments extends Component {
   componentWillMount() {
@@ -32,18 +33,18 @@ class Assignments extends Component {
         <div className="assignments-container">
           {this.props.assignments.assignments.length > 0 ? this.props.assignments.assignments.map(assignment => (
             <div key={assignment._id}>
-            <AssignmentCard
-              id={assignment._id}
-              musicSheetImage={assignment.musicSheetAddr}
-              deleteAssignment={this.deleteAssignment}
-              name={assignment.name}
-              dueDate={assignment.dueDate}
-            />
-          </div>
+              <AssignmentCard
+                id={assignment._id}
+                musicSheetImage={assignment.musicSheetAddr}
+                deleteAssignment={this.deleteAssignment}
+                name={assignment.name}
+                dueDate={assignment.dueDate}
+              />
+            </div>
         )) : role === 'Student' && <h3>There are no assignments</h3>}
           { role === 'Teacher' && <AddAssignmentCard />}
         </div>
-      </div>s
+      </div>
     );
   }
 }

@@ -25,7 +25,9 @@ const AssignmentCard = (props) => {
           >
             <CardImg
               top
-              width="20%"
+              width="225px"
+              margin="10px"
+              height="200px"
               src={props.musicSheetImage}
               alt="Card image cap"
             />
