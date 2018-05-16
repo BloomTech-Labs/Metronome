@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const isDaysOfWeekObject = require('../utils/validators/isDaysOfWeekObject');
 
 const DEFAULT_PROGRESS = {
   Sunday: false,
@@ -25,6 +26,7 @@ const AssignmentProgressSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Mixed,
     required: true,
     default: DEFAULT_PROGRESS,
+    validate: [isDaysOfWeekObject],
   },
 }, {
   timestamps: true,

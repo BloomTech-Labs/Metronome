@@ -5,18 +5,22 @@
         "chai-friendly"
     ],
     "rules": {
-        "linebreak-style": 0,
-        "global-require": 0,
+        "consistent-return": "off",
+        "chai-friendly/no-unused-expressions": 2,
         "eslint linebreak-style": [
             0,
             "error",
             "windows"
         ],
         "func-names": "off",
-        "consistent-return": "off",
-        "object-curly-newline": "off",
-        "no-underscore-dangle": "off",
+        "global-require": 0,
+        "linebreak-style": 0,
         "max-len": "off",
+        "no-restricted-syntax":"off",
+        "no-underscore-dangle": "off",
+        "no-unused-expressions": 0,
+        "object-curly-newline": "off",
+        "prefer-arrow-callback": "off",
         "react/jsx-filename-extension": [
             1,
             {
@@ -27,9 +31,6 @@
             }
         ],
         "react/no-unused-state": "off",
-        "prefer-arrow-callback": "off",
-        "no-unused-expressions": 0,
-        "chai-friendly/no-unused-expressions": 2,
         "spaced-comment": "off"
     },
     "env": {

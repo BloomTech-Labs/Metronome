@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const validate = require('mongoose-validator');
 const AssignmentProgress = require('../models/AssignmentProgress');
-
-// const VALID_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const isDaysOfWeekObject = require('../utils/validators/isDaysOfWeekObject');
 
 const AssignmentSchema = new mongoose.Schema({
   name: {
@@ -20,6 +19,7 @@ const AssignmentSchema = new mongoose.Schema({
   days: {
     type: mongoose.Schema.Types.Mixed,
     required: [true, 'Assignment days is a required field.'],
+    validate: [isDaysOfWeekObject],
   },
   dueDate: {
     type: Date,
@@ -47,6 +47,7 @@ const AssignmentSchema = new mongoose.Schema({
   },
   fileName: {
     type: String,
+    required: [true, 'Assignment file name is a required field.'],
   },
   teacher: {
     type: mongoose.Schema.Types.ObjectId,
