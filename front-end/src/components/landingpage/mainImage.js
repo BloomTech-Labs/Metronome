@@ -7,7 +7,7 @@ import saycool from './assets/saycool.jpg';
 
 
 const MainImage = () => (
-  <div className="slider-cover wrapper" style={{marginTop: "-1%"}}>
+  <div className="slider-cover wrapper" style={{marginTop: "-2%"}}>
     <div id="slider">
       <div className="slider-content">
         <img src={saycool} alt="Main" />
@@ -16,7 +16,7 @@ const MainImage = () => (
             <span className="bg-text">A NEW WAY TO PRACTICE</span>
             <h2 className="title">WELCOME TO METRONOME</h2>
             <p>A simple and elegant way for Music Teachers and Students to interact</p>
-            <p className="bg-text">CREATE AN ACCOUNT AND SIGN UP FOR A SUBSCRIPTION</p>
+            <p className="bg-text">CREATE AN ACCOUNT AND PURCHASE A SUBSCRIPTION</p>
             <BuyNowButton />
           </div>
         </div>
