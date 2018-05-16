@@ -52,21 +52,33 @@ exports.claimAssignmentToken = async function (req, res, next) {
  *    {
  *      "assignments": [{
  *        "_id": "5af352f0c9b6ae011ddbb065",
- *        "days": ["Monday", "Wednesday", "Friday"],
+ *        "days": {
+ *          "Monday": true,
+ *          "Wednesday": true,
+ *          "Friday" : true
+ *        },
  *        "name": "My Assignment",
  *        "dueDate": "2018-05-16 10:59:36.808",
  *        "hours": 5,
  *        "musicSheetAddr": "http://example.com/my_sheet.pdf",
+ *        "progress": {
+ *          "Monday": true,
+ *          "Wednesday": true
+ *        }
  *      }, {
  *        "_id": "5af30e2aff9e28011850d7c4",
- *        "days": ["Monday"],
+ *        "days": {
+ *          "Tuesday": true,
+ *          "Thursday": true,
+ *        },
  *        "name": "My Other Assignment",
  *        "dueDate": "2018-05-16 10:59:36.808",
  *        "hours": 1,
- *        "musicSheetAddr": "http://example.com/my_sheet.png"
+ *        "musicSheetAddr": "http://example.com/my_sheet.png",
+ *        "progress": {}
  *      }]
  *    }
- * @apiUse InvalidInputsError
+ * @apiUse NotAuthorizedError
  */
 exports.getAssignments = async function (req, res, next) {
   try {
@@ -88,6 +100,34 @@ exports.getAssignments = async function (req, res, next) {
   }
 };
 
+/**
+ * @api {get} /api/student/assignment/:id Get an assignment by its Id.
+ * @apiName GetAssignmentById
+ * @apiGroup Student
+ *
+ * @apiSuccess {Object} assignment
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "assignment": {
+ *        "_id": "5af352f0c9b6ae011ddbb065",
+ *        "days": {
+ *          "Monday": true,
+ *          "Wednesday": true,
+ *          "Friday" : true
+ *        },
+ *        "name": "My Assignment",
+ *        "dueDate": "2018-05-16 10:59:36.808",
+ *        "hours": 5,
+ *        "musicSheetAddr": "http://example.com/my_sheet.pdf",
+ *        "progress": {
+ *          "Monday": true,
+ *          "Wednesday": true
+ *        }
+ *    }
+ * @apiUse NotAuthorizedError
+ */
 exports.getAssignmentById = async function (req, res, next) {
   try {
     const assignmentId = req.params.id;
@@ -103,15 +143,33 @@ exports.getAssignmentById = async function (req, res, next) {
   }
 };
 
+/**
+ * @api {post} /api/student/updateProgress Update the progress on an assignment.
+ * @apiName UpdateProgress
+ * @apiGroup Student
+ *
+ * @apiParam {Object} progress The student's progress updates.
+ * @apiParam {String} assignmentId The assignment to update the progress on.
+ * @apiSuccess {Object} progress Returns the progress update that was sent.
+ *
+ * @apiSuccessExample Success-Response:
+ *    HTTP/1.1 200 OK
+ *    {
+ *        "progress": {
+ *          "Monday": true,
+ *          "Wednesday": true
+ *        }
+ *    }
+ * @apiUse NotAuthorizedError
+ */
 exports.updateProgress = async function (req, res, next) {
   try {
     const { progress, assignmentId } = req.body;
-    const student = await Student.findById(req.user._id);
-    const assignmentProgress = await AssignmentProgress.findOne({ assignment: assignmentId, student: student._id });
+    const assignmentProgress = await AssignmentProgress.findOne({ assignment: assignmentId, student: req.user._id });
     assignmentProgress.progress = progress;
     assignmentProgress.markModified('progress');
     await assignmentProgress.save();
-    res.status(200).json({ ...assignmentProgress });
+    res.status(200).json({ progress: assignmentProgress.progress });
   } catch (err) {
     next(err);
   }
