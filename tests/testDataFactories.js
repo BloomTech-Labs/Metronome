@@ -49,7 +49,8 @@ exports.AssignmentDataFactory = class AssignmentDataFactory {
       },
       hours: 1,
       dueDate: new Date(),
-      musicSheetAddr: 'localhost:8000',
+      musicSheetAddr: 'https://example.com/00000a-00000b-00000c',
+      fileName: 'my_file.pdf',
       emails: ['test@example.com'],
     };
   }

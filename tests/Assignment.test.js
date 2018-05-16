@@ -60,7 +60,7 @@ describe('Assignment model', () => {
     try {
       await Assignment.create(newAssignmentWithBadAddress);
     } catch (err) {
-      expect(err.errors.musicSheetAddr.message).toBe('Assignment music sheet address is a required field.');
+      expect(err.errors.musicSheetAddr.message).toBe('Sheet music file is required.');
     }
   });
 
@@ -77,15 +77,5 @@ describe('Assignment model', () => {
     const assignment = await Assignment.create(validNewAssignment);
     const assignmentInDb = await Assignment.findOne({ name: assignment.name });
     expect(assignment.hours).toEqual(assignmentInDb.hours);
-  });
-
-  it('Should have students empty array in the assignment', async () => {
-    const assignment = await Assignment.findOne({ name: validNewAssignment.name });
-    expect(assignment.students.length).toEqual(0);
-  });
-
-  it('Should have a teacher field in the assignment', async () => {
-    const assignment = await Assignment.findOne({ name: validNewAssignment.name });
-    expect(assignment.teacher).toEqual(undefined);
   });
 });

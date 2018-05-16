@@ -7,9 +7,11 @@ import Dashboard from '../components/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute';
 import Navbar from '../components/Navbar/signInSignUp';
 import ClaimToken from '../components/ClaimToken/ClaimToken';
+import GlobalError from '../components/GlobalError/GlobalError';
 
 const LoginContainer = () => (
   <div>
+    <GlobalError />
     <Route exact path="/" render={() => <Redirect to="/login" />} />
     <Route path="/login" component={LogIn} />
   </div>
@@ -17,6 +19,7 @@ const LoginContainer = () => (
 
 const SignupContainer = () => (
   <div>
+    <GlobalError />
     <Route exact path="/" render={() => <Redirect to="/signup" />} />
     <Route path="/signup" component={SignUp} />
   </div>
@@ -25,6 +28,7 @@ const SignupContainer = () => (
 const DefaultContainer = () => (
   <div>
     <Navbar />
+    <GlobalError />
     <Route exact path="/" component={LandingPage} />
     <Route path="/dashboard" component={PrivateRoute(Dashboard)} />
   </div>

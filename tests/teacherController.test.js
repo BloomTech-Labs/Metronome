@@ -49,7 +49,7 @@ describe('[POST] /api/teacher/emailAssignments', () => {
       .set('Authorization', user.generateJWT())
       .send({ emails: 'test@example.com' });
     expect(response.status).toBe(403);
-    expect(response.body.error).toBe('Not authorized');
+    expect(response.body.errors[0]).toBe('Not authorized');
   });
 
   it('Should return a 400 error from sendgrid if an email is invalid', async () => {

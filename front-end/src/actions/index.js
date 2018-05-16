@@ -60,7 +60,7 @@ export const login = (email, password, history) => (dispatch) => {
     })
     .then()
     .catch((error) => {
-      dispatch({ type: LOGIN_FAILURE, error: error.response.data });
+      dispatch({ type: LOGIN_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -86,7 +86,7 @@ export const register = (
       history.push('/login');
     })
     .catch((error) => {
-      dispatch({ type: REGISTER_FAILURE, error: error.response.data });
+      dispatch({ type: REGISTER_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -112,7 +112,7 @@ export const updateUser = (
       history.push('/dashboard');
     })
     .catch((error) => {
-      dispatch({ type: UPDATE_USER_FAILURE, error: error.response.data });
+      dispatch({ type: UPDATE_USER_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -123,7 +123,7 @@ export const logout = history => (dispatch) => {
     dispatch({ type: LOGOUT_SUCCESS });
     history.push('/');
   } catch (error) {
-    dispatch({ type: LOGOUT_FAILURE, error: error.response.data });
+    dispatch({ type: LOGOUT_FAILURE, errors: error.response.data.errors });
   }
 };
 
@@ -137,7 +137,7 @@ export const getAssignments = () => (dispatch) => {
       dispatch({ type: GET_ASSIGNMENTS_SUCCESS, payload: response.data.assignments });
     })
     .catch((error) => {
-      dispatch({ type: GET_ASSIGNMENTS_FAILURE, error: error.response.data });
+      dispatch({ type: GET_ASSIGNMENTS_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -149,7 +149,7 @@ export const addAssignment = assignment => (dispatch) => {
       dispatch({ type: ADD_ASSIGNMENT_SUCCESS, payload: response.data });
     })
     .catch((error) => {
-      dispatch({ type: ADD_ASSIGNMENT_FAILURE, error: error.response.data });
+      dispatch({ type: ADD_ASSIGNMENT_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -163,7 +163,7 @@ export const deleteAssignment = id => (dispatch) => {
       dispatch({ type: DELETE_ASSIGNMENT_SUCCESS, id });
     })
     .catch((error) => {
-      dispatch({ type: DELETE_ASSIGNMENT_FAILURE, error: error.response.data });
+      dispatch({ type: DELETE_ASSIGNMENT_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -176,7 +176,7 @@ export const claimAssignment = assignmentToken => (dispatch) => {
       window.localStorage.removeItem('assignmentToken');
     })
     .catch((error) => {
-      dispatch({ type: CLAIM_ASSIGNMENT_FAILURE, error: error.response.data });
+      dispatch({ type: CLAIM_ASSIGNMENT_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -188,7 +188,7 @@ export const updateAssignment = (progress, assignmentId) => (dispatch) => {
       dispatch({ type: UPDATE_ASSIGNMENT_SUCCESS });
     })
     .catch((error) => {
-      dispatch({ type: UPDATE_ASSIGNMENT_FAILURE, error: error.response.data });
+      dispatch({ type: UPDATE_ASSIGNMENT_FAILURE, errors: error.response.data.errors });
     });
 };
 
@@ -200,7 +200,7 @@ export const getAssignmentById = assignmentId => (dispatch) => {
       dispatch({ type: GET_ASSIGNMENT_BY_ID_SUCCESS, payload: response.data.assignment });
     })
     .catch((error) => {
-      dispatch({ type: GET_ASSIGNMENT_BY_ID_FAILURE, error: error.response.data });
+      dispatch({ type: GET_ASSIGNMENT_BY_ID_FAILURE, errors: error.response.data.errors });
     });
 };
 

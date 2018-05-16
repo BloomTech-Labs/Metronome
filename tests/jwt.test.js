@@ -26,13 +26,13 @@ describe('JSON Web Token middleware', () => {
   it('Should not allow an unauthenticated user to access an authenticated route', async () => {
     const response = await request.get('/auth-route');
     expect(response.status).toBe(422);
-    expect(response.body.error).toBe('Login token not found. Please log in.');
+    expect(response.body.errors[0]).toBe('Login token not found. Please log in.');
   });
 
   it('Should not allow a user with an invalid/expired token to access an authenticated route', async () => {
     const response = await request.get('/auth-route').set('authorization', 'badtoken');
     expect(response.status).toBe(403);
-    expect(response.body.error).toBe('Login token has expired. Please log in again.');
+    expect(response.body.errors[0]).toBe('Login token has expired. Please log in again.');
   });
 
   it('Should allow an authenticated user to access an authenticated route', async () => {
@@ -40,6 +40,5 @@ describe('JSON Web Token middleware', () => {
     const response = await request.get('/auth-route').set('authorization', user.generateJWT());
     expect(response.status).toBe(200);
     expect(response.body.response).toBe('Successfully authenticated!');
-    expect(response.body.error).toBeUndefined();
   });
 });

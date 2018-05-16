@@ -35,7 +35,7 @@ app.use((err, req, res, next) => {
     }
   } else {
     // catch-all for other errors
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ errors: [err.message] });
   }
 
   next();

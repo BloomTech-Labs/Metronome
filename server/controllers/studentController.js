@@ -16,7 +16,6 @@ const AssignmentProgress = require('../models/AssignmentProgress');
  *    {
  *      "message": "Assignment claimed successfully!"
  *    }
- * @apiUse InvalidInputsError
  */
 exports.claimAssignmentToken = async function (req, res, next) {
   try {
