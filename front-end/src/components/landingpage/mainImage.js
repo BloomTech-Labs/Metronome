@@ -1,9 +1,9 @@
 import React from 'react';
 import BuyNowButton from './buyNowButton.js';
-import './landingpage.css';
 import mainimage from './assets/metronome.png';
 import slogan from './assets/brownose.png';
 
+import './landingpage.css';
 
 
 const MainImage = () => (
@@ -13,10 +13,10 @@ const MainImage = () => (
         <img src={mainimage} alt="Main Image" />
         <div className="conent">
           <div className="cover">
-              <span className="bg-text">WELCOME TO METRONOME</span>
-              <h2 className="title">WELCOME TO METRONOME</h2>
-              <p>A simple and elegant way for Music Teachers and Students to interact</p>
-              <BuyNowButton />
+            <span className="bg-text">WELCOME TO METRONOME</span>
+            <h2 className="title">WELCOME TO METRONOME</h2>
+            <p>A simple and elegant way for Music Teachers and Students to interact</p>
+            <BuyNowButton />
           </div>
         </div>
       </div>
@@ -24,11 +24,13 @@ const MainImage = () => (
       <div className="slider-content">
         <img src={slogan} alt="Slogan" />
         <div className="conent">
-          <span className="bg-text">CONFERENCE</span>
-          <h2 className="title">BUSINESS CONFERENCE INFO</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. </p>
-          <BuyNowButton />
+          <div className="cover">
+            <span className="bg-text">CONFERENCE</span>
+            <h2 className="title">BUSINESS CONFERENCE INFO</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. </p>
+            <BuyNowButton />
+          </div>
         </div>
       </div>
     </div>

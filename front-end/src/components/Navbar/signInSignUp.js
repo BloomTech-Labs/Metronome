@@ -37,7 +37,7 @@ class LoginNavBar extends Component {
   render() {
     return (
       <div className="container">
-      <Navbar fixedTop={true}>
+      <Navbar inverse fixedTop={true}>
         <Navbar.Header>
           <Navbar.Brand>
             <LinkContainer to="/">
@@ -45,7 +45,7 @@ class LoginNavBar extends Component {
             </LinkContainer>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
+        <Nav pullRight>
           {this.navbarLinks()}
         </Nav>
       </Navbar>
