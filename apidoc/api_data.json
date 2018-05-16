@@ -579,6 +579,12 @@
             "optional": false,
             "field": "IncorrectPassword",
             "description": "<p>&quot;Password is not correct.&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidInput",
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
           }
         ]
       },
@@ -591,6 +597,11 @@
         {
           "title": "IncorrectPassword-Response:",
           "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"Password is not correct.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "InvalidInput-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
           "type": "json"
         }
       ]
