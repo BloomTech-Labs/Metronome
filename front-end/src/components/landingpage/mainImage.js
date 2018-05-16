@@ -1,7 +1,6 @@
 import React from 'react';
 
 import BuyNowButton from './buyNowButton.js';
-import mainimage from './assets/metronome.png';
 import saycool from './assets/saycool.jpg';
 
 
@@ -11,7 +10,7 @@ const MainImage = () => (
   <div className="slider-cover wrapper" style={{marginTop: "-1%"}}>
     <div id="slider">
       <div className="slider-content">
-        <img src={saycool} alt="Main Image" />
+        <img src={saycool} alt="Main" />
         <div className="conent">
           <div className="cover">
             <span className="bg-text">A NEW WAY TO PRACTICE</span>
