@@ -77,20 +77,20 @@ class SignUp extends Component {
 
 	render() {
 	  return (
-      <section id="about" class="container"  style={{marginTop: "-1%", width: '60%'}}>
-      <div class="header-con text-center" >
-        <div class="row">
-            <div>
-                <div class="icon-box">
-                    <div class="icon-box-content">
-                        <div class="content">
-                          <h2 class="title" style={{marginLeft: '8%'}}>Welcome to Metronome</h2>
-                          <div className="form-container" style={{marginTop: "-10%"}}>
+  <section id="about" className="container" style={{ marginTop: '-1%', width: '60%' }}>
+    <div className="header-con text-center" >
+          <div className="row">
+          <div>
+            <div className="icon-box">
+                <div className="icon-box-content">
+                    <div className="content">
+                        <h2 className="title" style={{ marginLeft: '8%' }}>Welcome to Metronome</h2>
+                        <div className="form-container" style={{ marginTop: '-10%' }}>
                             <div className="signup-form">
-                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '40%'}}>
+                              <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ width: '40%' }}>
                                 <Error error={this.props.auth.error} />
                                 <div>
-                                  <Field name="role" component="select" style={{width: '100%'}}>
+                                  <Field name="role" component="select" style={{ width: '100%' }}>
                                     <option>Please select role</option>
                                     <option value="Teacher">Teacher</option>
                                     <option value="Student">Student</option>
@@ -99,7 +99,7 @@ class SignUp extends Component {
                                 <div className="pair">
                                   <Field
                                     name="firstName"
-                                    type="email"
+                                    type="text"
                                     component="input"
                                     placeholder="First Name"
                                     autoComplete="off"
@@ -111,7 +111,7 @@ class SignUp extends Component {
                                     name="lastName"
                                     placeholder="Last Name"
                                     component="input"
-                                    type="email"
+                                    type="text"
                                     autoComplete="off"
                                   />
                                   <br />
@@ -150,19 +150,19 @@ class SignUp extends Component {
                                   style={{ fontSize: '14px', width: '100%' }}
                                   type="submit"
                                   value="Sign Up"
-                                ></input>
+                                />
                                 <br />
                                 <Link className="link" to="/login">Already have an account?</Link>
                               </form>
                             </div>
                           </div>
                       </div>
-                    </div>
                   </div>
-                </div>
               </div>
-            </div>
-          </section>
+          </div>
+        </div>
+        </div>
+  </section>
 
 	  );
 	}
