@@ -32,7 +32,7 @@ describe('[POST] /api/user/register ', () => {
   it('Should return an error if the user input was invalid', async () => {
     const response = await request.post('/api/user/register').send(newUserWithBadEmail);
     expect(response.status).toBe(400);
-    expect(response.body.error).toBeDefined();
+    expect(response.body.errors).toBeDefined();
     expect(response.body.token).toBeUndefined();
   });
 
@@ -40,20 +40,18 @@ describe('[POST] /api/user/register ', () => {
     const response = await request.post('/api/user/register').send(validNewUser);
     expect(response.status).toBe(200);
     expect(response.body.token.length).toBeGreaterThan(0);
-    expect(response.body.error).toBeUndefined();
   });
 
   it('Should not register a user with an invalid role', async () => {
     const response = await request.post('/api/user/register').send({ ...validNewUser, role: 'Wizard' });
     expect(response.status).toBe(400);
-    expect(response.body.error).toBeDefined();
+    expect(response.body.errors).toBeDefined();
   });
 
   it('Should default the user to a Student role if the role is not specified', async () => {
     const response = await request.post('/api/user/register').send(validNewUser);
     expect(response.status).toBe(200);
     expect(response.body.token.length).toBeGreaterThan(0);
-    expect(response.body.error).toBeUndefined();
     expect(jwt.decode(response.body.token).role).toBe('Student');
   });
 });
@@ -81,15 +79,14 @@ describe('[POST] /api/user/login', () => {
 
     const response = await request.post('/api/user/login').send(userThatIsntRegistered);
     expect(response.status).toBe(400);
-    expect(response.body.error).toBe('User does not exist with that email.');
+    expect(response.body.errors[0]).toBe('User does not exist with that email.');
     expect(response.body.token).toBeUndefined();
   });
 
   it('Should return an error if the submitted password is invalid', async () => {
     const response = await request.post('/api/user/login').send(newUserWithBadPassword);
     expect(response.status).toBe(400);
-    expect(response.body.error).toBe('Password is not correct.');
-    expect(response.body.token).toBeUndefined();
+    expect(response.body.errors[0]).toBe('Password is not correct.');
   });
 
   it('Should return a JSON Web Token if the input was valid', async () => {
@@ -97,7 +94,6 @@ describe('[POST] /api/user/login', () => {
     const response = await request.post('/api/user/login').send({ email, password });
     expect(response.status).toBe(200);
     expect(response.body.token.length).toBeGreaterThan(0);
-    expect(response.body.error).toBeUndefined();
   });
 });
 
@@ -129,7 +125,7 @@ describe('[PUT] /api/user', () => {
       .send(newData);
 
     expect(response.status).toBe(400);
-    expect(response.body.error).toBe('Password is not correct.');
+    expect(response.body.errors[0]).toBe('Password is not correct.');
   });
 
   it('Should return an error if a field has invalid data', async () => {
@@ -143,7 +139,7 @@ describe('[PUT] /api/user', () => {
       .send(newData);
 
     expect(response.status).toBe(400);
-    expect(response.body.error).toBe('Email must be a valid email.');
+    expect(response.body.errors[0]).toBe('Email must be a valid email.');
   });
 
   it('Should return a new JSON Web Token if all the input was valid', async () => {
@@ -161,6 +157,5 @@ describe('[PUT] /api/user', () => {
       .send(newData);
     expect(response.status).toBe(200);
     expect(response.body.token.length).toBeGreaterThan(0);
-    expect(response.body.error).toBeUndefined();
   });
 });
