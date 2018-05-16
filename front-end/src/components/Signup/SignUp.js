@@ -79,16 +79,16 @@ class SignUp extends Component {
 	  return (
 
       <div id="about" class="container"  style={{marginTop: "-1%", width: '60%'}}>
-      <div class="header-con text-center" >
-        <div class="row">
+      <div className="header-con text-center" >
+        <div className="row">
           <div>
-            <div class="icon-box">
-              <div class="icon-box-content">
-                <div class="content">
-                  <h2 class="title" style={{marginLeft: '8%'}}>Welcome to Metronome</h2>
-                    <Link to="/">
+            <div className="icon-box">
+              <div className="icon-box-content">
+                <div className="content">
+                  <h2 className="title" style={{marginLeft: '8%'}}>Welcome to Metronome</h2>
+                    <Link className="home-button" to="/">
                     <input
-                      style={{ fontSize: '14px', width: '100%' }}
+                      style={{ fontSize: '14px', width: '40%' }}
                       type="submit"
                       value="Home Page"
                     ></input>
