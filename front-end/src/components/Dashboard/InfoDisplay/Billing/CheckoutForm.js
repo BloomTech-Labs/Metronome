@@ -80,7 +80,7 @@ class CheckoutForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} >
-          <div className="header-con" style={{ marginTop: '10%' }}>
+          <div className="header-con" >
             <h2 className="title">BILLING INFORMATION</h2>
             <span>CHOOSE YOUR PLAN</span>
           </div>

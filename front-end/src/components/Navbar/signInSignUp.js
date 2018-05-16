@@ -17,7 +17,7 @@ class LoginNavBar extends Component {
         <LinkContainer to="/dashboard/billing">
           <NavItem href="#">Billing</NavItem>
         </LinkContainer>,
-         <LinkContainer to="/dashboard/settings">
+        <LinkContainer to="/dashboard/settings">
           <NavItem href="#">Settings</NavItem>
         </LinkContainer>,
         <LinkContainer to="/" onClick={() => this.props.logout(this.props.history)}>
@@ -37,7 +37,7 @@ class LoginNavBar extends Component {
   render() {
     return (
       <div className="container">
-      <Navbar fixedTop={true}>
+      <Navbar inverse fixedTop={true}>
         <Navbar.Header>
           <Navbar.Brand>
             <LinkContainer to="/">
@@ -45,7 +45,7 @@ class LoginNavBar extends Component {
             </LinkContainer>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
+        <Nav pullRight>
           {this.navbarLinks()}
         </Nav>
       </Navbar>

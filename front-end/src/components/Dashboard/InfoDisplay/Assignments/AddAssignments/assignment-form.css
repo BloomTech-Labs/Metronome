@@ -1,6 +1,12 @@
-.button-container {
+.assignment-form-container {
   display: flex;
-  flex-direction: row;
+ justify-content: center;
+}
+
+.button-container {
+  /* display: flex;
+  flex-direction: row; */
+  justify-content: space-around;
   
 }
 
@@ -8,13 +14,10 @@
   margin-top: -40px;
 }
 
-Button {
-  width: 50px;
-  
-}
 
 .title {
   width: 85%;
+  text-align: center;
 }
 
 .hours-container {
@@ -36,7 +39,7 @@ Button {
 
 .image-preview {
   position: absolute;
-  left: 235px;
+  left: 230px;
   width: 225px;
   height: 200px;
 }
