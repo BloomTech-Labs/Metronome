@@ -36,6 +36,11 @@ select {
     margin-top: 1rem;
   }
 }
+
+.home-button {
+	display: flex;
+	justify-content: center;
+}
 /* 
 html {
 	background-image: url('../landingpage/assets/background.jpg');
