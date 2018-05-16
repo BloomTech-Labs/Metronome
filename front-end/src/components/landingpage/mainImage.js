@@ -7,11 +7,11 @@ import slogan from './assets/brownose.png';
 
 
 const MainImage = () => (
-  <div className="slider-cover" style={{marginTop: "-6%"}}>
+  <div className="slider-cover" style={{marginTop: "-12%"}}>
     
       <div id="slider">
         <div className="slider-content">
-          <img src={mainimage} alt="" />
+          <img src={mainimage} alt="Main Image" />
 
           <div className="conent">
             <div className="cover">
@@ -25,7 +25,7 @@ const MainImage = () => (
         </div>
 
         <div className="slider-content">
-            <img src={slogan} alt="" />
+            <img src={slogan} alt="Slogan" />
             <div className="conent">
           <span className="bg-text">CONFERENCE</span>
 
