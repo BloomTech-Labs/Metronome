@@ -59,6 +59,7 @@ exports.register = async (req, res, next) => {
  *
  * @apiUse UserDoesNotExistError
  * @apiUse IncorrectPasswordError
+ * @apiUse InvalidInputsError
  */
 exports.login = async (req, res, next) => {
   try {
