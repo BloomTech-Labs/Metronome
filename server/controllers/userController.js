@@ -21,7 +21,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
  *    }
  *
  * @apiUse UserAlreadyExistsError
- * @apiUse InvalidInputError
+ * @apiUse InvalidInputsError
  */
 exports.register = async (req, res, next) => {
   try {
@@ -90,7 +90,7 @@ exports.login = async (req, res, next) => {
  *    }
  *
  * @apiUse UserAlreadyExistsError
- * @apiUse InvalidInputError
+ * @apiUse InvalidInputsError
  */
 exports.editProfile = async (req, res, next) => {
   try {
