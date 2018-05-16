@@ -16,6 +16,7 @@ const MainImage = () => (
             <span className="bg-text">A NEW WAY TO PRACTICE</span>
             <h2 className="title">WELCOME TO METRONOME</h2>
             <p>A simple and elegant way for Music Teachers and Students to interact</p>
+            <p className="bg-text">CREATE AN ACCOUNT AND SIGN UP FOR A SUBSCRIPTION</p>
             <BuyNowButton />
           </div>
         </div>
