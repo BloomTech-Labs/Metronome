@@ -77,8 +77,8 @@ class SignUp extends Component {
 
 	render() {
 	  return (
-      <div>
-      <section id="about" class="container"  style={{marginTop: "-1%", width: '60%'}}>
+
+      <div id="about" class="container"  style={{marginTop: "-1%", width: '60%'}}>
       <div class="header-con text-center" >
         <div class="row">
           <div>
@@ -96,6 +96,7 @@ class SignUp extends Component {
                               <option value="Teacher">Teacher</option>
                               <option value="Student">Student</option>
                             </Field>
+
                           </div>
                           <div className="pair">
                             <Field
@@ -156,15 +157,15 @@ class SignUp extends Component {
                           <Link className="link" to="/login">Already have an account?</Link>
                         </form>
                       </div>
-                    </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
       </div> 
-      </section>
       </div>
+      </div>
+      </div>
+
 	  );
 	}
 }

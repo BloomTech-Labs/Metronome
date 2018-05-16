@@ -25,10 +25,18 @@ Button {
 }
 
 .fileupload-container {
+  display: flex;
  margin-left: 200px;
 }
 
 .date-container {
   margin-left: -150px;
   margin-top: 30px;
+}
+
+.image-preview {
+  position: absolute;
+  left: 235px;
+  width: 225px;
+  height: 200px;
 }
