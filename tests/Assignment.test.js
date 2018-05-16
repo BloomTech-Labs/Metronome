@@ -60,7 +60,7 @@ describe('Assignment model', () => {
     try {
       await Assignment.create(newAssignmentWithBadAddress);
     } catch (err) {
-      expect(err.errors.musicSheetAddr.message).toBe('Assignment music sheet address is a required field.');
+      expect(err.errors.musicSheetAddr.message).toBe('Sheet music file is required.');
     }
   });
 
