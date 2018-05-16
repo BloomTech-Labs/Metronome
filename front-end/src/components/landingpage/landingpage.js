@@ -9,7 +9,6 @@ const LandingPage = () => (
   <div className="container">
     <div className="description-container">
       <MainImage />
-      <BuyNowButton />
     </div>
   </div>
 );
