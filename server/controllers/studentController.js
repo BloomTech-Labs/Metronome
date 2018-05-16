@@ -165,8 +165,7 @@ exports.getAssignmentById = async function (req, res, next) {
 exports.updateProgress = async function (req, res, next) {
   try {
     const { progress, assignmentId } = req.body;
-    const student = await Student.findById(req.user._id);
-    const assignmentProgress = await AssignmentProgress.findOne({ assignment: assignmentId, student: student._id });
+    const assignmentProgress = await AssignmentProgress.findOne({ assignment: assignmentId, student: req.user._id });
     assignmentProgress.progress = progress;
     assignmentProgress.markModified('progress');
     await assignmentProgress.save();
