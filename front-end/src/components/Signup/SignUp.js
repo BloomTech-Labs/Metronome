@@ -77,6 +77,7 @@ class SignUp extends Component {
 
 	render() {
 	  return (
+      <div>
       <section id="about" class="container"  style={{marginTop: "-1%", width: '60%'}}>
       <div class="header-con text-center" >
         <div class="row">
@@ -163,7 +164,7 @@ class SignUp extends Component {
           </div>
       </div> 
       </section>
-
+      </div>
 	  );
 	}
 }
