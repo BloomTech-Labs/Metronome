@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class ErrorDisplay extends React.Component {
+class GlobalError extends React.Component {
   state = {
     show: false,
   }
@@ -34,7 +34,7 @@ class ErrorDisplay extends React.Component {
   }
 }
 
-ErrorDisplay.propTypes = {
+GlobalError.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => {
   return { errors: [] };
 };
 
-export default connect(mapStateToProps, null)(ErrorDisplay);
+export default connect(mapStateToProps, null)(GlobalError);
