@@ -6,7 +6,7 @@ import MainImage from './mainImage';
 import './landingpage.css';
 
 const LandingPage = () => (
-  <div className="container">
+  <div className="container-fluid">
     <div className="description-container">
       <MainImage />
     </div>
