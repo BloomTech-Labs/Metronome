@@ -33,7 +33,7 @@ button {
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
   margin-top: 10px;
-  margin: 40px 15px 0;
+  margin: 15px 0;
   color: #fff;
   cursor: pointer;
 }
@@ -41,3 +41,7 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+
+
+

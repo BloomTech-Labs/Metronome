@@ -1,0 +1,28 @@
+/* ==========================================================================
+   BACKGROUND COLOR
+   ========================================================================== */
+   .owl-controls .owl-dot,.countdown, #faq .panel-title a .icon,.price-table .body_content ul li,#tab.resp-vtabs .resp-tab-active,.event-slider .owl-dots .owl-dot.active > span,.banner-owlCarousel .owl-nav,.eventschedule .content h3 .job,.paginations li.current,.comments ul .replay,.btn-pri,.widget .widget-form .button,.tagcloud a{
+    background: #4284c1;
+   
+   }
+
+ #map:before, .event-slider .owl-nav .owl-prev:hover,.event-slider .owl-nav .owl-next:hover,.single-related-posts .post h3 a:hover,.paginations li a:hover,.comments ul .title a:hover,.author-box .author-content .title a:hover,.widget .recentpost .title a:hover,aside .widget li a:hover,.blog-post h2 a:hover,.main-nav li.current a,.L_blog_post h3 a:hover,.btn-like,.owl-carousel .owl-controls .owl-nav .owl-prev:hover:after, .owl-carousel .owl-controls .owl-nav .owl-next:hover:after{
+    color: #4284c1;
+  }
+
+
+  #map,#loader,#map:before{
+    border-top-color:#4284c1; 
+  }
+
+  #tab.resp-vtabs .resp-tab-active:after{
+    border-left-color:#4284c1; 
+  }
+
+ .countdown{
+    border-color: rgba(0, 0, 0, 0.49);
+  }
+ 
+  .banner .banner-content .btn{
+       box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.49);
+  }

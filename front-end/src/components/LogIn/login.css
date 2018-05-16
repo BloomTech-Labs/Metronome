@@ -6,14 +6,25 @@
 }
 
 input {
-	margin: 5px;
-	height: 30px;
-	width: 200px;
+	margin: 2%;
+	height: 15%;
+	width: 40%;
 }
 
 h1 {
 	font-family: 'Roboto', sans-serif;
-	font-size: 30px;
+	font-size: 40%;
 	color: black;
 	text-decoration-line: underline;
+}
+
+@media screen and (max-width: 600px) {
+  .col-25, .col-75 {
+      width: 100%;
+      margin-top: 0;
+  }
+  input[type=submit] {
+    width: 100%;
+    margin-top: 1rem;
+  }
 }

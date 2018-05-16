@@ -2,48 +2,40 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Checkbox } from 'material-ui';
 import './teacher-assignments.css';
-import { getAssignments } from '../../../../../actions';
+import { getAssignmentById } from '../../../../../actions';
 
 class TeacherAssignments extends Component {
-  componentWillMount() {
-    this.props.getAssignments();
+  componentDidMount() {
+    this.props.getAssignmentById(this.props.match.params.assignmentId);
   }
 
   render() {
-    const { assignmentId } = this.props.match.params;
-    const sortedList = this.props.assignments.assignments.filter(assignment => assignment._id === assignmentId);
+    if (!this.props.assignment.assignment) { return <div>Loading...</div>; }
     return (
       <div>
-        <h1>{sortedList[0].name}</h1>
-        {sortedList.map(assign => (
+        <h1>{this.props.assignment.assignment.name}</h1>
+        <div>{this.props.assignment.assignment.students.map(student => (
           <div>
-            <div>{assign.students.map(student => (
+            <h3>{`Student Name: ${student.firstName} ${student.lastName}`}</h3>
+            <div style={{ display: 'flex' }}>{Object.keys(this.props.assignment.assignment.days).map(day => (
               <div>
-                <h3>{`Student Name: ${student.firstName} ${student.lastName}`}</h3>
-                <div style={{ display: 'flex' }}>{Object.keys(assign.days).map(day => (
-                  <div>
-                    <Checkbox
-                      name={day}
-                      checked={assign.days[day]}
-                      value={assign.days[day]}
-                      disabled
-                    />
-                    <label htmlFor={day}>{day}</label>
-                  </div>
-                  ))}
-                </div>
+                <Checkbox
+                  name={day}
+                  checked={student.progress[day]}
+                  disabled
+                />
+                <label htmlFor={day}>{day}</label>
               </div>
-            ))}
+                  ))}
             </div>
           </div>
-
-      ))
-    }
+            ))}
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ assignments: state.assignments });
+const mapStateToProps = state => ({ assignment: state.assignment });
 
-export default connect(mapStateToProps, { getAssignments })(TeacherAssignments);
+export default connect(mapStateToProps, { getAssignmentById })(TeacherAssignments);
