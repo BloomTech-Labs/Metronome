@@ -26,6 +26,13 @@ class Login extends Component {
                               <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '40%', marginTop: '-12%'} }>
                                 <div>
                                 <h2 className="title center" style={{marginLeft: "6%"}}>Welcome Back to Metronome</h2>
+                                <Link to="/">
+                                <input
+                                  style={{ fontSize: '14px', width: '100%' }}
+                                  type="submit"
+                                  value="Home Page"
+                                ></input>
+                                </Link>
                                   <Field
                                     placeholder="Email"
                                     name="email"

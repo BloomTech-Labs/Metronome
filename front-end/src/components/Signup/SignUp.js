@@ -86,7 +86,14 @@ class SignUp extends Component {
               <div class="icon-box-content">
                 <div class="content">
                   <h2 class="title" style={{marginLeft: '8%'}}>Welcome to Metronome</h2>
-                    <div className="form-container" style={{marginTop: "-10%"}}>
+                    <Link to="/">
+                    <input
+                      style={{ fontSize: '14px', width: '100%' }}
+                      type="submit"
+                      value="Home Page"
+                    ></input>
+                    </Link>
+                    <div className="form-container" style={{marginTop: "-5%"}}>
                       <div className="signup-form">
                         <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{width: '40%'}}>
                           <Error error={this.props.auth.error} />
