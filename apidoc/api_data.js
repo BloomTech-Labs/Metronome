@@ -40,6 +40,36 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "server/controllers/studentController.js",
+    "groupTitle": "Student"
+  },
+  {
+    "type": "get",
+    "url": "/api/student/assignment/:id",
+    "title": "Get an assignment by its Id.",
+    "name": "GetAssignmentById",
+    "group": "Student",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "assignment",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"assignment\": {\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": {\n      \"Monday\": true,\n      \"Wednesday\": true,\n      \"Friday\" : true\n    },\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n    \"progress\": {\n      \"Monday\": true,\n      \"Wednesday\": true\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/studentController.js",
     "groupTitle": "Student",
     "error": {
       "fields": {
@@ -47,15 +77,15 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
           }
         ]
       },
       "examples": [
         {
-          "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
           "type": "json"
         }
       ]
@@ -82,7 +112,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"assignments\": [{\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": [\"Monday\", \"Wednesday\", \"Friday\"],\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n  }, {\n    \"_id\": \"5af30e2aff9e28011850d7c4\",\n    \"days\": [\"Monday\"],\n    \"name\": \"My Other Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 1,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.png\"\n  }]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"assignments\": [{\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": {\n      \"Monday\": true,\n      \"Wednesday\": true,\n      \"Friday\" : true\n    },\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n    \"progress\": {\n      \"Monday\": true,\n      \"Wednesday\": true\n    }\n  }, {\n    \"_id\": \"5af30e2aff9e28011850d7c4\",\n    \"days\": {\n      \"Tuesday\": true,\n      \"Thursday\": true,\n    },\n    \"name\": \"My Other Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 1,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.png\",\n    \"progress\": {}\n  }]\n}",
           "type": "json"
         }
       ]
@@ -96,15 +126,133 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
           }
         ]
       },
       "examples": [
         {
-          "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/student/updateProgress",
+    "title": "Update the progress on an assignment.",
+    "name": "UpdateProgress",
+    "group": "Student",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "progress",
+            "description": "<p>The student's progress updates.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "assignmentId",
+            "description": "<p>The assignment to update the progress on.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "progress",
+            "description": "<p>Returns the progress update that was sent.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"progress\": {\n      \"Monday\": true,\n      \"Wednesday\": true\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/studentController.js",
+    "groupTitle": "Student",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/teacher/assignments/:id",
+    "title": "Deletes an assignment.",
+    "name": "DeleteAssignment",
+    "group": "Teacher",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of the deleted assignment.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": \"5af352f0c9b6ae011ddbb065\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/teacherController.js",
+    "groupTitle": "Teacher",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
           "type": "json"
         }
       ]
@@ -186,7 +334,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"assignment\": {\n      \"_id\": \"5af352f0c9b6ae011ddbb065\",\n      \"days\": [\"Monday\", \"Wednesday\", \"Friday\"],\n      \"name\": \"My Assignment\",\n      \"dueDate\": \"2018-05-16 10:59:36.808\",\n      \"hours\": 5,\n      \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n      \"fileName\": \"my_sheet.pdf\",\n      \"students\": [],\n      \"emails\": [\"test@example.com\"],\n      \"createdAt\": \"2018-05-10T21:08:44.018Z\",\n      \"updatedAt\": \"2018-05-10T21:08:44.018Z\",\n    }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"assignment\": {\n      \"_id\": \"5af352f0c9b6ae011ddbb065\",\n      \"days\": {\n        \"Monday\": true,\n        \"Wednesday\": true,\n        \"Friday\": true,\n      },\n      \"name\": \"My Assignment\",\n      \"dueDate\": \"2018-05-16 10:59:36.808\",\n      \"hours\": 5,\n      \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n      \"fileName\": \"my_sheet.pdf\",\n      \"students\": [],\n      \"emails\": [\"test@example.com\"],\n      \"createdAt\": \"2018-05-10T21:08:44.018Z\",\n      \"updatedAt\": \"2018-05-10T21:08:44.018Z\",\n    }\n}",
           "type": "json"
         }
       ]
@@ -200,15 +348,64 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
           }
         ]
       },
       "examples": [
         {
-          "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/teacher/assignment/:id",
+    "title": "Get an assignment by its id with all students' progress.",
+    "name": "GetAssignmentById",
+    "group": "Teacher",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "assignment",
+            "description": "<p>The assignment.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"assignment\": {\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": {\n      \"Monday\": true,\n      \"Wednesday\": true,\n      \"Friday\": true,\n    },\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n    \"students\": [{\n      \"email\": \"test@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\"\n     }]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/teacherController.js",
+    "groupTitle": "Teacher",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
           "type": "json"
         }
       ]
@@ -228,14 +425,14 @@ define({ "api": [
             "type": "Array",
             "optional": false,
             "field": "assignments",
-            "description": "<p>An array of the assignments linked to the teacher.</p>"
+            "description": "<p>An array of the assignments linked to the teacher. (Does not include student progress)</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"assignments\": [{\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": [\"Monday\", \"Wednesday\", \"Friday\"],\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n    \"students\": [{\n      \"email\": \"test@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\"\n     }]\n  }, {\n    \"_id\": \"5af30e2aff9e28011850d7c4\",\n    \"days\": [\"Monday\"],\n    \"name\": \"My Other Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 1,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.png\",\n    \"students\": [{\n      \"email\": \"test@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\"\n     }]\n  }]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"assignments\": [{\n    \"_id\": \"5af352f0c9b6ae011ddbb065\",\n    \"days\": {\n      \"Monday\": true,\n      \"Wednesday\": true,\n      \"Friday\": true,\n    },\n    \"name\": \"My Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 5,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.pdf\",\n    \"students\": [{\n      \"email\": \"test@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\"\n     }]\n  }, {\n    \"_id\": \"5af30e2aff9e28011850d7c4\",\n    \"days\": {\n      \"Tuesday\": true,\n      \"Thursday\": true,\n    },\n    \"name\": \"My Other Assignment\",\n    \"dueDate\": \"2018-05-16 10:59:36.808\",\n    \"hours\": 1,\n    \"musicSheetAddr\": \"http://example.com/my_sheet.png\",\n    \"students\": [{\n      \"email\": \"test@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\"\n     }]\n  }]\n}",
           "type": "json"
         }
       ]
@@ -249,15 +446,71 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
           }
         ]
       },
       "examples": [
         {
-          "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/teacher/getUploadUrl",
+    "title": "Uploads a file to S3 and returns the URL.",
+    "name": "GetUploadUrl",
+    "group": "Teacher",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "musicSheetAddr",
+            "description": "<p>the URL to get the downloaded file at.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "fileName",
+            "description": "<p>The original name of the file.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"musicSheetAddr\": \"https://www.example.com/abc-def-ghijkl\",\n  \"fileName\": \"my_music_sheet.png\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/teacherController.js",
+    "groupTitle": "Teacher",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotAuthorized",
+            "description": "<p>&quot;Not authorized.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "IncorrectPassword-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n{\n  \"error\": \"Not authorized\"\n}",
           "type": "json"
         }
       ]
@@ -426,7 +679,7 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.).</p>"
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
           }
         ]
       },
@@ -438,7 +691,7 @@ define({ "api": [
         },
         {
           "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
           "type": "json"
         }
       ]
@@ -615,7 +868,7 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "InvalidInput",
-            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.).</p>"
+            "description": "<p>Describes the input error (invalid email format, invalid password length, etc.). &quot;errors&quot; will always be an array, even if there is only one error.</p>"
           }
         ]
       },
@@ -627,7 +880,7 @@ define({ "api": [
         },
         {
           "title": "InvalidInput-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": \"Password must be between 8 and 56 characters.\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"errors\": [\"Password must be between 8 and 56 characters.\", \"First Name is a required field.\"]\n}",
           "type": "json"
         }
       ]
