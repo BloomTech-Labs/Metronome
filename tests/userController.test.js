@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const app = require('../server/app');
 const User = require('../server/models/User');
 const { UserDataFactory } = require('./testDataFactories');
+const { connectToTestDb, dropTestCollections } = require('./utils');
 
 const request = supertest(app);
 
@@ -13,21 +14,19 @@ const {
   newUserWithBadPassword,
 } = UserDataFactory;
 
+async function setup() {
+  await connectToTestDb();
+  await User.registerNewUser(validNewUser);
+}
+
 describe('[POST] /api/user/register ', () => {
-  beforeAll((done) => {
-    mongoose.connect('mongodb://localhost/Metronome_local_test');
-    const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error'));
-    db.once('open', done);
-  });
+  beforeAll(setup);
 
   afterEach((done) => {
     User.remove({}, done);
   });
 
-  afterAll((done) => {
-    mongoose.connection.db.dropCollection('users', done);
-  });
+  afterAll(dropTestCollections);
 
   it('Should return an error if the user input was invalid', async () => {
     const response = await request.post('/api/user/register').send(newUserWithBadEmail);
@@ -59,19 +58,8 @@ describe('[POST] /api/user/register ', () => {
 });
 
 describe('[POST] /api/user/login', () => {
-  beforeAll((done) => {
-    mongoose.connect('mongodb://localhost/Metronome_local_test');
-    const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error'));
-    db.once('open', async () => {
-      await User.registerNewUser(validNewUser);
-      done();
-    });
-  });
-
-  afterAll((done) => {
-    mongoose.connection.db.dropCollection('users', done);
-  });
+  beforeAll(setup);
+  afterAll(dropTestCollections);
 
   it('Should return an error if a user does not exist with the given email', async () => {
     const userThatIsntRegistered = {
@@ -102,19 +90,8 @@ describe('[POST] /api/user/login', () => {
 });
 
 describe('[PUT] /api/user', () => {
-  beforeAll((done) => {
-    mongoose.connect('mongodb://localhost/Metronome_local_test');
-    const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error'));
-    db.once('open', async () => {
-      await User.registerNewUser(validNewUser);
-      done();
-    });
-  });
-
-  afterAll((done) => {
-    mongoose.connection.db.dropCollection('users', done);
-  });
+  beforeAll(setup);
+  afterAll(dropTestCollections);
 
   it('Should return an error if the old password is incorrect', async () => {
     const user = await User.findOne({ email: validNewUser.email });
