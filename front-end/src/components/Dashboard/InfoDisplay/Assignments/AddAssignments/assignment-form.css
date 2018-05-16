@@ -1,3 +1,7 @@
+.assignemnt-form-container {
+  display: flex;
+}
+
 .button-container {
   display: flex;
   flex-direction: row;
@@ -36,7 +40,7 @@ Button {
 
 .image-preview {
   position: absolute;
-  left: 235px;
+  left: 230px;
   width: 225px;
   height: 200px;
 }

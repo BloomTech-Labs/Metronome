@@ -113,6 +113,7 @@ class AssignmentForm extends Component {
       musicSheetAddr,
       fileName,
     } = this.state;
+
     const emails = email.split(',');
     const assignment = {
       emails,
@@ -146,133 +147,140 @@ class AssignmentForm extends Component {
     const { preview } = this.state;
     return (
       <div>
-        <div style={{ margin: 40 }}>
-          <Grid container spacing={0} align="center">
-            <Grid item xs={12}>
-              <input
-                className="title"
-                placeholder="Assignment Name"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleStateDataChange}
-              />
-              <Grid container spacing={0} justify="center">
-                <Grid item xs={16}>
-                  <Checkbox
-                    className="daysToPractice"
-                    checked={this.state.Sunday}
-                    onChange={this.handleChange('Sunday')}
-                    value="checkedSunday"
-                  />
-                  <label htmlFor="checkedSunday">Sunday</label>
-                  <Checkbox
-                    className="daysToPractice"
-                    checked={this.state.Monday}
-                    onChange={this.handleChange('Monday')}
-                    value="checkedMonday"
-                  />
-                  <label htmlFor="checkedMonday">Monday</label>
-                  <Checkbox
-                    className="daysToPractice"
-                    checked={this.state.Tuesday}
-                    onChange={this.handleChange('Tuesday')}
-                    value="checkedTuesday"
-                  />
-                  <label htmlFor="checkedTuesday">Tuesday</label>
-                  <Checkbox
-                    className="daysToPractice"
-                    checked={this.state.Wednesday}
-                    onChange={this.handleChange('Wednesday')}
-                    value="checkedWednesday"
-                  />
-                  <label htmlFor="checkedWednesday">Wednesday</label>
-                  <Checkbox
-                    className="daysToPractice"
-                    checked={this.state.Thursday}
-                    onChange={this.handleChange('Thursday')}
-                    value="checkedThursday"
-                  />
-                  <label htmlFor="checkedThursday">Thursday</label>
-                  <Checkbox
-                    className="daysToPractice"
-                    checked={this.state.Friday}
-                    onChange={this.handleChange('Friday')}
-                    value="checkedFriday"
-                  />
-                  <label htmlFor="checkedFriday">Friday</label>
-                  <Checkbox
-                    className="daysToPractice"
-                    checked={this.state.Saturday}
-                    onChange={this.handleChange('Saturday')}
-                    value="checkedSaturday"
-                  />
-                  <label htmlFor="checkedSaturday">Saturday</label>
-                </Grid>
-              </Grid>
-              <Grid container justify="center">
-                <Grid item />
-                <div className="hours-container">
-                  <input
-                    className="hours"
-                    name="hours"
-                    type="text"
-                    placeholder="0"
-                    value={this.state.hours}
-                    onChange={this.handleStateDataChange}
-                  />
-
-                </div>
-                <label htmlFor="hours">hrs</label>
-                <div className="date-container">
-
-                  <label htmlFor="due date">Due Date:</label>
-                  <DatePicker
-                    selected={this.state.date}
-                    onChange={this.handledDateChange}
-                  />
-                </div>
-                <Grid item>
-                  <div className="fileupload-container">
-                    <Dropzone
-                      disabled={this.state.disabled}
-                      accept="image/*"
-                      multiple={false}
-                      onDrop={this.onDrop}
-                      size={150}
-                    >
-                      Upload sheet music here!
-
-                    </Dropzone>
-                    <div className="image-preview">
-                      {preview && <img className="image-preview" src={preview}  alt="sheet music" />}
-                    </div>
-                  </div>
-                </Grid>
-              </Grid>
-              <Grid container justify="center">
-                <label htmlFor="email">Email:</label>
+        <div className="assignment-form-container">
+          <div style={{ margin: 40 }}>
+            <Grid container spacing={0} align="center">
+              <Grid item xs={12}>
                 <input
-                  type="email"
-                  name="email"
-                  value={this.state.email}
+                  className="title"
+                  placeholder="Assignment Name"
+                  name="name"
+                  value={this.state.name}
                   onChange={this.handleStateDataChange}
                 />
-              </Grid>
+                <Grid container spacing={0} justify="center">
+                  <Grid item xs={16}>
+                    <Checkbox
+                      className="daysToPractice"
+                      checked={this.state.Sunday}
+                      onChange={this.handleChange('Sunday')}
+                      value="checkedSunday"
+                    />
+                    <label htmlFor="checkedSunday">Sunday</label>
+                    <Checkbox
+                      className="daysToPractice"
+                      checked={this.state.Monday}
+                      onChange={this.handleChange('Monday')}
+                      value="checkedMonday"
+                    />
+                    <label htmlFor="checkedMonday">Monday</label>
+                    <Checkbox
+                      className="daysToPractice"
+                      checked={this.state.Tuesday}
+                      onChange={this.handleChange('Tuesday')}
+                      value="checkedTuesday"
+                    />
+                    <label htmlFor="checkedTuesday">Tuesday</label>
+                    <Checkbox
+                      className="daysToPractice"
+                      checked={this.state.Wednesday}
+                      onChange={this.handleChange('Wednesday')}
+                      value="checkedWednesday"
+                    />
+                    <label htmlFor="checkedWednesday">Wednesday</label>
+                    <Checkbox
+                      className="daysToPractice"
+                      checked={this.state.Thursday}
+                      onChange={this.handleChange('Thursday')}
+                      value="checkedThursday"
+                    />
+                    <label htmlFor="checkedThursday">Thursday</label>
+                    <Checkbox
+                      className="daysToPractice"
+                      checked={this.state.Friday}
+                      onChange={this.handleChange('Friday')}
+                      value="checkedFriday"
+                    />
+                    <label htmlFor="checkedFriday">Friday</label>
+                    <Checkbox
+                      className="daysToPractice"
+                      checked={this.state.Saturday}
+                      onChange={this.handleChange('Saturday')}
+                      value="checkedSaturday"
+                    />
+                    <label htmlFor="checkedSaturday">Saturday</label>
+                  </Grid>
+                </Grid>
+                <Grid container justify="center">
+                  <Grid item />
+                  <div className="hours-container">
+                    <input
+                      className="hours"
+                      name="hours"
+                      type="text"
+                      placeholder="0"
+                      value={this.state.hours}
+                      onChange={this.handleStateDataChange}
+                    />
 
-              <Grid item>
+                  </div>
+                  <label htmlFor="hours">hrs</label>
+                  <div className="date-container">
 
-                <Button variant="raised" onClick={this.addAssignment}>
-                  Submit
+                    <label htmlFor="due date">Due Date:</label>
+                    <DatePicker
+                      selected={this.state.date}
+                      onChange={this.handledDateChange}
+                    />
+                  </div>
+                  <Grid item>
+                    <div className="fileupload-container">
+                      <Dropzone
+                        disabled={this.state.disabled}
+                        accept="image/*"
+                        multiple={false}
+                        onDrop={this.onDrop}
+                        size={150}
+                      >
+                        Upload sheet music here!
+
+                      </Dropzone>
+                      <div className="image-preview">
+                        {preview &&
+                          <img
+                            className="image-preview"
+                            src={preview}
+                            alt="sheet music"
+                          />}
+                      </div>
+                    </div>
+                  </Grid>
+                </Grid>
+                <Grid container justify="center">
+                  <label htmlFor="email">Email:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.handleStateDataChange}
+                  />
+                </Grid>
+
+                <Grid item>
+
+                  <Button variant="raised" onClick={this.addAssignment}>
+                    Submit
+                  </Button>
+
+                </Grid>
+
+                <Button variant="raised" onClick={this.props.history.goBack}>
+                  Assignments
                 </Button>
 
               </Grid>
-
-              <Button variant="raised" onClick={this.props.history.goBack}>
-                Assignments
-              </Button>
-
             </Grid>
-          </Grid>
+          </div>
         </div>
       </div>
     );
