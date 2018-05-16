@@ -4,7 +4,6 @@ import moment from 'moment';
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router-dom';
 
-
 import { Card, CardImg, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import FATrash from 'react-icons/lib/fa/trash';
 // import { Z_DEFAULT_STRATEGY } from 'zlib';
@@ -16,15 +15,20 @@ const AssignmentCard = (props) => {
     <div>
       <Col>
         <Card>
-          {role === 'Teacher' ?
-            <Link to={`/dashboard/teacher-assignments/${props.name}`}>
+          {role === 'Teacher'
+            ? <Link to={`/dashboard/teacher-assignments/${props.id}`}>
               <CardTitle>{props.name}</CardTitle>
-            </Link> : <CardTitle>{props.name}</CardTitle>}
-          <Link to={`/dashboard/${role.toLowerCase()}-assignment-details/${props.id}`}>
+            </Link>
+            : <CardTitle>{props.name}</CardTitle>}
+          <Link
+            to={`/dashboard/${role.toLowerCase()}-assignment-details/${props.id}`}
+          >
             <CardImg
               top
-              width="20%"
-              src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+              width="225px"
+              margin="10px"
+              height="200px"
+              src={props.musicSheetImage}
               alt="Card image cap"
             />
             <CardBody>
@@ -33,7 +37,8 @@ const AssignmentCard = (props) => {
           </Link>
         </Card>
 
-        {role === 'Teacher' && <FATrash onClick={() => props.deleteAssignment(props.id)} />}
+        {role === 'Teacher' &&
+          <FATrash onClick={() => props.deleteAssignment(props.id)} />}
       </Col>
     </div>
   );

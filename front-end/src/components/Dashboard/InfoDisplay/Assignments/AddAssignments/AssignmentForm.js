@@ -12,7 +12,6 @@ import './assignment-form.css';
 
 axios.defaults.withCredentials = true;
 
-
 class AssignmentForm extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +32,8 @@ class AssignmentForm extends Component {
       musicSheetAddr: '',
       email: '',
       fileName: '',
+      disabled: false,
+      preview: null,
     };
   }
 
@@ -54,12 +55,12 @@ class AssignmentForm extends Component {
       this.setState({
         days: { ...this.state.days, [name]: false },
       });
-    // } else {
-    //   const filteredArray = this.state.days.filter(day => day !== name);
+      // } else {
+      //   const filteredArray = this.state.days.filter(day => day !== name);
 
-    //   this.setState({
-    //     days: filteredArray,
-    //   });
+      //   this.setState({
+      //     days: filteredArray,
+      //   });
     }
   };
 
@@ -80,22 +81,38 @@ class AssignmentForm extends Component {
     const formData = new FormData();
     formData.append('file', files[0]);
 
-    axios.post('/api/teacher/getUploadUrl', formData, {
-      headers: {
-        Authorization: localStorage.getItem('token'),
-        'Content-Type': 'multipart/form-data',
-      },
-    }).then((response) => {
-      const { fileName, musicSheetAddr } = response.data;
-      this.setState({ fileName, musicSheetAddr });
-    }).catch(err => console.log(err));
+    axios
+      .post('/api/teacher/getUploadUrl', formData, {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        const { fileName, musicSheetAddr } = response.data;
+        this.setState({
+          preview: files[0].preview,
+          fileName,
+          musicSheetAddr,
+          disabled: true,
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   // Adds excitment via props/redux
 
   addAssignment = () => {
     // emails, name, days, dueDate, hours, musicSheetAddr;
-    const { email, name, days, dueDate, hours, musicSheetAddr, fileName } = this.state;
+    const {
+      email,
+      name,
+      days,
+      dueDate,
+      hours,
+      musicSheetAddr,
+      fileName,
+    } = this.state;
     const emails = email.split(',');
     const assignment = {
       emails,
@@ -121,10 +138,12 @@ class AssignmentForm extends Component {
       Thursday: false,
       Friday: false,
       Saturday: false,
+      preview: null,
     });
   };
 
   render() {
+    const { preview } = this.state;
     return (
       <div>
         <div style={{ margin: 40 }}>
@@ -206,7 +225,6 @@ class AssignmentForm extends Component {
                 <label htmlFor="hours">hrs</label>
                 <div className="date-container">
 
-
                   <label htmlFor="due date">Due Date:</label>
                   <DatePicker
                     selected={this.state.date}
@@ -215,9 +233,19 @@ class AssignmentForm extends Component {
                 </div>
                 <Grid item>
                   <div className="fileupload-container">
-                    <Dropzone onDrop={this.onDrop} size={150}>
-                    Drop some files here!
+                    <Dropzone
+                      disabled={this.state.disabled}
+                      accept="image/*"
+                      multiple={false}
+                      onDrop={this.onDrop}
+                      size={150}
+                    >
+                      Upload sheet music here!
+
                     </Dropzone>
+                    <div className="image-preview">
+                      {preview && <img className="image-preview" src={preview}  alt="sheet music" />}
+                    </div>
                   </div>
                 </Grid>
               </Grid>
@@ -239,9 +267,8 @@ class AssignmentForm extends Component {
 
               </Grid>
 
-
               <Button variant="raised" onClick={this.props.history.goBack}>
-                  Assignments
+                Assignments
               </Button>
 
             </Grid>

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 const validate = require('mongoose-validator');
+const AssignmentProgress = require('../models/AssignmentProgress');
 
 // const VALID_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -58,5 +59,16 @@ const AssignmentSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
+/**
+ * Adds the student's assignment progress to the assignment for a given student.
+ */
+AssignmentSchema.methods.getProgress = async function ({ studentId }) {
+  let assignmentProgress = await AssignmentProgress.findOne({ student: studentId, assignment: this._id });
+  if (!assignmentProgress) {
+    assignmentProgress = new AssignmentProgress({ student: studentId, assignment: this._id });
+    await assignmentProgress.save();
+  }
+  return assignmentProgress.progress;
+};
 
 module.exports = mongoose.model('Assignment', AssignmentSchema);

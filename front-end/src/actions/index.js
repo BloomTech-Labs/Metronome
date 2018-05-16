@@ -42,6 +42,10 @@ export const UPDATE_ASSIGNMENT_REQUEST = 'UPDATE_ASSIGNMENT_REQUEST';
 export const UPDATE_ASSIGNMENT_SUCCESS = 'UPDATE_ASSIGNMENT_SUCCESS';
 export const UPDATE_ASSIGNMENT_FAILURE = 'UPDATE_ASSIGNMENT_FAILURE';
 
+export const GET_ASSIGNMENT_BY_ID_REQUEST = 'GET_ASSIGNMENT_BY_ID_REQUEST';
+export const GET_ASSIGNMENT_BY_ID_SUCCESS = 'GET_ASSIGNMENT_BY_ID_SUCCESS';
+export const GET_ASSIGNMENT_BY_ID_FAILURE = 'GET_ASSIGNMENT_BY_ID_FAILURE';
+
 export const GET_STUDENT_LIST = 'GET_STUDENT_LIST';
 export const GET_STUDENT_ASSIGNMENT = 'GET_STUDENT_ASSIGNMENT';
 
@@ -152,7 +156,7 @@ export const addAssignment = assignment => (dispatch) => {
 export const deleteAssignment = id => (dispatch) => {
   const token = window.localStorage.getItem('token');
   dispatch({ type: DELETE_ASSIGNMENT_REQUEST });
-  axios.delete(`${TEACHER_URL}/assignments/${id}`, {
+  axios.delete(`${TEACHER_URL}/assignment/${id}`, {
     headers: { Authorization: token },
   })
     .then((response) => {
@@ -176,15 +180,27 @@ export const claimAssignment = assignmentToken => (dispatch) => {
     });
 };
 
-export const updateAssignment = (updates, assignmentId) => (dispatch) => {
+export const updateAssignment = (progress, assignmentId) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   dispatch({ type: UPDATE_ASSIGNMENT_REQUEST });
-  axios.put('/api/student/updateAssignment', { updates, assignmentId }, { headers: { Authorization: token } })
+  axios.post('/api/student/updateProgress', { progress, assignmentId }, { headers: { Authorization: token } })
     .then((response) => {
       dispatch({ type: UPDATE_ASSIGNMENT_SUCCESS });
     })
     .catch((error) => {
       dispatch({ type: UPDATE_ASSIGNMENT_FAILURE, error: error.response.data });
+    });
+};
+
+export const getAssignmentById = assignmentId => (dispatch) => {
+  const token = window.localStorage.getItem('token');
+  dispatch({ type: GET_ASSIGNMENT_BY_ID_REQUEST });
+  axios.get(`/api/teacher/assignment/${assignmentId}`, { headers: { Authorization: token } })
+    .then((response) => {
+      dispatch({ type: GET_ASSIGNMENT_BY_ID_SUCCESS, payload: response.data.assignment });
+    })
+    .catch((error) => {
+      dispatch({ type: GET_ASSIGNMENT_BY_ID_FAILURE, error: error.response.data });
     });
 };
 
