@@ -152,7 +152,7 @@ export const addAssignment = assignment => (dispatch) => {
 export const deleteAssignment = id => (dispatch) => {
   const token = window.localStorage.getItem('token');
   dispatch({ type: DELETE_ASSIGNMENT_REQUEST });
-  axios.delete(`${TEACHER_URL}/assignments/${id}`, {
+  axios.delete(`${TEACHER_URL}/assignment/${id}`, {
     headers: { Authorization: token },
   })
     .then((response) => {
