@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem , Image} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logout } from '../../actions';
@@ -17,7 +17,7 @@ class LoginNavBar extends Component {
         <LinkContainer to="/dashboard/billing">
           <NavItem href="#">Billing</NavItem>
         </LinkContainer>,
-         <LinkContainer to="/dashboard/settings">
+        <LinkContainer to="/dashboard/settings">
           <NavItem href="#">Settings</NavItem>
         </LinkContainer>,
         <LinkContainer to="/" onClick={() => this.props.logout(this.props.history)}>
