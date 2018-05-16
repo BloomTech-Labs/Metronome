@@ -37,18 +37,18 @@ class LoginNavBar extends Component {
   render() {
     return (
       <div className="container">
-      <Navbar inverse fixedTop={true}>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <LinkContainer to="/">
-              <NavItem className="nav-brand" href="#">Metronome</NavItem>
-            </LinkContainer>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav pullRight>
-          {this.navbarLinks()}
-        </Nav>
-      </Navbar>
+        <Navbar inverse fixedTop>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <LinkContainer to="/">
+                <NavItem className="nav-brand" href="/">Metronome</NavItem>
+              </LinkContainer>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav pullRight>
+            {this.navbarLinks()}
+          </Nav>
+        </Navbar>
       </div>
     );
   }
