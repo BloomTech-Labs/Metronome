@@ -16,7 +16,7 @@ class StudentAssignment extends Component {
       checked: false,
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.getAssignments();
   }
 

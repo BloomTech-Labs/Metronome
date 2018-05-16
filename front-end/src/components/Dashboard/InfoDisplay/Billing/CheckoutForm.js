@@ -13,6 +13,7 @@ class CheckoutForm extends Component {
       subscribe: false, // 1 month subscription: $20
       client: false, // 1 client purchase: $1.99
       error: null,
+      success: null,
     };
   }
 
@@ -28,7 +29,6 @@ class CheckoutForm extends Component {
 
     // JWT token pulled from local storage
     const jwt = window.localStorage.getItem('token');
-    console.log(jwt);
 
     const { subscribe, client } = this.state;
 
@@ -51,7 +51,6 @@ class CheckoutForm extends Component {
       .then(({ token }) => {
         if (!token) return this.setState({ error: 'Card information incorrect' });
         this.setState({ error: null });
-        console.log('Received Stripe token:', token);
 
         // once token is created, send request to backend
         // with user id, token id, subscribe type, and price
@@ -64,9 +63,10 @@ class CheckoutForm extends Component {
             Authorization: jwt,
           },
         }).then((res) => {
-          // transaction succeed and redirect to dashboard page
-          console.log('Transaction successful', res.data);
-          window.location.href = '/dashboard';
+          // transaction succeed and redirect to add assignment page
+          this.setState({ success: 'Pay Successful' });
+          window.localStorage.setItem('token', res.data);
+          window.location.href = '/dashboard/add-assignment';
         }).catch((error) => {
           console.log('Transaction Error', error);
         });
@@ -80,7 +80,7 @@ class CheckoutForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} >
-        <div className="header-con" >
+          <div className="header-con" >
             <h2 className="title">BILLING INFORMATION</h2>
             <span>CHOOSE YOUR PLAN</span>
           </div>
@@ -108,7 +108,8 @@ class CheckoutForm extends Component {
             />
           </FormGroup>
           <div style={{ color: 'red' }}>{this.state.error}</div>
-          <button style={{ width: 'calc(100% - 30px)' }}>Buy Now</button>
+          <div style={{ color: 'green' }}>{this.state.success}</div>
+          <button style={{ width: '100%' }}>Buy Now</button>
         </form>
       </div>
     );

@@ -171,7 +171,6 @@ exports.transaction = async (req, res, next) => {
 
       if (!charge) return res.status(500).json({ error: 'Transaction Error' });
       user.orderId = charge.id;
-      res.status(200).json(charge);
     } else if (subscribeType === '1 Client') {
       const charge = await stripe.charges.create({
         amount: Number(price) * 100,
@@ -181,11 +180,12 @@ exports.transaction = async (req, res, next) => {
 
       if (!charge) return res.status(500).json({ error: 'Transaction Error' });
       user.orderId = charge.id;
-      res.status(200).json(charge);
     } else {
       res.status(500).json({ error: 'No Transaction' });
     }
     user.save();
+    const token = user.generateJWT();
+    res.status(200).json(token);
   } catch (err) {
     next(err);
   }
