@@ -25,15 +25,16 @@ export default (state = initialState, action) => {
     case GET_ASSIGNMENTS_FAILURE:
     case ADD_ASSIGNMENT_FAILURE:
     case DELETE_ASSIGNMENT_FAILURE:
-      return { ...state, isPending: false, error: action.error };
+      return { ...state, isPending: false, errors: action.errors };
     case ADD_ASSIGNMENT_SUCCESS:
-      return { ...state, isPending: false, assignments: [action.payload].concat(state.assignments) };
+      return { ...state, isPending: false, assignments: [action.payload].concat(state.assignments), errors: null };
     case DELETE_ASSIGNMENT_SUCCESS: {
       const { id } = action;
       return {
         ...state,
         isPending: false,
         assignments: state.assignments.filter(assignment => assignment._id !== id),
+        errors: null,
       };
     }
     default:

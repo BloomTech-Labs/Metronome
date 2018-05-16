@@ -50,6 +50,10 @@ exports.emailAssignments = async function (req, res, next) {
     const assignment = await teacher.emailAssignment(emails, assignmentDetails);
     res.status(200).json({ assignment });
   } catch (err) {
+    if (err.errors && err.errors.fileName) {
+      // Remove filename error for client error messages (musicSheetAddr error is descriptive enough)
+      delete err.errors.fileName;
+    }
     next(err);
   }
 };

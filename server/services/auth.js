@@ -8,13 +8,13 @@ exports.isAuthenticated = function (req, res, next) {
 
   if (!token) {
     return res.status(422).json({
-      error: 'Login token not found. Please log in.',
+      errors: ['Login token not found. Please log in.'],
     });
   }
 
   jwt.verify(token, secret, (err, decodedToken) => {
     if (err) {
-      return res.status(403).json({ error: 'Login token has expired. Please log in again.' });
+      return res.status(403).json({ errors: ['Login token has expired. Please log in again.'] });
     }
 
     req.user = decodedToken;
@@ -25,7 +25,7 @@ exports.isAuthenticated = function (req, res, next) {
 exports.isTeacher = function (req, res, next) {
   if (req.user.role !== 'Teacher') {
     return res.status(403).json({
-      error: 'Not authorized',
+      errors: ['Not authorized'],
     });
   }
   next();
@@ -34,7 +34,7 @@ exports.isTeacher = function (req, res, next) {
 exports.isStudent = function (req, res, next) {
   if (req.user.role !== 'Student') {
     return res.status(403).json({
-      error: 'Not authorized',
+      errors: ['Not authorized'],
     });
   }
   next();

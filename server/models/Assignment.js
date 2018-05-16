@@ -43,11 +43,11 @@ const AssignmentSchema = new mongoose.Schema({
   },
   musicSheetAddr: {
     type: String,
-    required: [true, 'Assignment music sheet address is a required field.'],
+    required: [true, 'Sheet music file is required.'],
   },
   fileName: {
     type: String,
-    required: [true, 'Assignment file name is a required field.'],
+    required: [true, 'File name is required.'],
   },
   teacher: {
     type: mongoose.Schema.Types.ObjectId,

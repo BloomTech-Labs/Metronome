@@ -9,9 +9,9 @@ export default (state = initialState, action) => {
     case GET_ASSIGNMENT_BY_ID_REQUEST:
       return { ...state, isPending: true };
     case GET_ASSIGNMENT_BY_ID_SUCCESS:
-      return { ...state, isPending: false, assignment: action.payload };
+      return { ...state, isPending: false, assignment: action.payload, errors: null };
     case GET_ASSIGNMENT_BY_ID_FAILURE:
-      return { ...state, isPending: false, error: action.error };
+      return { ...state, isPending: false, errors: action.errors };
     default:
       return state;
   }

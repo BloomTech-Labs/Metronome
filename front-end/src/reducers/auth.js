@@ -25,14 +25,14 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
     case UPDATE_USER_SUCCESS:
-      return { ...state, isPending: false, token: action.payload };
+      return { ...state, isPending: false, token: action.payload, errors: null };
     case LOGOUT_SUCCESS:
-      return { ...state, isPending: false };
+      return { ...state, isPending: false, errors: null };
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
     case UPDATE_USER_FAILURE:
     case LOGOUT_FAILURE:
-      return { ...state, isPending: false, error: action.error };
+      return { ...state, isPending: false, errors: action.errors };
     default:
       return state;
   }
