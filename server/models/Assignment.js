@@ -71,13 +71,4 @@ AssignmentSchema.methods.getProgress = async function ({ studentId }) {
   return assignmentProgress.progress;
 };
 
-// AssignmentSchema.methods.getWithProgress = async function ({ studentId = '', assignmentIds = [''] }) {
-//   const [assignment, assignmentProgress] = await Promise.all([
-//     this.findById(assignmentId),
-//     AssignmentProgress.findOne({ student: studentId, assignment: this._id }),
-//   ]);
-//   assignment.progress = { days: assignmentProgress.days };
-//   return assignment;
-// };
-
 module.exports = mongoose.model('Assignment', AssignmentSchema);

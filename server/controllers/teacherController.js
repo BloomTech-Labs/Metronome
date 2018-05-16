@@ -105,7 +105,7 @@ exports.getAssignmentById = async function (req, res, next) {
     const assignment = await Assignment
       .findOne({ _id: assignmentId, teacher: req.user._id })
       .populate('students', '_id email firstName lastName');
-
+    if (!assignment) throw new Error('Assignment not found.');
     // Get each student's progress
     const studentsProgressQuery = assignment.students.map(async (student) => {
       const progress = await assignment.getProgress({ studentId: student._id });
