@@ -13,7 +13,7 @@ import TeacherAssignments from './Assignments/TeacherAssignments/TeacherAssignme
 
 const InfoDisplay = props => (
 
-  <div>
+  <div className="info-display-continer">
     <Switch>
       <Route
         path={`${props.match.path}/assignments`}

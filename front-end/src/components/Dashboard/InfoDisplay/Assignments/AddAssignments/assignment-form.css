@@ -1,10 +1,12 @@
-.assignemnt-form-container {
+.assignment-form-container {
   display: flex;
+ justify-content: center;
 }
 
 .button-container {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
+  justify-content: space-around;
   
 }
 
@@ -12,13 +14,10 @@
   margin-top: -40px;
 }
 
-Button {
-  width: 50px;
-  
-}
 
 .title {
   width: 85%;
+  text-align: center;
 }
 
 .hours-container {
