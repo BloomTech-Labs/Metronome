@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Grid, Checkbox, Button } from 'material-ui';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addAssignment } from '../../../../../actions';
 import './assignment-form.css';
@@ -55,12 +56,6 @@ class AssignmentForm extends Component {
       this.setState({
         days: { ...this.state.days, [name]: false },
       });
-      // } else {
-      //   const filteredArray = this.state.days.filter(day => day !== name);
-
-      //   this.setState({
-      //     days: filteredArray,
-      //   });
     }
   };
 
@@ -99,8 +94,6 @@ class AssignmentForm extends Component {
       })
       .catch(err => console.log(err));
   };
-
-  // Adds excitment via props/redux
 
   addAssignment = () => {
     // emails, name, days, dueDate, hours, musicSheetAddr;
@@ -142,8 +135,14 @@ class AssignmentForm extends Component {
     });
   };
 
+  makePayment = () => {
+    window.location.href = '/dashboard/billing';
+  };
+
   render() {
     const { preview } = this.state;
+    const { isSubscribe } = jwtDecode(window.localStorage.getItem('token'));
+
     return (
       <div>
         <div style={{ margin: 40 }}>
@@ -244,7 +243,7 @@ class AssignmentForm extends Component {
 
                     </Dropzone>
                     <div className="image-preview">
-                      {preview && <img className="image-preview" src={preview}  alt="sheet music" />}
+                      {preview && <img className="image-preview" src={preview} alt="sheet music" />}
                     </div>
                   </div>
                 </Grid>
@@ -260,11 +259,14 @@ class AssignmentForm extends Component {
               </Grid>
 
               <Grid item>
-
-                <Button variant="raised" onClick={this.addAssignment}>
+                {isSubscribe ?
+                  <Button variant="raised" onClick={this.addAssignment}>
                   Submit
-                </Button>
-
+                  </Button> :
+                  <Button variant="raised" onClick={this.makePayment}>
+                  Activate
+                  </Button>
+                }
               </Grid>
 
               <Button variant="raised" onClick={this.props.history.goBack}>
