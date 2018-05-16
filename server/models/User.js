@@ -168,15 +168,9 @@ UserSchema.methods.editProfile = async function ({ newEmail, oldPassword, newPas
  * @param {String} opts.password
  * @returns {Promise<String>}
  */
-UserSchema.statics.loginUser = function ({ email = '', password = '' }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const token = await this.validateLogin({ email, password });
-      return resolve(token);
-    } catch (err) {
-      return reject(err);
-    }
-  });
+UserSchema.statics.loginUser = async function ({ email = '', password = '' }) {
+  const token = await this.validateLogin({ email, password });
+  return token;
 };
 
 /**
