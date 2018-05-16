@@ -2,6 +2,7 @@ import React from 'react';
 import BuyNowButton from './buyNowButton.js';
 import mainimage from './assets/metronome.png';
 import slogan from './assets/brownose.png';
+import saycool from './assets/saycool.jpg';
 
 import './landingpage.css';
 
@@ -10,7 +11,7 @@ const MainImage = () => (
   <div className="slider-cover" style={{marginTop: "-12%"}}>
     <div id="slider">
       <div className="slider-content">
-        <img src={mainimage} alt="Main Image" />
+        <img src={saycool} alt="Main Image" />
         <div className="conent">
           <div className="cover">
             <span className="bg-text">WELCOME TO METRONOME</span>
@@ -22,7 +23,7 @@ const MainImage = () => (
       </div>
 
       <div className="slider-content">
-        <img src={slogan} alt="Slogan" />
+        <img src={saycool} alt="Slogan" />
         <div className="conent">
           <div className="cover">
             <span className="bg-text">CONFERENCE</span>
