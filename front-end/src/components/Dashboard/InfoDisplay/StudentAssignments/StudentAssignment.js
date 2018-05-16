@@ -49,25 +49,6 @@ class StudentAssignment extends Component {
             alt="img"
           />
           <div className="days-container">
-            {/* <fieldset>
-              <legend>Check off when you practice</legend>
-              {filterAssignment[0].days.map(day => (
-                <div className="day-check-container">
-
-                  <div className="box">
-                    <label htmlFor={day}>{day}</label>
-                    <input
-                      className="check-box"
-                      type="checkbox"
-                      id={day}
-                      value={day}
-                      onClick={this.toggleCheck}
-                    />
-                  </div>
-
-                </div>
-              ))}
-            </fieldset> */}
             <CheckboxForm days={days} assignmentId={assignmentId} />
           </div>
 

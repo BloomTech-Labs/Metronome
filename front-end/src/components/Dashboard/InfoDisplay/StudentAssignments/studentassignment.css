@@ -4,7 +4,6 @@
   border: solid 1px gray;
 }
 
-
 .day-check-container {
   float:left;
  }
@@ -15,12 +14,10 @@
   padding-left: 20px;
  }
 
- .box {
-   margin: -20px;
-   
+ input.check-box {
+   height: 10px;
  }
 
- 
 
 
 
