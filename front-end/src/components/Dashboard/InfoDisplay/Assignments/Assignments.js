@@ -31,7 +31,7 @@ class Assignments extends Component {
       <div>
         <h1>Assignments</h1>
         <div className="assignments-container">
-          {this.props.assignments.assignments.length > 0 ? this.props.assignments.assignments.map(assignment => (
+          {!this.props.assignments.isPending && this.props.assignments.assignments.length > 0 ? this.props.assignments.assignments.map(assignment => (
             <div key={assignment._id}>
               <AssignmentCard
                 id={assignment._id}
@@ -41,7 +41,7 @@ class Assignments extends Component {
                 dueDate={assignment.dueDate}
               />
             </div>
-        )) : role === 'Student' && <h3>There are no assignments</h3>}
+        )) : !this.props.assignments.isPending && this.props.assignments.assignments.length === 0 && role === 'Student' && <h3>There are no assignments</h3>}
           { role === 'Teacher' && <AddAssignmentCard />}
         </div>
       </div>
