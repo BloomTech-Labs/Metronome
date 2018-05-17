@@ -22,7 +22,7 @@ const AssignmentDetails = (props) => {
           <li className="list-group-item"><h3>Assigned emails: {studentEmails}</h3></li>
           <li className="list-group-item"><h3>Practice hours: {assignDetails.hours} hrs/day</h3></li>
           <li className="list-group-item">
-            <h3>Music file:
+            <h3>Music file:&nbsp;
               <button className="btn">
                 <i className="fa fa-download" />
                 <a href={assignDetails.musicSheetAddr}>
