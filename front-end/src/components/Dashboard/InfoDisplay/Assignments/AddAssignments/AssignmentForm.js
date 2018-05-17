@@ -127,9 +127,9 @@ class AssignmentForm extends Component {
     this.props.addAssignment(assignment);
     if (!this.state.name || !this.state.email || !this.state.hours || !this.state.musicSheetAddr || !this.state.fileName) {
       return;
-    } else {
-      this.notify("Assignment Made")
     }
+    this.notify('Assignment Made');
+
     this.setState({
       name: '',
       days: {},
@@ -257,7 +257,7 @@ class AssignmentForm extends Component {
                         Upload sheet music here!
 
                         </Dropzone>
-                        <ToastContainer />
+                        <ToastContainer autoClose={3000} />
                         <div className="image-preview">
                           {preview &&
                           <img

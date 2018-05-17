@@ -11,7 +11,7 @@ class CheckboxForm extends Component {
     this.notify();
   };
 
-  notify = () => toast.info('Assignment Updated!', { autoClose: 5000, position: toast.POSITION.TOP_LEFT });
+  notify = () => toast.info('Assignment Updated!', { position: toast.POSITION.TOP_LEFT });
 
   render() {
     const { days } = this.props;
@@ -37,7 +37,7 @@ class CheckboxForm extends Component {
               ))}
           </fieldset>
           <button style={{ width: 'calc(100% - 30px)' }}>update</button>
-          <ToastContainer autoClose={5000} />
+          <ToastContainer autoClose={3000} />
         </form>
       </div>
     );

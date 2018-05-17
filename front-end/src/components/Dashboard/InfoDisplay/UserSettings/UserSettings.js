@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { reduxForm, Field, reset } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

@@ -172,6 +172,7 @@ export const claimAssignment = assignmentToken => (dispatch) => {
     .then((response) => {
       dispatch({ type: CLAIM_ASSIGNMENT_SUCCESS });
       window.localStorage.removeItem('assignmentToken');
+      getAssignments()(dispatch);
     })
     .catch((error) => {
       dispatch({ type: CLAIM_ASSIGNMENT_FAILURE, errors: error.response.data.errors });
