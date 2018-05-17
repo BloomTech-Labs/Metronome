@@ -8,54 +8,40 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-npm install or yarn install
-```
+[NodeJS](https://nodejs.org/en/) (tested with version 9.3.0)  
+[Yarn](https://yarnpkg.com) (tested with version 1.6.0)  
+[MongoDB](https://mongodb.com) (tested with version 3.6.0)
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+Before running the server, you will need to copy the `.env.example` file to a `.env` file with your actual secret keys.
+You will also need an instance of MongoDB running locally to run the unit tests (and if your MONGODB_URI key points to a local MongoDB server).  
 
-Say what the step will be
+Dependencies are installed by running `yarn` in both the root directory and the front-end directory.
+To run the application locally, run `yarn start` in the root directory and `yarn start` in the front-end directory from a different terminal.
 
-```
-Give the example
-```
+Once the create-react-app development server has started up, you should be able to view the site at `localhost:3000` in your browser.  
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Note: the server must be running for the front-end to function properly, as the API requests are proxied to the server at `localhost:8000`.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+To run the unit tests, simply run `yarn test` in the root directory. 
+Make sure that your local server is running before executing the tests.
 
-### Break down into end to end tests
+### Coding Style
 
-Explain what these tests test and why
-
-```
-npm run test
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+This application uses the airbnb eslint file as a base for linting rules. We have added a few of our own linting rules along the way to fit our own development styles.  
+The linting rules can be viewed and modified in the `eslintrc.json` file. 
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Deployment is as simple as running `heroku create` and `git push heroku master` (see https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction for more details on deploying a Node.JS app to heroku).  
+Don't forget to set your secret keys in your heroku dashboard!
 
+## API 
+
+API documentation can be viewed by cloning/forking the project and opening `apidoc/index.html` in your preferred browser. Documentation is created with [apiDoc](http://apidocjs.com/). To update the API documentation after adding in your own apiDoc comments, run `yarn build-docs` in your terminal.
 ## Built With
 
 * [NodeJS](https://nodejs.org/en/)
@@ -63,22 +49,12 @@ Add additional notes about how to deploy this on a live system
 * [ReactJS](https://reactjs.org/)
 * [MongoDB](https://www.mongodb.com/)
 
-## Contributing
-
-Please read []() for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
 ## Authors
 
-* **Adam Fetters** - ** - []()
-* **Emma Drueke** - ** - []()
-* **Jesse Hood** - ** - []()
-* **Ting Wang** - ** - []()
-
-See also the list of [contributors]() who participated in this project.
+* **Adam Fetters** - [Github](https://github.com/adamfetters)
+* **Emma Drueke** - [Github](https://github.com/emmadrueke)
+* **Jesse Hood** - [Github](https://github.com/jessehood)
+* **Ting Wang** - [Github](https://github.com/nunulong)
 
 ## License
 
@@ -86,6 +62,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* [Lambda School - A school that invests in you](https://lambdaschool.com/)
