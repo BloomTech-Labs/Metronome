@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-import { Button } from 'material-ui';
 
 const AssignmentDetails = (props) => {
   const id = props.match.params.userId;
