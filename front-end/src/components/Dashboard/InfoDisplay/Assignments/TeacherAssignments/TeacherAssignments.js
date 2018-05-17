@@ -12,7 +12,6 @@ class TeacherAssignments extends Component {
 
   render() {
     if (!this.props.assignment.assignment) { return <div>Loading...</div>; }
-    console.log(this.props.assignment);
     return (
       <div>
         <h1>{this.props.assignment.assignment.name}</h1>
