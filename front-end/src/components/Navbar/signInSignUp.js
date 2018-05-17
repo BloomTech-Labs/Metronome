@@ -20,7 +20,10 @@ class LoginNavBar extends Component {
         <LinkContainer to="/dashboard/settings">
           <NavItem href="#">Settings</NavItem>
         </LinkContainer>,
-        <LinkContainer to="/" onClick={() => this.props.logout(this.props.history)}>
+        <LinkContainer
+          to="/"
+          onClick={() => this.props.logout(this.props.history)}
+        >
           <NavItem href="#">Sign Out</NavItem>
         </LinkContainer>,
       ];

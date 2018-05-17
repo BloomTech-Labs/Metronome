@@ -6,10 +6,12 @@ import './billing.css';
 class Billing extends Component {
   render() {
     return (
-      <div style={{ maxWidth: 400 }}>
+      <div className="page-container">
+        <div className="billing-container" style={{ maxWidth: 400 }}>
         <StripeProvider apiKey="pk_test_Nn7zHQBxMw8neIiRpUctF1Wc">
           <BillingCheckOut />
         </StripeProvider>
+      </div>
       </div>
     );
   }

@@ -43,8 +43,8 @@ class StudentAssignment extends Component {
           </CardBody>
 
           <img
-            top
             width="350px"
+            height="200px"
             src={musicImage}
             alt="img"
           />
@@ -53,9 +53,11 @@ class StudentAssignment extends Component {
           </div>
 
           <div className="form">
-            <h3>Practice {filterAssignment[0].hours} Hours</h3>
-            <h3>Download: </h3><a href={filterAssignment[0].musicSheetAddr}>{filterAssignment[0].fileName}</a>
+            <h3>Practice {filterAssignment[0].hours} hour per day</h3>
+            <button className="btn"><i className="fa fa-download" />
+              <a href={filterAssignment[0].musicSheetAddr}>{filterAssignment[0].fileName}</a>
 
+            </button>
           </div>
         </Card>
       </div>

@@ -42,6 +42,18 @@ button:hover {
   background-color: #45a049;
 }
 
+.billing-container {
+  
+  margin-top: -70px;
+
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+
+}
+
 
 
 

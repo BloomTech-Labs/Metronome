@@ -1,4 +1,5 @@
 .body {
+  margin-top: -30px;
   margin-bottom: 3em;
   padding: 1em;
   border: solid 1px gray;
@@ -6,16 +7,23 @@
 
 .day-check-container {
   float:left;
+  margin-top: -30px;
  }
 
 .day-check-container label {
    display: block;
    float: left;
   padding-left: 20px;
+
  }
 
  input.check-box {
    height: 10px;
+   margin-top: -20px;
+ }
+
+ form a {
+   color: white;
  }
 
 
