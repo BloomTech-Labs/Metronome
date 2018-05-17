@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import FATrash from 'react-icons/lib/fa/trash';
-// import { Z_DEFAULT_STRATEGY } from 'zlib';
+import './assignment-card.css';
 
 const AssignmentCard = (props) => {
   const date = moment(props.dueDate).format('l');
   const { role } = jwtDecode(window.localStorage.getItem('token'));
   return (
-    <div>
+    <div className="card">
       <Col>
         <Card>
           {role === 'Teacher'
