@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Checkbox, Button } from 'material-ui';
-import { Link } from 'react-router-dom';
+import { Checkbox } from 'material-ui';
 import './teacher-assignments.css';
 import { getAssignmentById } from '../../../../../actions';
 
@@ -36,11 +35,11 @@ class TeacherAssignments extends Component {
           </ul>
           : <ul className="list-group">{this.props.assignment.assignment.emails.map(email => <li className="list-group-item">{email} <span style={{ color: 'red' }}>Unclaimed</span></li>)}</ul>
         }
-        <Link to="/dashboard/assignments">
-          <Button variant="raised">
-            Assignments
-          </Button>
-        </Link>
+        <button
+          onClick={() => this.props.history.push('/dashboard/assignments')}
+        >
+          All Assignments
+        </button>
       </div>
     );
   }

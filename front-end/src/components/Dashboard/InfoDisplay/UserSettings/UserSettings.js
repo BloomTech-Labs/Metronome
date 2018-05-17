@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { updateUser } from '../../../../actions';
 import './userSettings.css';
 import Error from '../../../Error/Error';
@@ -19,13 +21,19 @@ class UserSettings extends Component {
       newEmail,
       oldPassword,
       newPassword,
-      this.props.history,
     );
+    this.props.reset('settings');
+    this.notify();
   };
+
+  notify = () => {
+    toast.info('Settings Updated', { position: toast.POSITION.TOP_LEFT });
+  }
 
   render() {
     return (
-      <div className="container" style={{marginLeft: '40%'}}>
+      <div className="container" style={{ marginLeft: '40%' }}>
+        <ToastContainer autoClose={3000} />
         <div className="header-con">
           <h2 className="title">USER SETTINGS</h2>
           <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)} style={{ margin: '.5em', width: '300px' }}>
@@ -86,7 +94,7 @@ class UserSettings extends Component {
               </div>
             </div>
             <div className="row">
-              <input type="submit" value="Update" style={{width: '248px'}}/>
+              <input type="submit" value="Update" style={{ width: '248px' }} />
             </div>
           </form>
         </div>

@@ -96,7 +96,6 @@ export const updateUser = (
   newEmail,
   oldPassword,
   newPassword,
-  history,
 ) => (dispatch) => {
   const token = window.localStorage.getItem('token');
   dispatch({ type: UPDATE_USER_REQUEST });
@@ -109,7 +108,6 @@ export const updateUser = (
     .then((response) => {
       window.localStorage.setItem('token', response.data.token);
       dispatch({ type: UPDATE_USER_SUCCESS, payload: response.data });
-      history.push('/dashboard');
     })
     .catch((error) => {
       dispatch({ type: UPDATE_USER_FAILURE, errors: error.response.data.errors });
@@ -174,6 +172,7 @@ export const claimAssignment = assignmentToken => (dispatch) => {
     .then((response) => {
       dispatch({ type: CLAIM_ASSIGNMENT_SUCCESS });
       window.localStorage.removeItem('assignmentToken');
+      getAssignments()(dispatch);
     })
     .catch((error) => {
       dispatch({ type: CLAIM_ASSIGNMENT_FAILURE, errors: error.response.data.errors });
