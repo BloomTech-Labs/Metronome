@@ -20,7 +20,10 @@ class LoginNavBar extends Component {
         <LinkContainer to="/dashboard/settings">
           <NavItem href="#">Settings</NavItem>
         </LinkContainer>,
-        <LinkContainer to="/" onClick={() => this.props.logout(this.props.history)}>
+        <LinkContainer
+          to="/"
+          onClick={() => this.props.logout(this.props.history)}
+        >
           <NavItem href="#">Sign Out</NavItem>
         </LinkContainer>,
       ];
@@ -37,18 +40,18 @@ class LoginNavBar extends Component {
   render() {
     return (
       <div className="container">
-      <Navbar inverse fixedTop={true}>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <LinkContainer to="/">
-              <NavItem className="nav-brand" href="#">Metronome</NavItem>
-            </LinkContainer>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav pullRight>
-          {this.navbarLinks()}
-        </Nav>
-      </Navbar>
+        <Navbar inverse fixedTop>
+          <Navbar.Header>
+            <Navbar.Brand>
+
+              <NavItem className="nav-brand" href="/">Metronome</NavItem>
+
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav pullRight>
+            {this.navbarLinks()}
+          </Nav>
+        </Navbar>
       </div>
     );
   }

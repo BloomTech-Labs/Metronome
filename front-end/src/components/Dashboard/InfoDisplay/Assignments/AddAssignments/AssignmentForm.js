@@ -7,6 +7,8 @@ import { Grid, Checkbox, Button } from 'material-ui';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addAssignment } from '../../../../../actions';
 import './assignment-form.css';
@@ -85,6 +87,7 @@ class AssignmentForm extends Component {
       })
       .then((response) => {
         const { fileName, musicSheetAddr } = response.data;
+        this.notify('File Uploaded');
         this.setState({
           preview: files[0].preview,
           fileName,
@@ -94,6 +97,10 @@ class AssignmentForm extends Component {
       })
       .catch(err => console.log(err));
   };
+
+  notify = (message) => {
+    toast.info(message, { position: toast.POSITION.TOP_LEFT });
+  }
 
   addAssignment = () => {
     // emails, name, days, dueDate, hours, musicSheetAddr;
@@ -118,6 +125,11 @@ class AssignmentForm extends Component {
       fileName,
     };
     this.props.addAssignment(assignment);
+    if (!this.state.name || !this.state.email || !this.state.hours || !this.state.musicSheetAddr || !this.state.fileName) {
+      return;
+    } else {
+      this.notify("Assignment Made")
+    }
     this.setState({
       name: '',
       days: {},
@@ -245,6 +257,7 @@ class AssignmentForm extends Component {
                         Upload sheet music here!
 
                         </Dropzone>
+                        <ToastContainer />
                         <div className="image-preview">
                           {preview &&
                           <img

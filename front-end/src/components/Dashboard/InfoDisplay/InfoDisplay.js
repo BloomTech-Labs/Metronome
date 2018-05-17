@@ -10,10 +10,11 @@ import AssignmentForm from '../InfoDisplay/Assignments/AddAssignments/Assignment
 import StudentAssignment from '../InfoDisplay/StudentAssignments/StudentAssignment';
 import TeacherAssignments from './Assignments/TeacherAssignments/TeacherAssignments';
 
+import './info-display.css';
 
 const InfoDisplay = props => (
 
-  <div className="info-display-continer">
+  <div className="info-display-container">
     <Switch>
       <Route
         path={`${props.match.path}/assignments`}
