@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
-import {connect} from 'react-redux';
-import {logout} from '../../actions';
+import React, { Component } from 'react';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { connect } from 'react-redux';
+import { logout } from '../../actions';
 
 import './navbar.css';
 
 class LoginNavBar extends Component {
   navbarLinks = () => {
-    const token = window.localStorage.getItem ('token');
+    const token = window.localStorage.getItem('token');
     if (token) {
       return [
         <LinkContainer to="/dashboard/assignments">
@@ -20,10 +20,7 @@ class LoginNavBar extends Component {
         <LinkContainer to="/dashboard/settings">
           <NavItem href="#">Settings</NavItem>
         </LinkContainer>,
-        <LinkContainer
-          to="/"
-          onClick={() => this.props.logout (this.props.history)}
-        >
+        <LinkContainer to="/" onClick={() => this.props.logout(this.props.history)}>
           <NavItem href="#">Sign Out</NavItem>
         </LinkContainer>,
       ];
@@ -37,19 +34,19 @@ class LoginNavBar extends Component {
       </LinkContainer>,
     ];
   };
-  render () {
+  render() {
     return (
       <div className="container">
         <Navbar inverse fixedTop>
-              avbar.Header>
+          <Navbar.Header>
             <Navbar.Brand>
-            
+
               <NavItem className="nav-brand" href="/">Metronome</NavItem>
 
             </Navbar.Brand>
           </Navbar.Header>
           <Nav pullRight>
-            {this.navbarLinks ()}
+            {this.navbarLinks()}
           </Nav>
         </Navbar>
       </div>
@@ -57,4 +54,4 @@ class LoginNavBar extends Component {
   }
 }
 
-export default connect (null, {logout}) (LoginNavBar);
+export default connect(null, { logout })(LoginNavBar);
