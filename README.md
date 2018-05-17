@@ -27,7 +27,7 @@ Note: the server must be running for the front-end to function properly, as the 
 ## Running the tests
 
 To run the unit tests, simply run `yarn test` in the root directory. 
-Make sure that your local server is running before executing the tests.
+Make sure that your local MongoDB instance is running before executing the tests.
 
 ### Coding Style
 
