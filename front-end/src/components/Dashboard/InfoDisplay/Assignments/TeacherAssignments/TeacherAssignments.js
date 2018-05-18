@@ -33,7 +33,7 @@ class TeacherAssignments extends Component {
             </li>
               ))}
           </ul>
-          : <ul className="list-group">{this.props.assignment.assignment.emails.map(email => <li className="list-group-item">{email} <span style={{ color: 'red' }}>Unclaimed</span></li>)}</ul>
+          : <ul className="list-group">{this.props.assignment.assignment.emails.map(email => <li className="list-group-item">{email} <span style={{ color: 'red' }}>Not Claimed</span></li>)}</ul>
         }
         <button
           onClick={() => this.props.history.push('/dashboard/assignments')}
