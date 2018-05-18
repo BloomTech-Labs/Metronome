@@ -1,3 +1,4 @@
+[ ![Codeship Status for Lambda-School-Labs/Metronome](https://app.codeship.com/projects/62dee230-3147-0136-a8ea-0ef9b2323dec/status?branch=master)](https://app.codeship.com/projects/288751)
 # CS5 Lab Project Metronome
 
 Metronome is designed for musical school system that allows instructors to give assignments and to track the history of assignments given and those who are given the assignments. On the other hand, students are able to check out instructions of the assignments and what assignments they are given.
