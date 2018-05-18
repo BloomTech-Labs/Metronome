@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const validate = require('mongoose-validator');
+const beautifyUnique = require('mongoose-beautiful-unique-validation');
 
 const saltRounds = 11;
 const expDay = 30; // expiration time of JWT
@@ -8,7 +10,6 @@ const { secret } = require('../config');
 
 const MIN_EMAIL_LENGTH = 3;
 const MAX_EMAIL_LENGTH = 320;
-const EMAIL_REGEX = /\S+@\S+\.\S+/;
 
 const MIN_NAME_LENGTH = 1;
 const MAX_NAME_LENGTH = 100;
@@ -22,24 +23,42 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
   email: {
     type: String,
-    unique: true,
-    required: [true, 'can\'t be blank'],
-    match: [EMAIL_REGEX, 'is invalid'],
+    unique: 'User already exists with that email.',
+    required: [true, 'Email is a required field.'],
     index: true,
-    minlength: MIN_EMAIL_LENGTH,
-    maxlength: MAX_EMAIL_LENGTH,
+    validate: [
+      validate({
+        validator: 'isEmail',
+        message: 'Email must be a valid email.',
+      }),
+      validate({
+        validator: 'isLength',
+        arguments: [MIN_EMAIL_LENGTH, MAX_EMAIL_LENGTH],
+        message: 'Email must be between {ARGS[0]} and {ARGS[1]} characters.',
+      }),
+    ],
   },
   firstName: {
     type: String,
-    required: [true, 'can\'t be blank'],
-    minlength: MIN_NAME_LENGTH,
-    maxlength: MAX_NAME_LENGTH,
+    required: [true, 'First name is a required field.'],
+    validate: [
+      validate({
+        validator: 'isLength',
+        arguments: [MIN_NAME_LENGTH, MAX_NAME_LENGTH],
+        message: 'First name must be between {ARGS[0]} and {ARGS[1]} characters.',
+      }),
+    ],
   },
   lastName: {
     type: String,
-    required: [true, 'can\'t be blank'],
-    minlength: MIN_NAME_LENGTH,
-    maxlength: MAX_NAME_LENGTH,
+    required: [true, 'Last name is a required field.'],
+    validate: [
+      validate({
+        validator: 'isLength',
+        arguments: [MIN_NAME_LENGTH, MAX_NAME_LENGTH],
+        message: 'Last name must be between {ARGS[0]} and {ARGS[1]} characters.',
+      }),
+    ],
   },
   passwordHash: {
     type: String,
@@ -60,12 +79,14 @@ const UserSchema = new Schema({
   },
 }, { timestamps: true });
 
+UserSchema.plugin(beautifyUnique);
+
 /**
  * set plain password to password hash
  * @param {String} password
  */
-UserSchema.methods.setPassword = function (password) {
-  this.passwordHash = bcrypt.hashSync(password, saltRounds);
+UserSchema.methods.setPassword = async function (password) {
+  this.passwordHash = await bcrypt.hash(password, saltRounds);
 };
 
 /**
@@ -73,8 +94,9 @@ UserSchema.methods.setPassword = function (password) {
  * @param {String} password
  * @returns {Boolean}
  */
-UserSchema.methods.comparePassword = function (password) {
-  return bcrypt.compareSync(password, this.passwordHash);
+UserSchema.methods.comparePassword = async function (password) {
+  const isValid = await bcrypt.compare(password, this.passwordHash);
+  return isValid;
 };
 
 /**
@@ -84,7 +106,6 @@ UserSchema.methods.generateJWT = function () {
   const today = new Date();
   const exp = new Date(today);
   exp.setDate(today.getDate() + expDay);
-
   return jwt.sign({
     _id: this._id,
     email: this.email,
@@ -106,19 +127,15 @@ UserSchema.methods.generateJWT = function () {
  * @returns {Promise<any>} the new user instance
  */
 UserSchema.statics.registerNewUser = async function ({ email = '', password = '', firstName = '', lastName = '', role = 'Student' }) {
-  this.validateEmail(email);
-  this.validatePassword(password);
-  this.validateFirstName(firstName);
-  this.validateLastName(lastName);
   this.validateRole(role);
-  await this.validateUniqueEmail(email);
+  this.validatePasswordLength(password);
 
   const user = new this({
     email,
     firstName,
     lastName,
   });
-  user.setPassword(password);
+  await user.setPassword(password);
   await user.save();
   return user;
 };
@@ -133,30 +150,23 @@ UserSchema.statics.registerNewUser = async function ({ email = '', password = ''
  * @param {String} opts.lastName
  */
 UserSchema.methods.editProfile = async function ({ newEmail, oldPassword, newPassword, firstName, lastName }) {
+  if (newPassword && !oldPassword) {
+    throw new Error('You must enter your old password to set a new password.');
+  }
   if (newPassword && oldPassword) {
-    this.model('User').validatePassword(oldPassword);
-    this.model('User').validatePassword(newPassword);
-    if (!this.comparePassword(oldPassword)) {
+    this.model('User').validatePasswordLength(oldPassword);
+    this.model('User').validatePasswordLength(newPassword);
+    if (!(await this.comparePassword(oldPassword))) {
       throw new Error('Password is not correct.');
     }
-    this.setPassword(newPassword);
+    await this.setPassword(newPassword);
   }
 
-  if (firstName) {
-    this.model('User').validateFirstName(firstName);
-    this.firstName = firstName;
-  }
+  if (firstName) this.firstName = firstName;
 
-  if (lastName) {
-    this.model('User').validateLastName(lastName);
-    this.lastName = lastName;
-  }
+  if (lastName) this.lastName = lastName;
 
-  if (newEmail && newEmail !== this.email) {
-    this.model('User').validateEmail(newEmail);
-    await this.model('User').validateUniqueEmail(newEmail);
-    this.email = newEmail;
-  }
+  if (newEmail && newEmail !== this.email) this.email = newEmail;
   await this.save();
   return this.generateJWT();
 };
@@ -185,42 +195,16 @@ UserSchema.statics.validateLogin = async function ({ email = '', password = '' }
   const user = await this.findOne({ email });
   if (!user) throw new Error('User does not exist with that email.');
 
-  if (!user.comparePassword(password)) {
+  if (!(await user.comparePassword(password))) {
     throw new Error('Password is not correct.');
   }
 
   return user.generateJWT();
 };
 
-UserSchema.statics.validateEmail = function (email = '') {
-  if (email.length < MIN_EMAIL_LENGTH || email.length > MAX_EMAIL_LENGTH) {
-    throw new Error(`Email must be between ${MIN_EMAIL_LENGTH} and ${MAX_EMAIL_LENGTH} characters.`);
-  }
-  if (!email.match(EMAIL_REGEX)) {
-    throw new Error('Email must be a valid email.');
-  }
-};
-
-UserSchema.statics.validateUniqueEmail = async function (email = '') {
-  const count = await this.findOne({ email }).count();
-  if (count) throw new Error('User already exists with that email.');
-};
-
-UserSchema.statics.validatePassword = function (password = '') {
+UserSchema.statics.validatePasswordLength = function (password = '') {
   if (password.length < MIN_PASSWORD_LENGTH || password.length > MAX_PASSWORD_LENGTH) {
     throw new Error(`Password must be between ${MIN_PASSWORD_LENGTH} and ${MAX_PASSWORD_LENGTH} characters.`);
-  }
-};
-
-UserSchema.statics.validateFirstName = function (firstName = '') {
-  if (firstName.length < MIN_NAME_LENGTH || firstName.length > MAX_NAME_LENGTH) {
-    throw new Error(`First name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`);
-  }
-};
-
-UserSchema.statics.validateLastName = function (lastName = '') {
-  if (lastName.length < MIN_NAME_LENGTH || lastName.length > MAX_NAME_LENGTH) {
-    throw new Error(`Last name must be between ${MIN_NAME_LENGTH} and ${MAX_NAME_LENGTH} characters.`);
   }
 };
 
@@ -232,7 +216,7 @@ UserSchema.statics.validateRole = function (role = '') {
 
 UserSchema.statics.getModelForRole = function (role = '') {
   this.validateRole(role);
-  // Dynamically import models (this model has not been exported yet so the discriminators are not actually defined yet)
+  // Dynamically import models (the user model has not been exported yet so the discriminators are not actually defined yet)
   if (role === 'Student') return require('./Student');
   else if (role === 'Teacher') return require('./Teacher');
   return this;

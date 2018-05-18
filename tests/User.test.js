@@ -26,7 +26,7 @@ describe('User model', () => {
     try {
       await User.registerNewUser(newUserWithBadEmail);
     } catch (err) {
-      expect(err.message).toBe('Email must be a valid email.');
+      expect(err.message).toContain('Email must be a valid email.');
     }
   });
 
@@ -34,7 +34,7 @@ describe('User model', () => {
     try {
       await User.registerNewUser(newUserWithBadPassword);
     } catch (err) {
-      expect(err.message).toBe('Password must be between 8 and 56 characters.');
+      expect(err.message).toContain('Password must be between 8 and 56 characters.');
     }
   });
 
@@ -42,7 +42,7 @@ describe('User model', () => {
     try {
       await User.registerNewUser(newUserWithBadFirstName);
     } catch (err) {
-      expect(err.message).toBe('First name must be between 1 and 100 characters.');
+      expect(err.message).toContain('First name is a required field.');
     }
   });
 
@@ -50,7 +50,7 @@ describe('User model', () => {
     try {
       await User.registerNewUser(newUserWithBadLastName);
     } catch (err) {
-      expect(err.message).toBe('Last name must be between 1 and 100 characters.');
+      expect(err.message).toContain('Last name is a required field.');
     }
   });
 
@@ -59,12 +59,12 @@ describe('User model', () => {
     const user = await User.registerNewUser(validNewUser);
     const userInDb = await User.findOne({ email: user.email });
     expect(user.email).toEqual(userInDb.email);
-    expect(userInDb.comparePassword(validNewUser.password)).toBeTruthy();
+    expect(await userInDb.comparePassword(validNewUser.password)).toBeTruthy();
   });
 
   it('Should validate incorrect passwords properly', async () => {
     const user = await User.findOne({ email: validNewUser.email });
-    expect(user.comparePassword('wrongpassword')).toBeFalsy();
+    expect(await user.comparePassword('wrongpassword')).toBeFalsy();
   });
 
   it('Should not edit the user\'s profile if new information is invalid', async () => {
@@ -75,7 +75,7 @@ describe('User model', () => {
       const user = await User.findOne({ email: validNewUser.email });
       await user.editProfile(newData);
     } catch (err) {
-      expect(err.message).toBe('Email must be a valid email.');
+      expect(err.message).toContain('Email must be a valid email.');
     }
   });
 
@@ -86,7 +86,7 @@ describe('User model', () => {
       const user = await User.findOne({ email: validNewUser.email });
       await user.editProfile(newData);
     } catch (err) {
-      expect(err.message).toBe('Password is not correct.');
+      expect(err.message).toContain('Password is not correct.');
     }
   });
 
@@ -101,7 +101,7 @@ describe('User model', () => {
     const user = await User.findOne({ email: validNewUser.email });
     await user.editProfile(newData);
     expect(user.email).toBe(newData.newEmail);
-    expect(user.comparePassword(newData.newPassword)).toBeTruthy();
+    expect(await user.comparePassword(newData.newPassword)).toBeTruthy();
     expect(user.firstName).toBe(newData.firstName);
     expect(user.lastName).toBe(newData.lastName);
   });
