@@ -9,7 +9,7 @@ const AssignmentDetails = (props) => {
   if (!assignDetails) return <div>Loading...</div>;
   const date = moment(assignDetails.dueDate).format('l');
   const studentEmails = assignDetails.students.map(student => student.email).join(', ') || assignDetails.emails.join(', ');
-  const studentNames = assignDetails.students.map(student => `${student.firstName} ${student.lastName}`).join(', ') || <span style={{ color: 'red' }}>Unclaim</span>;
+  const studentNames = assignDetails.students.map(student => `${student.firstName} ${student.lastName}`).join(', ') || <span style={{ color: 'red' }}>Not Claimed</span>;
   return (
     <div className="card" style={{ width: '100%' }}>
       <div className="card-body">
